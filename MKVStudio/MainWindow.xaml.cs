@@ -10,6 +10,8 @@ namespace MKVStudio
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
+
         }
     }
 }
