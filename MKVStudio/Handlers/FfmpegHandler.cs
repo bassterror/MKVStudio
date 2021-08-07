@@ -20,7 +20,7 @@ namespace MKVStudio
                 TaskCompletionSource<object> processExitEvent = new();
                 process.Exited += (s, e) =>
                 {
-                    processExitEvent.TrySetResult(true);
+                    _ = processExitEvent.TrySetResult(true);
                 };
                 processTasks.Add(processExitEvent.Task);
 
