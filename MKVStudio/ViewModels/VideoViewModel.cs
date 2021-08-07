@@ -1,19 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
-using PropertyChanged;
+﻿using MKVStudio.Data;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 
-namespace MKVStudio.Data
+namespace MKVStudio
 {
-    [AddINotifyPropertyChangedInterface]
-    public class Video : INotifyPropertyChanged
+    public class VideoViewModel : BaseViewModel
     {
-
-        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
-
         public string InputPath { get; private set; }
         public string InputName { get; private set; }
         public string InputExtension { get; private set; }
@@ -36,9 +32,11 @@ namespace MKVStudio.Data
         public string NormalizationType { get; private set; }
         public string TargetOffset { get; private set; }
         public string SampleRates { get; private set; }
+        public ICommand RunFirstPassCommand { get; set; }
 
-        public Video(string source, string outputPath = null)
+        public VideoViewModel(string source, string outputPath = null)
         {
+            RunFirstPassCommand = new RelayCommand(RunFirstPass);
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);
             InputExtension = Path.GetExtension(source);
@@ -64,6 +62,7 @@ namespace MKVStudio.Data
             SetMeasurements(ProcessResults.First(p => p.Name == "firstPass").StdErrOutput);
         }
 
+        #region Help
         public string BuildArguments(string processName)
         {
             string arguments = string.Empty;
@@ -101,6 +100,7 @@ namespace MKVStudio.Data
             Match audioDetails = Regex.Match(firstPassOutput, @"Audio:.*,\s(\d*)\sHz,\s(\w*).*,");
             SampleRates = audioDetails.Groups[1].ToString();
             Channels = audioDetails.Groups[2].ToString();
-        }
+        } 
+        #endregion
     }
 }
