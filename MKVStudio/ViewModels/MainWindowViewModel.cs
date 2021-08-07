@@ -10,15 +10,19 @@ namespace MKVStudio
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        public ObservableCollection<Video> SelectedVideos { get; set; } = new();
-
+        public ObservableCollection<VideoViewModel> Videos { get; set; } = new();
+        public VideoViewModel SelectedVideo { get; set; }
         public ICommand AddVideosCommand { get; set; }
         public ICommand AddVideosFromFolderCommand { get; set; }
+        public ICommand RemoveVideoCommand { get; set; }
+        public ICommand ClearVideosCommand { get; set; }
 
         public MainWindowViewModel()
         {
             AddVideosCommand = new RelayCommand(AddVideos);
             AddVideosFromFolderCommand = new RelayCommand(AddVideosFromFolder);
+            RemoveVideoCommand = new RelayCommand(RemoveVideo);
+            ClearVideosCommand = new RelayCommand(ClearVideos);
         }
 
         private void AddVideos()
@@ -31,8 +35,8 @@ namespace MKVStudio
             {
                 foreach (string filename in openFileDialog.FileNames)
                 {
-                    Video video = new(filename);
-                    SelectedVideos.Add(video);
+                    VideoViewModel video = new(filename);
+                    Videos.Add(video);
                 }
             }
         }
@@ -47,12 +51,24 @@ namespace MKVStudio
                 {
                     foreach (string filename in GetFiles(fbd.SelectedPath, "*.mkv|*.mp4"))
                     {
-                        Video video = new(filename);
-                        SelectedVideos.Add(video);
+                        VideoViewModel video = new(filename);
+                        Videos.Add(video);
                     }
                 }
             }
         }
+
+        private void RemoveVideo()
+        {
+            _ = Videos.Remove(SelectedVideo);
+        }
+
+        private void ClearVideos()
+        {
+            Videos.Clear();
+        }
+
+
 
         #region Help
         /// <summary>
@@ -71,7 +87,7 @@ namespace MKVStudio
             }
 
             return (string[])newList.ToArray(typeof(string));
-        } 
+        }
         #endregion
     }
 }
