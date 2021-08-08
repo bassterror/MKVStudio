@@ -6,13 +6,18 @@
         xmlns:local="clr-namespace:MKVStudio"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid>
+        <StackPanel Grid.Column="0">
+            <RadioButton Content="Videos" Margin="5"/>
+            <RadioButton Content="Queue" Margin="5"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
@@ -56,8 +61,18 @@
                 <Button Content="Clear list" Command="{Binding ClearVideosCommand}"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1">
-            <StackPanel>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <RadioButton Content="General"/>
+                <RadioButton Content="Media info"/>
+                <RadioButton Content="Convert"/>
+                <RadioButton Content="ASD"/>                
+            </StackPanel>
+            <StackPanel Grid.Row="1">
                 <TextBlock Text="{Binding SelectedVideo.InputFullName}"/>
                 <TextBlock Text="{Binding SelectedVideo.InputI}"/>
                 <TextBlock Text="{Binding SelectedVideo.InputLRA}"/>
