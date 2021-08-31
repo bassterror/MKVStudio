@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace MKVStudio.ViewModels.Base
 {
     [AddINotifyPropertyChangedInterface]
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseMainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
     }

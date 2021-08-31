@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="appsettings.Dev.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -29,6 +25,10 @@
     <None Update="appsettings.Prod.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\Queue\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using MKVStudio.ViewModels.Base;
+﻿using MKVStudio.State.MainNavigator;
+using MKVStudio.ViewModels.Base;
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -6,12 +7,13 @@ using System.IO;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace MKVStudio.ViewModels
+namespace MKVStudio.ViewModels.Main
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseMainViewModel
     {
-        public ObservableCollection<VideoViewModel> Videos { get; set; } = new();
-        public VideoViewModel SelectedVideo { get; set; }
+        public IMainNavigator Navigator { get; set; } = new MainNavigator();
+
+        public VideosViewModel SelectedVideo { get; set; }
         public ICommand AddVideosCommand { get; set; }
         public ICommand AddVideosFromFolderCommand { get; set; }
         public ICommand RemoveVideoCommand { get; set; }
@@ -35,7 +37,7 @@ namespace MKVStudio.ViewModels
             {
                 foreach (string filename in openFileDialog.FileNames)
                 {
-                    VideoViewModel video = new(filename);
+                    VideosViewModel video = new(filename);
                     Videos.Add(video);
                 }
             }
@@ -51,7 +53,7 @@ namespace MKVStudio.ViewModels
                 {
                     foreach (string filename in GetFiles(fbd.SelectedPath, "*.mkv|*.mp4"))
                     {
-                        VideoViewModel video = new(filename);
+                        VideosViewModel video = new(filename);
                         Videos.Add(video);
                     }
                 }

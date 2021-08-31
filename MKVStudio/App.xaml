@@ -1,12 +1,20 @@
 ﻿<Application x:Class="MKVStudio.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MKVStudio">
+             xmlns:local="clr-namespace:MKVStudio"
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             xmlns:v="clr-namespace:MKVStudio.Views.Controls">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/Common.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type vm:VideosViewModel}">
+                <v:VideosView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:QueueViewModel}">
+                <v:QueueView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
