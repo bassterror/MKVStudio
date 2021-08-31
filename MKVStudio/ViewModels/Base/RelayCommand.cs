@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MKVStudio
+namespace MKVStudio.ViewModels.Base
 {
     public class RelayCommand : ICommand
     {

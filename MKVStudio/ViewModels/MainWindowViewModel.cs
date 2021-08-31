@@ -1,4 +1,4 @@
-﻿using MKVStudio.Data;
+﻿using MKVStudio.ViewModels.Base;
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace MKVStudio
+namespace MKVStudio.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
