@@ -8,7 +8,7 @@ namespace MKVStudio.Handlers
 {
     public class FfmpegHandler
     {
-        private readonly string ffmpegPath = @"C:\Program Files\FFA\local64\bin-video\ffmpeg.exe";
+        private readonly string ffmpegPath = @"C:\masm\local64\bin-video\ffmpeg.exe";
 
         public async Task<ProcessResult> RunFFMPEG(string arguments, string processName)
         {

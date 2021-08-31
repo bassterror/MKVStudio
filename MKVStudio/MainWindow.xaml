@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MKVStudio"
-        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
+        xmlns:viewmodels="clr-namespace:MKVStudio.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid>
@@ -78,7 +79,7 @@
                 <TextBlock Text="{Binding SelectedVideo.InputLRA}"/>
                 <TextBlock Text="{Binding SelectedVideo.Channels}"/>
                 <TextBlock Text="{Binding SelectedVideo.SampleRates}"/>
-                <TextBlock Text="{Binding SelectedVideo.Channels}"/>
+                <TextBlock Text="{Binding SelectedVideo.OutputPath}"/>
                 <Button Content="FirstPass" Command="{Binding SelectedVideo.RunFirstPassCommand}"/>
             </StackPanel>
         </Grid>

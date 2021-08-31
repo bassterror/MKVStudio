@@ -28,6 +28,11 @@ namespace MKVStudio
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+#if DEBUG
+            builder.AddJsonFile("appsettings.Dev.json", optional: false, reloadOnChange: true);
+#else
+            builder.AddJsonFile("appsettings.Prod.json", optional: false, reloadOnChange: true);
+#endif
 
             IConfiguration configuration = builder.Build();
 
