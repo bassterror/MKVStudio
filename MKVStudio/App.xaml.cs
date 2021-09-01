@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MKVStudio.Handlers;
 using MKVStudio.ViewModels.Main;
+using MKVStudio.Views.Controls;
 using System;
 using System.IO;
 using System.Windows;
@@ -23,7 +24,7 @@ namespace MKVStudio
             base.OnStartup(e);
         }
 
-        private IServiceProvider CreateServiceProvider()
+        private static IServiceProvider CreateServiceProvider()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

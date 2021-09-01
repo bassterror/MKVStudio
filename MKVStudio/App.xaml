@@ -2,18 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MKVStudio"
-             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             xmlns:vmm="clr-namespace:MKVStudio.ViewModels.Main"
+             xmlns:vmvf="clr-namespace:MKVStudio.ViewModels.VideoFile"
+             xmlns:vmf="clr-namespace:MKVStudio.ViewModels.Files"
+             xmlns:vmq="clr-namespace:MKVStudio.ViewModels.Queue"
              xmlns:v="clr-namespace:MKVStudio.Views.Controls">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/Common.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type vm:VideosViewModel}">
-                <v:VideosView/>
+            <DataTemplate DataType="{x:Type vmf:FilesViewModel}">
+                <v:FilesView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:QueueViewModel}">
+            <DataTemplate DataType="{x:Type vmq:QueueViewModel}">
                 <v:QueueView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmvf:VideoFileViewModel}">
+                <v:VideoFileView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmvf:GeneralViewModel}">
+                <v:GeneralView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmvf:MediaInfoViewModel}">
+                <v:MediaInfoView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmvf:ConvertViewModel}">
+                <v:ConvertView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

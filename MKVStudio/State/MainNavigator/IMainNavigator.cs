@@ -5,13 +5,13 @@ namespace MKVStudio.State.MainNavigator
 {
     public enum MainViewModelType
     {
-        Video,
+        Files,
         Queue
     }
 
     public interface IMainNavigator
     {
-        BaseMainViewModel CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
+        BaseMainViewModel CurrentMainViewModel { get; set; }
+        ICommand UpdateCurrentMainViewModelCommand { get; }
     }
 }

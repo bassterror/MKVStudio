@@ -4,10 +4,10 @@ using System.Windows.Input;
 
 namespace MKVStudio.State.MainNavigator
 {
-    public class MainNavigator : IMainNavigator
+    public class MainNavigator : BaseNavigator, IMainNavigator
     {
-        public BaseMainViewModel CurrentViewModel { get; set; }
+        public BaseMainViewModel CurrentMainViewModel { get; set; }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurrentMainViewModelCommand => new UpdateCurrentMainViewModelCommand(this);
     }
 }

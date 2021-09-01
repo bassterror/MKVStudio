@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MKVStudio.Views.Controls
 {
     /// <summary>
-    /// Interaction logic for VideosView.xaml
+    /// Interaction logic for FilesNavigator.xaml
     /// </summary>
-    public partial class VideosView : UserControl
+    public partial class FilesNavigator : UserControl
     {
-        public VideosView()
+        public FilesNavigator()
         {
             InitializeComponent();
         }
