@@ -1,12 +1,12 @@
 ﻿using MKVStudio.Commands;
-using MKVStudio.ViewModels.Base;
+using MKVStudio.ViewModels;
 using System.Windows.Input;
 
-namespace MKVStudio.State.MainNavigator
+namespace MKVStudio.State
 {
     public class MainNavigator : BaseNavigator, IMainNavigator
     {
-        public BaseMainViewModel CurrentMainViewModel { get; set; }
+        public BaseViewModel CurrentMainViewModel { get; set; }
 
         public ICommand UpdateCurrentMainViewModelCommand => new UpdateCurrentMainViewModelCommand(this);
     }

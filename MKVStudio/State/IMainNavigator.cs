@@ -1,7 +1,7 @@
-﻿using MKVStudio.ViewModels.Base;
+﻿using MKVStudio.ViewModels;
 using System.Windows.Input;
 
-namespace MKVStudio.State.MainNavigator
+namespace MKVStudio.State
 {
     public enum MainViewModelType
     {
@@ -11,7 +11,7 @@ namespace MKVStudio.State.MainNavigator
 
     public interface IMainNavigator
     {
-        BaseMainViewModel CurrentMainViewModel { get; set; }
+        BaseViewModel CurrentMainViewModel { get; set; }
         ICommand UpdateCurrentMainViewModelCommand { get; }
     }
 }

@@ -1,12 +1,12 @@
-﻿using MKVStudio.Data;
-using MKVStudio.ViewModels.VideoFile;
+﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Windows.Input;
 
-namespace MKVStudio.State.FilesNavigator
+namespace MKVStudio.State
 {
     public interface IFilesNavigator
     {
-        BaseVideoFileViewModel CurrentVideoFileViewModel { get; set; }
+        BaseViewModel CurrentVideoFileViewModel { get; set; }
         Video SelectedVideo { get; }
         ICommand AddVideosCommand { get; }
         ICommand AddVideosFromFolderCommand { get; }

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MKVStudio.Handlers;
-using MKVStudio.ViewModels.Main;
-using MKVStudio.Views.Controls;
+using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System;
 using System.IO;
 using System.Windows;

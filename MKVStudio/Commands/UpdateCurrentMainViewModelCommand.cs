@@ -1,6 +1,5 @@
-﻿using MKVStudio.State.MainNavigator;
-using MKVStudio.ViewModels.Files;
-using MKVStudio.ViewModels.Queue;
+﻿using MKVStudio.State;
+using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 

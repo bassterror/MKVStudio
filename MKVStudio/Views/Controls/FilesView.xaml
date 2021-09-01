@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MKVStudio.Views.Controls"
-             xmlns:vmf="clr-namespace:MKVStudio.ViewModels.Files"
-             d:DataContext="{d:DesignInstance Type=vmf:FilesViewModel}"
+             xmlns:l="clr-namespace:MKVStudio.Views.Controls"
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:FilesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,7 +13,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <local:FilesNavigator Grid.Column="0" DataContext="{Binding Navigator}"/>
+        <l:FilesNavigator Grid.Column="0" DataContext="{Binding Navigator}"/>
         <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentVideoFileViewModel}"/>
     </Grid>
 </UserControl>

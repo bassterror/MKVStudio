@@ -1,4 +1,4 @@
-﻿using MKVStudio.Data;
+﻿using MKVStudio.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -21,7 +21,7 @@ namespace MKVStudio.Commands
         }
 
         public void Execute(object parameter)
-{
+        {
             _videos.Clear();
         }
     }

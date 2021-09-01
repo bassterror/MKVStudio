@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MKVStudio.Data
+namespace MKVStudio.Models
 {
     public class ProcessResult
     {

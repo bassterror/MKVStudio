@@ -1,4 +1,4 @@
-﻿using MKVStudio.Handlers;
+﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
-namespace MKVStudio.Data
+namespace MKVStudio.Models
 {
     public class Video
     {
@@ -47,12 +47,12 @@ namespace MKVStudio.Data
             OutputExtension = InputExtension;
             OutputFullName = $"{OutputName}.{OutputExtension}";
             OutputFullPath = Path.Combine(OutputPath, OutputFullName);
-            RunFirstPassCommand = new RelayCommand(RunFirstPass);
+            //RunFirstPassCommand = new RelayCommand(RunFirstPass);
         }
 
         private async void RunFirstPass()
         {
-            FfmpegHandler ffmpegHandler = new();
+            FfmpegService ffmpegHandler = new();
             ProcessResult pr = await ffmpegHandler.RunFFMPEG(BuildArguments("firstPass"), "firstPass");
             ProcessResults.Add(pr);
             SetMeasurements(ProcessResults.First(p => p.Name == "firstPass").StdErrOutput);

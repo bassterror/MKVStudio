@@ -1,6 +1,6 @@
-﻿namespace MKVStudio.Handlers
+﻿namespace MKVStudio.Services
 {
-    public class MkvToolNixHandler
+    public class MkvToolNixService
     {
         private readonly string mkvInfoPath = @"C:\Program Files\MKVToolNix\mkvinfo.exe";
         private readonly string mkvMergePath = @"C:\Program Files\MKVToolNix\mkvmerge.exe";

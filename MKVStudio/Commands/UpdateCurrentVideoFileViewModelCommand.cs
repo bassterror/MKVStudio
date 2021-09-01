@@ -1,5 +1,6 @@
-﻿using MKVStudio.State.VideoFileNavigator;
-using MKVStudio.ViewModels.VideoFile;
+﻿using MKVStudio.Services;
+using MKVStudio.State;
+using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -9,10 +10,14 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
         private readonly IVideoFileNavigator _navigator;
+        private readonly string _arguments;
+        private readonly string _processName;
 
-        public UpdateCurrentVideoFileViewModelCommand(IVideoFileNavigator navigator)
+        public UpdateCurrentVideoFileViewModelCommand(IVideoFileNavigator navigator, string arguments, string processName)
         {
             _navigator = navigator;
+            _arguments = arguments;
+            _processName = processName;
         }
 
         public bool CanExecute(object parameter)
@@ -27,7 +32,7 @@ namespace MKVStudio.Commands
                 switch (videoFileViewModelType)
                 {
                     case VideoFileViewModelType.General:
-                        _navigator.CurrentVideoFileViewModel = new GeneralViewModel();
+                        _navigator.CurrentVideoFileViewModel = new GeneralViewModel(FfmpegViewModel.LoadFfmpegViewModel(new FfmpegService(), _arguments, _processName));
                         break;
                     case VideoFileViewModelType.MediaInfo:
                         _navigator.CurrentVideoFileViewModel = new MediaInfoViewModel();

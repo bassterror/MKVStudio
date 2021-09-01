@@ -1,9 +1,8 @@
-﻿using MKVStudio.State.MainNavigator;
-using MKVStudio.ViewModels.Base;
+﻿using MKVStudio.State;
 
-namespace MKVStudio.ViewModels.Main
+namespace MKVStudio.ViewModels
 {
-    public class MainWindowViewModel : BaseMainViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
         public IMainNavigator Navigator { get; set; } = new MainNavigator();
         public MainWindowViewModel()

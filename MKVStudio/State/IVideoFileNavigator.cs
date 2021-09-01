@@ -1,7 +1,7 @@
-﻿using MKVStudio.ViewModels.VideoFile;
+﻿using MKVStudio.ViewModels;
 using System.Windows.Input;
 
-namespace MKVStudio.State.VideoFileNavigator
+namespace MKVStudio.State
 {
     public enum VideoFileViewModelType
     {
@@ -12,7 +12,7 @@ namespace MKVStudio.State.VideoFileNavigator
 
     public interface IVideoFileNavigator
     {
-        BaseVideoFileViewModel CurrentVideoFileViewModel { get; set; }
+        BaseViewModel CurrentVideoFileViewModel { get; set; }
         ICommand UpdateCurrentVideoFileViewModelCommand { get; }
     }
 }

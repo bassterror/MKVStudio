@@ -1,17 +1,16 @@
 ﻿using MKVStudio.Commands;
-using MKVStudio.Data;
-using MKVStudio.ViewModels.Files;
-using MKVStudio.ViewModels.VideoFile;
+using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace MKVStudio.State.FilesNavigator
+namespace MKVStudio.State
 {
     public class FilesNavigator : IFilesNavigator
     {
         private Video selectedVideo;
 
-        public BaseVideoFileViewModel CurrentVideoFileViewModel { get; set; }
+        public BaseViewModel CurrentVideoFileViewModel { get; set; }
         public ObservableCollection<Video> Videos { get; set; } = new();
         public Video SelectedVideo
         {
