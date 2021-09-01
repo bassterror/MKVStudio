@@ -6,5 +6,9 @@ namespace MKVStudio.ViewModels.Main
     public class MainWindowViewModel : BaseMainViewModel
     {
         public IMainNavigator Navigator { get; set; } = new MainNavigator();
+        public MainWindowViewModel()
+        {
+            Navigator.UpdateCurrentMainViewModelCommand.Execute(MainViewModelType.Files);
+        }
     }
 }
