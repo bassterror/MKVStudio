@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MKVStudio.Handlers;
+using MKVStudio.Models;
+using MKVStudio.Services;
+using MKVStudio.State;
 using MKVStudio.ViewModels;
 using System;
 using System.IO;
@@ -23,7 +25,7 @@ namespace MKVStudio
             base.OnStartup(e);
         }
 
-        private IServiceProvider CreateServiceProvider()
+        private static IServiceProvider CreateServiceProvider()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -40,8 +42,11 @@ namespace MKVStudio
 
             _ = services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
 
-            _ = services.AddScoped<MainWindowViewModel>();
-            _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainWindowViewModel>()));
+            _ = services.AddTransient<IFfmpegService, FfmpegService>();
+
+            _ = services.AddScoped<MainViewModel>();
+            _ = services.AddScoped<INavigator, Navigator>();
+            _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();
         }

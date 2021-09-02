@@ -1,7 +1,7 @@
 ﻿using PropertyChanged;
 using System.ComponentModel;
 
-namespace MKVStudio.ViewModels.Base
+namespace MKVStudio.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
     public class BaseViewModel : INotifyPropertyChanged

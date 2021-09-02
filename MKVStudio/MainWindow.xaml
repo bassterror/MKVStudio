@@ -3,85 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MKVStudio"
-        xmlns:viewmodels="clr-namespace:MKVStudio.ViewModels"
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:c="clr-namespace:MKVStudio.Views.Controls"
+        xmlns:vm="clr-namespace:MKVStudio.ViewModels"        
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <RadioButton Content="Videos" Margin="5"/>
-            <RadioButton Content="Queue" Margin="5"/>
-        </StackPanel>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <ListView Grid.Row="0" ItemsSource="{Binding Videos}" SelectedItem="{Binding SelectedVideo, Mode=TwoWay}">
-                <ListView.Resources>
-                    <GridView x:Key="key">
-                        <GridViewColumn Header="Name">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding InputFullName}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Output Path">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding OutputPath}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Output Name">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding OutputFullName}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.Resources>
-                <ListView.Style>
-                    <Style TargetType="ListView">
-                        <Setter Property="View" Value="{StaticResource key}" />
-                    </Style>
-                </ListView.Style>
-            </ListView>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Content="Add Videos" Command="{Binding AddVideosCommand}"/>
-                <Button Content="Add Folder" Command="{Binding AddVideosFromFolderCommand}"/>
-                <Button Content="Remove Video" Command="{Binding RemoveVideoCommand}"/>
-                <Button Content="Clear list" Command="{Binding ClearVideosCommand}"/>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <RadioButton Content="General"/>
-                <RadioButton Content="Media info"/>
-                <RadioButton Content="Convert"/>
-                <RadioButton Content="ASD"/>                
-            </StackPanel>
-            <StackPanel Grid.Row="1">
-                <TextBlock Text="{Binding SelectedVideo.InputFullName}"/>
-                <TextBlock Text="{Binding SelectedVideo.InputI}"/>
-                <TextBlock Text="{Binding SelectedVideo.InputLRA}"/>
-                <TextBlock Text="{Binding SelectedVideo.Channels}"/>
-                <TextBlock Text="{Binding SelectedVideo.SampleRates}"/>
-                <TextBlock Text="{Binding SelectedVideo.OutputPath}"/>
-                <Button Content="FirstPass" Command="{Binding SelectedVideo.RunFirstPassCommand}"/>
-            </StackPanel>
-        </Grid>
+        <c:MainNavigation Grid.Column="0" DataContext="{Binding Navigator}"/>
+        <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentMainViewModel}"/>
     </Grid>
 </Window>

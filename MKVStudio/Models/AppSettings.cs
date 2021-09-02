@@ -1,4 +1,4 @@
-﻿namespace MKVStudio.Handlers
+﻿namespace MKVStudio.Models
 {
     public class AppSettings
     {

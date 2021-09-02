@@ -1,6 +1,4 @@
-﻿using MKVStudio.Data;
-using MKVStudio.Handlers;
-using MKVStudio.ViewModels.Base;
+﻿using MKVStudio.Services;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
@@ -8,9 +6,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
-namespace MKVStudio
+namespace MKVStudio.Models
 {
-    public class VideoViewModel : BaseViewModel
+    public class Video
     {
         public string InputPath { get; private set; }
         public string InputName { get; private set; }
@@ -36,35 +34,29 @@ namespace MKVStudio
         public string SampleRates { get; private set; }
         public ICommand RunFirstPassCommand { get; set; }
 
-        public VideoViewModel(string source, string outputPath = null)
+        public Video(string source)
         {
-            RunFirstPassCommand = new RelayCommand(RunFirstPass);
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);
             InputExtension = Path.GetExtension(source);
             InputFullName = InputName + InputExtension;
             InputFullPath = source;
-            OutputPath = outputPath;
-            if (string.IsNullOrWhiteSpace(OutputPath))
-            {
-                OutputPath = InputPath;
-            }
+            OutputPath = InputPath;
             OutputName = InputName + " - edit";
             OutputExtension = InputExtension;
-            OutputFullName = OutputName + OutputExtension;
+            OutputFullName = $"{OutputName}.{OutputExtension}";
             OutputFullPath = Path.Combine(OutputPath, OutputFullName);
-            RunFirstPass();
+            //RunFirstPassCommand = new RelayCommand(RunFirstPass);
         }
 
         private async void RunFirstPass()
         {
-            FfmpegHandler ffmpegHandler = new();
+            FfmpegService ffmpegHandler = new();
             ProcessResult pr = await ffmpegHandler.RunFFMPEG(BuildArguments("firstPass"), "firstPass");
             ProcessResults.Add(pr);
             SetMeasurements(ProcessResults.First(p => p.Name == "firstPass").StdErrOutput);
         }
 
-        #region Help
         public string BuildArguments(string processName)
         {
             string arguments = string.Empty;
@@ -102,7 +94,6 @@ namespace MKVStudio
             Match audioDetails = Regex.Match(firstPassOutput, @"Audio:.*,\s(\d*)\sHz,\s(\w*).*,");
             SampleRates = audioDetails.Groups[1].ToString();
             Channels = audioDetails.Groups[2].ToString();
-        } 
-        #endregion
+        }
     }
 }

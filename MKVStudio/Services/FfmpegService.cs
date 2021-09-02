@@ -1,12 +1,12 @@
-﻿using MKVStudio.Data;
+﻿using MKVStudio.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MKVStudio.Handlers
+namespace MKVStudio.Services
 {
-    public class FfmpegHandler
+    public class FfmpegService : IFfmpegService
     {
         private readonly string ffmpegPath = @"C:\masm\local64\bin-video\ffmpeg.exe";
 
