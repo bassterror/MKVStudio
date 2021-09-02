@@ -1,21 +1,24 @@
-﻿using MKVStudio.State;
+﻿using MKVStudio.Models;
+using MKVStudio.State;
 using MKVStudio.ViewModels.Factories;
 using System;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
-    public class UpdateCurrentMainViewModelCommand : ICommand
+    public class UpdateCurrentFilesViewModelCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 
-        private readonly IMainNavigator _navigator;
+        private readonly IFilesNavigator _navigator;
         private readonly IRootViewModelFactory _viewModelFactory;
+        private readonly Video _selectedVideo;
 
-        public UpdateCurrentMainViewModelCommand(IMainNavigator navigator, IRootViewModelFactory viewModelFactory)
+        public UpdateCurrentFilesViewModelCommand(IFilesNavigator navigator, IRootViewModelFactory viewModelFactory, Video selectedVideo)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
+            _selectedVideo = selectedVideo;
         }
         public bool CanExecute(object parameter)
         {

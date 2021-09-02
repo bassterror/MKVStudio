@@ -9,10 +9,10 @@ namespace MKVStudio.ViewModels
         public IVideoFileNavigator Navigator { get; set; }
         private readonly Video _selectedVideo;
 
-        public VideoFileViewModel(Video selectedVideo)
+        public VideoFileViewModel()
         {
-            _selectedVideo = selectedVideo;
-            Navigator = new VideoFileNavigator(selectedVideo);
+            
+            Navigator = new VideoFileNavigator();
         }
     }
 }

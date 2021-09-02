@@ -6,7 +6,7 @@
              xmlns:s="clr-namespace:MKVStudio.State"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              xmlns:c="clr-namespace:MKVStudio.Converters"
-             d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+             d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -15,9 +15,11 @@
     <Grid>
         <StackPanel Grid.Column="0">
             <RadioButton Content="Files" Margin="5"
-                         IsChecked="{Binding CurrentMainViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FilesViewModel}}"
-                         Command="{Binding UpdateCurrentMainViewModelCommand}" CommandParameter="{x:Static s:MainViewModelType.Files}"/>
-            <RadioButton Content="Queue" Margin="5" Command="{Binding UpdateCurrentMainViewModelCommand}" CommandParameter="{x:Static s:MainViewModelType.Queue}"/>
+                         IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FilesViewModel}}"
+                         Command="{Binding UpdateCurrentMainViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.Files}"/>
+            <RadioButton Content="Queue" Margin="5"
+                         IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:QueueViewModel}}"
+                         Command="{Binding UpdateCurrentMainViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.Queue}"/>
         </StackPanel>
     </Grid>
 </UserControl>

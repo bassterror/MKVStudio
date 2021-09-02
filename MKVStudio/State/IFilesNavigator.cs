@@ -6,7 +6,7 @@ namespace MKVStudio.State
 {
     public interface IFilesNavigator
     {
-        BaseViewModel CurrentVideoFileViewModel { get; set; }
+        BaseViewModel CurrentViewModel { get; set; }
         Video SelectedVideo { get; }
         ICommand AddVideosCommand { get; }
         ICommand AddVideosFromFolderCommand { get; }

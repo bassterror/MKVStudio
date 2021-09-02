@@ -27,17 +27,17 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is VideoFileViewModelType videoFileViewModelType)
+            if (parameter is ViewModelTypes videoFileViewModelType)
             {
                 switch (videoFileViewModelType)
                 {
-                    case VideoFileViewModelType.General:
+                    case ViewModelTypes.General:
                         _navigator.CurrentVideoFileViewModel = new GeneralViewModel(FfmpegViewModel.LoadFfmpegViewModel(new FfmpegService(), _arguments, _processName));
                         break;
-                    case VideoFileViewModelType.MediaInfo:
+                    case ViewModelTypes.MediaInfo:
                         _navigator.CurrentVideoFileViewModel = new MediaInfoViewModel();
                         break;
-                    case VideoFileViewModelType.Convert:
+                    case ViewModelTypes.Convert:
                         _navigator.CurrentVideoFileViewModel = new ConvertViewModel();
                         break;
                     default:

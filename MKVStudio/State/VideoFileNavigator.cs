@@ -11,9 +11,9 @@ namespace MKVStudio.State.VideoFileNavigator
         public Video SelectedVideo { get; set; }
         public ICommand UpdateCurrentVideoFileViewModelCommand => new UpdateCurrentVideoFileViewModelCommand(this, SelectedVideo.BuildArguments("firstPass"), "firstPass");
 
-        public VideoFileNavigator(Video selectedVideo)
+        public VideoFileNavigator()
         {
-            SelectedVideo = selectedVideo;
+            
         }
     }
 }

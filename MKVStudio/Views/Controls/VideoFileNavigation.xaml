@@ -10,9 +10,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <RadioButton Content="General" Margin="5" Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:VideoFileViewModelType.General}"/>
-            <RadioButton Content="Media info" Margin="5" Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:VideoFileViewModelType.MediaInfo}"/>
-            <RadioButton Content="Convert" Margin="5" Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:VideoFileViewModelType.Convert}"/>
+            <RadioButton Content="General" Margin="5" Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.General}"/>
+            <RadioButton Content="Media info" Margin="5" Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.MediaInfo}"/>
+            <RadioButton Content="Convert" Margin="5" Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.Convert}"/>
         </StackPanel>
     </Grid>
 </UserControl>
