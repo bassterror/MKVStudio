@@ -4,7 +4,6 @@ using MKVStudio.Models;
 using MKVStudio.Services;
 using MKVStudio.State;
 using MKVStudio.ViewModels;
-using MKVStudio.ViewModels.Factories;
 using System;
 using System.IO;
 using System.Windows;
@@ -43,15 +42,10 @@ namespace MKVStudio
 
             _ = services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
 
-            _ = services.AddSingleton<IRootViewModelFactory, RootViewModelFactory>();
-            _ = services.AddSingleton<IViewModelFactory<FilesViewModel>, FilesViewModelFactory>();
-            _ = services.AddSingleton<IViewModelFactory<QueueViewModel>, QueueViewModelFactory>();
-            _ = services.AddSingleton<IViewModelFactory<VideoFileViewModel>, VideoFileViewModelFactory>();
-
             _ = services.AddTransient<IFfmpegService, FfmpegService>();
 
             _ = services.AddScoped<MainViewModel>();
-            _ = services.AddScoped<IMainNavigator, MainNavigator>();
+            _ = services.AddScoped<INavigator, Navigator>();
             _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();

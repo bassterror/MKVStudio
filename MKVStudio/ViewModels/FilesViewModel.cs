@@ -4,6 +4,10 @@ namespace MKVStudio.ViewModels
 {
     public class FilesViewModel : BaseViewModel
     {
-        public IFilesNavigator Navigator { get; set; } = new FilesNavigator();
+        public INavigator Navigator { get; }
+        public FilesViewModel(INavigator mainNavigator)
+        {
+            Navigator = mainNavigator;
+        }
     }
 }

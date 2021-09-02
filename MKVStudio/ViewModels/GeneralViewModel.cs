@@ -1,13 +1,17 @@
-﻿namespace MKVStudio.ViewModels
+﻿using MKVStudio.Models;
+using MKVStudio.State;
+
+namespace MKVStudio.ViewModels
 {
     public class GeneralViewModel : BaseViewModel
     {
-        public FfmpegViewModel FfmpegViewModel { get; set; }
+        public INavigator Navigator { get; set; }
+        private readonly Video _selectedVideo;
 
-        public GeneralViewModel(FfmpegViewModel ffmpegViewModel)
+        public GeneralViewModel(INavigator navigator, Video selectedVideo)
         {
-            FfmpegViewModel = ffmpegViewModel;
+            Navigator = navigator;
+            _selectedVideo = selectedVideo;
         }
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿using MKVStudio.State;
-using MKVStudio.ViewModels.Factories;
+using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -9,13 +9,15 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        private readonly IMainNavigator _navigator;
-        private readonly IRootViewModelFactory _viewModelFactory;
+        private readonly INavigator _navigator;
+        private readonly FilesViewModel _filesViewModel;
+        private readonly QueueViewModel _queueViewModel;
 
-        public UpdateCurrentMainViewModelCommand(IMainNavigator navigator, IRootViewModelFactory viewModelFactory)
+        public UpdateCurrentMainViewModelCommand(INavigator navigator, FilesViewModel filesViewModel, QueueViewModel queueViewModel)
         {
             _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
+            _filesViewModel = filesViewModel;
+            _queueViewModel = queueViewModel;
         }
         public bool CanExecute(object parameter)
         {
@@ -26,7 +28,17 @@ namespace MKVStudio.Commands
         {
             if (parameter is ViewModelTypes viewModelType)
             {
-                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewModelType);
+                switch (viewModelType)
+                {
+                    case ViewModelTypes.Files:
+                        _navigator.CurrentMainViewModel = _filesViewModel;
+                        break;
+                    case ViewModelTypes.Queue:
+                        _navigator.CurrentMainViewModel = _queueViewModel;
+                        break;
+                    default:
+                        throw new ArgumentException("No such Main View Model");
+                }
             }
         }
     }

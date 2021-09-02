@@ -13,7 +13,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <c:MainNavigator Grid.Column="0" DataContext="{Binding Navigator}"/>
-        <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentViewModel}"/>
+        <c:MainNavigation Grid.Column="0" DataContext="{Binding Navigator}"/>
+        <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentMainViewModel}"/>
     </Grid>
 </Window>

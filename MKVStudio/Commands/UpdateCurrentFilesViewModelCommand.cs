@@ -1,6 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.State;
-using MKVStudio.ViewModels.Factories;
+using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -10,14 +10,12 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        private readonly IFilesNavigator _navigator;
-        private readonly IRootViewModelFactory _viewModelFactory;
+        private readonly INavigator _navigator;
         private readonly Video _selectedVideo;
 
-        public UpdateCurrentFilesViewModelCommand(IFilesNavigator navigator, IRootViewModelFactory viewModelFactory, Video selectedVideo)
+        public UpdateCurrentFilesViewModelCommand(INavigator navigator, Video selectedVideo)
         {
             _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
             _selectedVideo = selectedVideo;
         }
         public bool CanExecute(object parameter)
@@ -29,7 +27,14 @@ namespace MKVStudio.Commands
         {
             if (parameter is ViewModelTypes viewModelType)
             {
-                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewModelType);
+                switch (viewModelType)
+                {
+                    case ViewModelTypes.VideoFile:
+                        _navigator.CurrentFilesViewModel = new VideoFileViewModel(_navigator, _selectedVideo);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

@@ -1,18 +1,17 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.State;
-using MKVStudio.State.VideoFileNavigator;
 
 namespace MKVStudio.ViewModels
 {
     public class VideoFileViewModel : BaseViewModel
     {
-        public IVideoFileNavigator Navigator { get; set; }
+        public INavigator Navigator { get; set; }
         private readonly Video _selectedVideo;
 
-        public VideoFileViewModel()
+        public VideoFileViewModel(INavigator navigator, Video selectedVideo)
         {
-            
-            Navigator = new VideoFileNavigator();
+            Navigator = navigator;
+            _selectedVideo = selectedVideo;
         }
     }
 }

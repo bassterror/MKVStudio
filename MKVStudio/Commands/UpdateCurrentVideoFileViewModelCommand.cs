@@ -9,15 +9,18 @@ namespace MKVStudio.Commands
     public class UpdateCurrentVideoFileViewModelCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly IVideoFileNavigator _navigator;
-        private readonly string _arguments;
-        private readonly string _processName;
+        private readonly INavigator _navigator;
+        private readonly GeneralViewModel _gemeraViewModel;
+        private readonly MediaInfoViewModel _mediaInfoViewModel;
+        private readonly ConvertViewModel _convertViewModel;
 
-        public UpdateCurrentVideoFileViewModelCommand(IVideoFileNavigator navigator, string arguments, string processName)
+        public UpdateCurrentVideoFileViewModelCommand(INavigator navigator, GeneralViewModel generalViewModel, MediaInfoViewModel mediaInfoViewModel, ConvertViewModel convertViewModel)
         {
             _navigator = navigator;
-            _arguments = arguments;
-            _processName = processName;
+            _gemeraViewModel = generalViewModel;
+            _mediaInfoViewModel = mediaInfoViewModel;
+            _convertViewModel = convertViewModel;
+
         }
 
         public bool CanExecute(object parameter)
@@ -32,13 +35,13 @@ namespace MKVStudio.Commands
                 switch (videoFileViewModelType)
                 {
                     case ViewModelTypes.General:
-                        _navigator.CurrentVideoFileViewModel = new GeneralViewModel(FfmpegViewModel.LoadFfmpegViewModel(new FfmpegService(), _arguments, _processName));
+                        _navigator.CurrentVideoFileViewModel = _gemeraViewModel;
                         break;
                     case ViewModelTypes.MediaInfo:
-                        _navigator.CurrentVideoFileViewModel = new MediaInfoViewModel();
+                        _navigator.CurrentVideoFileViewModel = _mediaInfoViewModel;
                         break;
                     case ViewModelTypes.Convert:
-                        _navigator.CurrentVideoFileViewModel = new ConvertViewModel();
+                        _navigator.CurrentVideoFileViewModel = _convertViewModel;
                         break;
                     default:
                         throw new ArgumentException("No such VideoFileViewModelType");

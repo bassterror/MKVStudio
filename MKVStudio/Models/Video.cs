@@ -1,5 +1,4 @@
 ﻿using MKVStudio.Services;
-using MKVStudio.ViewModels;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
