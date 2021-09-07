@@ -87,7 +87,7 @@ jobs:
 
 # 7zip
       - name: 7Zip
-        run: 7z a -t7z -mx=9 MKVStudio.7z ./MKVStudio/bin/release/netcoreapp5.0/publish/
+        run: 7z a -t7z -mx=9 MKVStudio.7z ./MKVStudio/bin/release/net5.0-windows/publish/
         
 # Upload artifacts
       - name: Upload build artifacts
