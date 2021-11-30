@@ -25,10 +25,7 @@ namespace MKVStudio.State
         public ObservableCollection<Video> Videos { get; set; } = new();
         public Video SelectedVideo
         {
-            get
-            {
-                return _selectedVideo;
-            }
+            get => _selectedVideo;
             set
             {
                 _selectedVideo = value;

@@ -39,11 +39,11 @@ namespace MKVStudio.Services
                 {
                     if (e.Data == null)
                     {
-                        stdOutCloseEvent.TrySetResult(true);
+                        _ = stdOutCloseEvent.TrySetResult(true);
                     }
                     else
                     {
-                        output.AppendLine(e.Data);
+                        _ = output.AppendLine(e.Data);
                     }
                 };
                 processTasks.Add(stdOutCloseEvent.Task);
@@ -54,11 +54,11 @@ namespace MKVStudio.Services
                 {
                     if (e.Data == null)
                     {
-                        stdErrCloseEvent.TrySetResult(true);
+                        _ = stdErrCloseEvent.TrySetResult(true);
                     }
                     else
                     {
-                        errorOutput.AppendLine(e.Data);
+                        _ = errorOutput.AppendLine(e.Data);
                     }
                 };
                 processTasks.Add(stdErrCloseEvent.Task);

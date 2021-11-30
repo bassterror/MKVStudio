@@ -10,14 +10,14 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
         private readonly INavigator _navigator;
-        private readonly GeneralViewModel _gemeraViewModel;
+        private readonly GeneralViewModel _generalViewModel;
         private readonly MediaInfoViewModel _mediaInfoViewModel;
         private readonly ConvertViewModel _convertViewModel;
 
         public UpdateCurrentVideoFileViewModelCommand(INavigator navigator, GeneralViewModel generalViewModel, MediaInfoViewModel mediaInfoViewModel, ConvertViewModel convertViewModel)
         {
             _navigator = navigator;
-            _gemeraViewModel = generalViewModel;
+            _generalViewModel = generalViewModel;
             _mediaInfoViewModel = mediaInfoViewModel;
             _convertViewModel = convertViewModel;
 
@@ -35,7 +35,7 @@ namespace MKVStudio.Commands
                 switch (videoFileViewModelType)
                 {
                     case ViewModelTypes.General:
-                        _navigator.CurrentVideoFileViewModel = _gemeraViewModel;
+                        _navigator.CurrentVideoFileViewModel = _generalViewModel;
                         break;
                     case ViewModelTypes.MediaInfo:
                         _navigator.CurrentVideoFileViewModel = _mediaInfoViewModel;

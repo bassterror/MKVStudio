@@ -22,9 +22,9 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is Video)
+            if (parameter is Video video)
             {
-                _ = _videos.Remove((Video)parameter);
+                _ = _videos.Remove(video);
             }
         }
     }
