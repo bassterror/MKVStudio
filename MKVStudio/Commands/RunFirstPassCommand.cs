@@ -12,10 +12,12 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
         private readonly Video _video;
+        private readonly IFfmpegService _ffmpeg;
 
-        public RunFirstPassCommand(Video video)
+        public RunFirstPassCommand(Video video, IFfmpegService ffmpegService)
         {
             _video = video;
+            _ffmpeg = ffmpegService;
         }
 
         public bool CanExecute(object parameter)
@@ -25,13 +27,12 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            FfmpegService ffmpegHandler = new();
-            ProcessResult pr = await ffmpegHandler.RunFFMPEG(BuildArguments("firstPass"), "firstPass");
+            ProcessResult pr = await _ffmpeg.RunFFMPEG(BuildArguments("firstPass"), "firstPass");
             _video.ProcessResults.Add(pr);
             SetMeasurements(_video.ProcessResults.First(p => p.Name == "firstPass").StdErrOutput);
         }
 
-        public string BuildArguments(string processName)
+        private string BuildArguments(string processName)
         {
             string arguments = string.Empty;
             switch (processName)

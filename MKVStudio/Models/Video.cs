@@ -1,4 +1,5 @@
 ﻿using MKVStudio.Commands;
+using MKVStudio.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
@@ -7,6 +8,8 @@ namespace MKVStudio.Models
 {
     public class Video
     {
+        private readonly IFfmpegService _ffmpeg;
+
         public string InputPath { get; private set; }
         public string InputName { get; private set; }
         public string InputExtension { get; private set; }
@@ -31,7 +34,7 @@ namespace MKVStudio.Models
         public string SampleRates { get; set; }
         public ICommand RunFirstPassCommand { get; set; }
 
-        public Video(string source)
+        public Video(string source, IFfmpegService ffmpegService)
         {
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);
@@ -43,7 +46,8 @@ namespace MKVStudio.Models
             OutputExtension = InputExtension;
             OutputFullName = $"{OutputName}.{OutputExtension}";
             OutputFullPath = Path.Combine(OutputPath, OutputFullName);
-            RunFirstPassCommand = new RunFirstPassCommand(this);
+            _ffmpeg = ffmpegService;
+            RunFirstPassCommand = new RunFirstPassCommand(this, _ffmpeg);
         }
     }
 }

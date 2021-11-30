@@ -1,5 +1,4 @@
-﻿using MKVStudio.Services;
-using MKVStudio.State;
+﻿using MKVStudio.State;
 using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
@@ -20,7 +19,6 @@ namespace MKVStudio.Commands
             _generalViewModel = generalViewModel;
             _mediaInfoViewModel = mediaInfoViewModel;
             _convertViewModel = convertViewModel;
-
         }
 
         public bool CanExecute(object parameter)
