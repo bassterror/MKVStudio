@@ -1,13 +1,17 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Services;
+using PropertyChanged;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
 
 namespace MKVStudio.Models
 {
-    public class Video
+    [AddINotifyPropertyChangedInterface]
+    public class Video : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         private readonly IFfmpegService _ffmpeg;
 
         public string InputPath { get; private set; }
