@@ -28,7 +28,6 @@ namespace MKVStudio.Commands
             Microsoft.Win32.OpenFileDialog openFileDialog = new();
             openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); //TODO remember last directory
             if (openFileDialog.ShowDialog() == true)
             {
                 foreach (string filename in openFileDialog.FileNames)

@@ -8,11 +8,11 @@ namespace MKVStudio.Services
 {
     public class FfmpegService : IFfmpegService
     {
-        IRegistryService _regServ;
+        public IRegistryService _registry;
 
         public FfmpegService(IRegistryService registryService)
         {
-            _regServ = registryService;
+            _registry = registryService;
         }
 
         public async Task<ProcessResult> RunFFMPEG(string arguments, string processName)
@@ -30,7 +30,7 @@ namespace MKVStudio.Services
                 processTasks.Add(processExitEvent.Task);
 
                 process.EnableRaisingEvents = true;
-                process.StartInfo.FileName = _regServ.GetFFmpeg();
+                process.StartInfo.FileName = _registry.GetFFmpeg();
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;

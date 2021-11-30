@@ -12,6 +12,34 @@ namespace MKVStudio.Services
             return ffmpeg.ToString();
         }
 
+        public string GetMKVInfo()
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+            object mkvInfo = key.GetValue("MKVInfo");
+            return mkvInfo.ToString();
+        }
+
+        public string GetMKVMerge()
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+            object mkvMerge = key.GetValue("MKVMerge");
+            return mkvMerge.ToString();
+        }
+
+        public string GetMKVPropEdit()
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+            object mkvPropEdit = key.GetValue("MKVPropEdit");
+            return mkvPropEdit.ToString();
+        }
+
+        public string GetMKVExtract()
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+            object mkvExtract = key.GetValue("MKVExtract");
+            return mkvExtract.ToString();
+        }
+
         public static bool CheckMKVStudioRegistryKey()
         {
             using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
@@ -54,6 +82,9 @@ namespace MKVStudio.Services
             OpenFileDialog openFileDialog = new();
             openFileDialog.Multiselect = false;
             openFileDialog.Filter = filter;
+            openFileDialog.ValidateNames = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.CheckFileExists = true;
             return openFileDialog.ShowDialog() == true
                 ? openFileDialog.FileName
                 : throw new ArgumentException("The file you selected is not correct!");

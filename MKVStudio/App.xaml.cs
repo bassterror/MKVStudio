@@ -19,7 +19,6 @@ namespace MKVStudio
             if (RegistryService.CheckMKVStudioRegistryKey())
             {
                 RegistryService.CreateMKVStudioRegistryKey();
-                RegistryService.CreateExternalLibrariesRegistries();
             }
 
             MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
@@ -34,6 +33,7 @@ namespace MKVStudio
 
             _ = services.AddSingleton<IRegistryService, RegistryService>();
             _ = services.AddSingleton<IFfmpegService, FfmpegService>();
+            _ = services.AddSingleton<IMkvToolNixService, MkvToolNixService>();
 
             _ = services.AddScoped<MainViewModel>();
             _ = services.AddScoped<INavigator, Navigator>();
