@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using MKVStudio.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MKVStudio.Services;
 using MKVStudio.State;
 using MKVStudio.ViewModels;
 using System;
-using System.IO;
 using System.Windows;
 
 namespace MKVStudio
@@ -19,6 +16,11 @@ namespace MKVStudio
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
 
+            if (RegistryService.CheckMKVStudioRegistryKey())
+            {
+                RegistryService.CreateMKVStudioRegistryKey();
+            }
+
             MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
@@ -27,22 +29,11 @@ namespace MKVStudio
 
         private static IServiceProvider CreateServiceProvider()
         {
-            IConfigurationBuilder builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-#if DEBUG
-            builder.AddJsonFile("appsettings.Dev.json", optional: false, reloadOnChange: true);
-#else
-            builder.AddJsonFile("appsettings.Prod.json", optional: false, reloadOnChange: true);
-#endif
-
-            IConfiguration configuration = builder.Build();
-
             IServiceCollection services = new ServiceCollection();
 
-            _ = services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
-
-            _ = services.AddTransient<IFfmpegService, FfmpegService>();
+            _ = services.AddSingleton<IRegistryService, RegistryService>();
+            _ = services.AddSingleton<IFfmpegService, FfmpegService>();
+            _ = services.AddSingleton<IMkvToolNixService, MkvToolNixService>();
 
             _ = services.AddScoped<MainViewModel>();
             _ = services.AddScoped<INavigator, Navigator>();

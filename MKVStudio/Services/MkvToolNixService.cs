@@ -1,10 +1,19 @@
-﻿namespace MKVStudio.Services
+﻿using System.Threading.Tasks;
+
+namespace MKVStudio.Services
 {
-    public class MkvToolNixService
+    public class MkvToolNixService : IMkvToolNixService
     {
-        private readonly string mkvInfoPath = @"C:\Program Files\MKVToolNix\mkvinfo.exe";
-        private readonly string mkvMergePath = @"C:\Program Files\MKVToolNix\mkvmerge.exe";
-        private readonly string mkvPropEditPath = @"C:\Program Files\MKVToolNix\mkvpropedit.exe";
-        private readonly string mkvExtractPath = @"C:\Program Files\MKVToolNix\mkvextract.exe";
+        private readonly IRegistryService _registry;
+
+        public MkvToolNixService(IRegistryService registryService)
+        {
+            _registry = registryService;
+        }
+
+        public async Task RunMKVInfo()
+        {
+
+        }
     }
 }

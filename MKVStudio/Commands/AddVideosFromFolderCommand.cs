@@ -1,4 +1,5 @@
 ﻿using MKVStudio.Models;
+using MKVStudio.Services;
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -12,10 +13,12 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
         private readonly ObservableCollection<Video> _videos;
+        private readonly IFfmpegService _ffmpeg;
 
-        public AddVideosFromFolderCommand(ObservableCollection<Video> videos)
+        public AddVideosFromFolderCommand(ObservableCollection<Video> videos, IFfmpegService ffmpegService)
         {
             _videos = videos;
+            _ffmpeg = ffmpegService;
         }
 
         public bool CanExecute(object parameter)
@@ -33,7 +36,7 @@ namespace MKVStudio.Commands
                 {
                     foreach (string filename in GetFiles(fbd.SelectedPath, "*.mkv|*.mp4"))
                     {
-                        Video video = new(filename);
+                        Video video = new(filename, _ffmpeg);
                         _videos.Add(video);
                     }
                 }
