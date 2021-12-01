@@ -3,9 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="I'm media info"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="I'm media info"/>
+            <TextBlock Text="{Binding Navigator.SelectedVideo.InputFullName}"/>
+            <Button Content="Run" Command="{Binding Navigator.SelectedVideo.RunMKVInfoCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

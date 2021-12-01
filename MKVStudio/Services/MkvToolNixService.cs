@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace MKVStudio.Services
+﻿namespace MKVStudio.Services
 {
     public class MkvToolNixService : IMkvToolNixService
     {
@@ -9,11 +7,6 @@ namespace MKVStudio.Services
         public MkvToolNixService(IRegistryService registryService)
         {
             _registry = registryService;
-        }
-
-        public async Task RunMKVInfo()
-        {
-
         }
     }
 }

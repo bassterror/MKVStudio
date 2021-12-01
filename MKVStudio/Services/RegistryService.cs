@@ -5,39 +5,38 @@ namespace MKVStudio.Services
 {
     public class RegistryService : IRegistryService
     {
-        public string GetFFmpeg()
+        public enum Executables
         {
-            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-            object ffmpeg = key.GetValue("FFmpeg");
-            return ffmpeg.ToString();
+            FFmpeg,
+            MKVInfo,
+            MKVMerge,
+            MKVPropEdit,
+            MKVExtract
         }
 
-        public string GetMKVInfo()
+        public string GetExecutable(Executables executable)
         {
             using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-            object mkvInfo = key.GetValue("MKVInfo");
-            return mkvInfo.ToString();
-        }
-
-        public string GetMKVMerge()
-        {
-            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-            object mkvMerge = key.GetValue("MKVMerge");
-            return mkvMerge.ToString();
-        }
-
-        public string GetMKVPropEdit()
-        {
-            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-            object mkvPropEdit = key.GetValue("MKVPropEdit");
-            return mkvPropEdit.ToString();
-        }
-
-        public string GetMKVExtract()
-        {
-            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-            object mkvExtract = key.GetValue("MKVExtract");
-            return mkvExtract.ToString();
+            string path = string.Empty;
+            switch (executable)
+            {
+                case Executables.FFmpeg:
+                    path = key.GetValue(Executables.FFmpeg.ToString()).ToString();
+                    break;
+                case Executables.MKVInfo:
+                    path = key.GetValue(Executables.MKVInfo.ToString()).ToString();
+                    break;
+                case Executables.MKVMerge:
+                    path = key.GetValue(Executables.MKVMerge.ToString()).ToString();
+                    break;
+                case Executables.MKVPropEdit:
+                    path = key.GetValue(Executables.MKVPropEdit.ToString()).ToString();
+                    break;
+                case Executables.MKVExtract:
+                    path = key.GetValue(Executables.MKVExtract.ToString()).ToString();
+                    break;
+            }
+            return path;
         }
 
         public static bool CheckMKVStudioRegistryKey()
@@ -55,11 +54,11 @@ namespace MKVStudio.Services
         private static bool CheckExternalLibrariesRegistries()
         {
             using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-            object ffmpeg = key.GetValue("FFmpeg");
-            object mkvInfo = key.GetValue("MKVInfo");
-            object mkvMerge = key.GetValue("MKVMerge");
-            object mkvPropEdit = key.GetValue("MKVPropEdit");
-            object mkvExtract = key.GetValue("MKVExtract");
+            object ffmpeg = key.GetValue(Executables.FFmpeg.ToString());
+            object mkvInfo = key.GetValue(Executables.MKVInfo.ToString());
+            object mkvMerge = key.GetValue(Executables.MKVMerge.ToString());
+            object mkvPropEdit = key.GetValue(Executables.MKVPropEdit.ToString());
+            object mkvExtract = key.GetValue(Executables.MKVExtract.ToString());
 
             return ffmpeg == null || mkvInfo == null || mkvMerge == null || mkvPropEdit == null || mkvExtract == null;
         }
@@ -68,11 +67,11 @@ namespace MKVStudio.Services
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
 
-            key.SetValue("FFmpeg", GetFile("ffmpeg.exe|ffmpeg.exe"));
-            key.SetValue("MKVInfo", GetFile("mkvinfo.exe|mkvinfo.exe"));
-            key.SetValue("MKVMerge", GetFile("mkvmerge.exe|mkvmerge.exe"));
-            key.SetValue("MKVPropEdit", GetFile("mkvpropedit.exe|mkvpropedit.exe"));
-            key.SetValue("MKVExtract", GetFile("mkvextract.exe|mkvextract.exe"));
+            key.SetValue(Executables.FFmpeg.ToString(), GetFile("ffmpeg.exe|ffmpeg.exe"));
+            key.SetValue(Executables.MKVInfo.ToString(), GetFile("mkvinfo.exe|mkvinfo.exe"));
+            key.SetValue(Executables.MKVMerge.ToString(), GetFile("mkvmerge.exe|mkvmerge.exe"));
+            key.SetValue(Executables.MKVPropEdit.ToString(), GetFile("mkvpropedit.exe|mkvpropedit.exe"));
+            key.SetValue(Executables.MKVExtract.ToString(), GetFile("mkvextract.exe|mkvextract.exe"));
 
             key.Close();
         }

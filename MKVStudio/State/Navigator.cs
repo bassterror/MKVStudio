@@ -10,7 +10,7 @@ namespace MKVStudio.State
     public class Navigator : BaseNavigator, INavigator
     {
         private Video _selectedVideo;
-        private readonly IFfmpegService _ffmpeg;
+        private readonly IExternalLibrariesService _exLib;
 
         public BaseViewModel CurrentMainViewModel { get; set; }
         public BaseViewModel CurrentFilesViewModel { get; set; }
@@ -39,17 +39,17 @@ namespace MKVStudio.State
                 UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.General);
             }
         }
-        public ICommand AddVideosCommand => new AddVideosCommand(Videos, _ffmpeg);
-        public ICommand AddVideosFromFolderCommand => new AddVideosFromFolderCommand(Videos, _ffmpeg);
+        public ICommand AddVideosCommand => new AddVideosCommand(Videos, _exLib);
+        public ICommand AddVideosFromFolderCommand => new AddVideosFromFolderCommand(Videos, _exLib);
         public ICommand RemoveVideoCommand => new RemoveVideoCommand(Videos);
         public ICommand ClearVideosCommand => new ClearVideosCommand(Videos);
 
-        public Navigator(IFfmpegService ffmpegService)
+        public Navigator(IExternalLibrariesService externalLibrariesService)
         {
             FilesViewModel = new FilesViewModel(this);
             QueueViewModel = new QueueViewModel(this);
             UpdateCurrentMainViewModelCommand = new UpdateCurrentMainViewModelCommand(this, FilesViewModel, QueueViewModel);
-            _ffmpeg = ffmpegService;
+            _exLib = externalLibrariesService;
         }
     }
 }

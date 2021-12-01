@@ -1,11 +1,9 @@
-﻿namespace MKVStudio.Services
+﻿using static MKVStudio.Services.RegistryService;
+
+namespace MKVStudio.Services
 {
     public interface IRegistryService
     {
-        string GetFFmpeg();
-        string GetMKVInfo();
-        string GetMKVMerge();
-        string GetMKVPropEdit();
-        string GetMKVExtract();
+        string GetExecutable(Executables executable);
     }
 }

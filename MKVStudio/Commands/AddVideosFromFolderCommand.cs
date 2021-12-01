@@ -13,12 +13,12 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
         private readonly ObservableCollection<Video> _videos;
-        private readonly IFfmpegService _ffmpeg;
+        private readonly IExternalLibrariesService _exLib;
 
-        public AddVideosFromFolderCommand(ObservableCollection<Video> videos, IFfmpegService ffmpegService)
+        public AddVideosFromFolderCommand(ObservableCollection<Video> videos, IExternalLibrariesService externalLibrariesService)
         {
             _videos = videos;
-            _ffmpeg = ffmpegService;
+            _exLib = externalLibrariesService;
         }
 
         public bool CanExecute(object parameter)
@@ -36,7 +36,7 @@ namespace MKVStudio.Commands
                 {
                     foreach (string filename in GetFiles(fbd.SelectedPath, "*.mkv|*.mp4"))
                     {
-                        Video video = new(filename, _ffmpeg);
+                        Video video = new(filename, _exLib);
                         _videos.Add(video);
                     }
                 }

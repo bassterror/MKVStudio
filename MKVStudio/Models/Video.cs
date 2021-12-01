@@ -12,7 +12,7 @@ namespace MKVStudio.Models
     public class Video : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
-        private readonly IFfmpegService _ffmpeg;
+        private readonly IExternalLibrariesService _exLib;
 
         public string InputPath { get; private set; }
         public string InputName { get; private set; }
@@ -24,7 +24,7 @@ namespace MKVStudio.Models
         public string OutputExtension { get; private set; }
         public string OutputFullName { get; private set; }
         public string OutputFullPath { get; private set; }
-        public List<ProcessResult> ProcessResults { get; private set; } = new();
+        public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
         public string Channels { get; set; }
         public string InputI { get; set; }
         public string InputTP { get; set; }
@@ -37,8 +37,9 @@ namespace MKVStudio.Models
         public string TargetOffset { get; set; }
         public string SampleRates { get; set; }
         public ICommand RunFirstPassCommand { get; set; }
+        public ICommand RunMKVInfoCommand { get; set; }
 
-        public Video(string source, IFfmpegService ffmpegService)
+        public Video(string source, IExternalLibrariesService externalLibrariesService)
         {
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);
@@ -50,8 +51,9 @@ namespace MKVStudio.Models
             OutputExtension = InputExtension;
             OutputFullName = $"{OutputName}.{OutputExtension}";
             OutputFullPath = Path.Combine(OutputPath, OutputFullName);
-            _ffmpeg = ffmpegService;
-            RunFirstPassCommand = new RunFirstPassCommand(this, _ffmpeg);
+            _exLib = externalLibrariesService;
+            RunFirstPassCommand = new RunFirstPassCommand(this, _exLib);
+            RunMKVInfoCommand = new RunMKVInfoCommand(this, _exLib);
         }
     }
 }
