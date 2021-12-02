@@ -3,22 +3,31 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using static MKVStudio.Services.RegistryService;
+using static MKVStudio.Services.UtilitiesService;
 
 namespace MKVStudio.Services
 {
     public class ExternalLibrariesService : IExternalLibrariesService
     {
-        private readonly IRegistryService _registry;
+        private IUtilitiesService _util;
+        public IUtilitiesService Util
+        {
+            get  => _util;
+            set
+            {
+                _util = value;
+            }
+        }
         private readonly IFfmpegService _ffmpeg;
         private readonly IMkvToolNixService _mkvToolNix;
 
-        public ExternalLibrariesService(IRegistryService registryService, IFfmpegService ffmpegService, IMkvToolNixService mkvToolNixService)
+        public ExternalLibrariesService(IUtilitiesService utilitiesService, IFfmpegService ffmpegService, IMkvToolNixService mkvToolNixService)
         {
-            _registry = registryService;
+            Util = utilitiesService;
             _ffmpeg = ffmpegService;
             _mkvToolNix = mkvToolNixService;
         }
+
 
         public async Task<ProcessResult> RunProcess(Executables executable, string arguments, ProcessResultNames processName)
         {
@@ -34,7 +43,7 @@ namespace MKVStudio.Services
                 };
                 processTasks.Add(processExitEvent.Task);
                 process.EnableRaisingEvents = true;
-                process.StartInfo.FileName = _registry.GetExecutable(executable);
+                process.StartInfo.FileName = Util.GetExecutable(executable);
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;

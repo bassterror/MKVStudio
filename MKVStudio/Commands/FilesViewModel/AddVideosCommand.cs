@@ -25,16 +25,10 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new();
-            openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
+            foreach (string filename in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
             {
-                foreach (string filename in openFileDialog.FileNames)
-                {
-                    Video video = new(filename, _exLib);
-                    _videos.Add(video);
-                }
+                Video video = new(filename, _exLib);
+                _videos.Add(video);
             }
         }
     }

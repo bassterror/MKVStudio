@@ -1,10 +1,7 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
 using System;
-using System.Collections;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
@@ -28,37 +25,11 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            using (FolderBrowserDialog fbd = new())
+            foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
             {
-                DialogResult result = fbd.ShowDialog();
-
-                if (!string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    foreach (string filename in GetFiles(fbd.SelectedPath, "*.mkv|*.mp4"))
-                    {
-                        Video video = new(filename, _exLib);
-                        _videos.Add(video);
-                    }
-                }
+                Video video = new(filename, _exLib);
+                _videos.Add(video);
             }
-        }
-
-        /// <summary>
-        /// Returns files with specific multiple filters
-        /// </summary>
-        /// <param name="searchPath">Source directory</param>
-        /// <param name="complexFilter">Sequence of filters divided by '|'</param>
-        /// <returns>string[]</returns>
-        private static string[] GetFiles(string searchPath, string complexFilter)
-        {
-            ArrayList newList = new();
-            string[] filters = complexFilter.Split("|");
-            foreach (string filter in filters)
-            {
-                newList.AddRange(Directory.GetFiles(searchPath, filter));
-            }
-
-            return (string[])newList.ToArray(typeof(string));
         }
     }
 }

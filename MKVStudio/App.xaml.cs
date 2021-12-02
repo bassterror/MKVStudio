@@ -16,9 +16,9 @@ namespace MKVStudio
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
 
-            if (RegistryService.CheckMKVStudioRegistryKey())
+            if (UtilitiesService.CheckMKVStudioRegistryKey())
             {
-                RegistryService.CreateMKVStudioRegistryKey();
+                UtilitiesService.CreateMKVStudioRegistryKeys();
             }
 
             MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
@@ -31,7 +31,7 @@ namespace MKVStudio
         {
             IServiceCollection services = new ServiceCollection();
 
-            _ = services.AddSingleton<IRegistryService, RegistryService>();
+            _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
             _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
             _ = services.AddSingleton<IFfmpegService, FfmpegService>();
             _ = services.AddSingleton<IMkvToolNixService, MkvToolNixService>();

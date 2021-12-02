@@ -2,11 +2,11 @@
 {
     public class MkvToolNixService : IMkvToolNixService
     {
-        private readonly IRegistryService _registry;
+        private readonly IUtilitiesService _util;
 
-        public MkvToolNixService(IRegistryService registryService)
+        public MkvToolNixService(IUtilitiesService utilitiesService)
         {
-            _registry = registryService;
+            _util = utilitiesService;
         }
     }
 }

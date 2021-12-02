@@ -2,11 +2,11 @@
 {
     public class FfmpegService : IFfmpegService
     {
-        public IRegistryService _registry;
+        public IUtilitiesService _util;
 
-        public FfmpegService(IRegistryService registryService)
+        public FfmpegService(IUtilitiesService utilitiesService)
         {
-            _registry = registryService;
+            _util = utilitiesService;
         }
     }
 }

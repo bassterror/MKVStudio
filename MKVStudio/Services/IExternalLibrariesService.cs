@@ -5,6 +5,7 @@ namespace MKVStudio.Services
 {
     public interface IExternalLibrariesService
     {
-        Task<ProcessResult> RunProcess(RegistryService.Executables executable, string arguments, ProcessResultNames processName);
+        IUtilitiesService Util { get; set; }
+        Task<ProcessResult> RunProcess(UtilitiesService.Executables executable, string arguments, ProcessResultNames processName);
     }
 }

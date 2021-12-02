@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-using static MKVStudio.Services.RegistryService;
+using static MKVStudio.Services.UtilitiesService;
 
 namespace MKVStudio.Commands
 {
