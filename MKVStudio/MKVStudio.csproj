@@ -19,4 +19,8 @@
     <Folder Include="Commands\VideoFileViewModel\Convert\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

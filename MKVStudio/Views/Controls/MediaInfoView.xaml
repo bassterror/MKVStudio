@@ -9,9 +9,17 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Grid.Row="1">
-            <TextBlock Text="I'm media info"/>
-            <TextBlock Text="{Binding Navigator.SelectedVideo.InputFullName}"/>
-            <Button Content="Run" Command="{Binding Navigator.SelectedVideo.RunMKVInfoCommand}"/>
+            <StackPanel Orientation="Horizontal" Margin="2">
+                <Label Content="Title:" Margin="2"/>
+                <TextBox Text="{Binding Navigator.SelectedVideo.Title}" VerticalContentAlignment="Center" Width="auto"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="2">
+                <Label Content="Audio channels:" Margin="2"/>
+                <TextBlock Text="{Binding Navigator.SelectedVideo.Channels}" VerticalAlignment="Center" Width="auto"/>
+            </StackPanel>
+            <Button Content="RunMKVInfo" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVInfoCommand}"/>
+            <Button Content="RunMKVMerge" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVMergeCommand}"/>
+            <Button Content="RunMKVExtract" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVExtractCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>
