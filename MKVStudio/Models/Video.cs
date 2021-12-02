@@ -19,12 +19,13 @@ namespace MKVStudio.Models
         public string InputExtension { get; private set; }
         public string InputFullName { get; private set; }
         public string InputFullPath { get; private set; }
-        public string OutputPath { get; private set; }
-        public string OutputName { get; private set; }
+        public string OutputPath { get; set; }
+        public string OutputName { get; set; }
         public string OutputExtension { get; private set; }
         public string OutputFullName { get; private set; }
         public string OutputFullPath { get; private set; }
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
+        public string Title { get; set; }
         public string Channels { get; set; }
         public string InputI { get; set; }
         public string InputTP { get; set; }
@@ -38,6 +39,8 @@ namespace MKVStudio.Models
         public string SampleRates { get; set; }
         public ICommand RunFirstPassCommand { get; set; }
         public ICommand RunMKVInfoCommand { get; set; }
+        public ICommand RunMKVExtractCommand { get; set; }
+        public ICommand RunMKVMergeCommand { get; set; }
 
         public Video(string source, IExternalLibrariesService externalLibrariesService)
         {
@@ -48,12 +51,15 @@ namespace MKVStudio.Models
             InputFullPath = source;
             OutputPath = InputPath;
             OutputName = InputName + " - edit";
-            OutputExtension = InputExtension;
+            OutputExtension = "mkv";
             OutputFullName = $"{OutputName}.{OutputExtension}";
             OutputFullPath = Path.Combine(OutputPath, OutputFullName);
             _exLib = externalLibrariesService;
             RunFirstPassCommand = new RunFirstPassCommand(this, _exLib);
             RunMKVInfoCommand = new RunMKVInfoCommand(this, _exLib);
+            RunMKVExtractCommand = new RunMKVExtractCommand(this, _exLib);
+            RunMKVMergeCommand = new RunMKVMergeCommand(this, _exLib);
+            RunMKVMergeCommand.Execute(null);
         }
     }
 }

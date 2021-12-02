@@ -7,7 +7,9 @@ namespace MKVStudio.Models
         LoudnormFirst,
         LoudnormSecondStereo,
         LoudnormSecond6Channels,
-        MKVInfo
+        MKVInfo,
+        MKVExtract,
+        MKVMerge
     }
 
     public class ProcessResult

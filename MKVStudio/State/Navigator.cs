@@ -36,7 +36,7 @@ namespace MKVStudio.State
                 MediaInfoViewModel = new MediaInfoViewModel(this, SelectedVideo);
                 ConvertViewModel = new ConvertViewModel(this, SelectedVideo);
                 UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, GeneralViewModel, MediaInfoViewModel, ConvertViewModel);
-                UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.General);
+                UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.MediaInfo);
             }
         }
         public ICommand AddVideosCommand => new AddVideosCommand(Videos, _exLib);
