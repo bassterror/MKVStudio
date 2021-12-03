@@ -14,12 +14,12 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <RadioButton Content="General" Margin="5" 
-                         IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:GeneralViewModel}}"
-                         Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.General}"/>
-            <RadioButton Content="Media info" Margin="5"
-                         IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:MediaInfoViewModel}}"
-                         Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.MediaInfo}"/>
+            <RadioButton Content="File Overview" Margin="5" 
+                         IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FileOverviewViewModel}}"
+                         Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.FileOverview}"/>
+            <RadioButton Content="Tracks" Margin="5"
+                         IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TracksViewModel}}"
+                         Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.Tracks}"/>
             <RadioButton Content="Convert" Margin="5"
                          IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:ConvertViewModel}}"
                          Command="{Binding UpdateCurrentVideoFileViewModelCommand}" CommandParameter="{x:Static s:ViewModelTypes.Convert}"/>

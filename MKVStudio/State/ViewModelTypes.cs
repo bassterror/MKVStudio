@@ -5,8 +5,8 @@
         Files,
         Queue,
         VideoFile,
-        General,
-        MediaInfo,
+        FileOverview,
+        Tracks,
         Convert
     }
 }

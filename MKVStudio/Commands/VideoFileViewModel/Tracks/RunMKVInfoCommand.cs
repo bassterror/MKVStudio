@@ -1,10 +1,8 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-using static MKVStudio.Services.UtilitiesService;
 
 namespace MKVStudio.Commands
 {
@@ -28,24 +26,9 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.RunProcess(Executables.MKVInfo, BuildArguments(ProcessResultNames.MKVInfo), ProcessResultNames.MKVInfo);
+            ProcessResult pr = await _exLib.Run(_video, ProcessResultNames.MKVInfo);
             _video.ProcessResults[ProcessResultNames.MKVInfo] = pr;
             SetMeasurements(_video.ProcessResults[ProcessResultNames.MKVInfo].StdOutput);
-        }
-
-        private string BuildArguments(ProcessResultNames processName)
-        {
-            string arguments = string.Empty;
-            switch (processName)
-            {
-                case ProcessResultNames.MKVInfo:
-                    arguments = $"\"{_video.InputFullPath}\"";
-                    break;
-                default:
-                    break;
-            }
-
-            return arguments;
         }
 
         private void SetMeasurements(string mkvInfoOutput)

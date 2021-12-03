@@ -16,8 +16,8 @@ namespace MKVStudio.State
         public BaseViewModel CurrentFilesViewModel { get; set; }
         public BaseViewModel CurrentVideoFileViewModel { get; set; }
         private FilesViewModel FilesViewModel { get; set; }
-        private GeneralViewModel GeneralViewModel { get; set; }
-        private MediaInfoViewModel MediaInfoViewModel { get; set; }
+        private FileOverviewViewModel GeneralViewModel { get; set; }
+        private TracksViewModel MediaInfoViewModel { get; set; }
         private ConvertViewModel ConvertViewModel { get; set; }
         private QueueViewModel QueueViewModel { get; set; }
         public ICommand UpdateCurrentMainViewModelCommand { get; set; }
@@ -32,11 +32,11 @@ namespace MKVStudio.State
                 _selectedVideo = value;
                 UpdateCurrentFilesViewModelCommand = new UpdateCurrentFilesViewModelCommand(this, SelectedVideo);
                 UpdateCurrentFilesViewModelCommand.Execute(ViewModelTypes.VideoFile);
-                GeneralViewModel = new GeneralViewModel(this, SelectedVideo);
-                MediaInfoViewModel = new MediaInfoViewModel(this, SelectedVideo);
+                GeneralViewModel = new FileOverviewViewModel(this, SelectedVideo);
+                MediaInfoViewModel = new TracksViewModel(this, SelectedVideo);
                 ConvertViewModel = new ConvertViewModel(this, SelectedVideo);
                 UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, GeneralViewModel, MediaInfoViewModel, ConvertViewModel);
-                UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.MediaInfo);
+                UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.FileOverview);
             }
         }
         public ICommand AddVideosCommand => new AddVideosCommand(Videos, _exLib);

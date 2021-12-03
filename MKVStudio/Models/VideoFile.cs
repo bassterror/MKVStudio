@@ -1,10 +1,13 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PropertyChanged;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace MKVStudio.Models
@@ -18,9 +21,9 @@ namespace MKVStudio.Models
 
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
         public string Title { get; set; }
-        public List<VideoTrack> VideoTracks { get; set; }
-        public List<AudioTrack> AudioTracks { get; set; }
-        public List<SubtitleTrack> SubtitleTracks { get; set; }
+        public List<VideoTrack> VideoTracks { get; set; } = new();
+        public List<AudioTrack> AudioTracks { get; set; } = new();
+        public List<SubtitleTrack> SubtitleTracks { get; set; } = new();
 
         #region I/O
         public string InputPath { get; private set; }
@@ -51,7 +54,6 @@ namespace MKVStudio.Models
         public ICommand RunLoudnormFirstPassCommand { get; set; }
         public ICommand RunMKVInfoCommand { get; set; }
         public ICommand RunMKVExtractCommand { get; set; }
-        public ICommand RunMKVMergeCommand { get; set; }
         #endregion
 
         public VideoFile(string source, IExternalLibrariesService externalLibrariesService)
@@ -66,8 +68,32 @@ namespace MKVStudio.Models
             RunLoudnormFirstPassCommand = new RunLoudnormFirstPassCommand(this, _exLib);
             RunMKVInfoCommand = new RunMKVInfoCommand(this, _exLib);
             RunMKVExtractCommand = new RunMKVExtractCommand(this, _exLib);
-            RunMKVMergeCommand = new RunMKVMergeCommand(this, _exLib);
-            RunMKVMergeCommand.Execute(null);
+            CallMKVMergeJ();
+        }
+
+        private async void CallMKVMergeJ()
+        {
+            ProcessResult pr = await _exLib.Run(this, ProcessResultNames.MKVMergeJ);
+            ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
+            SetVideoFileProperties(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
+        }
+
+        private void SetVideoFileProperties(string mkvMergeOutput)
+        {
+            MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(mkvMergeOutput);
+            Title = result.Container.Properties.Title;
+            foreach (MKVMergeJ.Track videoTrack in result.Tracks.Where(v => v.Type == "video"))
+            {
+                //_video.VideoTracks.Add(new VideoTrack());
+            }
+            foreach (MKVMergeJ.Track audioTrack in result.Tracks.Where(v => v.Type == "audio"))
+            {
+                AudioTracks.Add(new AudioTrack(audioTrack));
+            }
+            foreach (MKVMergeJ.Track subtitleTrack in result.Tracks.Where(v => v.Type == "subtitles"))
+            {
+                //_video.SubtitleTracks.Add(new SubtitleTrack());
+            }
         }
     }
 }

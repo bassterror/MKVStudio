@@ -9,7 +9,7 @@ namespace MKVStudio.Models
         LoudnormSecond6Channels,
         MKVInfo,
         MKVExtract,
-        MKVMerge
+        MKVMergeJ
     }
 
     public class ProcessResult
