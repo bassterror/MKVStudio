@@ -30,7 +30,7 @@ namespace MKVStudio.Commands
         {
             ProcessResult pr = await _exLib.RunProcess(Executables.MKVMerge, BuildArguments(ProcessResultNames.MKVMerge), ProcessResultNames.MKVMerge);
             _video.ProcessResults[ProcessResultNames.MKVMerge] = pr;
-            SetMeasurements(_video.ProcessResults[ProcessResultNames.MKVMerge].StdOutput);
+            SetVideoFileProperties(_video.ProcessResults[ProcessResultNames.MKVMerge].StdOutput);
         }
 
         private string BuildArguments(ProcessResultNames processName)
@@ -48,12 +48,22 @@ namespace MKVStudio.Commands
             return arguments;
         }
 
-        private void SetMeasurements(string mkvInfoOutput)
+        private void SetVideoFileProperties(string mkvMergeOutput)
         {
-            MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(mkvInfoOutput);
+            MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(mkvMergeOutput);
             _video.Title = result.Container.Properties.Title;
-            _video.Channels = result.Tracks.First(t => t.Type == "audio").Properties.Audio_channels.ToString();
-            _video.SampleRates = result.Tracks.First(t => t.Type == "audio").Properties.Audio_sampling_frequency.ToString();
+            foreach (MKVMergeJ.Track videoTrack in result.Tracks.Where(v => v.Type == "video"))
+            {
+                //_video.VideoTracks.Add(new VideoTrack());
+            }
+            foreach (MKVMergeJ.Track audioTrack in result.Tracks.Where(v => v.Type == "audio"))
+            {
+                _video.AudioTracks.Add(new AudioTrack(audioTrack));
+            }
+            foreach (MKVMergeJ.Track subtitleTrack in result.Tracks.Where(v => v.Type == "subtitles"))
+            {
+                //_video.SubtitleTracks.Add(new SubtitleTrack());
+            }
         }
     }
 }

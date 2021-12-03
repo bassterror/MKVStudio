@@ -14,14 +14,14 @@
                 <TextBox Text="{Binding Navigator.SelectedVideo.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" Width="auto"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="2">
+            <!--<StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Audio channels:" Margin="2"/>
                 <TextBlock Text="{Binding Navigator.SelectedVideo.Channels}" VerticalAlignment="Center" Width="auto"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Audio sampling freq:" Margin="2"/>
                 <TextBlock Text="{Binding Navigator.SelectedVideo.SamplingRates}" VerticalAlignment="Center" Width="auto"/>
-            </StackPanel>
+            </StackPanel>-->
             <Button Content="RunMKVInfo" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVInfoCommand}"/>
             <Button Content="RunMKVMerge" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVMergeCommand}"/>
             <Button Content="RunMKVExtract" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVExtractCommand}"/>

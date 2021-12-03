@@ -4,6 +4,7 @@ using PropertyChanged;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MKVStudio.Models
@@ -17,12 +18,9 @@ namespace MKVStudio.Models
 
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
         public string Title { get; set; }
-        public VideoTrack[] VideoTracks { get; set; }
-        public AudioTrack[] AudioTracks { get; set; }
-        public SubtitleTrack[] SubtitleTracks { get; set; }
-
-        public string Channels { get; set; }
-        public string SampleRates { get; set; }
+        public List<VideoTrack> VideoTracks { get; set; }
+        public List<AudioTrack> AudioTracks { get; set; }
+        public List<SubtitleTrack> SubtitleTracks { get; set; }
 
         #region I/O
         public string InputPath { get; private set; }

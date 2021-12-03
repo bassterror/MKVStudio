@@ -41,10 +41,10 @@ namespace MKVStudio.Commands
                     arguments = $"-i \"{_video.InputFullPath}\" -af loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json -f null -";
                     break;
                 case ProcessResultNames.LoudnormSecondStereo:
-                    arguments = $"-i \"{_video.InputFullPath}\" -af loudnorm=I=-16:LRA=11:TP=-1.5 aresample={_video.SampleRates} \"{_video.OutputFullPath}\"";
+                    //arguments = $"-i \"{_video.InputFullPath}\" -af loudnorm=I=-16:LRA=11:TP=-1.5 aresample={_video.SampleRates} \"{_video.OutputFullPath}\"";
                     break;
                 case ProcessResultNames.LoudnormSecond6Channels:
-                    arguments = $"-i \"{_video.InputFullPath}\" -filter_complex \"[0:a:0]channelsplit=channel_layout=5.1[FL][FR][FC][LFE][BL][BR];[FC]loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={_video.InputI}:measured_LRA={_video.InputLRA}:measured_TP={_video.InputTP}:measured_thresh={_video.InputTresh}:offset={_video.TargetOffset}:linear=true,aformat=sample_rates={_video.SampleRates}:channel_layouts=mono[FC2];[FL]aformat=channel_layouts=mono[FL2];[FR]aformat=channel_layouts=mono[FR2];[LFE]aformat=channel_layouts=mono[LFE2];[BL]aformat=channel_layouts=mono[BL2];[BR]aformat=channel_layouts=mono[BR2];[FL2][FR2][FC2][LFE2][BL2][BR2]join=inputs=6:channel_layout=5.1:map=0.0-FL|1.0-FR|2.0-FC|3.0-LFE|4.0-BL|5.0-BR\" -c:v copy -c:a libfdk_aac -vbr 3 -c:s copy \"{_video.OutputFullPath}\"";
+                    //arguments = $"-i \"{_video.InputFullPath}\" -filter_complex \"[0:a:0]channelsplit=channel_layout=5.1[FL][FR][FC][LFE][BL][BR];[FC]loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={_video.InputI}:measured_LRA={_video.InputLRA}:measured_TP={_video.InputTP}:measured_thresh={_video.InputTresh}:offset={_video.TargetOffset}:linear=true,aformat=sample_rates={_video.SampleRates}:channel_layouts=mono[FC2];[FL]aformat=channel_layouts=mono[FL2];[FR]aformat=channel_layouts=mono[FR2];[LFE]aformat=channel_layouts=mono[LFE2];[BL]aformat=channel_layouts=mono[BL2];[BR]aformat=channel_layouts=mono[BR2];[FL2][FR2][FC2][LFE2][BL2][BR2]join=inputs=6:channel_layout=5.1:map=0.0-FL|1.0-FR|2.0-FC|3.0-LFE|4.0-BL|5.0-BR\" -c:v copy -c:a libfdk_aac -vbr 3 -c:s copy \"{_video.OutputFullPath}\"";
                     break;
                 default:
                     break;

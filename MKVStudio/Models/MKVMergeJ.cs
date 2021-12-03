@@ -73,8 +73,6 @@
             public bool Forced_track { get; set; }
             public bool Flag_hearing_impaired { get; set; }
             public bool Flag_visual_impaired { get; set; }
-            public bool Flag_text_descriptions { get; set; }
-            public bool Flag_original { get; set; }
             public bool Flag_commentary { get; set; }
             public string Language { get; set; }
             public int Number { get; set; }
@@ -83,6 +81,7 @@
             public string UID { get; set; }
             public int Audio_channels { get; set; }
             public int Audio_sampling_frequency { get; set; }
+            public string Encoding { get; set; }
             public string Language_ietf { get; set; }
             public string Track_name { get; set; }
             public string Content_encoding_algorithms { get; set; }
