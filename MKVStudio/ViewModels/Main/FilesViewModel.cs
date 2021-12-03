@@ -1,13 +1,27 @@
-﻿using MKVStudio.State;
+﻿using MKVStudio.Commands;
+using MKVStudio.Services;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
     public class FilesViewModel : BaseViewModel
     {
-        public INavigator Navigator { get; }
-        public FilesViewModel(INavigator mainNavigator)
+        private readonly IExternalLibrariesService _exLib;
+
+        public BaseViewModel CurrentFilesViewModel { get; set; }
+
+        public ObservableCollection<VideoFileViewModel> Videos { get; set; } = new();
+        public VideoFileViewModel SelectedVideo { get; set; }
+        public ICommand AddVideosCommand => new AddVideosCommand(Videos, _exLib);
+        public ICommand AddVideosFromFolderCommand => new AddVideosFromFolderCommand(Videos, _exLib);
+        public ICommand RemoveVideoCommand => new RemoveVideoCommand(Videos);
+        public ICommand ClearVideosCommand => new ClearVideosCommand(Videos);
+
+        public FilesViewModel(IExternalLibrariesService externalLibrariesService)
         {
-            Navigator = mainNavigator;
+            CurrentFilesViewModel = this;
+            _exLib = externalLibrariesService;
         }
     }
 }

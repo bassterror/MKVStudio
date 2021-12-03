@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:l="clr-namespace:MKVStudio.Views.Controls"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-             d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+             d:DataContext="{d:DesignInstance Type=vm:FilesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,7 +13,7 @@
             <ColumnDefinition Width="auto" MaxWidth="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <l:FilesNavigator Grid.Column="0" DataContext="{Binding Navigator}"/>
-        <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentFilesViewModel}"/>
+        <l:FilesNavigation Grid.Column="0" DataContext="{Binding CurrentFilesViewModel}"/>
+        <ContentControl Grid.Column="1" Content="{Binding SelectedVideo}"/>
     </Grid>
 </UserControl>

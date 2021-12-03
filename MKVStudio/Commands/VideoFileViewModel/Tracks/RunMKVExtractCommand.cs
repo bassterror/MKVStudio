@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -8,10 +9,10 @@ namespace MKVStudio.Commands
     public class RunMKVExtractCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly VideoFile _video;
+        private readonly VideoFileViewModel _video;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunMKVExtractCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
+        public RunMKVExtractCommand(VideoFileViewModel video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;

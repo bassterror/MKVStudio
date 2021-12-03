@@ -1,4 +1,4 @@
-﻿using MKVStudio.Models;
+﻿using MKVStudio.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -8,9 +8,9 @@ namespace MKVStudio.Commands
     public class RemoveVideoCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly ObservableCollection<VideoFile> _videos;
+        private readonly ObservableCollection<VideoFileViewModel> _videos;
 
-        public RemoveVideoCommand(ObservableCollection<VideoFile> videos)
+        public RemoveVideoCommand(ObservableCollection<VideoFileViewModel> videos)
         {
             _videos = videos;
         }
@@ -22,7 +22,7 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is VideoFile video)
+            if (parameter is VideoFileViewModel video)
             {
                 _ = _videos.Remove(video);
             }

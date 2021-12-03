@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MKVStudio.ViewModels
+﻿namespace MKVStudio.ViewModels
 {
-    class AudioTrackViewModel
+    internal class AudioTrackViewModel
     {
     }
 }

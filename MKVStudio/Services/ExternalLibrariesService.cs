@@ -1,4 +1,5 @@
 ﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -10,17 +11,13 @@ namespace MKVStudio.Services
     public class ExternalLibrariesService : IExternalLibrariesService
     {
         public IUtilitiesService Util { get; set; }
-        private readonly IFfmpegService _ffmpeg;
-        private readonly IMkvToolNixService _mkvToolNix;
 
-        public ExternalLibrariesService(IUtilitiesService utilitiesService, IFfmpegService ffmpegService, IMkvToolNixService mkvToolNixService)
+        public ExternalLibrariesService(IUtilitiesService utilitiesService)
         {
             Util = utilitiesService;
-            _ffmpeg = ffmpegService;
-            _mkvToolNix = mkvToolNixService;
         }
 
-        public async Task<ProcessResult> Run(VideoFile video, ProcessResultNames processName)
+        public async Task<ProcessResult> Run(VideoFileViewModel video, ProcessResultNames processName)
         {
             ProcessResult pr = new();
 
@@ -136,7 +133,7 @@ namespace MKVStudio.Services
             return processResult;
         }
 
-        private static string BuildArguments(ProcessResultNames processName, VideoFile video)
+        private static string BuildArguments(ProcessResultNames processName, VideoFileViewModel video)
         {
             string arguments = string.Empty;
             switch (processName)

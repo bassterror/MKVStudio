@@ -33,8 +33,6 @@ namespace MKVStudio
 
             _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
             _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
-            _ = services.AddSingleton<IFfmpegService, FfmpegService>();
-            _ = services.AddSingleton<IMkvToolNixService, MkvToolNixService>();
 
             _ = services.AddScoped<MainViewModel>();
             _ = services.AddScoped<INavigator, Navigator>();

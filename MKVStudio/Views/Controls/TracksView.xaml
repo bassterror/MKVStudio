@@ -5,13 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+             d:DataContext="{d:DesignInstance Type=vm:TracksViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Navigator.SelectedVideo.}">
+                
+            </ItemsControl>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Title:" Margin="2"/>
-                <TextBox Text="{Binding Navigator.SelectedVideo.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding SelectedVideo.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" Width="auto"/>
             </StackPanel>
             <!--<StackPanel Orientation="Horizontal" Margin="2">
@@ -22,9 +25,9 @@
                 <Label Content="Audio sampling freq:" Margin="2"/>
                 <TextBlock Text="{Binding Navigator.SelectedVideo.SamplingRates}" VerticalAlignment="Center" Width="auto"/>
             </StackPanel>-->
-            <Button Content="RunMKVInfo" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVInfoCommand}"/>
-            <Button Content="RunMKVMerge" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVMergeCommand}"/>
-            <Button Content="RunMKVExtract" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunMKVExtractCommand}"/>
+            <Button Content="RunMKVInfo" IsEnabled="False" Command="{Binding SelectedVideo.RunMKVInfoCommand}"/>
+            <Button Content="RunMKVMerge" IsEnabled="False" Command="{Binding SelectedVideo.RunMKVMergeCommand}"/>
+            <Button Content="RunMKVExtract" IsEnabled="False" Command="{Binding SelectedVideo.RunMKVExtractCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

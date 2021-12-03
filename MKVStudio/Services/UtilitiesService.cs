@@ -104,7 +104,7 @@ namespace MKVStudio.Services
             }
 
             return (string[])newList.ToArray(typeof(string));
-        } 
+        }
         #endregion
     }
 }

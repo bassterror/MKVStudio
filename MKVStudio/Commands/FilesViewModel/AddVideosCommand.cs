@@ -1,5 +1,5 @@
-﻿using MKVStudio.Models;
-using MKVStudio.Services;
+﻿using MKVStudio.Services;
+using MKVStudio.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -9,10 +9,10 @@ namespace MKVStudio.Commands
     public class AddVideosCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly ObservableCollection<VideoFile> _videos;
+        private readonly ObservableCollection<VideoFileViewModel> _videos;
         private readonly IExternalLibrariesService _exLib;
 
-        public AddVideosCommand(ObservableCollection<VideoFile> videos, IExternalLibrariesService externalLibrariesService)
+        public AddVideosCommand(ObservableCollection<VideoFileViewModel> videos, IExternalLibrariesService externalLibrariesService)
         {
             _videos = videos;
             _exLib = externalLibrariesService;
@@ -27,7 +27,7 @@ namespace MKVStudio.Commands
         {
             foreach (string filename in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
             {
-                VideoFile video = new(filename, _exLib);
+                VideoFileViewModel video = new(filename, _exLib);
                 _videos.Add(video);
             }
         }

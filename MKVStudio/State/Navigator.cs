@@ -1,55 +1,23 @@
 ﻿using MKVStudio.Commands;
-using MKVStudio.Models;
 using MKVStudio.Services;
 using MKVStudio.ViewModels;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.State
 {
     public class Navigator : BaseNavigator, INavigator
     {
-        private VideoFile _selectedVideo;
-        private readonly IExternalLibrariesService _exLib;
+        private FilesViewModel FilesViewModel { get; set; }
+        private QueueViewModel QueueViewModel { get; set; }
 
         public BaseViewModel CurrentMainViewModel { get; set; }
-        public BaseViewModel CurrentFilesViewModel { get; set; }
-        public BaseViewModel CurrentVideoFileViewModel { get; set; }
-        private FilesViewModel FilesViewModel { get; set; }
-        private FileOverviewViewModel GeneralViewModel { get; set; }
-        private TracksViewModel MediaInfoViewModel { get; set; }
-        private ConvertViewModel ConvertViewModel { get; set; }
-        private QueueViewModel QueueViewModel { get; set; }
         public ICommand UpdateCurrentMainViewModelCommand { get; set; }
-        public ICommand UpdateCurrentFilesViewModelCommand { get; set; }
-        public ICommand UpdateCurrentVideoFileViewModelCommand { get; set; }
-        public ObservableCollection<VideoFile> Videos { get; set; } = new();
-        public VideoFile SelectedVideo
-        {
-            get => _selectedVideo;
-            set
-            {
-                _selectedVideo = value;
-                UpdateCurrentFilesViewModelCommand = new UpdateCurrentFilesViewModelCommand(this, SelectedVideo);
-                UpdateCurrentFilesViewModelCommand.Execute(ViewModelTypes.VideoFile);
-                GeneralViewModel = new FileOverviewViewModel(this, SelectedVideo);
-                MediaInfoViewModel = new TracksViewModel(this, SelectedVideo);
-                ConvertViewModel = new ConvertViewModel(this, SelectedVideo);
-                UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, GeneralViewModel, MediaInfoViewModel, ConvertViewModel);
-                UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.FileOverview);
-            }
-        }
-        public ICommand AddVideosCommand => new AddVideosCommand(Videos, _exLib);
-        public ICommand AddVideosFromFolderCommand => new AddVideosFromFolderCommand(Videos, _exLib);
-        public ICommand RemoveVideoCommand => new RemoveVideoCommand(Videos);
-        public ICommand ClearVideosCommand => new ClearVideosCommand(Videos);
 
         public Navigator(IExternalLibrariesService externalLibrariesService)
         {
-            FilesViewModel = new FilesViewModel(this);
+            FilesViewModel = new FilesViewModel(externalLibrariesService);
             QueueViewModel = new QueueViewModel(this);
             UpdateCurrentMainViewModelCommand = new UpdateCurrentMainViewModelCommand(this, FilesViewModel, QueueViewModel);
-            _exLib = externalLibrariesService;
         }
     }
 }

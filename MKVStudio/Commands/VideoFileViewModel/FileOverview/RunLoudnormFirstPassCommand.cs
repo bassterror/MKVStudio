@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using MKVStudio.ViewModels;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
@@ -10,10 +11,10 @@ namespace MKVStudio.Commands
     public class RunLoudnormFirstPassCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly VideoFile _video;
+        private readonly VideoFileViewModel _video;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunLoudnormFirstPassCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
+        public RunLoudnormFirstPassCommand(VideoFileViewModel video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;

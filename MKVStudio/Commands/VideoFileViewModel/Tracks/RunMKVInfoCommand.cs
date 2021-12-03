@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using MKVStudio.ViewModels;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -8,12 +9,12 @@ namespace MKVStudio.Commands
 {
     public class RunMKVInfoCommand : ICommand
     {
-        private readonly VideoFile _video;
+        private readonly VideoFileViewModel _video;
         private readonly IExternalLibrariesService _exLib;
 
         public event EventHandler CanExecuteChanged;
 
-        public RunMKVInfoCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
+        public RunMKVInfoCommand(VideoFileViewModel video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;

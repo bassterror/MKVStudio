@@ -6,7 +6,7 @@
              xmlns:s="clr-namespace:MKVStudio.State"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              xmlns:c="clr-namespace:MKVStudio.Converters"
-             d:DataContext="{d:DesignInstance Type=s:Navigator}"
+             d:DataContext="{d:DesignInstance Type=vm:VideoFileViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

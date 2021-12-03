@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-             d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+             d:DataContext="{d:DesignInstance Type=vm:FileOverviewViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,24 +13,24 @@
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Input Location:" Margin="2"/>
-                <TextBlock Text="{Binding Navigator.SelectedVideo.InputPath}" VerticalAlignment="Center" Width="auto"/>
+                <TextBlock Text="{Binding SelectedVideo.InputPath}" VerticalAlignment="Center" Width="auto"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Output Location:" Margin="2"/>
-                <TextBox Text="{Binding Navigator.SelectedVideo.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding SelectedVideo.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" Width="auto"/>
                 <Button Content="Browse" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Output Name:" Margin="2"/>
-                <TextBox Text="{Binding Navigator.SelectedVideo.OutputName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding SelectedVideo.OutputName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" Width="auto"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Output:" Margin="2"/>
-                <TextBlock Text="{Binding Navigator.SelectedVideo.OutputFullPath}" VerticalAlignment="Center" Width="auto"/>
+                <TextBlock Text="{Binding SelectedVideo.OutputFullPath}" VerticalAlignment="Center" Width="auto"/>
             </StackPanel>
-            <Button Content="FirstPass" IsEnabled="True" Command="{Binding Navigator.SelectedVideo.RunFirstPassCommand}"/>
+            <Button Content="FirstPass" IsEnabled="True" Command="{Binding SelectedVideo.RunLoudnormFirstPassCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

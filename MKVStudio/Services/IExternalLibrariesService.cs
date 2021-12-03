@@ -1,4 +1,5 @@
 ﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Threading.Tasks;
 
 namespace MKVStudio.Services
@@ -6,6 +7,6 @@ namespace MKVStudio.Services
     public interface IExternalLibrariesService
     {
         IUtilitiesService Util { get; set; }
-        Task<ProcessResult> Run(VideoFile video, ProcessResultNames processName);
+        Task<ProcessResult> Run(VideoFileViewModel video, ProcessResultNames processName);
     }
 }
