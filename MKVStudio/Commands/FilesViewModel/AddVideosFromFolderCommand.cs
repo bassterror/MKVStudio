@@ -9,10 +9,10 @@ namespace MKVStudio.Commands
     public class AddVideosFromFolderCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly ObservableCollection<Video> _videos;
+        private readonly ObservableCollection<VideoFile> _videos;
         private readonly IExternalLibrariesService _exLib;
 
-        public AddVideosFromFolderCommand(ObservableCollection<Video> videos, IExternalLibrariesService externalLibrariesService)
+        public AddVideosFromFolderCommand(ObservableCollection<VideoFile> videos, IExternalLibrariesService externalLibrariesService)
         {
             _videos = videos;
             _exLib = externalLibrariesService;
@@ -27,7 +27,7 @@ namespace MKVStudio.Commands
         {
             foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
             {
-                Video video = new(filename, _exLib);
+                VideoFile video = new(filename, _exLib);
                 _videos.Add(video);
             }
         }

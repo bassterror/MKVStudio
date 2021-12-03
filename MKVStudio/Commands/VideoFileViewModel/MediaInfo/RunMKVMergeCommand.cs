@@ -10,12 +10,12 @@ namespace MKVStudio.Commands
 {
     public class RunMKVMergeCommand : ICommand
     {
-        private readonly Video _video;
+        private readonly VideoFile _video;
         private readonly IExternalLibrariesService _exLib;
 
         public event EventHandler CanExecuteChanged;
 
-        public RunMKVMergeCommand(Video video, IExternalLibrariesService externalLibrariesService)
+        public RunMKVMergeCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;
@@ -53,6 +53,7 @@ namespace MKVStudio.Commands
             MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(mkvInfoOutput);
             _video.Title = result.Container.Properties.Title;
             _video.Channels = result.Tracks.First(t => t.Type == "audio").Properties.Audio_channels.ToString();
+            _video.SampleRates = result.Tracks.First(t => t.Type == "audio").Properties.Audio_sampling_frequency.ToString();
         }
     }
 }

@@ -17,18 +17,20 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Output Location:" Margin="2"/>
-                <TextBox Text="{Binding Navigator.SelectedVideo.OutputPath}" VerticalContentAlignment="Center" Width="auto"/>
+                <TextBox Text="{Binding Navigator.SelectedVideo.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center" Width="auto"/>
                 <Button Content="Browse" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Output Name:" Margin="2"/>
-                <TextBox Text="{Binding Navigator.SelectedVideo.OutputName}" VerticalContentAlignment="Center" Width="auto"/>
+                <TextBox Text="{Binding Navigator.SelectedVideo.OutputName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center" Width="auto"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Content="Output:" Margin="2"/>
                 <TextBlock Text="{Binding Navigator.SelectedVideo.OutputFullPath}" VerticalAlignment="Center" Width="auto"/>
             </StackPanel>
-            <Button Content="FirstPass" IsEnabled="False" Command="{Binding Navigator.SelectedVideo.RunFirstPassCommand}"/>
+            <Button Content="FirstPass" IsEnabled="True" Command="{Binding Navigator.SelectedVideo.RunFirstPassCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

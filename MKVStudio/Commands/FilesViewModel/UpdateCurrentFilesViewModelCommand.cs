@@ -11,9 +11,9 @@ namespace MKVStudio.Commands
         public event EventHandler CanExecuteChanged;
 
         private readonly INavigator _navigator;
-        private readonly Video _selectedVideo;
+        private readonly VideoFile _selectedVideo;
 
-        public UpdateCurrentFilesViewModelCommand(INavigator navigator, Video selectedVideo)
+        public UpdateCurrentFilesViewModelCommand(INavigator navigator, VideoFile selectedVideo)
         {
             _navigator = navigator;
             _selectedVideo = selectedVideo;

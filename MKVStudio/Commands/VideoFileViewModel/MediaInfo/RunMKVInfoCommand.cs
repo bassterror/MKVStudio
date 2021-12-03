@@ -10,12 +10,12 @@ namespace MKVStudio.Commands
 {
     public class RunMKVInfoCommand : ICommand
     {
-        private readonly Video _video;
+        private readonly VideoFile _video;
         private readonly IExternalLibrariesService _exLib;
 
         public event EventHandler CanExecuteChanged;
 
-        public RunMKVInfoCommand(Video video, IExternalLibrariesService externalLibrariesService)
+        public RunMKVInfoCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;

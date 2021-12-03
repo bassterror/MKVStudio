@@ -11,10 +11,10 @@ namespace MKVStudio.Commands
     public class RunMKVExtractCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly Video _video;
+        private readonly VideoFile _video;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunMKVExtractCommand(Video video, IExternalLibrariesService externalLibrariesService)
+        public RunMKVExtractCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;

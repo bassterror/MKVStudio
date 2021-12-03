@@ -8,13 +8,13 @@ using static MKVStudio.Services.UtilitiesService;
 
 namespace MKVStudio.Commands
 {
-    public class RunFirstPassCommand : ICommand
+    public class RunLoudnormFirstPassCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly Video _video;
+        private readonly VideoFile _video;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunFirstPassCommand(Video video, IExternalLibrariesService externalLibrariesService)
+        public RunLoudnormFirstPassCommand(VideoFile video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;
@@ -66,9 +66,6 @@ namespace MKVStudio.Commands
             _video.OutputTresh = (string)keyValuePairs["output_thresh"];
             _video.NormalizationType = (string)keyValuePairs["normalization_type"];
             _video.TargetOffset = (string)keyValuePairs["target_offset"];
-            Match audioDetails = Regex.Match(firstPassOutput, @"Audio:.*,\s(\d*)\sHz,\s(\w*).*,");
-            _video.SampleRates = audioDetails.Groups[1].ToString();
-            _video.Channels = audioDetails.Groups[2].ToString();
         }
     }
 }

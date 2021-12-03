@@ -9,24 +9,35 @@ using System.Windows.Input;
 namespace MKVStudio.Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class Video : INotifyPropertyChanged
+    public class VideoFile : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+
         private readonly IExternalLibrariesService _exLib;
 
+        public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
+        public string Title { get; set; }
+        public VideoTrack[] VideoTracks { get; set; }
+        public AudioTrack[] AudioTracks { get; set; }
+        public SubtitleTrack[] SubtitleTracks { get; set; }
+
+        public string Channels { get; set; }
+        public string SampleRates { get; set; }
+
+        #region I/O
         public string InputPath { get; private set; }
         public string InputName { get; private set; }
         public string InputExtension { get; private set; }
-        public string InputFullName { get; private set; }
+        public string InputFullName => InputName + InputExtension;
         public string InputFullPath { get; private set; }
         public string OutputPath { get; set; }
         public string OutputName { get; set; }
-        public string OutputExtension { get; private set; }
-        public string OutputFullName { get; private set; }
-        public string OutputFullPath { get; private set; }
-        public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
-        public string Title { get; set; }
-        public string Channels { get; set; }
+        public static string OutputExtension => ".mkv";
+        public string OutputFullName => $"{OutputName}.{OutputExtension}";
+        public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
+        #endregion
+
+        #region LoudnormFirstPass
         public string InputI { get; set; }
         public string InputTP { get; set; }
         public string InputLRA { get; set; }
@@ -36,26 +47,25 @@ namespace MKVStudio.Models
         public string OutputTresh { get; set; }
         public string NormalizationType { get; set; }
         public string TargetOffset { get; set; }
-        public string SampleRates { get; set; }
-        public ICommand RunFirstPassCommand { get; set; }
+        #endregion
+
+        #region Commands
+        public ICommand RunLoudnormFirstPassCommand { get; set; }
         public ICommand RunMKVInfoCommand { get; set; }
         public ICommand RunMKVExtractCommand { get; set; }
         public ICommand RunMKVMergeCommand { get; set; }
+        #endregion
 
-        public Video(string source, IExternalLibrariesService externalLibrariesService)
+        public VideoFile(string source, IExternalLibrariesService externalLibrariesService)
         {
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);
             InputExtension = Path.GetExtension(source);
-            InputFullName = InputName + InputExtension;
             InputFullPath = source;
             OutputPath = InputPath;
             OutputName = InputName + " - edit";
-            OutputExtension = "mkv";
-            OutputFullName = $"{OutputName}.{OutputExtension}";
-            OutputFullPath = Path.Combine(OutputPath, OutputFullName);
             _exLib = externalLibrariesService;
-            RunFirstPassCommand = new RunFirstPassCommand(this, _exLib);
+            RunLoudnormFirstPassCommand = new RunLoudnormFirstPassCommand(this, _exLib);
             RunMKVInfoCommand = new RunMKVInfoCommand(this, _exLib);
             RunMKVExtractCommand = new RunMKVExtractCommand(this, _exLib);
             RunMKVMergeCommand = new RunMKVMergeCommand(this, _exLib);

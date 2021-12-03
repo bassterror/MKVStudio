@@ -9,7 +9,7 @@ namespace MKVStudio.State
 {
     public class Navigator : BaseNavigator, INavigator
     {
-        private Video _selectedVideo;
+        private VideoFile _selectedVideo;
         private readonly IExternalLibrariesService _exLib;
 
         public BaseViewModel CurrentMainViewModel { get; set; }
@@ -23,8 +23,8 @@ namespace MKVStudio.State
         public ICommand UpdateCurrentMainViewModelCommand { get; set; }
         public ICommand UpdateCurrentFilesViewModelCommand { get; set; }
         public ICommand UpdateCurrentVideoFileViewModelCommand { get; set; }
-        public ObservableCollection<Video> Videos { get; set; } = new();
-        public Video SelectedVideo
+        public ObservableCollection<VideoFile> Videos { get; set; } = new();
+        public VideoFile SelectedVideo
         {
             get => _selectedVideo;
             set

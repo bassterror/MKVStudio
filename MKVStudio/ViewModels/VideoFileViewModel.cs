@@ -6,9 +6,9 @@ namespace MKVStudio.ViewModels
     public class VideoFileViewModel : BaseViewModel
     {
         public INavigator Navigator { get; set; }
-        private readonly Video _selectedVideo;
+        private readonly VideoFile _selectedVideo;
 
-        public VideoFileViewModel(INavigator navigator, Video selectedVideo)
+        public VideoFileViewModel(INavigator navigator, VideoFile selectedVideo)
         {
             Navigator = navigator;
             _selectedVideo = selectedVideo;

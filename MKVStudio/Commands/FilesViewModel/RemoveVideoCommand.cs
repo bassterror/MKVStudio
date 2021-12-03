@@ -8,9 +8,9 @@ namespace MKVStudio.Commands
     public class RemoveVideoCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private readonly ObservableCollection<Video> _videos;
+        private readonly ObservableCollection<VideoFile> _videos;
 
-        public RemoveVideoCommand(ObservableCollection<Video> videos)
+        public RemoveVideoCommand(ObservableCollection<VideoFile> videos)
         {
             _videos = videos;
         }
@@ -22,7 +22,7 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is Video video)
+            if (parameter is VideoFile video)
             {
                 _ = _videos.Remove(video);
             }
