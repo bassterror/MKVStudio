@@ -17,11 +17,23 @@
             <DataTemplate DataType="{x:Type vm:VideoFileViewModel}">
                 <v:VideoFileView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:GeneralViewModel}">
-                <v:GeneralView/>
+            <DataTemplate DataType="{x:Type vm:FileOverviewViewModel}">
+                <v:FileOverviewView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:MediaInfoViewModel}">
-                <v:MediaInfoView/>
+            <DataTemplate DataType="{x:Type vm:TracksViewModel}">
+                <v:TracksView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:VideoTrackViewModel}">
+                <v:VideoTrackView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AudioTrackViewModel}">
+                <v:AudioTrackView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SubtitleTrackViewModel}">
+                <v:SubtitleTrackView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AttachmentTrackViewModel}">
+                <v:AttachmentTrackView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ConvertViewModel}">
                 <v:ConvertView/>

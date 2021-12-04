@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MKVStudio.Services;
-using MKVStudio.State;
 using MKVStudio.ViewModels;
 using System;
 using System.Windows;
@@ -16,9 +15,9 @@ namespace MKVStudio
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
 
-            if (RegistryService.CheckMKVStudioRegistryKey())
+            if (UtilitiesService.CheckMKVStudioRegistryKey())
             {
-                RegistryService.CreateMKVStudioRegistryKey();
+                UtilitiesService.CreateMKVStudioRegistryKeys();
             }
 
             MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
@@ -31,12 +30,10 @@ namespace MKVStudio
         {
             IServiceCollection services = new ServiceCollection();
 
-            _ = services.AddSingleton<IRegistryService, RegistryService>();
-            _ = services.AddSingleton<IFfmpegService, FfmpegService>();
-            _ = services.AddSingleton<IMkvToolNixService, MkvToolNixService>();
+            _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
+            _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
 
             _ = services.AddScoped<MainViewModel>();
-            _ = services.AddScoped<INavigator, Navigator>();
             _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();

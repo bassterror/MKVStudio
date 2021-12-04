@@ -2,9 +2,19 @@
 
 namespace MKVStudio.Models
 {
+    public enum ProcessResultNames
+    {
+        LoudnormFirst,
+        LoudnormSecondStereo,
+        LoudnormSecond6Channels,
+        MKVInfo,
+        MKVExtract,
+        MKVMergeJ
+    }
+
     public class ProcessResult
     {
-        public string Name { get; set; }
+        public ProcessResultNames Name { get; set; }
         public string StdOutput { get; set; }
         public string StdErrOutput { get; set; }
         public int ExitCode { get; set; }
