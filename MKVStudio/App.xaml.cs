@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MKVStudio.Services;
-using MKVStudio.State;
 using MKVStudio.ViewModels;
 using System;
 using System.Windows;
@@ -35,7 +34,6 @@ namespace MKVStudio
             _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
 
             _ = services.AddScoped<MainViewModel>();
-            _ = services.AddScoped<INavigator, Navigator>();
             _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();

@@ -1,4 +1,4 @@
-﻿namespace MKVStudio.State
+﻿namespace MKVStudio.ViewModels
 {
     public enum ViewModelTypes
     {

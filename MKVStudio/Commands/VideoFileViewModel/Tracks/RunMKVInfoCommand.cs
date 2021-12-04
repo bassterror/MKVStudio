@@ -35,7 +35,7 @@ namespace MKVStudio.Commands
         private void SetMeasurements(string mkvInfoOutput)
         {
             Match match = Regex.Match(mkvInfoOutput, @"^.+\+\sTitle:\s(.+)$", RegexOptions.Multiline);
-            _video.Title = match.Groups[1].ToString();
+            //_video.Title = match.Groups[1].ToString();
             //JObject keyValuePairs = JObject.Parse(loudnormOutput.Value);
             //_video.InputI = (string)keyValuePairs["input_i"];
             //Match audioDetails = Regex.Match(firstPassOutput, @"Audio:.*,\s(\d*)\sHz,\s(\w*).*,");

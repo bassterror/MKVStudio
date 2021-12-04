@@ -7,13 +7,15 @@
         xmlns:vm="clr-namespace:MKVStudio.ViewModels"        
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200">
+        Title="MKV Studio"
+        Height="800"
+        Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <c:MainNavigation Grid.Column="0" DataContext="{Binding Navigator}"/>
-        <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentMainViewModel}"/>
+        <c:MainNavigation Grid.Column="0" DataContext="{Binding ThisMainViewModel}" Margin="1"/>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentMainViewModel}" Margin="1"/>
     </Grid>
 </Window>

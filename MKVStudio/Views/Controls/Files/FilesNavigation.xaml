@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="MKVStudio.Views.Controls.FilesNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:FilesViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0"
+                    MaxWidth="390"
+                    ItemsSource="{Binding Videos}"
+                    SelectedItem="{Binding SelectedVideo, Mode=TwoWay}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.Resources>
+                <GridView x:Key="key">
+                    <GridViewColumn Header="Name">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding InputFullName}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.Resources>
+            <ListView.Style>
+                <Style TargetType="ListView">
+                    <Setter Property="View" Value="{StaticResource key}" />
+                </Style>
+            </ListView.Style>
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Add Videos" Command="{Binding AddVideosCommand}"/>
+            <Button Grid.Column="1" Content="Add Folder" Command="{Binding AddVideosFromFolderCommand}"/>
+            <Button Grid.Column="2" Content="Remove Video" Command="{Binding RemoveVideoCommand}" CommandParameter="{Binding SelectedVideo}"/>
+            <Button Grid.Column="3" Content="Clear list" Command="{Binding ClearVideosCommand}"/>
+        </Grid>
+    </Grid>
+</UserControl>

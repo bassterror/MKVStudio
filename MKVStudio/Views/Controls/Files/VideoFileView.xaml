@@ -5,17 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:l="clr-namespace:MKVStudio.Views.Controls"
              xmlns:cm="clr-namespace:MKVStudio.ViewModels"
-             d:DataContext="{d:DesignInstance Type=cm:VideoFileViewModel}"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=cm:VideoFileViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <l:VideoFileNavigation Grid.Row="0" DataContext="{Binding ThisVideoFileViewModel}"/>
-            <ContentControl Grid.Row="1" Content="{Binding CurrentVideoFileViewModel}"/>
-        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <l:VideoFileNavigation Grid.Row="0" DataContext="{Binding ThisVideoFileViewModel}" Margin="1"/>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentVideoFileViewModel}" Margin="1"/>
     </Grid>
 </UserControl>

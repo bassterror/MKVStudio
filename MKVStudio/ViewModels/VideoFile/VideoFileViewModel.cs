@@ -1,12 +1,9 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Models;
 using MKVStudio.Services;
-using MKVStudio.State;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
@@ -25,10 +22,6 @@ namespace MKVStudio.ViewModels
         private readonly IExternalLibrariesService _exLib;
 
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
-        public string Title { get; set; }
-        public ObservableCollection<VideoTrack> VideoTracks { get; set; } = new();
-        public ObservableCollection<AudioTrack> AudioTracks { get; set; } = new();
-        public ObservableCollection<SubtitleTrack> SubtitleTracks { get; set; } = new();
 
         #region I/O
         public string InputPath { get; private set; }
@@ -55,11 +48,6 @@ namespace MKVStudio.ViewModels
         public string TargetOffset { get; set; }
         #endregion
 
-        #region Commands
-        public ICommand RunLoudnormFirstPassCommand { get; set; }
-        public ICommand RunMKVInfoCommand { get; set; }
-        public ICommand RunMKVExtractCommand { get; set; }
-        #endregion
 
         public VideoFileViewModel(string source, IExternalLibrariesService externalLibrariesService)
         {
@@ -73,15 +61,8 @@ namespace MKVStudio.ViewModels
             OutputPath = InputPath;
             OutputName = InputName + " - edit";
 
-            RunLoudnormFirstPassCommand = new RunLoudnormFirstPassCommand(this, _exLib);
-            RunMKVInfoCommand = new RunMKVInfoCommand(this, _exLib);
-            RunMKVExtractCommand = new RunMKVExtractCommand(this, _exLib);
-
             FileOverviewViewModel = new FileOverviewViewModel(this);
-            TracksViewModel = new TracksViewModel(this);
             ConvertViewModel = new ConvertViewModel(this);
-            UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, ConvertViewModel);
-            UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.FileOverview);
 
             CallMKVMergeJ();
         }
@@ -90,25 +71,11 @@ namespace MKVStudio.ViewModels
         {
             ProcessResult pr = await _exLib.Run(this, ProcessResultNames.MKVMergeJ);
             ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
-            SetVideoFileProperties(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
-        }
+            MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
+            TracksViewModel = new TracksViewModel(this, result, _exLib);
 
-        private void SetVideoFileProperties(string mkvMergeOutput)
-        {
-            MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(mkvMergeOutput);
-            Title = result.Container.Properties.Title;
-            foreach (MKVMergeJ.Track videoTrack in result.Tracks.Where(v => v.Type == "video"))
-            {
-                //_video.VideoTracks.Add(new VideoTrack());
-            }
-            foreach (MKVMergeJ.Track audioTrack in result.Tracks.Where(v => v.Type == "audio"))
-            {
-                AudioTracks.Add(new AudioTrack(audioTrack));
-            }
-            foreach (MKVMergeJ.Track subtitleTrack in result.Tracks.Where(v => v.Type == "subtitles"))
-            {
-                //_video.SubtitleTracks.Add(new SubtitleTrack());
-            }
+            UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, ConvertViewModel);
+            UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.FileOverview);
         }
     }
 }

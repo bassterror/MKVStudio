@@ -1,5 +1,4 @@
-﻿using MKVStudio.State;
-using MKVStudio.ViewModels;
+﻿using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -9,20 +8,20 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        private readonly VideoFileViewModel _videoFileViewModel;
-        private readonly FileOverviewViewModel _generalViewModel;
-        private readonly TracksViewModel _mediaInfoViewModel;
-        private readonly ConvertViewModel _convertViewModel;
+        private readonly VideoFileViewModel _video;
+        private readonly FileOverviewViewModel _fileOverview;
+        private readonly TracksViewModel _tracks;
+        private readonly ConvertViewModel _convert;
 
         public UpdateCurrentVideoFileViewModelCommand(VideoFileViewModel videoFileViewModel,
-                                                      FileOverviewViewModel generalViewModel,
-                                                      TracksViewModel mediaInfoViewModel,
+                                                      FileOverviewViewModel fileOverviewViewModel,
+                                                      TracksViewModel tracksViewModel,
                                                       ConvertViewModel convertViewModel)
         {
-            _videoFileViewModel = videoFileViewModel;
-            _generalViewModel = generalViewModel;
-            _mediaInfoViewModel = mediaInfoViewModel;
-            _convertViewModel = convertViewModel;
+            _video = videoFileViewModel;
+            _fileOverview = fileOverviewViewModel;
+            _tracks = tracksViewModel;
+            _convert = convertViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -37,13 +36,13 @@ namespace MKVStudio.Commands
                 switch (videoFileViewModelType)
                 {
                     case ViewModelTypes.FileOverview:
-                        _videoFileViewModel.CurrentVideoFileViewModel = _generalViewModel;
+                        _video.CurrentVideoFileViewModel = _fileOverview;
                         break;
                     case ViewModelTypes.Tracks:
-                        _videoFileViewModel.CurrentVideoFileViewModel = _mediaInfoViewModel;
+                        _video.CurrentVideoFileViewModel = _tracks;
                         break;
                     case ViewModelTypes.Convert:
-                        _videoFileViewModel.CurrentVideoFileViewModel = _convertViewModel;
+                        _video.CurrentVideoFileViewModel = _convert;
                         break;
                     default:
                         throw new ArgumentException("No such VideoFileViewModelType");

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\VideoFileViewModel\Convert\" />
+    <Folder Include="ViewModels\Queue\" />
   </ItemGroup>
 
   <ItemGroup>
