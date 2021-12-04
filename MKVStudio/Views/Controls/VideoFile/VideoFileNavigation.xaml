@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="MKVStudio.Views.Controls.VideoFileNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             xmlns:c="clr-namespace:MKVStudio.Converters"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:VideoFileViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <c:EqualValueToParameterConverter x:Key="EVTPC"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <RadioButton Grid.Column="0"
+                     Content="File Overview"
+                     Margin="5"
+                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FileOverviewViewModel}}"
+                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.FileOverview}"/>
+        <RadioButton Grid.Column="1"
+                     Content="Tracks"
+                     Margin="5"
+                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TracksViewModel}}"
+                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.Tracks}"/>
+        <RadioButton Grid.Column="2"
+                     Content="Convert"
+                     Margin="5"
+                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:ConvertViewModel}}"
+                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.Convert}"/>
+    </Grid>
+</UserControl>

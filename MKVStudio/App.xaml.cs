@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MKVStudio.Services;
+using MKVStudio.ViewModels;
+using System;
+using System.Windows;
 
 namespace MKVStudio
 {
@@ -9,10 +13,30 @@ namespace MKVStudio
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Window window = new MainWindow();
-            window.Show();
+            IServiceProvider serviceProvider = CreateServiceProvider();
+
+            if (UtilitiesService.CheckMKVStudioRegistryKey())
+            {
+                UtilitiesService.CreateMKVStudioRegistryKeys();
+            }
+
+            MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        private static IServiceProvider CreateServiceProvider()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
+            _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
+
+            _ = services.AddScoped<MainViewModel>();
+            _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainViewModel>()));
+
+            return services.BuildServiceProvider();
         }
     }
 }
