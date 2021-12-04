@@ -8,6 +8,7 @@
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
         Title="MKV Studio"
+        Style="{DynamicResource CustomWindowStyle}"
         Height="800"
         Width="1200">
     <Grid>
@@ -15,13 +16,16 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0"
+              Background="{StaticResource ControlPrimaryBrightDefaultBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0"
+                       FontSize="28"
+                       Padding="10"
                        Text="MKV Studio"/>
         </Grid>
         <Grid Grid.Row="1">

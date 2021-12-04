@@ -6,24 +6,24 @@
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:FilesViewModel}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ListView Grid.Row="0"
-                    MaxWidth="390"
-                    ItemsSource="{Binding Videos}"
-                    SelectedItem="{Binding SelectedVideo, Mode=TwoWay}"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                  MaxWidth="390"
+                  ItemsSource="{Binding Videos}"
+                  SelectedItem="{Binding SelectedVideo, Mode=TwoWay}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.Resources>
                 <GridView x:Key="key">
                     <GridViewColumn Header="Name">
                         <GridViewColumn.HeaderContainerStyle>
                             <Style TargetType="{x:Type GridViewColumnHeader}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </Style>
                         </GridViewColumn.HeaderContainerStyle>
                         <GridViewColumn.CellTemplate>
@@ -36,7 +36,11 @@
             </ListView.Resources>
             <ListView.Style>
                 <Style TargetType="ListView">
-                    <Setter Property="View" Value="{StaticResource key}" />
+                    <Setter Property="View" Value="{StaticResource key}"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="{StaticResource ControlBrightDefaultBorderBrush}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}" />
                 </Style>
             </ListView.Style>
         </ListView>
@@ -45,12 +49,26 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Add Videos" Command="{Binding AddVideosCommand}"/>
-            <Button Grid.Column="1" Content="Add Folder" Command="{Binding AddVideosFromFolderCommand}"/>
-            <Button Grid.Column="2" Content="Remove Video" Command="{Binding RemoveVideoCommand}" CommandParameter="{Binding SelectedVideo}"/>
-            <Button Grid.Column="3" Content="Clear list" Command="{Binding ClearVideosCommand}"/>
+            <Button Grid.Column="0"
+                    Margin="1"
+                    Content="Add Videos"
+                    Command="{Binding AddVideosCommand}"/>
+            <Button Grid.Column="1"
+                    Margin="1"
+                    Content="Add Folder"
+                    Command="{Binding AddVideosFromFolderCommand}"/>
+            <Button Grid.Column="2"
+                    Margin="1"
+                    Content="Remove Video"
+                    Command="{Binding RemoveVideoCommand}"
+                    CommandParameter="{Binding SelectedVideo}"/>
+            <Button Grid.Column="3"
+                    Margin="1"
+                    Content="Clear list"
+                    Command="{Binding ClearVideosCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -7,23 +7,25 @@
              xmlns:c="clr-namespace:MKVStudio.Converters"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="100">
     <UserControl.Resources>
         <c:EqualValueToParameterConverter x:Key="EVTPC"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid RenderOptions.EdgeMode="Aliased" Background="{StaticResource WindowTitleColour}">
+        <Grid.Resources>
+            <Style TargetType="RadioButton" BasedOn="{StaticResource NavRadioButton}"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <RadioButton Grid.Row="0"
-                     Margin="2"
                      Content="Files"
                      IsChecked="{Binding CurrentMainViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FilesViewModel}}"
                      Command="{Binding UpdateCurrentMainViewModelCommand}"
                      CommandParameter="{x:Static vm:ViewModelTypes.Files}"/>
         <RadioButton Grid.Row="1"
-                     Margin="2"
                      Content="Queue"
                      IsChecked="{Binding CurrentMainViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:QueueViewModel}}"
                      Command="{Binding UpdateCurrentMainViewModelCommand}"
