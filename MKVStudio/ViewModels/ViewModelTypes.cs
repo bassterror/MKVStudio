@@ -7,6 +7,7 @@
         VideoFile,
         FileOverview,
         Tracks,
-        Convert
+        AudioEdit,
+        VideoEdit
     }
 }

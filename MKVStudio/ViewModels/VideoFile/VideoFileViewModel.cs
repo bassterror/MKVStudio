@@ -14,7 +14,7 @@ namespace MKVStudio.ViewModels
         public VideoFileViewModel ThisVideoFileViewModel { get; set; }
         private FileOverviewViewModel FileOverviewViewModel { get; set; }
         private TracksViewModel TracksViewModel { get; set; }
-        private ConvertViewModel ConvertViewModel { get; set; }
+        private AudioEditViewModel ConvertViewModel { get; set; }
         public BaseViewModel CurrentVideoFileViewModel { get; set; }
         public ICommand UpdateCurrentVideoFileViewModelCommand { get; set; }
         #endregion
@@ -62,7 +62,7 @@ namespace MKVStudio.ViewModels
             OutputName = InputName + " - edit";
 
             FileOverviewViewModel = new FileOverviewViewModel(this);
-            ConvertViewModel = new ConvertViewModel(this);
+            ConvertViewModel = new AudioEditViewModel(this);
 
             CallMKVMergeJ();
         }
@@ -75,7 +75,7 @@ namespace MKVStudio.ViewModels
             TracksViewModel = new TracksViewModel(this, result, _exLib);
 
             UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, ConvertViewModel);
-            UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.FileOverview);
+            UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.Tracks);
         }
     }
 }

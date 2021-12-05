@@ -11,12 +11,12 @@ namespace MKVStudio.Commands
         private readonly VideoFileViewModel _video;
         private readonly FileOverviewViewModel _fileOverview;
         private readonly TracksViewModel _tracks;
-        private readonly ConvertViewModel _convert;
+        private readonly AudioEditViewModel _convert;
 
         public UpdateCurrentVideoFileViewModelCommand(VideoFileViewModel videoFileViewModel,
                                                       FileOverviewViewModel fileOverviewViewModel,
                                                       TracksViewModel tracksViewModel,
-                                                      ConvertViewModel convertViewModel)
+                                                      AudioEditViewModel convertViewModel)
         {
             _video = videoFileViewModel;
             _fileOverview = fileOverviewViewModel;
@@ -41,7 +41,7 @@ namespace MKVStudio.Commands
                     case ViewModelTypes.Tracks:
                         _video.CurrentVideoFileViewModel = _tracks;
                         break;
-                    case ViewModelTypes.Convert:
+                    case ViewModelTypes.AudioEdit:
                         _video.CurrentVideoFileViewModel = _convert;
                         break;
                     default:
