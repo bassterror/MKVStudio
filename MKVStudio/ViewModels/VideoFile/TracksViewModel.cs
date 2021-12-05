@@ -34,15 +34,15 @@ namespace MKVStudio.ViewModels
             }
             foreach (MKVMergeJ.Track videoTrack in result.Tracks.Where(v => v.Type == "video"))
             {
-                VideoTracks.Add(new VideoTrackViewModel(SelectedVideo, videoTrack));
+                VideoTracks.Add(new VideoTrackViewModel(SelectedVideo, videoTrack, externalLibrariesService));
             }
             foreach (MKVMergeJ.Track audioTrack in result.Tracks.Where(v => v.Type == "audio"))
             {
-                AudioTracks.Add(new AudioTrackViewModel(SelectedVideo, audioTrack));
+                AudioTracks.Add(new AudioTrackViewModel(SelectedVideo, audioTrack, externalLibrariesService));
             }
             foreach (MKVMergeJ.Track subtitleTrack in result.Tracks.Where(v => v.Type == "subtitles"))
             {
-                SubtitleTracks.Add(new SubtitleTrackViewModel(SelectedVideo, subtitleTrack));
+                SubtitleTracks.Add(new SubtitleTrackViewModel(SelectedVideo, subtitleTrack, externalLibrariesService));
             }
         }
     }

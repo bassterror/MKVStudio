@@ -25,7 +25,7 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.Run(_video, ProcessResultNames.MKVExtract);
+            ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVExtract, _video);
             _video.ProcessResults[ProcessResultNames.MKVExtract] = pr;
             //SetMeasurements(_video.ProcessResults[ProcessResultNames.MKVExtract].StdErrOutput);
         }

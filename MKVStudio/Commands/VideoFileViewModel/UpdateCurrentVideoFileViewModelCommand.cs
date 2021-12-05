@@ -10,17 +10,17 @@ namespace MKVStudio.Commands
         private readonly VideoFileViewModel _video;
         private readonly FileOverviewViewModel _fileOverview;
         private readonly TracksViewModel _tracks;
-        private readonly AudioEditViewModel _convert;
+        private readonly AudioEditViewModel _audioEdit;
 
         public UpdateCurrentVideoFileViewModelCommand(VideoFileViewModel videoFileViewModel,
                                                       FileOverviewViewModel fileOverviewViewModel,
                                                       TracksViewModel tracksViewModel,
-                                                      AudioEditViewModel convertViewModel)
+                                                      AudioEditViewModel audioEditViewModel)
         {
             _video = videoFileViewModel;
             _fileOverview = fileOverviewViewModel;
             _tracks = tracksViewModel;
-            _convert = convertViewModel;
+            _audioEdit = audioEditViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -41,7 +41,7 @@ namespace MKVStudio.Commands
                         _video.CurrentVideoFileViewModel = _tracks;
                         break;
                     case ViewModelTypes.AudioEdit:
-                        _video.CurrentVideoFileViewModel = _convert;
+                        _video.CurrentVideoFileViewModel = _audioEdit;
                         break;
                     default:
                         throw new ArgumentException("No such VideoFileViewModelType");

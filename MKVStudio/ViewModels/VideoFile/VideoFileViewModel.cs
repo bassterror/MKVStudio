@@ -20,7 +20,6 @@ namespace MKVStudio.ViewModels
         #endregion
 
         private readonly IExternalLibrariesService _exLib;
-
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
 
         #region I/O
@@ -56,7 +55,7 @@ namespace MKVStudio.ViewModels
 
         private async void CallMKVMergeJ()
         {
-            ProcessResult pr = await _exLib.Run(this, ProcessResultNames.MKVMergeJ);
+            ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVMergeJ, this);
             ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
             MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
             TracksViewModel = new TracksViewModel(this, result, _exLib);

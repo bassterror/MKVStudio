@@ -1,8 +1,9 @@
 ﻿using MKVStudio.Models;
+using MKVStudio.Services;
 
 namespace MKVStudio.ViewModels
 {
-    public class AudioTrackViewModel
+    public class AudioTrackViewModel : BaseViewModel
     {
         public VideoFileViewModel SelectedVideo { get; }
 
@@ -18,11 +19,11 @@ namespace MKVStudio.ViewModels
         public bool FlagCommentary { get; set; }
         public int Channels { get; set; }
         public int SampleRate { get; set; }
-        public string Language { get; set; }
+        public Language Lang { get; set; }
         public string LanguageIETF { get; set; }
         public int Number { get; set; }
 
-        public AudioTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Track track)
+        public AudioTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Track track, IExternalLibrariesService externalLibrariesService)
         {
             SelectedVideo = videoFileViewModel;
             Name = track.Properties.Track_name;
@@ -37,7 +38,7 @@ namespace MKVStudio.ViewModels
             FlagCommentary = track.Properties.Flag_commentary;
             Channels = track.Properties.Audio_channels;
             SampleRate = track.Properties.Audio_sampling_frequency;
-            Language = track.Properties.Language;
+            Lang = string.IsNullOrWhiteSpace(track.Properties.Language) ? externalLibrariesService.Languages["und"] : externalLibrariesService.Languages[track.Properties.Language];
             LanguageIETF = track.Properties.Language_ietf;
             Number = track.Properties.Number;
         }

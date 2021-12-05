@@ -29,7 +29,7 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.Run(_video, ProcessResultNames.LoudnormFirst);
+            ProcessResult pr = await _exLib.Run(ProcessResultNames.LoudnormFirst, _video);
             _video.ProcessResults[pr.Name] = pr;
             SetLoudnormFirstPassMeasurements(_video.ProcessResults[ProcessResultNames.LoudnormFirst].StdErrOutput);
         }
