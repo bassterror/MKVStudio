@@ -6,8 +6,7 @@ namespace MKVStudio.Commands
 {
     public class UpdateCurrentMainViewModelCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
-
+        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly MainViewModel _main;
         private readonly FilesViewModel _files;
         private readonly QueueViewModel _queue;

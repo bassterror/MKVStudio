@@ -8,7 +8,7 @@ namespace MKVStudio.Commands
 {
     public class RunMKVExtractCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly VideoFileViewModel _video;
         private readonly IExternalLibrariesService _exLib;
 

@@ -17,7 +17,6 @@ namespace MKVStudio.ViewModels
         public ObservableCollection<AttachmentTrackViewModel> Attachments { get; set; } = new();
 
         #region Commands
-        public ICommand RunLoudnormFirstPassCommand { get; set; }
         public ICommand RunMKVInfoCommand { get; set; }
         public ICommand RunMKVExtractCommand { get; set; }
         #endregion
@@ -25,7 +24,6 @@ namespace MKVStudio.ViewModels
         public TracksViewModel(VideoFileViewModel selectedVideo, MKVMergeJ result, IExternalLibrariesService externalLibrariesService)
         {
             SelectedVideo = selectedVideo;
-            RunLoudnormFirstPassCommand = new RunLoudnormFirstPassCommand(SelectedVideo, externalLibrariesService);
             RunMKVInfoCommand = new RunMKVInfoCommand(SelectedVideo, externalLibrariesService);
             RunMKVExtractCommand = new RunMKVExtractCommand(SelectedVideo, externalLibrariesService);
 
