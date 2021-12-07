@@ -38,7 +38,7 @@ namespace MKVStudio.VisualStyles
             try
             {
                 if (!string.IsNullOrEmpty(themeName))
-                    ChangeTheme(new Uri($"Themes/{themeName}.xaml", UriKind.Relative));
+                    ChangeTheme(new Uri($"VisualStyles/{themeName}.xaml", UriKind.Relative));
             }
             catch { }
         }

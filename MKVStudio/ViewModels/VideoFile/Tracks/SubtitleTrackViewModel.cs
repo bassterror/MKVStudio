@@ -1,11 +1,13 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using System.Linq;
 
 namespace MKVStudio.ViewModels
 {
     public class SubtitleTrackViewModel : BaseViewModel
     {
         public VideoFileViewModel SelectedVideo { get; }
+        public IExternalLibrariesService ExLib { get; }
 
         public string Name { get; set; }
         public string ID { get; set; }
@@ -26,6 +28,7 @@ namespace MKVStudio.ViewModels
         public SubtitleTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Track track, IExternalLibrariesService externalLibrariesService)
         {
             SelectedVideo = videoFileViewModel;
+            ExLib = externalLibrariesService;
             Name = track.Properties.Track_name;
             ID = track.ID.ToString();
             UID = track.Properties.UID;
@@ -36,7 +39,7 @@ namespace MKVStudio.ViewModels
             ForcedTrack = track.Properties.Forced_track;
             FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
             FlagCommentary = track.Properties.Flag_commentary;
-            Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? externalLibrariesService.Languages["und"] : externalLibrariesService.Languages[track.Properties.Language];
+            Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
             LanguageIETF = track.Properties.Language_ietf;
             Number = track.Properties.Number;
             ContentEncodingAlgorithms = track.Properties.Content_encoding_algorithms;

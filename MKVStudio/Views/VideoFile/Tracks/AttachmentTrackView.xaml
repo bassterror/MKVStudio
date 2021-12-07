@@ -14,7 +14,6 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -22,7 +21,9 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Track Name:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBox Grid.Column="1"
                      Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
@@ -33,7 +34,9 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="ID:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
                        Text="{Binding ID}"
                        VerticalAlignment="Center"
@@ -44,9 +47,11 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="UID:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Content type:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding UID}"
+                       Text="{Binding ContentType}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -55,33 +60,18 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Content Type:" Margin="2"/>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding ContentType}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Description:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Description:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
                        Text="{Binding Description}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
-        <Grid Grid.Row="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Size:" Margin="2"/>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding Size}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
+        <Separator Grid.Row="4">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3" />
+            </Separator.RenderTransform>
+        </Separator>
     </Grid>
 </UserControl>

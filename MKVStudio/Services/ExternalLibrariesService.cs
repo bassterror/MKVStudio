@@ -1,7 +1,9 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.ViewModels;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,7 +14,8 @@ namespace MKVStudio.Services
     public class ExternalLibrariesService : IExternalLibrariesService
     {
         public IUtilitiesService Util { get; set; }
-        public Dictionary<string, Language> Languages { get; set; } = new();
+        public ObservableCollection<Language> AllLanguages { get; set; } = new();
+        public ObservableCollection<Language> Languages { get; set; } = new();
 
         public ExternalLibrariesService(IUtilitiesService utilitiesService)
         {
@@ -178,7 +181,12 @@ namespace MKVStudio.Services
             {
                 Match match = Regex.Match(lines[i], @"^(.+)\|(.+)\|(.+)\|(.+)$");
                 Language language = new(match);
-                Languages.Add(language.ID, language);
+                AllLanguages.Add(language);
+                string[] pref = new string[] { "eng", "und", "bul", "fre", "ger", "ita", "rus", "spa" };
+                if (pref.Contains(language.ID))
+                {
+                    Languages.Add(language);
+                }
             }
         }
     }

@@ -43,8 +43,9 @@ namespace MKVStudio.Commands
                     case ViewModelTypes.AudioEdit:
                         _video.CurrentVideoFileViewModel = _audioEdit;
                         break;
-                    default:
-                        throw new ArgumentException("No such VideoFileViewModelType");
+                    case ViewModelTypes.VideoEdit:
+                        _video.CurrentVideoFileViewModel = _audioEdit;
+                        break;
                 }
             }
         }

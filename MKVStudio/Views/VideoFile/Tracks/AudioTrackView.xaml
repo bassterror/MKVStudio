@@ -18,8 +18,6 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -27,7 +25,9 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Track Name:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBox Grid.Column="1"
                      Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
@@ -38,7 +38,9 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="ID:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
                        Text="{Binding ID}"
                        VerticalAlignment="Center"
@@ -49,9 +51,11 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="UID:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Codec:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding UID}"
+                       Text="{Binding Codec}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -60,9 +64,11 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Codec:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Codec ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Codec}"
+                       Text="{Binding CodecId}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -71,9 +77,11 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="CodecId:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Channels:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding CodecId}"
+                       Text="{Binding Channels}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -82,9 +90,11 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Language:" Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Sample rate:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Language.Name}"
+                       Text="{Binding SampleRate}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -93,11 +103,22 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Language IETF:" Margin="2"/>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding LanguageIETF}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
+            <Label Grid.Column="0" Margin="2">
+                <TextBlock Text="Language:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding ExLib.Languages}"
+                      SelectedItem="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding ID}"/>
+                            <TextBlock Text=", "/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
@@ -134,38 +155,10 @@
                       VerticalContentAlignment="Center"
                       Margin="2"/>
         </Grid>
-        <Grid Grid.Row="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Number:" Margin="2"/>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding Number}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
-        <Grid Grid.Row="9">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Channels:" Margin="2"/>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding Channels}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
-        <Grid Grid.Row="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Sample Rate:" Margin="2"/>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding SampleRate}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
+        <Separator Grid.Row="8">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3" />
+            </Separator.RenderTransform>
+        </Separator>
     </Grid>
 </UserControl>

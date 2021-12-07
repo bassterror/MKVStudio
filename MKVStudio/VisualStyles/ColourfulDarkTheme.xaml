@@ -142,6 +142,7 @@
                             <Setter Property="Background" TargetName="border" Value="{StaticResource ControlBrightDefaultBackground}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource ControlBrightDefaultBorderBrush}"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource ControlDisabledGlythColour}"/>
+                            <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1260,7 +1261,7 @@
     <!-- Label -->
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{StaticResource ControlDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{StaticResource ControlDisabledGlythColour}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

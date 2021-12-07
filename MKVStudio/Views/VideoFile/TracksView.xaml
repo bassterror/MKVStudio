@@ -48,7 +48,9 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Title:" Margin="2"/>
+                    <Label Grid.Column="0" Margin="2">
+                        <TextBlock Text="Title:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                    </Label>
                     <TextBox Grid.Column="1"
                              Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              VerticalContentAlignment="Center"
@@ -62,7 +64,7 @@
                 <ItemsControl ItemsSource="{Binding VideoTracks}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -79,7 +81,7 @@
                 <ItemsControl ItemsSource="{Binding AudioTracks}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -96,7 +98,7 @@
                 <ItemsControl ItemsSource="{Binding SubtitleTracks}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -113,7 +115,7 @@
                 <ItemsControl ItemsSource="{Binding Attachments}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
