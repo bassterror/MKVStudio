@@ -130,7 +130,7 @@
                       Margin="2"/>
             <CheckBox Grid.Column="4"
                       Content="Hearing impared track"
-                      IsChecked="{Binding FlagHearingImpared, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding FlagHearingImpaired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
         </Grid>

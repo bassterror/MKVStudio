@@ -84,7 +84,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Language:" Margin="2"/>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Lang.Name}"
+                       Text="{Binding Language.Name}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>

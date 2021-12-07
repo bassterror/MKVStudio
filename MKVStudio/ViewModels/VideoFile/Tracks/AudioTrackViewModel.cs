@@ -19,7 +19,7 @@ namespace MKVStudio.ViewModels
         public bool FlagCommentary { get; set; }
         public int Channels { get; set; }
         public int SampleRate { get; set; }
-        public Language Lang { get; set; }
+        public Language Language { get; set; }
         public string LanguageIETF { get; set; }
         public int Number { get; set; }
 
@@ -38,7 +38,7 @@ namespace MKVStudio.ViewModels
             FlagCommentary = track.Properties.Flag_commentary;
             Channels = track.Properties.Audio_channels;
             SampleRate = track.Properties.Audio_sampling_frequency;
-            Lang = string.IsNullOrWhiteSpace(track.Properties.Language) ? externalLibrariesService.Languages["und"] : externalLibrariesService.Languages[track.Properties.Language];
+            Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? externalLibrariesService.Languages["und"] : externalLibrariesService.Languages[track.Properties.Language];
             LanguageIETF = track.Properties.Language_ietf;
             Number = track.Properties.Number;
         }

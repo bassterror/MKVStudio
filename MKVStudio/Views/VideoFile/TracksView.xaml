@@ -21,11 +21,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>                
                 <Button Grid.Column="0"
                         Content="RunMKVInfo"
                         IsEnabled="False"
@@ -39,7 +39,7 @@
                         Padding="5"
                         Command="{Binding RunMKVExtractCommand}"/>
             </Grid>
-            <GroupBox Grid.Row="2">
+            <GroupBox Grid.Row="2" Margin="2">
                 <GroupBox.Header>
                     <TextBlock Text="Container properties"/>
                 </GroupBox.Header>
@@ -49,8 +49,10 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Title:" Margin="2"/>
-                    <TextBox Grid.Column="1" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalContentAlignment="Center" Width="auto"/>
+                    <TextBox Grid.Column="1"
+                             Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             VerticalContentAlignment="Center"
+                             Margin="2"/>
                 </Grid>
             </GroupBox>
             <GroupBox Grid.Row="3" Margin="2">
@@ -65,7 +67,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <v:VideoTrackView Margin="2"/>
+                            <v:VideoTrackView/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -82,7 +84,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <v:VideoTrackView Margin="2"/>
+                            <v:AudioTrackView/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -99,7 +101,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <v:VideoTrackView Margin="2"/>
+                            <v:SubtitleTrackView/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -116,7 +118,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <v:VideoTrackView Margin="2"/>
+                            <v:AttachmentTrackView/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
