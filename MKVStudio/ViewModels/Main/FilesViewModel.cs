@@ -17,6 +17,7 @@ namespace MKVStudio.ViewModels
         public ICommand AddVideosFromFolderCommand => new AddVideosFromFolderCommand(Videos, _exLib);
         public ICommand RemoveVideoCommand => new RemoveVideoCommand(Videos);
         public ICommand ClearVideosCommand => new ClearVideosCommand(Videos);
+        public ICommand ApplyToAllCommand => new ApplyToAllCommand(Videos);
 
         public FilesViewModel(IExternalLibrariesService externalLibrariesService)
         {

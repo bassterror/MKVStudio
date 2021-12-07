@@ -12,9 +12,10 @@ namespace MKVStudio.ViewModels
     {
         #region Navigation
         public VideoFileViewModel ThisVideoFileViewModel { get; set; }
+        public TracksViewModel TracksViewModel { get; set; }
         private FileOverviewViewModel FileOverviewViewModel { get; set; }
-        private TracksViewModel TracksViewModel { get; set; }
         private AudioEditViewModel AudioEditViewModel { get; set; }
+        private VideoEditViewModel VideoEditViewModel { get; set; }
         public BaseViewModel CurrentVideoFileViewModel { get; set; }
         public ICommand UpdateCurrentVideoFileViewModelCommand { get; set; }
         #endregion
@@ -49,6 +50,7 @@ namespace MKVStudio.ViewModels
 
             FileOverviewViewModel = new FileOverviewViewModel(this);
             AudioEditViewModel = new AudioEditViewModel(this, _exLib);
+            VideoEditViewModel = new VideoEditViewModel(this, _exLib);
 
             CallMKVMergeJ();
         }
@@ -60,7 +62,7 @@ namespace MKVStudio.ViewModels
             MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
             TracksViewModel = new TracksViewModel(this, result, _exLib);
 
-            UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, AudioEditViewModel);
+            UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, AudioEditViewModel, VideoEditViewModel);
             UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.Tracks);
         }
     }

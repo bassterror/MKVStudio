@@ -11,16 +11,19 @@ namespace MKVStudio.Commands
         private readonly FileOverviewViewModel _fileOverview;
         private readonly TracksViewModel _tracks;
         private readonly AudioEditViewModel _audioEdit;
+        private readonly VideoEditViewModel _videoEdit;
 
         public UpdateCurrentVideoFileViewModelCommand(VideoFileViewModel videoFileViewModel,
                                                       FileOverviewViewModel fileOverviewViewModel,
                                                       TracksViewModel tracksViewModel,
-                                                      AudioEditViewModel audioEditViewModel)
+                                                      AudioEditViewModel audioEditViewModel,
+                                                      VideoEditViewModel videoEditViewModel)
         {
             _video = videoFileViewModel;
             _fileOverview = fileOverviewViewModel;
             _tracks = tracksViewModel;
             _audioEdit = audioEditViewModel;
+            _videoEdit = videoEditViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -44,7 +47,7 @@ namespace MKVStudio.Commands
                         _video.CurrentVideoFileViewModel = _audioEdit;
                         break;
                     case ViewModelTypes.VideoEdit:
-                        _video.CurrentVideoFileViewModel = _audioEdit;
+                        _video.CurrentVideoFileViewModel = _videoEdit;
                         break;
                 }
             }

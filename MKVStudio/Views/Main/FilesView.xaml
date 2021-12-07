@@ -8,14 +8,29 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:FilesViewModel}"
              d:DesignHeight="150" d:DesignWidth="400">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" MaxWidth="400"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <v:FilesNavigation Grid.Column="0"
-                         DataContext="{Binding CurrentFilesViewModel}"/>
-        <ContentControl Grid.Column="1"
-                        Content="{Binding SelectedVideo}"/>
-    </Grid>
+    <DockPanel LastChildFill="False">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" MaxWidth="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <v:FilesNavigation Grid.Column="0"
+                               DataContext="{Binding CurrentFilesViewModel}"/>
+            <ContentControl Grid.Column="1"
+                            Content="{Binding SelectedVideo}"/>
+            
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
+                    Content="Apply to all"
+                    Margin="2"
+                    Padding="5"
+                    Command="{Binding ApplyToAllCommand}"/>
+        </Grid>
+    </DockPanel>
 </UserControl>

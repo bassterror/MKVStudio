@@ -47,7 +47,8 @@
                   ItemsSource="{Binding Videos}"
                   SelectedItem="{Binding SelectedVideo, Mode=TwoWay}"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  BorderBrush="Transparent">
             <ListView.Resources>
                 <GridView x:Key="key">
                     <GridViewColumn Header="Name">
