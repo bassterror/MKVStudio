@@ -10,13 +10,15 @@ namespace MKVStudio.Commands
 {
     public class RunLoudnormFirstPassCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly VideoFileViewModel _video;
+        private readonly AudioEditViewModel _audioEdit;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunLoudnormFirstPassCommand(VideoFileViewModel video, IExternalLibrariesService externalLibrariesService)
+        public RunLoudnormFirstPassCommand(VideoFileViewModel video, AudioEditViewModel audioEditViewModel, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
+            _audioEdit = audioEditViewModel;
             _exLib = externalLibrariesService;
         }
 
@@ -27,7 +29,7 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.Run(_video, ProcessResultNames.LoudnormFirst);
+            ProcessResult pr = await _exLib.Run(ProcessResultNames.LoudnormFirst, _video);
             _video.ProcessResults[pr.Name] = pr;
             SetLoudnormFirstPassMeasurements(_video.ProcessResults[ProcessResultNames.LoudnormFirst].StdErrOutput);
         }
@@ -36,15 +38,15 @@ namespace MKVStudio.Commands
         {
             Match loudnormOutput = Regex.Match(firstPassOutput, @"(\{(\n*.*\n*)*?\})");
             JObject keyValuePairs = JObject.Parse(loudnormOutput.Value);
-            _video.InputI = (string)keyValuePairs["input_i"];
-            _video.InputTP = (string)keyValuePairs["input_tp"];
-            _video.InputLRA = (string)keyValuePairs["input_lra"];
-            _video.InputTresh = (string)keyValuePairs["input_thresh"];
-            _video.OutputTP = (string)keyValuePairs["output_tp"];
-            _video.OutputLRA = (string)keyValuePairs["output_lra"];
-            _video.OutputTresh = (string)keyValuePairs["output_thresh"];
-            _video.NormalizationType = (string)keyValuePairs["normalization_type"];
-            _video.TargetOffset = (string)keyValuePairs["target_offset"];
+            _audioEdit.InputI = (string)keyValuePairs["input_i"];
+            _audioEdit.InputTP = (string)keyValuePairs["input_tp"];
+            _audioEdit.InputLRA = (string)keyValuePairs["input_lra"];
+            _audioEdit.InputTresh = (string)keyValuePairs["input_thresh"];
+            _audioEdit.OutputTP = (string)keyValuePairs["output_tp"];
+            _audioEdit.OutputLRA = (string)keyValuePairs["output_lra"];
+            _audioEdit.OutputTresh = (string)keyValuePairs["output_thresh"];
+            _audioEdit.NormalizationType = (string)keyValuePairs["normalization_type"];
+            _audioEdit.TargetOffset = (string)keyValuePairs["target_offset"];
         }
     }
 }

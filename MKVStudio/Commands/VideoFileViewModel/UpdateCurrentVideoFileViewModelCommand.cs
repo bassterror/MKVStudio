@@ -6,22 +6,24 @@ namespace MKVStudio.Commands
 {
     public class UpdateCurrentVideoFileViewModelCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
-
+        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly VideoFileViewModel _video;
         private readonly FileOverviewViewModel _fileOverview;
         private readonly TracksViewModel _tracks;
-        private readonly ConvertViewModel _convert;
+        private readonly AudioEditViewModel _audioEdit;
+        private readonly VideoEditViewModel _videoEdit;
 
         public UpdateCurrentVideoFileViewModelCommand(VideoFileViewModel videoFileViewModel,
                                                       FileOverviewViewModel fileOverviewViewModel,
                                                       TracksViewModel tracksViewModel,
-                                                      ConvertViewModel convertViewModel)
+                                                      AudioEditViewModel audioEditViewModel,
+                                                      VideoEditViewModel videoEditViewModel)
         {
             _video = videoFileViewModel;
             _fileOverview = fileOverviewViewModel;
             _tracks = tracksViewModel;
-            _convert = convertViewModel;
+            _audioEdit = audioEditViewModel;
+            _videoEdit = videoEditViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -41,11 +43,12 @@ namespace MKVStudio.Commands
                     case ViewModelTypes.Tracks:
                         _video.CurrentVideoFileViewModel = _tracks;
                         break;
-                    case ViewModelTypes.Convert:
-                        _video.CurrentVideoFileViewModel = _convert;
+                    case ViewModelTypes.AudioEdit:
+                        _video.CurrentVideoFileViewModel = _audioEdit;
                         break;
-                    default:
-                        throw new ArgumentException("No such VideoFileViewModelType");
+                    case ViewModelTypes.VideoEdit:
+                        _video.CurrentVideoFileViewModel = _videoEdit;
+                        break;
                 }
             }
         }

@@ -9,10 +9,10 @@ namespace MKVStudio.Commands
 {
     public class RunMKVInfoCommand : ICommand
     {
+        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly VideoFileViewModel _video;
         private readonly IExternalLibrariesService _exLib;
 
-        public event EventHandler CanExecuteChanged;
 
         public RunMKVInfoCommand(VideoFileViewModel video, IExternalLibrariesService externalLibrariesService)
         {
@@ -27,7 +27,7 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.Run(_video, ProcessResultNames.MKVInfo);
+            ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVInfo, _video);
             _video.ProcessResults[ProcessResultNames.MKVInfo] = pr;
             SetMeasurements(_video.ProcessResults[ProcessResultNames.MKVInfo].StdOutput);
         }

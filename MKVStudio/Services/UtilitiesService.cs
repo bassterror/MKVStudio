@@ -76,9 +76,8 @@ namespace MKVStudio.Services
             openFileDialog.ValidateNames = true;
             openFileDialog.CheckPathExists = true;
             openFileDialog.CheckFileExists = true;
-            return openFileDialog.ShowDialog() == true
-                ? openFileDialog
-                : throw new ArgumentException("The file you selected is not correct!");
+            openFileDialog.ShowDialog();
+            return openFileDialog;
         }
 
         /// <summary>

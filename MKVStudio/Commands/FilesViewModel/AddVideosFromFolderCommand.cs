@@ -8,7 +8,7 @@ namespace MKVStudio.Commands
 {
     public class AddVideosFromFolderCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly ObservableCollection<VideoFileViewModel> _videos;
         private readonly IExternalLibrariesService _exLib;
 

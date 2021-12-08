@@ -1,0 +1,219 @@
+﻿<Window x:Class="MKVStudio.ApplyToAllView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+        xmlns:v="clr-namespace:MKVStudio.Views"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:ApplyToAllViewModel}"
+        Title="Apply to all"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ToolWindow"
+        Style="{DynamicResource CustomToolWindowStyle}"
+        Height="650"
+        Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
+                Content="Apply"
+                    Margin="2"
+                    Padding="5"
+                Command="{Binding ApplyChangesCommand}"/>
+        </Grid>
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Margin="2">
+                    <GroupBox.Header>
+                        <TextBlock Text="Container properties"/>
+                    </GroupBox.Header>
+                    <Grid Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Margin="2">
+                            <TextBlock Text="Title:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                        </Label>
+                        <TextBox Grid.Column="1"
+                             Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             VerticalContentAlignment="Center"
+                             Margin="2"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Margin="2">
+                    <GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                   Margin="0 0 5 0"
+                                   Text="Video tracks"
+                                   VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                Content="+"
+                                Width="15"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrackAll}"/>
+                            <Button Grid.Column="2"
+                                Width="15"
+                                Content="-"
+                                Command="{Binding RemoveTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrackAll}"/>
+                        </Grid>
+                    </GroupBox.Header>
+                    <ItemsControl ItemsSource="{Binding VideoTracks}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:VideoTrackAllView/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+                <GroupBox Grid.Row="2" Margin="2">
+                    <GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                   Margin="0 0 5 0"
+                                   Text="Audio tracks"
+                                   VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                Content="+"
+                                Width="15"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.AudioTrackAll}"/>
+                            <Button Grid.Column="2"
+                                Width="15"
+                                Content="-"
+                                Command="{Binding RemoveTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrackAll}"/>
+                        </Grid>
+                    </GroupBox.Header>
+                    <ItemsControl ItemsSource="{Binding AudioTracks}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:AudioTrackAllView/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+                <GroupBox Grid.Row="3" Margin="2">
+                    <GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                   Margin="0 0 5 0"
+                                   Text="Subtitles"
+                                   VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                Content="+"
+                                Width="15"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.SubtitleTrackAll}"/>
+                            <Button Grid.Column="2"
+                                Width="15"
+                                Content="-"
+                                Command="{Binding RemoveTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrackAll}"/>
+                        </Grid>
+                    </GroupBox.Header>
+                    <ItemsControl ItemsSource="{Binding SubtitleTracks}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:SubtitleTrackAllView/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+                <GroupBox Grid.Row="4" Margin="2">
+                    <GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                   Margin="0 0 5 0"
+                                   Text="Attachments"
+                                   VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                Content="+"
+                                Width="15"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.AttachmentsAll}"/>
+                            <Button Grid.Column="2"
+                                Width="15"
+                                Content="-"
+                                Command="{Binding RemoveTrackAllCommand}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrackAll}"/>
+                        </Grid>
+                    </GroupBox.Header>
+                    <ItemsControl ItemsSource="{Binding Attachments}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <v:AttachmentAllView/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

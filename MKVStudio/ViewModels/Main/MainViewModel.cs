@@ -6,11 +6,11 @@ namespace MKVStudio.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        public MainViewModel ThisMainViewModel { get; set; }
+        public BaseViewModel CurrentMainViewModel { get; set; }
         private FilesViewModel FilesViewModel { get; set; }
         private QueueViewModel QueueViewModel { get; set; }
 
-        public MainViewModel ThisMainViewModel { get; set; }
-        public BaseViewModel CurrentMainViewModel { get; set; }
         public ICommand UpdateCurrentMainViewModelCommand { get; set; }
 
         public MainViewModel(IExternalLibrariesService externalLibrariesService)

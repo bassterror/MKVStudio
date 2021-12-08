@@ -1,8 +1,11 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.ViewModels;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static MKVStudio.Services.UtilitiesService;
 
@@ -11,13 +14,16 @@ namespace MKVStudio.Services
     public class ExternalLibrariesService : IExternalLibrariesService
     {
         public IUtilitiesService Util { get; set; }
+        public ObservableCollection<Language> AllLanguages { get; set; } = new();
+        public ObservableCollection<Language> Languages { get; set; } = new();
 
         public ExternalLibrariesService(IUtilitiesService utilitiesService)
         {
             Util = utilitiesService;
+            GetLanguageList();
         }
 
-        public async Task<ProcessResult> Run(VideoFileViewModel video, ProcessResultNames processName)
+        public async Task<ProcessResult> Run(ProcessResultNames processName, VideoFileViewModel video = null)
         {
             ProcessResult pr = new();
 
@@ -40,6 +46,9 @@ namespace MKVStudio.Services
                     break;
                 case ProcessResultNames.MKVMergeJ:
                     pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, video), processName);
+                    break;
+                case ProcessResultNames.MKVMergeLangList:
+                    pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
                     break;
             }
 
@@ -133,7 +142,7 @@ namespace MKVStudio.Services
             return processResult;
         }
 
-        private static string BuildArguments(ProcessResultNames processName, VideoFileViewModel video)
+        private static string BuildArguments(ProcessResultNames processName, VideoFileViewModel video = null)
         {
             string arguments = string.Empty;
             switch (processName)
@@ -156,13 +165,29 @@ namespace MKVStudio.Services
                 case ProcessResultNames.MKVMergeJ:
                     arguments = $"-J \"{video.InputFullPath}\"";
                     break;
-                default:
+                case ProcessResultNames.MKVMergeLangList:
+                    arguments = "--list-languages";
                     break;
             }
 
             return arguments;
         }
 
-
+        private async void GetLanguageList()
+        {
+            ProcessResult pr = await Run(ProcessResultNames.MKVMergeLangList);
+            string[] lines = pr.StdOutput.Split("\r\n");
+            for (int i = 2; i < lines.Length; i++)
+            {
+                Match match = Regex.Match(lines[i], @"^(.+)\|(.+)\|(.+)\|(.+)$");
+                Language language = new(match);
+                AllLanguages.Add(language);
+                string[] pref = new string[] { "eng", "und", "bul", "fre", "ger", "ita", "rus", "spa" };
+                if (pref.Contains(language.ID))
+                {
+                    Languages.Add(language);
+                }
+            }
+        }
     }
 }

@@ -17,7 +17,6 @@ namespace MKVStudio.ViewModels
         public ObservableCollection<AttachmentTrackViewModel> Attachments { get; set; } = new();
 
         #region Commands
-        public ICommand RunLoudnormFirstPassCommand { get; set; }
         public ICommand RunMKVInfoCommand { get; set; }
         public ICommand RunMKVExtractCommand { get; set; }
         #endregion
@@ -25,7 +24,6 @@ namespace MKVStudio.ViewModels
         public TracksViewModel(VideoFileViewModel selectedVideo, MKVMergeJ result, IExternalLibrariesService externalLibrariesService)
         {
             SelectedVideo = selectedVideo;
-            RunLoudnormFirstPassCommand = new RunLoudnormFirstPassCommand(SelectedVideo, externalLibrariesService);
             RunMKVInfoCommand = new RunMKVInfoCommand(SelectedVideo, externalLibrariesService);
             RunMKVExtractCommand = new RunMKVExtractCommand(SelectedVideo, externalLibrariesService);
 
@@ -36,15 +34,15 @@ namespace MKVStudio.ViewModels
             }
             foreach (MKVMergeJ.Track videoTrack in result.Tracks.Where(v => v.Type == "video"))
             {
-                VideoTracks.Add(new VideoTrackViewModel(SelectedVideo, videoTrack));
+                VideoTracks.Add(new VideoTrackViewModel(SelectedVideo, videoTrack, externalLibrariesService));
             }
             foreach (MKVMergeJ.Track audioTrack in result.Tracks.Where(v => v.Type == "audio"))
             {
-                AudioTracks.Add(new AudioTrackViewModel(SelectedVideo, audioTrack));
+                AudioTracks.Add(new AudioTrackViewModel(SelectedVideo, audioTrack, externalLibrariesService));
             }
             foreach (MKVMergeJ.Track subtitleTrack in result.Tracks.Where(v => v.Type == "subtitles"))
             {
-                SubtitleTracks.Add(new SubtitleTrackViewModel(SelectedVideo, subtitleTrack));
+                SubtitleTracks.Add(new SubtitleTrackViewModel(SelectedVideo, subtitleTrack, externalLibrariesService));
             }
         }
     }

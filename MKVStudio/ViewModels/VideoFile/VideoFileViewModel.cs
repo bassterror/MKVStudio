@@ -12,15 +12,15 @@ namespace MKVStudio.ViewModels
     {
         #region Navigation
         public VideoFileViewModel ThisVideoFileViewModel { get; set; }
+        public TracksViewModel TracksViewModel { get; set; }
         private FileOverviewViewModel FileOverviewViewModel { get; set; }
-        private TracksViewModel TracksViewModel { get; set; }
-        private ConvertViewModel ConvertViewModel { get; set; }
+        private AudioEditViewModel AudioEditViewModel { get; set; }
+        private VideoEditViewModel VideoEditViewModel { get; set; }
         public BaseViewModel CurrentVideoFileViewModel { get; set; }
         public ICommand UpdateCurrentVideoFileViewModelCommand { get; set; }
         #endregion
 
         private readonly IExternalLibrariesService _exLib;
-
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
 
         #region I/O
@@ -36,19 +36,6 @@ namespace MKVStudio.ViewModels
         public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
         #endregion
 
-        #region LoudnormFirstPass
-        public string InputI { get; set; }
-        public string InputTP { get; set; }
-        public string InputLRA { get; set; }
-        public string InputTresh { get; set; }
-        public string OutputTP { get; set; }
-        public string OutputLRA { get; set; }
-        public string OutputTresh { get; set; }
-        public string NormalizationType { get; set; }
-        public string TargetOffset { get; set; }
-        #endregion
-
-
         public VideoFileViewModel(string source, IExternalLibrariesService externalLibrariesService)
         {
             ThisVideoFileViewModel = this;
@@ -62,20 +49,21 @@ namespace MKVStudio.ViewModels
             OutputName = InputName + " - edit";
 
             FileOverviewViewModel = new FileOverviewViewModel(this);
-            ConvertViewModel = new ConvertViewModel(this);
+            AudioEditViewModel = new AudioEditViewModel(this, _exLib);
+            VideoEditViewModel = new VideoEditViewModel(this, _exLib);
 
             CallMKVMergeJ();
         }
 
         private async void CallMKVMergeJ()
         {
-            ProcessResult pr = await _exLib.Run(this, ProcessResultNames.MKVMergeJ);
+            ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVMergeJ, this);
             ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
             MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
             TracksViewModel = new TracksViewModel(this, result, _exLib);
 
-            UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, ConvertViewModel);
-            UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.FileOverview);
+            UpdateCurrentVideoFileViewModelCommand = new UpdateCurrentVideoFileViewModelCommand(this, FileOverviewViewModel, TracksViewModel, AudioEditViewModel, VideoEditViewModel);
+            UpdateCurrentVideoFileViewModelCommand.Execute(ViewModelTypes.Tracks);
         }
     }
 }
