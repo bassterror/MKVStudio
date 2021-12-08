@@ -43,7 +43,6 @@
                     Command="{Binding ClearVideosCommand}"/>
         </Grid>
         <ListView Grid.Row="1"
-                  MaxWidth="390"
                   ItemsSource="{Binding Videos}"
                   SelectedItem="{Binding SelectedVideo, Mode=TwoWay}"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"

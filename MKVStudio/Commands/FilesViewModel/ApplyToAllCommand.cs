@@ -1,6 +1,8 @@
-﻿using MKVStudio.ViewModels;
+﻿using MKVStudio.Services;
+using MKVStudio.ViewModels;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
@@ -8,12 +10,14 @@ namespace MKVStudio.Commands
     public class ApplyToAllCommand : ICommand
     {
         private readonly ObservableCollection<VideoFileViewModel> _videos;
+        private readonly IExternalLibrariesService _exLIb;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public ApplyToAllCommand(ObservableCollection<VideoFileViewModel> videos)
+        public ApplyToAllCommand(ObservableCollection<VideoFileViewModel> videos, IExternalLibrariesService externalLibrariesService)
         {
             _videos = videos;
+            _exLIb = externalLibrariesService;
         }
 
         public bool CanExecute(object parameter)
@@ -24,8 +28,10 @@ namespace MKVStudio.Commands
         public void Execute(object parameter)
         {
             ApplyToAllView applyToAllView = new();
-            applyToAllView.Content = new ApplyToAllViewModel(_videos);
-            applyToAllView.Show();
+            applyToAllView.DataContext = new ApplyToAllViewModel(_videos, _exLIb, applyToAllView);
+            applyToAllView.Owner = Application.Current.MainWindow;
+            applyToAllView.ShowInTaskbar = false;
+            applyToAllView.ShowDialog();
         }
     }
 }

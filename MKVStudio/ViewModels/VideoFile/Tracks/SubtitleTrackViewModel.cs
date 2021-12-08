@@ -25,24 +25,27 @@ namespace MKVStudio.ViewModels
         public int Number { get; set; }
         public string ContentEncodingAlgorithms { get; set; }
 
-        public SubtitleTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Track track, IExternalLibrariesService externalLibrariesService)
+        public SubtitleTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Track track = null, IExternalLibrariesService externalLibrariesService = null)
         {
             SelectedVideo = videoFileViewModel;
-            ExLib = externalLibrariesService;
-            Name = track.Properties.Track_name;
-            ID = track.ID.ToString();
-            UID = track.Properties.UID;
-            Codec = track.Codec;
-            CodecId = track.Properties.Codec_id;
-            DefaultTrack = track.Properties.Default_track;
-            EnabledTrack = track.Properties.Enabled_track;
-            ForcedTrack = track.Properties.Forced_track;
-            FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
-            FlagCommentary = track.Properties.Flag_commentary;
-            Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
-            LanguageIETF = track.Properties.Language_ietf;
-            Number = track.Properties.Number;
-            ContentEncodingAlgorithms = track.Properties.Content_encoding_algorithms;
+            if (track != null)
+            {
+                ExLib = externalLibrariesService;
+                Name = track.Properties.Track_name;
+                ID = track.ID.ToString();
+                UID = track.Properties.UID;
+                Codec = track.Codec;
+                CodecId = track.Properties.Codec_id;
+                DefaultTrack = track.Properties.Default_track;
+                EnabledTrack = track.Properties.Enabled_track;
+                ForcedTrack = track.Properties.Forced_track;
+                FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
+                FlagCommentary = track.Properties.Flag_commentary;
+                Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
+                LanguageIETF = track.Properties.Language_ietf;
+                Number = track.Properties.Number;
+                ContentEncodingAlgorithms = track.Properties.Content_encoding_algorithms; 
+            }
         }
     }
 }

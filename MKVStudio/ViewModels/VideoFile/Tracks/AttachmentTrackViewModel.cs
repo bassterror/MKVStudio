@@ -13,15 +13,18 @@ namespace MKVStudio.ViewModels
         public string Description { get; set; }
         public string Size { get; set; }
 
-        public AttachmentTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Attachment attachment)
+        public AttachmentTrackViewModel(VideoFileViewModel videoFileViewModel, MKVMergeJ.Attachment attachment = null)
         {
-            SelectedVideo = videoFileViewModel;
-            ID = attachment.Id.ToString();
-            UID = attachment.Properties.UID;
-            ContentType = attachment.Content_type;
-            Name = attachment.File_name;
-            Description = attachment.Description;
-            Size = attachment.Size.ToString();
+            if (attachment != null)
+            {
+                SelectedVideo = videoFileViewModel;
+                ID = attachment.Id.ToString();
+                UID = attachment.Properties.UID;
+                ContentType = attachment.Content_type;
+                Name = attachment.File_name;
+                Description = attachment.Description;
+                Size = attachment.Size.ToString(); 
+            }
         }
     }
 }

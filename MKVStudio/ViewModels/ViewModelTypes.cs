@@ -3,6 +3,10 @@
     public enum ViewModelTypes
     {
         Files,
+        VideoTrackAll,
+        AudioTrackAll,
+        SubtitleTrackAll,
+        AttachmentsAll,
         Queue,
         VideoFile,
         FileOverview,

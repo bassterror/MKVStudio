@@ -17,7 +17,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -39,7 +38,7 @@
                         Padding="5"
                         Command="{Binding RunMKVExtractCommand}"/>
             </Grid>
-            <GroupBox Grid.Row="2" Margin="2">
+            <GroupBox Grid.Row="1" Margin="2">
                 <GroupBox.Header>
                     <TextBlock Text="Container properties"/>
                 </GroupBox.Header>
@@ -57,7 +56,7 @@
                              Margin="2"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Row="3" Margin="2">
+            <GroupBox Grid.Row="2" Margin="2">
                 <GroupBox.Header>
                     <TextBlock Text="Video tracks"/>
                 </GroupBox.Header>
@@ -74,7 +73,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </GroupBox>
-            <GroupBox Grid.Row="4" Margin="2">
+            <GroupBox Grid.Row="3" Margin="2">
                 <GroupBox.Header>
                     <TextBlock Text="Audio tracks"/>
                 </GroupBox.Header>
@@ -91,7 +90,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </GroupBox>
-            <GroupBox Grid.Row="5" Margin="2">
+            <GroupBox Grid.Row="4" Margin="2">
                 <GroupBox.Header>
                     <TextBlock Text="Subtitles"/>
                 </GroupBox.Header>
@@ -108,7 +107,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </GroupBox>
-            <GroupBox Grid.Row="6" Margin="2">
+            <GroupBox Grid.Row="5" Margin="2">
                 <GroupBox.Header>
                     <TextBlock Text="Attachments"/>
                 </GroupBox.Header>
