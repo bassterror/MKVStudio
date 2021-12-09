@@ -11,11 +11,11 @@ namespace MKVStudio.Commands
     public class RunLoudnormFirstPassCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly VideoFileViewModel _video;
-        private readonly AudioEditViewModel _audioEdit;
+        private readonly VideoFileVM _video;
+        private readonly AudioEditVM _audioEdit;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunLoudnormFirstPassCommand(VideoFileViewModel video, AudioEditViewModel audioEditViewModel, IExternalLibrariesService externalLibrariesService)
+        public RunLoudnormFirstPassCommand(VideoFileVM video, AudioEditVM audioEditViewModel, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _audioEdit = audioEditViewModel;

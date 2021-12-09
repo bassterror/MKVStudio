@@ -11,41 +11,41 @@
                 <ResourceDictionary Source="/VisualStyles/Colors.xaml"/>
                 <ResourceDictionary Source="/VisualStyles/ColourfulDarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type vm:FilesViewModel}">
-                <v:FilesView/>
+            <DataTemplate DataType="{x:Type vm:FilesVM}">
+                <v:FilesV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:ApplyToAllViewModel}">
-                <l:ApplyToAllView/>
+            <DataTemplate DataType="{x:Type vm:ApplyToAllVM}">
+                <l:ApplyToAllV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:QueueViewModel}">
-                <v:QueueView/>
+            <DataTemplate DataType="{x:Type vm:QueueVM}">
+                <v:QueueV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoFileViewModel}">
-                <v:VideoFileView/>
+            <DataTemplate DataType="{x:Type vm:VideoFileVM}">
+                <v:VideoFileV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:FileOverviewViewModel}">
-                <v:FileOverviewView/>
+            <DataTemplate DataType="{x:Type vm:FileOverviewVM}">
+                <v:FileOverviewV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:TracksViewModel}">
-                <v:TracksView/>
+            <DataTemplate DataType="{x:Type vm:TracksVM}">
+                <v:TracksV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoTrackViewModel}">
-                <v:VideoTrackView/>
+            <DataTemplate DataType="{x:Type vm:VideoTrackVM}">
+                <v:VideoTrackV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AudioTrackViewModel}">
-                <v:AudioTrackView/>
+            <DataTemplate DataType="{x:Type vm:AudioTrackVM}">
+                <v:AudioTrackV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:SubtitleTrackViewModel}">
-                <v:SubtitleTrackView/>
+            <DataTemplate DataType="{x:Type vm:SubtitlesTrackVM}">
+                <v:SubtitlesTrackV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AttachmentTrackViewModel}">
-                <v:AttachmentTrackView/>
+            <DataTemplate DataType="{x:Type vm:AttachmentVM}">
+                <v:AttachmentV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AudioEditViewModel}">
-                <v:AudioEditView/>
+            <DataTemplate DataType="{x:Type vm:AudioEditVM}">
+                <v:AudioEditV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoEditViewModel}">
-                <v:VideoEditView/>
+            <DataTemplate DataType="{x:Type vm:VideoEditVM}">
+                <v:VideoEditV/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

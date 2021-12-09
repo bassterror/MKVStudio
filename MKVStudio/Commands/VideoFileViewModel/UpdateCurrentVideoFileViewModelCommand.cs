@@ -7,17 +7,17 @@ namespace MKVStudio.Commands
     public class UpdateCurrentVideoFileViewModelCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly VideoFileViewModel _video;
-        private readonly FileOverviewViewModel _fileOverview;
-        private readonly TracksViewModel _tracks;
-        private readonly AudioEditViewModel _audioEdit;
-        private readonly VideoEditViewModel _videoEdit;
+        private readonly VideoFileVM _video;
+        private readonly FileOverviewVM _fileOverview;
+        private readonly TracksVM _tracks;
+        private readonly AudioEditVM _audioEdit;
+        private readonly VideoEditVM _videoEdit;
 
-        public UpdateCurrentVideoFileViewModelCommand(VideoFileViewModel videoFileViewModel,
-                                                      FileOverviewViewModel fileOverviewViewModel,
-                                                      TracksViewModel tracksViewModel,
-                                                      AudioEditViewModel audioEditViewModel,
-                                                      VideoEditViewModel videoEditViewModel)
+        public UpdateCurrentVideoFileViewModelCommand(VideoFileVM videoFileViewModel,
+                                                      FileOverviewVM fileOverviewViewModel,
+                                                      TracksVM tracksViewModel,
+                                                      AudioEditVM audioEditViewModel,
+                                                      VideoEditVM videoEditViewModel)
         {
             _video = videoFileViewModel;
             _fileOverview = fileOverviewViewModel;

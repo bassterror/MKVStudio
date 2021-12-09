@@ -9,18 +9,18 @@ namespace MKVStudio.Commands
     public class AddTrackAllCommand : ICommand
     {
         private readonly IExternalLibrariesService _exLib;
-        private readonly ObservableCollection<VideoTrackAllViewModel> _videoTracks;
-        private readonly ObservableCollection<AudioTrackAllViewModel> _audioTracks;
-        private readonly ObservableCollection<SubtitleTrackAllViewModel> _subtitleTracks;
-        private readonly ObservableCollection<AttachmentAllTrackViewModel> _attachments;
+        private readonly ObservableCollection<VideoTrackAllVM> _videoTracks;
+        private readonly ObservableCollection<AudioTrackAllVM> _audioTracks;
+        private readonly ObservableCollection<SubtitlesTrackAllVM> _subtitleTracks;
+        private readonly ObservableCollection<AttachmentAllVM> _attachments;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
         public AddTrackAllCommand(IExternalLibrariesService externalLibrariesService,
-            ObservableCollection<VideoTrackAllViewModel> videoTracks,
-            ObservableCollection<AudioTrackAllViewModel> audioTracks,
-            ObservableCollection<SubtitleTrackAllViewModel> subtitleTracks,
-            ObservableCollection<AttachmentAllTrackViewModel> attachments)
+            ObservableCollection<VideoTrackAllVM> videoTracks,
+            ObservableCollection<AudioTrackAllVM> audioTracks,
+            ObservableCollection<SubtitlesTrackAllVM> subtitleTracks,
+            ObservableCollection<AttachmentAllVM> attachments)
         {
             _exLib = externalLibrariesService;
             _videoTracks = videoTracks;
@@ -41,16 +41,16 @@ namespace MKVStudio.Commands
                 switch (viewModelType)
 {
                     case ViewModelTypes.VideoTrackAll:
-                        _videoTracks.Add(new VideoTrackAllViewModel(_exLib));
+                        _videoTracks.Add(new VideoTrackAllVM(_exLib));
                         break;
                     case ViewModelTypes.AudioTrackAll:
-                        _audioTracks.Add(new AudioTrackAllViewModel(_exLib));
+                        _audioTracks.Add(new AudioTrackAllVM(_exLib));
                         break;
                     case ViewModelTypes.SubtitleTrackAll:
-                        _subtitleTracks.Add(new SubtitleTrackAllViewModel(_exLib));
+                        _subtitleTracks.Add(new SubtitlesTrackAllVM(_exLib));
                         break;
                     case ViewModelTypes.AttachmentsAll:
-                        _attachments.Add(new AttachmentAllTrackViewModel());
+                        _attachments.Add(new AttachmentAllVM());
                         break;
                 }
             }

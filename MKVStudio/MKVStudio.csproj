@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\VideoFileViewModel\AudioEdit\" />
-    <Folder Include="ViewModels\Queue\" />
   </ItemGroup>
 
   <ItemGroup>

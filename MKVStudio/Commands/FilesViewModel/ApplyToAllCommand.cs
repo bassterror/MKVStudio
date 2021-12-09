@@ -9,12 +9,12 @@ namespace MKVStudio.Commands
 {
     public class ApplyToAllCommand : ICommand
     {
-        private readonly ObservableCollection<VideoFileViewModel> _videos;
+        private readonly ObservableCollection<VideoFileVM> _videos;
         private readonly IExternalLibrariesService _exLIb;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public ApplyToAllCommand(ObservableCollection<VideoFileViewModel> videos, IExternalLibrariesService externalLibrariesService)
+        public ApplyToAllCommand(ObservableCollection<VideoFileVM> videos, IExternalLibrariesService externalLibrariesService)
         {
             _videos = videos;
             _exLIb = externalLibrariesService;
@@ -27,8 +27,8 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            ApplyToAllView applyToAllView = new();
-            applyToAllView.DataContext = new ApplyToAllViewModel(_videos, _exLIb, applyToAllView);
+            ApplyToAllV applyToAllView = new();
+            applyToAllView.DataContext = new ApplyToAllVM(_videos, _exLIb, applyToAllView);
             applyToAllView.Owner = Application.Current.MainWindow;
             applyToAllView.ShowInTaskbar = false;
             applyToAllView.ShowDialog();

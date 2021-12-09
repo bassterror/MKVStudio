@@ -7,13 +7,13 @@ namespace MKVStudio.Commands
 {
     public class ApplyChangesCommand : ICommand
     {
-        private readonly ObservableCollection<VideoFileViewModel> _videos;
-        private readonly ApplyToAllViewModel _applyToAll;
-        private readonly ApplyToAllView _applyToAllView;
+        private readonly ObservableCollection<VideoFileVM> _videos;
+        private readonly ApplyToAllVM _applyToAll;
+        private readonly ApplyToAllV _applyToAllView;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public ApplyChangesCommand(ObservableCollection<VideoFileViewModel> videoFileViewModels, ApplyToAllViewModel applyToAllViewModel, ApplyToAllView applyToAllView)
+        public ApplyChangesCommand(ObservableCollection<VideoFileVM> videoFileViewModels, ApplyToAllVM applyToAllViewModel, ApplyToAllV applyToAllView)
         {
             _videos = videoFileViewModels;
             _applyToAll = applyToAllViewModel;
@@ -27,7 +27,7 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            foreach (VideoFileViewModel video in _videos)
+            foreach (VideoFileVM video in _videos)
             {
                 video.TracksViewModel.Title = _applyToAll.Title;
 
@@ -35,28 +35,28 @@ namespace MKVStudio.Commands
                 {
                     for (int i = 0; i < _applyToAll.VideoTracks.Count - video.TracksViewModel.VideoTracks.Count; i++)
                     {
-                        video.TracksViewModel.VideoTracks.Add(new VideoTrackViewModel(video));
+                        video.TracksViewModel.VideoTracks.Add(new VideoTrackVM(video));
                     }
                 }
                 if (video.TracksViewModel.AudioTracks.Count != _applyToAll.AudioTracks.Count)
                 {
                     for (int i = 0; i < _applyToAll.AudioTracks.Count - video.TracksViewModel.AudioTracks.Count; i++)
                     {
-                        video.TracksViewModel.AudioTracks.Add(new AudioTrackViewModel(video));
+                        video.TracksViewModel.AudioTracks.Add(new AudioTrackVM(video));
                     }
                 }
-                if (video.TracksViewModel.SubtitleTracks.Count != _applyToAll.SubtitleTracks.Count)
+                if (video.TracksViewModel.SubtitlesTracks.Count != _applyToAll.SubtitleTracks.Count)
                 {
-                    for (int i = 0; i < _applyToAll.SubtitleTracks.Count - video.TracksViewModel.SubtitleTracks.Count; i++)
+                    for (int i = 0; i < _applyToAll.SubtitleTracks.Count - video.TracksViewModel.SubtitlesTracks.Count; i++)
                     {
-                        video.TracksViewModel.SubtitleTracks.Add(new SubtitleTrackViewModel(video));
+                        video.TracksViewModel.SubtitlesTracks.Add(new SubtitlesTrackVM(video));
                     }
                 }
                 if (video.TracksViewModel.Attachments.Count != _applyToAll.Attachments.Count)
                 {
                     for (int i = 0; i < _applyToAll.Attachments.Count - video.TracksViewModel.Attachments.Count; i++)
                     {
-                        video.TracksViewModel.Attachments.Add(new AttachmentTrackViewModel(video));
+                        video.TracksViewModel.Attachments.Add(new AttachmentVM(video));
                     }
                 }
                 if (_applyToAll.VideoTracks.Count > 0)
@@ -87,15 +87,15 @@ namespace MKVStudio.Commands
                 }
                 if (_applyToAll.SubtitleTracks.Count > 0)
                 {
-                    for (int i = 0; i < video.TracksViewModel.SubtitleTracks.Count; i++)
+                    for (int i = 0; i < video.TracksViewModel.SubtitlesTracks.Count; i++)
                     {
-                        video.TracksViewModel.SubtitleTracks[i].Name = _applyToAll.SubtitleTracks[i].Name;
-                        video.TracksViewModel.SubtitleTracks[i].Language = _applyToAll.SubtitleTracks[i].Language;
-                        video.TracksViewModel.SubtitleTracks[i].DefaultTrack = _applyToAll.SubtitleTracks[i].DefaultTrack;
-                        video.TracksViewModel.SubtitleTracks[i].EnabledTrack = _applyToAll.SubtitleTracks[i].EnabledTrack;
-                        video.TracksViewModel.SubtitleTracks[i].ForcedTrack = _applyToAll.SubtitleTracks[i].ForcedTrack;
-                        video.TracksViewModel.SubtitleTracks[i].FlagCommentary = _applyToAll.SubtitleTracks[i].FlagCommentary;
-                        video.TracksViewModel.SubtitleTracks[i].FlagHearingImpaired = _applyToAll.SubtitleTracks[i].FlagHearingImpaired;
+                        video.TracksViewModel.SubtitlesTracks[i].Name = _applyToAll.SubtitleTracks[i].Name;
+                        video.TracksViewModel.SubtitlesTracks[i].Language = _applyToAll.SubtitleTracks[i].Language;
+                        video.TracksViewModel.SubtitlesTracks[i].DefaultTrack = _applyToAll.SubtitleTracks[i].DefaultTrack;
+                        video.TracksViewModel.SubtitlesTracks[i].EnabledTrack = _applyToAll.SubtitleTracks[i].EnabledTrack;
+                        video.TracksViewModel.SubtitlesTracks[i].ForcedTrack = _applyToAll.SubtitleTracks[i].ForcedTrack;
+                        video.TracksViewModel.SubtitlesTracks[i].FlagCommentary = _applyToAll.SubtitleTracks[i].FlagCommentary;
+                        video.TracksViewModel.SubtitlesTracks[i].FlagHearingImpaired = _applyToAll.SubtitleTracks[i].FlagHearingImpaired;
                     }
                 }
                 if (_applyToAll.Attachments.Count > 0)

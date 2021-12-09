@@ -7,17 +7,17 @@ namespace MKVStudio.Commands
 {
     public class RemoveTrackAllCommand : ICommand
     {
-        private readonly ObservableCollection<VideoTrackAllViewModel> _videoTracks;
-        private readonly ObservableCollection<AudioTrackAllViewModel> _audioTracks;
-        private readonly ObservableCollection<SubtitleTrackAllViewModel> _subtitleTracks;
-        private readonly ObservableCollection<AttachmentAllTrackViewModel> _attachments;
+        private readonly ObservableCollection<VideoTrackAllVM> _videoTracks;
+        private readonly ObservableCollection<AudioTrackAllVM> _audioTracks;
+        private readonly ObservableCollection<SubtitlesTrackAllVM> _subtitleTracks;
+        private readonly ObservableCollection<AttachmentAllVM> _attachments;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public RemoveTrackAllCommand(ObservableCollection<VideoTrackAllViewModel> videoTracks,
-            ObservableCollection<AudioTrackAllViewModel> audioTracks,
-            ObservableCollection<SubtitleTrackAllViewModel> subtitleTracks,
-            ObservableCollection<AttachmentAllTrackViewModel> attachments)
+        public RemoveTrackAllCommand(ObservableCollection<VideoTrackAllVM> videoTracks,
+            ObservableCollection<AudioTrackAllVM> audioTracks,
+            ObservableCollection<SubtitlesTrackAllVM> subtitleTracks,
+            ObservableCollection<AttachmentAllVM> attachments)
         {
             _videoTracks = videoTracks;
             _audioTracks = audioTracks;

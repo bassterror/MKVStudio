@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:MKVStudio.Views"
         xmlns:vm="clr-namespace:MKVStudio.ViewModels"        
-        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        d:DataContext="{d:DesignInstance Type=vm:MainVM}"
         d:DesignHeight="250" d:DesignWidth="200"
         mc:Ignorable="d"
         Title="MKV Studio"
@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <c:MainNavigation Grid.Column="0"
+            <c:MainNav Grid.Column="0"
                               DataContext="{Binding ThisMainViewModel}"/>
             <ContentControl Grid.Column="1"
                             Content="{Binding CurrentMainViewModel}"/>
