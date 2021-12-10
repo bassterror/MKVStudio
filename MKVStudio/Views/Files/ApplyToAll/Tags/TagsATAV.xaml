@@ -27,34 +27,31 @@
                         Content="Remove all tags"
                         Margin="2"
                         Padding="5"
-                        Command="{Binding RemoveAllTags}"/>
-                <Button Grid.Column="1"
-                        Content="Remove all global tags"
-                        Margin="2"
-                        Padding="5"
-                        Command="{Binding RemoveAllGlobalTags}"/>
-                <Button Grid.Column="2"
-                        Content="Remove all track tags"
-                        Margin="2"
-                        Padding="5"
-                        Command="{Binding RemoveAllTrackTags}"/>
+                        Command="{Binding RemoveAllTags}"
+                        CommandParameter="{x:Static vm:ViewModelTypes.Tags}"/>
             </Grid>
             <GroupBox Grid.Row="1">
                 <GroupBox.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
-                                   Margin="0 0 5 0"
-                                   Text="Global tags"
+                                   Text="Global"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
                                    VerticalAlignment="Center"/>
                         <Button Grid.Column="1"
-                                Content="+"
-                                Width="15"
+                                Margin="0 0 4 0"
+                                Content="Add tag"
                                 Command="{Binding AddTag}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATAGlobalTag}"/>
+                                CommandParameter="{x:Static vm:ViewModelTypes.GobalTag}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTags}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.GobalTag}"/>
                     </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding GlobalTags}">
@@ -74,18 +71,24 @@
                 <GroupBox.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
-                                   Margin="0 0 5 0"
                                    Text="Track tags"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
                                    VerticalAlignment="Center"/>
                         <Button Grid.Column="1"
-                                Content="+"
-                                Width="15"
+                                Margin="0 0 4 0"
+                                Content="Add tag"
                                 Command="{Binding AddTag}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATATrackTag}"/>
+                                CommandParameter="{x:Static vm:ViewModelTypes.TrackTag}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTags}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.TrackTag}"/>
                     </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding TrackTags}">

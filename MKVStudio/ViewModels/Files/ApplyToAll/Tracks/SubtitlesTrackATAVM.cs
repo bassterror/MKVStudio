@@ -1,14 +1,13 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Models;
 using MKVStudio.Services;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
     public class SubtitlesTrackATAVM : BaseViewModel
     {
-        private readonly ObservableCollection<SubtitlesTrackATAVM> _subtitlesTracks;
+        private readonly TracksATAVM _tracks;
 
         public string Name { get; set; }
         public bool DefaultTrack { get; set; }
@@ -18,12 +17,12 @@ namespace MKVStudio.ViewModels
         public bool FlagCommentary { get; set; }
         public Language Language { get; set; }
         public IExternalLibrariesService ExLib { get; }
-        public ICommand RemoveTrack => new RemoveTrackATACommand(null, null, _subtitlesTracks, null, null, this);
+        public ICommand RemoveTrack => new RemoveTrackATACommand(_tracks, null, null, this);
 
-        public SubtitlesTrackATAVM(IExternalLibrariesService externalLibrariesService, ObservableCollection<SubtitlesTrackATAVM> subtitlesTracks)
+        public SubtitlesTrackATAVM(IExternalLibrariesService externalLibrariesService, TracksATAVM tracks)
         {
             ExLib = externalLibrariesService;
-            _subtitlesTracks = subtitlesTracks;
+            _tracks = tracks;
         }
     }
 }

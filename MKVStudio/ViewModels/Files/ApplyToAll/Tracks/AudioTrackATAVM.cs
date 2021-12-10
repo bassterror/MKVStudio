@@ -1,14 +1,13 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Models;
 using MKVStudio.Services;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
     public class AudioTrackATAVM : BaseViewModel
     {
-        private readonly ObservableCollection<AudioTrackATAVM> _audioTracks;
+        private readonly TracksATAVM _tracks;
 
         public string Name { get; set; }
         public bool DefaultTrack { get; set; }
@@ -18,12 +17,12 @@ namespace MKVStudio.ViewModels
         public bool FlagCommentary { get; set; }
         public Language Language { get; set; }
         public IExternalLibrariesService ExLib { get; }
-        public ICommand RemoveTrack => new RemoveTrackATACommand(null, _audioTracks, null, null, this, null);
+        public ICommand RemoveTrack => new RemoveTrackATACommand(_tracks, null, this, null);
 
-        public AudioTrackATAVM(IExternalLibrariesService externalLibrariesService, ObservableCollection<AudioTrackATAVM> audioTracks)
+        public AudioTrackATAVM(IExternalLibrariesService externalLibrariesService, TracksATAVM tracks)
         {
             ExLib = externalLibrariesService;
-            _audioTracks = audioTracks;
+            _tracks = tracks;
         }
     }
 }

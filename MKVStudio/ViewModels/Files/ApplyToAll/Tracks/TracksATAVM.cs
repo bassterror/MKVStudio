@@ -13,8 +13,8 @@ namespace MKVStudio.ViewModels
         public ObservableCollection<VideoTrackATAVM> VideoTracks { get; set; } = new();
         public ObservableCollection<AudioTrackATAVM> AudioTracks { get; set; } = new();
         public ObservableCollection<SubtitlesTrackATAVM> SubtitleTracks { get; set; } = new();
-        public ICommand AddTrack => new AddTrackATACommand(_exLib, VideoTracks, AudioTracks, SubtitleTracks);
-        public ICommand RemoveAllTracks => new RemoveAllTracksATACommand(VideoTracks, AudioTracks, SubtitleTracks);
+        public ICommand AddTrack => new AddTrackATACommand(_exLib, this);
+        public ICommand RemoveAllTracks => new RemoveAllTracksATACommand(this);
 
         public TracksATAVM(IExternalLibrariesService exLib)
         {

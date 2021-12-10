@@ -1,31 +1,24 @@
 ﻿using MKVStudio.ViewModels;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
     public class RemoveTrackATACommand : ICommand
     {
-        private readonly ObservableCollection<VideoTrackATAVM> _videoTracks;
-        private readonly ObservableCollection<AudioTrackATAVM> _audioTracks;
-        private readonly ObservableCollection<SubtitlesTrackATAVM> _subtitlesTracks;
+        private readonly TracksATAVM _tracks;
         private readonly VideoTrackATAVM _videoTrack;
         private readonly AudioTrackATAVM _audioTrack;
         private readonly SubtitlesTrackATAVM _subtitlesTrack;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public RemoveTrackATACommand(ObservableCollection<VideoTrackATAVM> videoTracks = null,
-            ObservableCollection<AudioTrackATAVM> audioTracks = null,
-            ObservableCollection<SubtitlesTrackATAVM> subtitlesTracks = null,
+        public RemoveTrackATACommand(TracksATAVM tracks,
             VideoTrackATAVM videoTrackAllVM = null,
             AudioTrackATAVM audioTrackAllVM = null,
             SubtitlesTrackATAVM subtitlesTrackAllVM = null)
         {
-            _videoTracks = videoTracks;
-            _audioTracks = audioTracks;
-            _subtitlesTracks = subtitlesTracks;
+            _tracks = tracks;
             _videoTrack = videoTrackAllVM;
             _audioTrack = audioTrackAllVM;
             _subtitlesTrack = subtitlesTrackAllVM;
@@ -42,14 +35,14 @@ namespace MKVStudio.Commands
             {
                 switch (viewModelType)
                 {
-                    case ViewModelTypes.ATAVideoTrack:
-                        _videoTracks.Remove(_videoTrack);
+                    case ViewModelTypes.VideoTrack:
+                        _tracks.VideoTracks.Remove(_videoTrack);
                         break;
-                    case ViewModelTypes.ATAAudioTrack:
-                        _audioTracks.Remove(_audioTrack);
+                    case ViewModelTypes.AudioTrack:
+                        _tracks.AudioTracks.Remove(_audioTrack);
                         break;
-                    case ViewModelTypes.ATASubtitleTrack:
-                        _subtitlesTracks.Remove(_subtitlesTrack);
+                    case ViewModelTypes.SubtitlesTrack:
+                        _tracks.SubtitleTracks.Remove(_subtitlesTrack);
                         break;
                 }
             }

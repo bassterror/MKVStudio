@@ -6,10 +6,9 @@
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:AttachmentATAVM}"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="200">
+             d:DesignHeight="150" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -18,18 +17,23 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" MinWidth="86"/>
+                <ColumnDefinition Width="86"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Margin="2" HorizontalContentAlignment="Right">
-                <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                <TextBlock Text="Name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBox Grid.Column="1"
                      Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
                      Margin="2"/>
+            <Button Grid.Column="2"
+                    Margin="2"
+                    Content="Remove attachment"
+                    Command="{Binding RemoveAttachment}"/>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" MinWidth="86"/>
                 <ColumnDefinition Width="*"/>
@@ -42,7 +46,7 @@
                      VerticalContentAlignment="Center"
                      Margin="2"/>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" MinWidth="86"/>
                 <ColumnDefinition Width="*"/>
@@ -55,7 +59,7 @@
                      VerticalContentAlignment="Center"
                      Margin="2"/>
         </Grid>
-        <Separator Grid.Row="4">
+        <Separator Grid.Row="3">
             <Separator.RenderTransform>
                 <ScaleTransform ScaleY="3" />
             </Separator.RenderTransform>

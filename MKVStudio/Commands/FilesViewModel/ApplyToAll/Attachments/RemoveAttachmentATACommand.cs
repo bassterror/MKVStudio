@@ -4,15 +4,17 @@ using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
-    public class RemoveAllAttachmentsATACommand : ICommand
+    public class RemoveAttachmentATACommand : ICommand
     {
         private readonly AttachmentsATAVM _attachments;
+        private readonly AttachmentATAVM _attachment;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public RemoveAllAttachmentsATACommand(AttachmentsATAVM attachments)
+        public RemoveAttachmentATACommand(AttachmentsATAVM attachments, AttachmentATAVM attachment)
         {
             _attachments = attachments;
+            _attachment = attachment;
         }
 
         public bool CanExecute(object parameter)
@@ -22,7 +24,7 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            _attachments.Attachments.Clear();
+            _attachments.Attachments.Remove(_attachment);
         }
     }
 }

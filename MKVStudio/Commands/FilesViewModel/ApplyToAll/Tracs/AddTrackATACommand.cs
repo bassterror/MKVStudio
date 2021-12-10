@@ -1,7 +1,6 @@
 ﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
@@ -9,21 +8,14 @@ namespace MKVStudio.Commands
     public class AddTrackATACommand : ICommand
     {
         private readonly IExternalLibrariesService _exLib;
-        private readonly ObservableCollection<VideoTrackATAVM> _videoTracks;
-        private readonly ObservableCollection<AudioTrackATAVM> _audioTracks;
-        private readonly ObservableCollection<SubtitlesTrackATAVM> _subtitleTracks;
+        private readonly TracksATAVM _tracks;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public AddTrackATACommand(IExternalLibrariesService exLib,
-            ObservableCollection<VideoTrackATAVM> videoTracks,
-            ObservableCollection<AudioTrackATAVM> audioTracks,
-            ObservableCollection<SubtitlesTrackATAVM> subtitleTracks)
+        public AddTrackATACommand(IExternalLibrariesService exLib, TracksATAVM tracks)
         {
             _exLib = exLib;
-            _videoTracks = videoTracks;
-            _audioTracks = audioTracks;
-            _subtitleTracks = subtitleTracks;
+            _tracks = tracks;
         }
 
         public bool CanExecute(object parameter)
@@ -36,15 +28,15 @@ namespace MKVStudio.Commands
             if (parameter is ViewModelTypes viewModelType)
             {
                 switch (viewModelType)
-{
-                    case ViewModelTypes.ATAVideoTrack:
-                        _videoTracks.Add(new VideoTrackATAVM(_exLib, _videoTracks));
+                {
+                    case ViewModelTypes.VideoTrack:
+                        _tracks.VideoTracks.Add(new VideoTrackATAVM(_exLib, _tracks));
                         break;
-                    case ViewModelTypes.ATAAudioTrack:
-                        _audioTracks.Add(new AudioTrackATAVM(_exLib, _audioTracks));
+                    case ViewModelTypes.AudioTrack:
+                        _tracks.AudioTracks.Add(new AudioTrackATAVM(_exLib, _tracks));
                         break;
-                    case ViewModelTypes.ATASubtitleTrack:
-                        _subtitleTracks.Add(new SubtitlesTrackATAVM(_exLib, _subtitleTracks));
+                    case ViewModelTypes.SubtitlesTrack:
+                        _tracks.SubtitleTracks.Add(new SubtitlesTrackATAVM(_exLib, _tracks));
                         break;
                 }
             }

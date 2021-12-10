@@ -32,7 +32,8 @@
             <Button Grid.Column="2"
                     Content="Remove track"
                     Margin="2"
-                    Command="{Binding RemoveTrack}"/>
+                    Command="{Binding RemoveTrack}"
+                    CommandParameter="{x:Static vm:ViewModelTypes.SubtitlesTrack}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

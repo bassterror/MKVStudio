@@ -1,25 +1,18 @@
 ﻿using MKVStudio.ViewModels;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
     public class RemoveAllTracksATACommand : ICommand
     {
-        private readonly ObservableCollection<VideoTrackATAVM> _videoTracks;
-        private readonly ObservableCollection<AudioTrackATAVM> _audioTracks;
-        private readonly ObservableCollection<SubtitlesTrackATAVM> _subtitleTracks;
+        private readonly TracksATAVM _tracks;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public RemoveAllTracksATACommand(ObservableCollection<VideoTrackATAVM> videoTracks,
-            ObservableCollection<AudioTrackATAVM> audioTracks,
-            ObservableCollection<SubtitlesTrackATAVM> subtitleTracks)
+        public RemoveAllTracksATACommand(TracksATAVM tracks)
         {
-            _videoTracks = videoTracks;
-            _audioTracks = audioTracks;
-            _subtitleTracks = subtitleTracks;
+            _tracks = tracks;
         }
 
         public bool CanExecute(object parameter)
@@ -33,14 +26,14 @@ namespace MKVStudio.Commands
             {
                 switch (viewModelType)
                 {
-                    case ViewModelTypes.ATAVideoTrack:
-                        _videoTracks.Clear();
+                    case ViewModelTypes.VideoTrack:
+                        _tracks.VideoTracks.Clear();
                         break;
-                    case ViewModelTypes.ATAAudioTrack:
-                        _audioTracks.Clear();
+                    case ViewModelTypes.AudioTrack:
+                        _tracks.AudioTracks.Clear();
                         break;
-                    case ViewModelTypes.ATASubtitleTrack:
-                        _subtitleTracks.Clear();
+                    case ViewModelTypes.SubtitlesTrack:
+                        _tracks.SubtitleTracks.Clear();
                         break;
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using MKVStudio.Commands;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
@@ -7,10 +8,7 @@ namespace MKVStudio.ViewModels
     {
         public ObservableCollection<GlobalTagATAVM> GlobalTags { get; set; } = new();
         public ObservableCollection<TrackTagATAVM> TrackTags { get; set; } = new();
-        public ICommand RemoveAllTags { get; set; }
-        public ICommand RemoveAllGlobalTags { get; set; }
-        public ICommand RemoveAllTrackTags { get; set; }
-        public ICommand AddTag { get; set; }
-
+        public ICommand RemoveAllTags => new RemoveAllTagsATACommand(this);
+        public ICommand AddTag => new AddTagATACommand(this);
     }
 }

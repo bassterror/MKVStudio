@@ -7,11 +7,11 @@ namespace MKVStudio.Commands
 {
     public class AddAttachmentATACommand : ICommand
     {
-        private readonly ObservableCollection<AttachmentATAVM> _attachments;
+        private readonly AttachmentsATAVM _attachments;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public AddAttachmentATACommand(ObservableCollection<AttachmentATAVM> attachments)
+        public AddAttachmentATACommand(AttachmentsATAVM attachments)
         {
             _attachments = attachments;
         }
@@ -23,7 +23,7 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            _attachments.Add(new AttachmentATAVM());
+            _attachments.Attachments.Add(new AttachmentATAVM(_attachments));
         }
     }
 }

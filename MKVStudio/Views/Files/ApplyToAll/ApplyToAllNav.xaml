@@ -28,31 +28,31 @@
                      Content="Tracks"
                      IsChecked="{Binding CurrentApplyToAllTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TracksATAVM}}"
                      Command="{Binding UpdateCurrentApplyToAllTab}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.ATATracks}"/>
+                     CommandParameter="{x:Static vm:ViewModelTypes.Tracks}"/>
         <RadioButton Grid.Column="1"
                      Content="Attachments"
                      IsChecked="{Binding CurrentApplyToAllTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AttachmentsATAVM}}"
                      Command="{Binding UpdateCurrentApplyToAllTab}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.ATAAttachments}"/>
+                     CommandParameter="{x:Static vm:ViewModelTypes.Attachments}"/>
         <RadioButton Grid.Column="2"
                      Content="File Overview"
                      IsChecked="{Binding CurrentApplyToAllTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FileOverviewATAVM}}"
                      Command="{Binding UpdateCurrentApplyToAllTab}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.ATAFileOverview}"/>
+                     CommandParameter="{x:Static vm:ViewModelTypes.FileOverview}"/>
         <RadioButton Grid.Column="3"
                      Content="Audio Edit"
                      IsChecked="{Binding CurrentApplyToAllTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AudioEditATAVM}}"
                      Command="{Binding UpdateCurrentApplyToAllTab}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.ATAAudioEdit}"/>
+                     CommandParameter="{x:Static vm:ViewModelTypes.AudioEdit}"/>
         <RadioButton Grid.Column="4"
                      Content="Video Edit"
                      IsChecked="{Binding CurrentApplyToAllTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:VideoEditATAVM}}"
                      Command="{Binding UpdateCurrentApplyToAllTab}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.ATAVideoEdit}"/>
+                     CommandParameter="{x:Static vm:ViewModelTypes.VideoEdit}"/>
         <RadioButton Grid.Column="5"
                      Content="Tags"
                      IsChecked="{Binding CurrentApplyToAllTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TagsATAVM}}"
                      Command="{Binding UpdateCurrentApplyToAllTab}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.ATATags}"/>
+                     CommandParameter="{x:Static vm:ViewModelTypes.Tags}"/>
     </Grid>
 </UserControl>

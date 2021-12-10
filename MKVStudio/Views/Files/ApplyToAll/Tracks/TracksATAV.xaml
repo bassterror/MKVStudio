@@ -21,7 +21,8 @@
             </Grid.RowDefinitions>
             <GroupBox Grid.Row="0" Margin="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Container properties"/>
+                    <TextBlock Text="Container properties"
+                               Foreground="{StaticResource ControlDisabledGlythColour}"/>
                 </GroupBox.Header>
                 <Grid Margin="2">
                     <Grid.ColumnDefinitions>
@@ -41,23 +42,24 @@
                 <GroupBox.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
                                    Text="Video"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
                                    VerticalAlignment="Center"/>
-                        <Button Grid.Column="2"
+                        <Button Grid.Column="1"
+                                Margin="0 0 4 0"
                                 Content="Add track"
-                                Margin="0 0 2 0"
                                 Command="{Binding AddTrack}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATAVideoTrack}"/>
-                        <Button Grid.Column="3"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrack}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
                                 Content="Remove all"
                                 Command="{Binding RemoveAllTracks}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATAVideoTrack}"/>
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrack}"/>
                     </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding VideoTracks}">
@@ -77,23 +79,24 @@
                 <GroupBox.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
                                    Text="Audio"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
                                    VerticalAlignment="Center"/>
-                        <Button Grid.Column="2"
+                        <Button Grid.Column="1"
+                                Margin="0 0 4 0"
                                 Content="Add track"
-                                Margin="0 0 2 0"
                                 Command="{Binding AddTrack}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATAAudioTrack}"/>
-                        <Button Grid.Column="3"
+                                CommandParameter="{x:Static vm:ViewModelTypes.AudioTrack}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
                                 Content="Remove all"
                                 Command="{Binding RemoveAllTracks}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATAAudioTrack}"/>
+                                CommandParameter="{x:Static vm:ViewModelTypes.AudioTrack}"/>
                     </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding AudioTracks}">
@@ -113,23 +116,24 @@
                 <GroupBox.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
                                    Text="Subtitles"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
                                    VerticalAlignment="Center"/>
-                        <Button Grid.Column="2"
+                        <Button Grid.Column="1"
+                                Margin="0 0 4 0"
                                 Content="Add track"
-                                Margin="0 0 2 0"
                                 Command="{Binding AddTrack}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATASubtitleTrack}"/>
-                        <Button Grid.Column="3"
+                                CommandParameter="{x:Static vm:ViewModelTypes.SubtitlesTrack}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
                                 Content="Remove all"
                                 Command="{Binding RemoveAllTracks}"
-                                CommandParameter="{x:Static vm:ViewModelTypes.ATASubtitleTrack}"/>
+                                CommandParameter="{x:Static vm:ViewModelTypes.SubtitlesTrack}"/>
                     </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding SubtitleTracks}">

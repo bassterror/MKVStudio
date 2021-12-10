@@ -7,35 +7,30 @@ namespace MKVStudio.ViewModels
 {
     public class ApplyToAllVM : BaseViewModel
     {
+        private readonly IExternalLibrariesService _exLib;
+
         public ApplyToAllV ApplyToAllView { get; }
         public ApplyToAllVM ThisApplyToAllVM { get; set; }
         public BaseViewModel CurrentApplyToAllTab { get; set; }
-        public ICommand UpdateCurrentApplyToAllTab { get; set; }
+        public ICommand UpdateCurrentApplyToAllTab => new UpdateCurrentApplyToAllTabCommand(this);
         public ICommand ApplyChanges => new ApplyChangesCommand(Videos, this, ApplyToAllView);
         public ObservableCollection<VideoFileVM> Videos { get; set; }
 
-        public TracksATAVM Tracks { get; set; }
-        public AttachmentsATAVM Attachments { get; set; }
-        public FileOverviewATAVM FileOverview { get; set; }
-        public AudioEditATAVM AudioEdit { get; set; }
-        public VideoEditATAVM VideoEdit { get; set; }
-        public TagsATAVM Tags { get; set; }
+        public TracksATAVM Tracks => new(_exLib);
+        public static AttachmentsATAVM Attachments => new();
+        public FileOverviewATAVM FileOverview => new(_exLib);
+        public static AudioEditATAVM AudioEdit => new();
+        public static VideoEditATAVM VideoEdit => new();
+        public static TagsATAVM Tags => new();
 
         public ApplyToAllVM(ObservableCollection<VideoFileVM> videos, IExternalLibrariesService exLib, ApplyToAllV applyToAllView)
         {
+            _exLib = exLib;
             ApplyToAllView = applyToAllView;
             ThisApplyToAllVM = this;
             Videos = videos;
 
-            Tracks = new TracksATAVM(exLib);
-            Attachments = new AttachmentsATAVM();
-            FileOverview = new FileOverviewATAVM(exLib);
-            AudioEdit = new AudioEditATAVM();
-            VideoEdit = new VideoEditATAVM();
-            Tags = new TagsATAVM();
-
-            UpdateCurrentApplyToAllTab = new UpdateCurrentApplyToAllTabCommand(this, Tracks, Attachments, FileOverview, AudioEdit, VideoEdit, Tags);
-            UpdateCurrentApplyToAllTab.Execute(ViewModelTypes.ATATracks);
+            UpdateCurrentApplyToAllTab.Execute(ViewModelTypes.Tracks);
         }
     }
 }

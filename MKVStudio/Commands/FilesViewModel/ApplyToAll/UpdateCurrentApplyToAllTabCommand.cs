@@ -7,30 +7,12 @@ namespace MKVStudio.Commands
     public class UpdateCurrentApplyToAllTabCommand : ICommand
     {
         private readonly ApplyToAllVM _applyToAllVM;
-        private readonly TracksATAVM _tracksAllVM;
-        private readonly AttachmentsATAVM _attachmentsAllVM;
-        private readonly FileOverviewATAVM _fileOverviewAllVM;
-        private readonly AudioEditATAVM _audioEditAllVM;
-        private readonly VideoEditATAVM _videoEditAllVM;
-        private readonly TagsATAVM _tagsAllVM;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public UpdateCurrentApplyToAllTabCommand(ApplyToAllVM applyToAllVM,
-            TracksATAVM tracksAllVM,
-            AttachmentsATAVM attachmentsAllVM,
-            FileOverviewATAVM fileOverviewAllVM,
-            AudioEditATAVM audioEditAllVM,
-            VideoEditATAVM videoEditAllVM,
-            TagsATAVM tagsAllVM)
+        public UpdateCurrentApplyToAllTabCommand(ApplyToAllVM applyToAllVM)
         {
             _applyToAllVM = applyToAllVM;
-            _tracksAllVM = tracksAllVM;
-            _attachmentsAllVM = attachmentsAllVM;
-            _fileOverviewAllVM = fileOverviewAllVM;
-            _audioEditAllVM = audioEditAllVM;
-            _videoEditAllVM = videoEditAllVM;
-            _tagsAllVM = tagsAllVM;
         }
 
         public bool CanExecute(object parameter)
@@ -44,23 +26,23 @@ namespace MKVStudio.Commands
             {
                 switch (videoFileTab)
                 {
-                    case ViewModelTypes.ATATracks:
-                        _applyToAllVM.CurrentApplyToAllTab = _tracksAllVM;
+                    case ViewModelTypes.Tracks:
+                        _applyToAllVM.CurrentApplyToAllTab = _applyToAllVM.Tracks;
                         break;
-                    case ViewModelTypes.ATAAttachments:
-                        _applyToAllVM.CurrentApplyToAllTab = _attachmentsAllVM;
+                    case ViewModelTypes.Attachments:
+                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.Attachments;
                         break;
-                    case ViewModelTypes.ATAFileOverview:
-                        _applyToAllVM.CurrentApplyToAllTab = _fileOverviewAllVM;
+                    case ViewModelTypes.FileOverview:
+                        _applyToAllVM.CurrentApplyToAllTab = _applyToAllVM.FileOverview;
                         break;
-                    case ViewModelTypes.ATAAudioEdit:
-                        _applyToAllVM.CurrentApplyToAllTab = _audioEditAllVM;
+                    case ViewModelTypes.AudioEdit:
+                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.AudioEdit;
                         break;
-                    case ViewModelTypes.ATAVideoEdit:
-                        _applyToAllVM.CurrentApplyToAllTab = _videoEditAllVM;
+                    case ViewModelTypes.VideoEdit:
+                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.VideoEdit;
                         break;
-                    case ViewModelTypes.ATATags:
-                        _applyToAllVM.CurrentApplyToAllTab = _tagsAllVM;
+                    case ViewModelTypes.Tags:
+                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.Tags;
                         break;
                 }
             }
