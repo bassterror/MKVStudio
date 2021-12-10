@@ -14,14 +14,10 @@ namespace MKVStudio.ViewModels
         public ObservableCollection<VideoTrackVM> VideoTracks { get; set; } = new();
         public ObservableCollection<AudioTrackVM> AudioTracks { get; set; } = new();
         public ObservableCollection<SubtitlesTrackVM> SubtitlesTracks { get; set; } = new();
-        public ObservableCollection<AttachmentVM> Attachments { get; set; } = new();
-        public ObservableCollection<GlobalTagVM> GlobalTags { get; set; } = new();
-        public ObservableCollection<TrackTagVM> TrackTags { get; set; } = new();
-
-        #region Commands
+        public ICommand AddTrack { get; set; }
+        public ICommand RemoveAllTracks => new RemoveAllTracksCommand(this);
         public ICommand RunMKVInfo { get; set; }
         public ICommand RunMKVExtract { get; set; }
-        #endregion
 
         public TracksVM(VideoFileVM selectedVideo, MKVMergeJ result, IExternalLibrariesService exLib)
         {
@@ -32,28 +28,18 @@ namespace MKVStudio.ViewModels
             Title = result.Container.Properties.Title;
             foreach (MKVMergeJ.Track videoTrack in result.Tracks.Where(v => v.Type == "video"))
             {
-                VideoTracks.Add(new VideoTrackVM(SelectedVideo, videoTrack, exLib));
+                VideoTracks.Add(new VideoTrackVM(exLib, this, videoTrack));
             }
             foreach (MKVMergeJ.Track audioTrack in result.Tracks.Where(v => v.Type == "audio"))
             {
-                AudioTracks.Add(new AudioTrackVM(SelectedVideo, audioTrack, exLib));
+                AudioTracks.Add(new AudioTrackVM(exLib, this, audioTrack));
             }
             foreach (MKVMergeJ.Track subtitlesTrack in result.Tracks.Where(v => v.Type == "subtitles"))
             {
-                SubtitlesTracks.Add(new SubtitlesTrackVM(SelectedVideo, subtitlesTrack, exLib));
+                SubtitlesTracks.Add(new SubtitlesTrackVM(exLib, this, subtitlesTrack));
             }
-            foreach (MKVMergeJ.Attachment attachment in result.Attachments)
-            {
-                Attachments.Add(new AttachmentVM(SelectedVideo, attachment));
-            }
-            foreach (MKVMergeJ.Global_Tag globalTag in result.Global_tags)
-            {
-                GlobalTags.Add(new GlobalTagVM(SelectedVideo, globalTag));
-            }
-            foreach (MKVMergeJ.Track_Tag trackTad in result.Track_tags)
-            {
-                TrackTags.Add(new TrackTagVM(SelectedVideo, trackTad));
-            }
+
+            AddTrack = new AddTrackCommand(exLib, this);
         }
     }
 }

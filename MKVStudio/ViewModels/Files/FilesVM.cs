@@ -9,18 +9,18 @@ namespace MKVStudio.ViewModels
     {
         private readonly IExternalLibrariesService _exLib;
 
-        public BaseViewModel CurrentFilesViewModel { get; set; }
+        public BaseViewModel ThisFilesVM { get; set; }
         public ObservableCollection<VideoFileVM> Videos { get; set; } = new();
         public VideoFileVM SelectedVideo { get; set; }
-        public ICommand AddVideosCommand => new AddVideosCommand(Videos, _exLib);
-        public ICommand AddVideosFromFolderCommand => new AddVideosFromFolderCommand(Videos, _exLib);
-        public ICommand RemoveVideoCommand => new RemoveVideoCommand(Videos);
-        public ICommand ClearVideosCommand => new ClearVideosCommand(Videos);
-        public ICommand ApplyToAllCommand => new ApplyToAllCommand(Videos, _exLib);
+        public ICommand AddVideos => new AddVideosCommand(Videos, _exLib);
+        public ICommand AddVideosFromFolder => new AddVideosFromFolderCommand(Videos, _exLib);
+        public ICommand RemoveVideo => new RemoveVideoCommand(Videos);
+        public ICommand ClearVideos => new ClearVideosCommand(Videos);
+        public ICommand ApplyToAll => new ApplyToAllCommand(Videos, _exLib);
 
         public FilesVM(IExternalLibrariesService externalLibrariesService)
         {
-            CurrentFilesViewModel = this;
+            ThisFilesVM = this;
             _exLib = externalLibrariesService;
         }
     }

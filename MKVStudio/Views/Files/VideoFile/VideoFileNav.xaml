@@ -7,7 +7,7 @@
              xmlns:c="clr-namespace:MKVStudio.Converters"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:VideoFileVM}"
-             d:DesignHeight="50" d:DesignWidth="250">
+             d:DesignHeight="50" d:DesignWidth="380">
     <UserControl.Resources>
         <c:EqualValueToParameterConverter x:Key="EVTPC"/>
     </UserControl.Resources>
@@ -20,27 +20,39 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <RadioButton Grid.Column="0"
                      Content="Tracks"
-                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TracksVM}}"
-                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
+                     IsChecked="{Binding CurrentVideoFileTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TracksVM}}"
+                     Command="{Binding UpdateCurrentVideoFileTab}"
                      CommandParameter="{x:Static vm:ViewModelTypes.Tracks}"/>
         <RadioButton Grid.Column="1"
-                     Content="File Overview"
-                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FileOverviewVM}}"
-                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.FileOverview}"/>
+                     Content="Attachments"
+                     IsChecked="{Binding CurrentVideoFileTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AttachmentsVM}}"
+                     Command="{Binding UpdateCurrentVideoFileTab}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.Attachments}"/>
         <RadioButton Grid.Column="2"
-                     Content="Audio Edit"
-                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AudioEditVM}}"
-                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
-                     CommandParameter="{x:Static vm:ViewModelTypes.AudioEdit}"/>
+                     Content="File Overview"
+                     IsChecked="{Binding CurrentVideoFileTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:FileOverviewVM}}"
+                     Command="{Binding UpdateCurrentVideoFileTab}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.FileOverview}"/>
         <RadioButton Grid.Column="3"
+                     Content="Audio Edit"
+                     IsChecked="{Binding CurrentVideoFileTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AudioEditVM}}"
+                     Command="{Binding UpdateCurrentVideoFileTab}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.AudioEdit}"/>
+        <RadioButton Grid.Column="4"
                      Content="Video Edit"
-                     IsChecked="{Binding CurrentVideoFileViewModel, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AudioEditVM}}"
-                     Command="{Binding UpdateCurrentVideoFileViewModelCommand}"
+                     IsChecked="{Binding CurrentVideoFileTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:VideoEditVM}}"
+                     Command="{Binding UpdateCurrentVideoFileTab}"
                      CommandParameter="{x:Static vm:ViewModelTypes.VideoEdit}"/>
+        <RadioButton Grid.Column="5"
+                     Content="Tags"
+                     IsChecked="{Binding CurrentVideoFileTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:TagsVM}}"
+                     Command="{Binding UpdateCurrentVideoFileTab}"
+                     CommandParameter="{x:Static vm:ViewModelTypes.Tags}"/>
     </Grid>
 </UserControl>

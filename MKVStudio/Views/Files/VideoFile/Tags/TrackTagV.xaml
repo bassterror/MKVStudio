@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="MKVStudio.Views.TrackTagV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:TrackTagVM}"
+             d:DesignHeight="100" d:DesignWidth="200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="82"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
+                <TextBlock Text="Num entries:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding NumEntries}"
+                       VerticalAlignment="Center"
+                       Margin="2"/>
+            <Button Grid.Column="2"
+                    Content="Remove tag"
+                    Margin="2"
+                    Command="{Binding RemoveTag}"
+                    CommandParameter="{x:Static vm:ViewModelTypes.TrackTag}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="82"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
+                <TextBlock Text="Track ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding TrackID}"
+                       VerticalAlignment="Center"
+                       Margin="2"/>
+        </Grid>
+        <Separator Grid.Row="2">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3" />
+            </Separator.RenderTransform>
+        </Separator>
+    </Grid>
+</UserControl>

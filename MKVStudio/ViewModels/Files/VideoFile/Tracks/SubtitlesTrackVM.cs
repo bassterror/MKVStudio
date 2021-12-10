@@ -1,12 +1,13 @@
-﻿using MKVStudio.Models;
+﻿using MKVStudio.Commands;
+using MKVStudio.Models;
 using MKVStudio.Services;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
     public class SubtitlesTrackVM : BaseViewModel
     {
-        public VideoFileVM SelectedVideo { get; }
         public IExternalLibrariesService ExLib { get; }
 
         public string Name { get; set; }
@@ -24,13 +25,14 @@ namespace MKVStudio.ViewModels
         public string LanguageIETF { get; set; }
         public int Number { get; set; }
         public string ContentEncodingAlgorithms { get; set; }
+        public ICommand RemoveTrack { get; set; }
 
-        public SubtitlesTrackVM(VideoFileVM videoFileViewModel, MKVMergeJ.Track track = null, IExternalLibrariesService externalLibrariesService = null)
+        public SubtitlesTrackVM(IExternalLibrariesService exLib, TracksVM tracksVM, MKVMergeJ.Track track = null)
         {
-            SelectedVideo = videoFileViewModel;
+            ExLib = exLib;
+            RemoveTrack = new RemoveTrackCommand(tracksVM, null, null, this);
             if (track != null)
             {
-                ExLib = externalLibrariesService;
                 Name = track.Properties.Track_name;
                 ID = track.ID.ToString();
                 UID = track.Properties.UID;
@@ -44,7 +46,7 @@ namespace MKVStudio.ViewModels
                 Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
                 LanguageIETF = track.Properties.Language_ietf;
                 Number = track.Properties.Number;
-                ContentEncodingAlgorithms = track.Properties.Content_encoding_algorithms; 
+                ContentEncodingAlgorithms = track.Properties.Content_encoding_algorithms;
             }
         }
     }

@@ -8,5 +8,6 @@ namespace MKVStudio.Services
         string GetExecutable(Executables executable);
         OpenFileDialog GetFileDialog(string filter, bool multiselect);
         string[] GetFilesFromFolder(string complexFilter);
+        string GetFolder();
     }
 }

@@ -148,7 +148,7 @@ namespace MKVStudio.Services
             switch (processName)
             {
                 case ProcessResultNames.LoudnormFirst:
-                    arguments = $"-i \"{video.InputFullPath}\" -af loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json -f null -";
+                    arguments = $"-i \"{video.FileOverview.InputFullPath}\" -af loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json -f null -";
                     break;
                 case ProcessResultNames.LoudnormSecondStereo:
                     //arguments = $"-i \"{video.InputFullPath}\" -af loudnorm=I=-16:LRA=11:TP=-1.5 aresample={video.SampleRates} \"{video.OutputFullPath}\"";
@@ -157,13 +157,13 @@ namespace MKVStudio.Services
                     //arguments = $"-i \"{video.InputFullPath}\" -filter_complex \"[0:a:0]channelsplit=channel_layout=5.1[FL][FR][FC][LFE][BL][BR];[FC]loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={video.InputI}:measured_LRA={video.InputLRA}:measured_TP={video.InputTP}:measured_thresh={video.InputTresh}:offset={video.TargetOffset}:linear=true,aformat=sample_rates={video.SampleRates}:channel_layouts=mono[FC2];[FL]aformat=channel_layouts=mono[FL2];[FR]aformat=channel_layouts=mono[FR2];[LFE]aformat=channel_layouts=mono[LFE2];[BL]aformat=channel_layouts=mono[BL2];[BR]aformat=channel_layouts=mono[BR2];[FL2][FR2][FC2][LFE2][BL2][BR2]join=inputs=6:channel_layout=5.1:map=0.0-FL|1.0-FR|2.0-FC|3.0-LFE|4.0-BL|5.0-BR\" -c:v copy -c:a libfdk_aac -vbr 3 -c:s copy \"{video.OutputFullPath}\"";
                     break;
                 case ProcessResultNames.MKVInfo:
-                    arguments = $"\"{video.InputFullPath}\"";
+                    arguments = $"\"{video.FileOverview.InputFullPath}\"";
                     break;
                 case ProcessResultNames.MKVExtract:
-                    arguments = $"\"{video.InputFullPath}\" tracks";
+                    arguments = $"\"{video.FileOverview.InputFullPath}\" tracks";
                     break;
                 case ProcessResultNames.MKVMergeJ:
-                    arguments = $"-J \"{video.InputFullPath}\"";
+                    arguments = $"-J \"{video.FileOverview.InputFullPath}\"";
                     break;
                 case ProcessResultNames.MKVMergeLangList:
                     arguments = "--list-languages";

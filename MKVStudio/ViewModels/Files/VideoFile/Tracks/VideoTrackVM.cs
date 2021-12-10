@@ -1,12 +1,13 @@
-﻿using MKVStudio.Models;
+﻿using MKVStudio.Commands;
+using MKVStudio.Models;
 using MKVStudio.Services;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
     public class VideoTrackVM : BaseViewModel
     {
-        public VideoFileVM SelectedVideo { get; }
         public IExternalLibrariesService ExLib { get; }
 
         public string Name { get; set; }
@@ -25,13 +26,14 @@ namespace MKVStudio.ViewModels
         public string Packetizer { get; set; }
         public string DisplayDimensions { get; set; }
         public string PixelDimensions { get; set; }
+        public ICommand RemoveTrack { get; set; }
 
-        public VideoTrackVM(VideoFileVM videoFileViewModel, MKVMergeJ.Track track = null, IExternalLibrariesService externalLibrariesService = null)
+        public VideoTrackVM(IExternalLibrariesService externalLibrariesService, TracksVM tracksVM, MKVMergeJ.Track track = null)
         {
-            SelectedVideo = videoFileViewModel;
+            ExLib = externalLibrariesService;
+            RemoveTrack = new RemoveTrackCommand(tracksVM, this, null, null);
             if (track != null)
             {
-                ExLib = externalLibrariesService;
                 Name = track.Properties.Track_name;
                 ID = track.ID.ToString();
                 UID = track.Properties.UID;
@@ -47,7 +49,7 @@ namespace MKVStudio.ViewModels
                 Number = track.Properties.Number;
                 Packetizer = track.Properties.Packetizer;
                 DisplayDimensions = track.Properties.Display_dimensions;
-                PixelDimensions = track.Properties.Pixel_dimensions; 
+                PixelDimensions = track.Properties.Pixel_dimensions;
             }
         }
 

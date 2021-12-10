@@ -23,23 +23,33 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBox Grid.Column="1"
                      Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
                      Margin="2"/>
+            <Button Grid.Column="2"
+                    Content="Remove track"
+                    Margin="2"
+                    Command="{Binding RemoveTrack}"
+                    CommandParameter="{x:Static vm:ViewModelTypes.VideoTrack}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
@@ -49,10 +59,12 @@
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Codec:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
@@ -62,10 +74,12 @@
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Codec ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
@@ -75,10 +89,12 @@
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Display dimensions:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
@@ -88,10 +104,12 @@
         </Grid>
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Pixel dimensions:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
@@ -101,10 +119,12 @@
         </Grid>
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Packetizer:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
@@ -114,10 +134,12 @@
         </Grid>
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="2">
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
                 <TextBlock Text="Language:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <ComboBox Grid.Column="1"

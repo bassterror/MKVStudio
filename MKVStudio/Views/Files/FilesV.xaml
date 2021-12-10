@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <v:FilesNav Grid.Column="0"
-                               DataContext="{Binding CurrentFilesViewModel}"/>
+                        DataContext="{Binding ThisFilesVM}"/>
             <ContentControl Grid.Column="1"
                             Content="{Binding SelectedVideo}"/>
             
@@ -39,7 +39,7 @@
                     Margin="2"
                     Padding="5"
                     IsEnabled="{Binding Videos.Count, Mode=OneWay, Converter={StaticResource ITBC}}"
-                    Command="{Binding ApplyToAllCommand}"/>
+                    Command="{Binding ApplyToAll}"/>
         </Grid>
     </Grid>
 </UserControl>

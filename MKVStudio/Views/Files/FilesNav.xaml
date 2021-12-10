@@ -24,23 +24,23 @@
                     Margin="2"
                     Padding="5"
                     Content="Add Videos"
-                    Command="{Binding AddVideosCommand}"/>
+                    Command="{Binding AddVideos}"/>
             <Button Grid.Column="1"
                     Margin="2"
                     Padding="5"
                     Content="Add Folder"
-                    Command="{Binding AddVideosFromFolderCommand}"/>
+                    Command="{Binding AddVideosFromFolder}"/>
             <Button Grid.Column="2"
                     Margin="2"
                     Padding="5"
                     Content="Remove Video"
-                    Command="{Binding RemoveVideoCommand}"
+                    Command="{Binding RemoveVideo}"
                     CommandParameter="{Binding SelectedVideo}"/>
             <Button Grid.Column="3"
                     Margin="2"
                     Padding="5"
                     Content="Clear list"
-                    Command="{Binding ClearVideosCommand}"/>
+                    Command="{Binding ClearVideos}"/>
         </Grid>
         <ListView Grid.Row="1"
                   ItemsSource="{Binding Videos}"
@@ -58,7 +58,7 @@
                         </GridViewColumn.HeaderContainerStyle>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding InputFullName}"/>
+                                <TextBlock Text="{Binding FileOverview.InputFullName}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

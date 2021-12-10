@@ -16,7 +16,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -30,17 +29,18 @@
                         IsEnabled="False"
                         Margin="2"
                         Padding="5"
-                        Command="{Binding RunMKVInfoCommand}"/>
+                        Command="{Binding RunMKVInfo}"/>
                 <Button Grid.Column="1"
                         Content="RunMKVExtract"
                         IsEnabled="False"
                         Margin="2"
                         Padding="5"
-                        Command="{Binding RunMKVExtractCommand}"/>
+                        Command="{Binding RunMKVExtract}"/>
             </Grid>
             <GroupBox Grid.Row="1" Margin="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Container properties"/>
+                    <TextBlock Text="Container properties"
+                               Foreground="{StaticResource ControlDisabledGlythColour}"/>
                 </GroupBox.Header>
                 <Grid Margin="2">
                     <Grid.ColumnDefinitions>
@@ -58,7 +58,27 @@
             </GroupBox>
             <GroupBox Grid.Row="2" Margin="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Video tracks"/>
+                    <Grid Width="230">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Video"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
+                                   VerticalAlignment="Center"/>
+                        <Button Grid.Column="2"
+                                Content="Add track"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrack}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrack}"/>
+                        <Button Grid.Column="3"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTracks}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.VideoTrack}"/>
+                    </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding VideoTracks}">
                     <ItemsControl.ItemsPanel>
@@ -75,7 +95,27 @@
             </GroupBox>
             <GroupBox Grid.Row="3" Margin="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Audio tracks"/>
+                    <Grid Width="230">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Audio"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
+                                   VerticalAlignment="Center"/>
+                        <Button Grid.Column="2"
+                                Content="Add track"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrack}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.AudioTrack}"/>
+                        <Button Grid.Column="3"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTracks}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.AudioTrack}"/>
+                    </Grid>
                 </GroupBox.Header>
                 <ItemsControl ItemsSource="{Binding AudioTracks}">
                     <ItemsControl.ItemsPanel>
@@ -92,9 +132,29 @@
             </GroupBox>
             <GroupBox Grid.Row="4" Margin="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Subtitles"/>
+                    <Grid Width="230">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Subtitles"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
+                                   VerticalAlignment="Center"/>
+                        <Button Grid.Column="2"
+                                Content="Add subtitles"
+                                Margin="0 0 5 0"
+                                Command="{Binding AddTrack}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.SubtitlesTrack}"/>
+                        <Button Grid.Column="3"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTracks}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.SubtitlesTrack}"/>
+                    </Grid>
                 </GroupBox.Header>
-                <ItemsControl ItemsSource="{Binding SubtitleTracks}">
+                <ItemsControl ItemsSource="{Binding SubtitlesTracks}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
@@ -103,23 +163,6 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <v:SubtitlesTrackV/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </GroupBox>
-            <GroupBox Grid.Row="5" Margin="2">
-                <GroupBox.Header>
-                    <TextBlock Text="Attachments"/>
-                </GroupBox.Header>
-                <ItemsControl ItemsSource="{Binding Attachments}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <v:AttachmentV/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
