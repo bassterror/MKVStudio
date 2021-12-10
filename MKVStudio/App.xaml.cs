@@ -33,8 +33,8 @@ namespace MKVStudio
             _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
             _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
 
-            _ = services.AddScoped<MainViewModel>();
-            _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainViewModel>()));
+            _ = services.AddScoped<MainVM>();
+            _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainVM>()));
 
             return services.BuildServiceProvider();
         }

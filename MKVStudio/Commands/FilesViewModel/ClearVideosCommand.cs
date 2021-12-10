@@ -8,9 +8,9 @@ namespace MKVStudio.Commands
     public class ClearVideosCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly ObservableCollection<VideoFileViewModel> _videos;
+        private readonly ObservableCollection<VideoFileVM> _videos;
 
-        public ClearVideosCommand(ObservableCollection<VideoFileViewModel> videos)
+        public ClearVideosCommand(ObservableCollection<VideoFileVM> videos)
         {
             _videos = videos;
         }

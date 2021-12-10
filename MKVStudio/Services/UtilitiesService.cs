@@ -93,6 +93,13 @@ namespace MKVStudio.Services
             return !string.IsNullOrWhiteSpace(fbd.SelectedPath) ? GetFiles(fbd.SelectedPath, complexFilter) : Array.Empty<string>();
         }
 
+        public string GetFolder()
+        {
+            using FolderBrowserDialog fbd = new();
+            DialogResult result = fbd.ShowDialog();
+            return fbd.SelectedPath;
+        }
+
         private static string[] GetFiles(string searchPath, string complexFilter)
         {
             ArrayList newList = new();
