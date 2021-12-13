@@ -2,11 +2,25 @@
 {
     public enum ViewModelTypes
     {
+        //Main
         Files,
         Queue,
-        VideoFile,
-        FileOverview,
+
+        //Video file
         Tracks,
-        Convert
+        Attachments,
+        FileOverview,
+        AudioEdit,
+        VideoEdit,
+        Tags,
+
+        //Video file tracks
+        VideoTrack,
+        AudioTrack,
+        SubtitlesTrack,
+
+        //Video file tags
+        GobalTag,
+        TrackTag
     }
 }

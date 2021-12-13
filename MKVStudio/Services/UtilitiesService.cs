@@ -76,9 +76,8 @@ namespace MKVStudio.Services
             openFileDialog.ValidateNames = true;
             openFileDialog.CheckPathExists = true;
             openFileDialog.CheckFileExists = true;
-            return openFileDialog.ShowDialog() == true
-                ? openFileDialog
-                : throw new ArgumentException("The file you selected is not correct!");
+            openFileDialog.ShowDialog();
+            return openFileDialog;
         }
 
         /// <summary>
@@ -92,6 +91,13 @@ namespace MKVStudio.Services
             DialogResult result = fbd.ShowDialog();
 
             return !string.IsNullOrWhiteSpace(fbd.SelectedPath) ? GetFiles(fbd.SelectedPath, complexFilter) : Array.Empty<string>();
+        }
+
+        public string GetFolder()
+        {
+            using FolderBrowserDialog fbd = new();
+            DialogResult result = fbd.ShowDialog();
+            return fbd.SelectedPath;
         }
 
         private static string[] GetFiles(string searchPath, string complexFilter)

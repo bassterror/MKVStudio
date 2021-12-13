@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="MKVStudio.Views.AttachmentV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:AttachmentVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
+                <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <TextBox Grid.Column="1"
+                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Margin="2"/>
+            <Button Grid.Column="2"
+                    Content="Remove attachment"
+                    Margin="2"
+                    Command="{Binding RemoveAttachment}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
+                <TextBlock Text="ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding ID}"
+                       VerticalAlignment="Center"
+                       Margin="2"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
+                <TextBlock Text="Content type:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding ContentType}"
+                       VerticalAlignment="Center"
+                       Margin="2"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="86"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Right"
+                   Margin="2">
+                <TextBlock Text="Description:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </Label>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding Description}"
+                       VerticalAlignment="Center"
+                       Margin="2"/>
+        </Grid>
+        <Separator Grid.Row="4">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3" />
+            </Separator.RenderTransform>
+        </Separator>
+    </Grid>
+</UserControl>

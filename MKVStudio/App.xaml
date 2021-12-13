@@ -2,42 +2,118 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-             xmlns:v="clr-namespace:MKVStudio.Views.Controls">
+             xmlns:v="clr-namespace:MKVStudio.Views"
+             xmlns:l="clr-namespace:MKVStudio">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Views/Styles/Common.xaml"/>
+                <ResourceDictionary Source="/VisualStyles/NavRadioButton.xaml"/>
+                <ResourceDictionary Source="/VisualStyles/Colors.xaml"/>
+                <ResourceDictionary Source="/VisualStyles/ColourfulDarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type vm:FilesViewModel}">
-                <v:FilesView/>
+            <!--Main-->
+            <DataTemplate DataType="{x:Type vm:FilesVM}">
+                <v:FilesV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:QueueViewModel}">
-                <v:QueueView/>
+            <DataTemplate DataType="{x:Type vm:QueueVM}">
+                <v:QueueV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoFileViewModel}">
-                <v:VideoFileView/>
+            
+            <!--Files-->
+            <DataTemplate DataType="{x:Type vm:ApplyToAllVM}">
+                <l:ApplyToAllV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:FileOverviewViewModel}">
-                <v:FileOverviewView/>
+            <DataTemplate DataType="{x:Type vm:VideoFileVM}">
+                <v:VideoFileV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:TracksViewModel}">
-                <v:TracksView/>
+            
+            <!--Video file-->
+            <DataTemplate DataType="{x:Type vm:TracksVM}">
+                <v:TracksV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoTrackViewModel}">
-                <v:VideoTrackView/>
+            <DataTemplate DataType="{x:Type vm:AttachmentsVM}">
+                <v:AttachmentsV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AudioTrackViewModel}">
-                <v:AudioTrackView/>
+            <DataTemplate DataType="{x:Type vm:FileOverviewVM}">
+                <v:FileOverviewV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:SubtitleTrackViewModel}">
-                <v:SubtitleTrackView/>
+            <DataTemplate DataType="{x:Type vm:AudioEditVM}">
+                <v:AudioEditV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AttachmentTrackViewModel}">
-                <v:AttachmentTrackView/>
+            <DataTemplate DataType="{x:Type vm:VideoEditVM}">
+                <v:VideoEditV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:ConvertViewModel}">
-                <v:ConvertView/>
+            <DataTemplate DataType="{x:Type vm:TagsVM}">
+                <v:TagsV/>
             </DataTemplate>
+            
+            <!--Video file tracks-->
+            <DataTemplate DataType="{x:Type vm:VideoTrackVM}">
+                <v:VideoTrackV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AudioTrackVM}">
+                <v:AudioTrackV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SubtitlesTrackVM}">
+                <v:SubtitlesTrackV/>
+            </DataTemplate>
+            
+            <!--Video file attachments-->
+            <DataTemplate DataType="{x:Type vm:AttachmentVM}">
+                <v:AttachmentV/>
+            </DataTemplate>
+            
+            <!--Video file tags-->
+            <DataTemplate DataType="{x:Type vm:GlobalTagVM}">
+                <v:GlobalTagV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:TrackTagVM}">
+                <v:TrackTagV/>
+            </DataTemplate>
+
+            <!--Apply to all-->
+            <DataTemplate DataType="{x:Type vm:TracksATAVM}">
+                <v:TracksATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AttachmentsATAVM}">
+                <v:AttachmentsATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:FileOverviewATAVM}">
+                <v:FileOverviewATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AudioEditATAVM}">
+                <v:AudioEditATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:VideoEditATAVM}">
+                <v:VideoEditATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:TagsATAVM}">
+                <v:TagsATAV/>
+            </DataTemplate>
+
+            <!--Apply to all tracks-->
+            <DataTemplate DataType="{x:Type vm:VideoTrackATAVM}">
+                <v:VideoTrackATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AudioTrackATAVM}">
+                <v:AudioTrackATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SubtitlesTrackATAVM}">
+                <v:SubtitlesTrackATAV/>
+            </DataTemplate>
+
+            <!--Apply to all attachments-->
+            <DataTemplate DataType="{x:Type vm:AttachmentATAVM}">
+                <v:AttachmentATAV/>
+            </DataTemplate>
+
+            <!--Apply to all tags-->
+            <!--<DataTemplate DataType="{x:Type vm:GlobalTagATAVM}">
+                <v:GlobalTagATAV/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:TrackTagATAVM}">
+                <v:TrackTagATAV/>
+            </DataTemplate>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>
