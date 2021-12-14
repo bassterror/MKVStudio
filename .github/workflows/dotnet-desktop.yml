@@ -13,8 +13,8 @@ jobs:
 
     env:
       Pre_Release: ${{ contains(github.ref, 'dev') }}
-      Solution_Name: MKVStudio.sln
-      Project_Name: MKVStudio/MKVStudio.csproj
+      Solution_Name: MKVStudio/MKVStudio.sln
+      Project_Name: MKVStudio/MKVStudio/MKVStudio.csproj
       # Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
 
     steps:
@@ -68,7 +68,7 @@ jobs:
 
 # Restore NuGet
       - name: Restore NuGet with dotnet
-        run: dotnet restore
+        run: dotnet restore $env:Solution_Name
       
 # Execute all unit tests in the solution    
       - name: Tests
