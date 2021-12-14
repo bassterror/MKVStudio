@@ -2,7 +2,7 @@ name: Build and release
 
 on:
   pull_request:
-    branches: 
+    branches:
       - main
       - dev
 
@@ -12,6 +12,7 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
+      Pre_Release: ${{ contains(github.ref, 'dev') }}
       Solution_Name: MKVStudio.sln
       Project_Name: MKVStudio/MKVStudio.csproj
       # Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
@@ -85,18 +86,6 @@ jobs:
           path: MKVStudio.7z
 
 #Read Relese.md for using it as a body of new release
-      - name: Read release.md
-        id: read_release
-        shell: bash
-        run: |
-          r=$(cat .github/release.md)                       # <--- Read release.md (Provide correct path as per your repo)
-          r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
-          r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
-          r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
-          echo "::set-output name=RELEASE_BODY::$r"         # <--- Set environment variable
-
-          
-#Read Relese.md for using it as a body of new release
 #      - name: Read release.md
 #        id: read_release
 #        shell: bash
@@ -106,7 +95,6 @@ jobs:
 #          r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
 #          r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
 #          echo "::set-output name=RELEASE_BODY::$r"         # <--- Set environment variable
-
 
 # Create changelog
       - name: Changelog
@@ -127,7 +115,4 @@ jobs:
           overwrite: true
           body: |
             ${{ steps.Changelog.outputs.changelog }}
-          if: contains(github.ref, 'main')
-          prerelease: false
-          if: contains(github.ref, 'dev')
-          prerelease: true
+          prerelease: $env:Pre_Release
