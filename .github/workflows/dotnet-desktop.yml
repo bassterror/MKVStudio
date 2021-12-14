@@ -62,6 +62,10 @@ jobs:
           echo "UncommittedChanges: ${{ steps.gitversion.outputs.uncommittedChanges }}"
           echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
 
+# Create NuGet congif
+      - name: Create NuGet config
+        run: dotnet new nugetconfig
+
 # Restore NuGet
       - name: Restore NuGet with dotnet
         run: dotnet restore $env:Project_Name
