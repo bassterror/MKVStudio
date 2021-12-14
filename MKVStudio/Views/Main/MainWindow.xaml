@@ -3,15 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:MKVStudio.Views"
+        xmlns:c="clr-namespace:MKVStudio.Converters"
         xmlns:vm="clr-namespace:MKVStudio.ViewModels"        
         d:DataContext="{d:DesignInstance Type=vm:MainVM}"
         d:DesignHeight="250" d:DesignWidth="200"
         mc:Ignorable="d"
         Title="MKV Studio"
         Style="{DynamicResource CustomWindowStyle}"
+        WindowStartupLocation="CenterScreen"
         Height="800"
-        Width="1200">
+        Width="1700">
+    <Window.Resources>
+        <c:EqualValueToParameterConverter x:Key="EVTPC"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -34,10 +38,30 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <c:MainNav Grid.Column="0"
-                              DataContext="{Binding ThisMainViewModel}"/>
+            <Grid Grid.Column="0"
+                  RenderOptions.EdgeMode="Aliased"
+                  Background="{StaticResource WindowTitleColour}">
+                <Grid.Resources>
+                    <Style TargetType="RadioButton" BasedOn="{StaticResource NavRadioButton}"/>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <RadioButton Grid.Row="0"
+                             Content="Multiplexer"
+                             IsChecked="{Binding SelectedMainTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:MultiplexerVM}}"
+                             Command="{Binding UpdateSelectedMainTab}"
+                             CommandParameter="{x:Static vm:ViewModelTypes.Multiplexer}"/>
+                <RadioButton Grid.Row="1"
+                             Content="Job queue"
+                             IsChecked="{Binding SelectedMainTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:JobQueueVM}}"
+                             Command="{Binding UpdateSelectedMainTab}"
+                             CommandParameter="{x:Static vm:ViewModelTypes.JobQueue}"/>
+            </Grid>
             <ContentControl Grid.Column="1"
-                            Content="{Binding CurrentMainViewModel}"/>
+                            Content="{Binding SelectedMainTab}"/>
         </Grid>
     </Grid>
 </Window>

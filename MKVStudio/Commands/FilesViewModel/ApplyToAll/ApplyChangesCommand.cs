@@ -1,23 +1,23 @@
 ﻿using MKVStudio.ViewModels;
+using MKVStudio.Views;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
     public class ApplyChangesCommand : ICommand
     {
-        private readonly ObservableCollection<VideoFileVM> _videos;
-        private readonly ApplyToAllVM _applyToAll;
-        private readonly ApplyToAllV _applyToAllView;
+        private readonly MultiplexerVM _multiplexer;
+        private readonly BatchEditVM _batchEdit;
+        private readonly BatchEditV _batchEditView;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public ApplyChangesCommand(ObservableCollection<VideoFileVM> videoFileViewModels, ApplyToAllVM applyToAllViewModel, ApplyToAllV applyToAllView)
+        public ApplyChangesCommand(MultiplexerVM multiplexer, BatchEditVM batchEdit, BatchEditV batchEditView)
         {
-            _videos = videoFileViewModels;
-            _applyToAll = applyToAllViewModel;
-            _applyToAllView = applyToAllView;
+            _multiplexer = multiplexer;
+            _batchEdit = batchEdit;
+            _batchEditView = batchEditView;
         }
 
         public bool CanExecute(object parameter)
@@ -92,7 +92,7 @@ namespace MKVStudio.Commands
             //        }
             //    }
             //}
-            _applyToAllView.Close();
+            _batchEditView.Close();
         }
     }
 }

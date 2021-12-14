@@ -12,18 +12,18 @@
                 <ResourceDictionary Source="/VisualStyles/ColourfulDarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--Main-->
-            <DataTemplate DataType="{x:Type vm:FilesVM}">
-                <v:FilesV/>
+            <DataTemplate DataType="{x:Type vm:MultiplexerVM}">
+                <v:MultiplexerV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:QueueVM}">
+            <DataTemplate DataType="{x:Type vm:JobQueueVM}">
                 <v:QueueV/>
             </DataTemplate>
             
             <!--Files-->
-            <DataTemplate DataType="{x:Type vm:ApplyToAllVM}">
-                <l:ApplyToAllV/>
+            <DataTemplate DataType="{x:Type vm:BatchEditVM}">
+                <v:BatchEditV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoFileVM}">
+            <DataTemplate DataType="{x:Type vm:MultiplexVM}">
                 <v:VideoFileV/>
             </DataTemplate>
             

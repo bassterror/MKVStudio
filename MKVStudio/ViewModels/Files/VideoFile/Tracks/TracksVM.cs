@@ -9,7 +9,7 @@ namespace MKVStudio.ViewModels
 {
     public class TracksVM : BaseViewModel
     {
-        public VideoFileVM SelectedVideo { get; set; }
+        public MultiplexVM SelectedVideo { get; set; }
         public string Title { get; set; }
         public ObservableCollection<VideoTrackVM> VideoTracks { get; set; } = new();
         public ObservableCollection<AudioTrackVM> AudioTracks { get; set; } = new();
@@ -19,7 +19,7 @@ namespace MKVStudio.ViewModels
         public ICommand RunMKVInfo { get; set; }
         public ICommand RunMKVExtract { get; set; }
 
-        public TracksVM(VideoFileVM selectedVideo, MKVMergeJ result, IExternalLibrariesService exLib)
+        public TracksVM(MultiplexVM selectedVideo, MKVMergeJ result, IExternalLibrariesService exLib)
         {
             SelectedVideo = selectedVideo;
             RunMKVInfo = new RunMKVInfoCommand(SelectedVideo, exLib);

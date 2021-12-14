@@ -1,23 +1,23 @@
 ﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
+using MKVStudio.Views;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
-    public class ApplyToAllCommand : ICommand
+    public class BatchEditCommand : ICommand
     {
-        private readonly ObservableCollection<VideoFileVM> _videos;
+        private readonly MultiplexerVM _multiplexer;
         private readonly IExternalLibrariesService _exLIb;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public ApplyToAllCommand(ObservableCollection<VideoFileVM> videos, IExternalLibrariesService externalLibrariesService)
+        public BatchEditCommand(MultiplexerVM multiplexer, IExternalLibrariesService exLib)
         {
-            _videos = videos;
-            _exLIb = externalLibrariesService;
+            _multiplexer = multiplexer;
+            _exLIb = exLib;
         }
 
         public bool CanExecute(object parameter)
@@ -27,8 +27,8 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            ApplyToAllV applyToAllView = new();
-            applyToAllView.DataContext = new ApplyToAllVM(_videos, _exLIb, applyToAllView);
+            BatchEditV applyToAllView = new();
+            applyToAllView.DataContext = new BatchEditVM(_multiplexer, _exLIb, applyToAllView);
             applyToAllView.Owner = Application.Current.MainWindow;
             applyToAllView.ShowInTaskbar = false;
             applyToAllView.ShowDialog();

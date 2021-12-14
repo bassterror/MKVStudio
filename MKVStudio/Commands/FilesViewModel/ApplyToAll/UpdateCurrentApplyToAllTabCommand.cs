@@ -6,11 +6,11 @@ namespace MKVStudio.Commands
 {
     public class UpdateCurrentApplyToAllTabCommand : ICommand
     {
-        private readonly ApplyToAllVM _applyToAllVM;
+        private readonly BatchEditVM _applyToAllVM;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public UpdateCurrentApplyToAllTabCommand(ApplyToAllVM applyToAllVM)
+        public UpdateCurrentApplyToAllTabCommand(BatchEditVM applyToAllVM)
         {
             _applyToAllVM = applyToAllVM;
         }
@@ -30,19 +30,19 @@ namespace MKVStudio.Commands
                         _applyToAllVM.CurrentApplyToAllTab = _applyToAllVM.Tracks;
                         break;
                     case ViewModelTypes.Attachments:
-                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.Attachments;
+                        _applyToAllVM.CurrentApplyToAllTab = BatchEditVM.Attachments;
                         break;
                     case ViewModelTypes.FileOverview:
                         _applyToAllVM.CurrentApplyToAllTab = _applyToAllVM.FileOverview;
                         break;
                     case ViewModelTypes.AudioEdit:
-                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.AudioEdit;
+                        _applyToAllVM.CurrentApplyToAllTab = BatchEditVM.AudioEdit;
                         break;
                     case ViewModelTypes.VideoEdit:
-                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.VideoEdit;
+                        _applyToAllVM.CurrentApplyToAllTab = BatchEditVM.VideoEdit;
                         break;
                     case ViewModelTypes.Tags:
-                        _applyToAllVM.CurrentApplyToAllTab = ApplyToAllVM.Tags;
+                        _applyToAllVM.CurrentApplyToAllTab = BatchEditVM.Tags;
                         break;
                 }
             }

@@ -1,21 +1,20 @@
 ﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
-    public class AddVideosFromFolderCommand : ICommand
+    public class AddFilesFromFolderCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly ObservableCollection<VideoFileVM> _videos;
+        private readonly MultiplexerVM _multiplexer;
         private readonly IExternalLibrariesService _exLib;
 
-        public AddVideosFromFolderCommand(ObservableCollection<VideoFileVM> videos, IExternalLibrariesService externalLibrariesService)
+        public AddFilesFromFolderCommand(MultiplexerVM multiplexer, IExternalLibrariesService exLib)
         {
-            _videos = videos;
-            _exLib = externalLibrariesService;
+            _multiplexer = multiplexer;
+            _exLib = exLib;
         }
 
         public bool CanExecute(object parameter)
@@ -27,8 +26,8 @@ namespace MKVStudio.Commands
         {
             foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
             {
-                VideoFileVM video = new(filename, _exLib);
-                _videos.Add(video);
+                MultiplexVM multiplex = new(_multiplexer, filename, _exLib);
+                _multiplexer.Multiplexes.Add(multiplex);
             }
         }
     }

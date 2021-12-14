@@ -3,8 +3,8 @@
     public enum ViewModelTypes
     {
         //Main
-        Files,
-        Queue,
+        Multiplexer,
+        JobQueue,
 
         //Video file
         Tracks,

@@ -9,10 +9,10 @@ namespace MKVStudio.Commands
     public class RunMKVExtractCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly VideoFileVM _video;
+        private readonly MultiplexVM _video;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunMKVExtractCommand(VideoFileVM video, IExternalLibrariesService externalLibrariesService)
+        public RunMKVExtractCommand(MultiplexVM video, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _exLib = externalLibrariesService;
@@ -25,8 +25,8 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVExtract, _video);
-            _video.ProcessResults[ProcessResultNames.MKVExtract] = pr;
+            //ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVExtract, _video);
+            //_video.ProcessResults[ProcessResultNames.MKVExtract] = pr;
             //SetMeasurements(_video.ProcessResults[ProcessResultNames.MKVExtract].StdErrOutput);
         }
     }

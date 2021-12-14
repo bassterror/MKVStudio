@@ -7,12 +7,13 @@ using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
-    public class VideoFileVM : BaseViewModel
+    public class MultiplexVM : BaseViewModel
     {
-        private readonly IExternalLibrariesService _exLib;
-
         public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
-        public VideoFileVM ThisVideoFileVM { get; set; }
+        public MultiplexerVM Multiplexer { get; }
+        public IExternalLibrariesService ExLib { get; }
+        public ICommand RemoveFile => new RemoveFileCommand(Multiplexer, this);
+        public MultiplexVM ThisVideoFileVM { get; set; }
         public BaseViewModel CurrentVideoFileTab { get; set; }
         public ICommand UpdateCurrentVideoFileTab { get; set; }
         public TracksVM Tracks { get; set; }
@@ -22,24 +23,25 @@ namespace MKVStudio.ViewModels
         public VideoEditVM VideoEdit { get; set; }
         public TagsVM Tags { get; set; }
 
-        public VideoFileVM(string source, IExternalLibrariesService exLibService)
+        public MultiplexVM(MultiplexerVM multiplexer, string source, IExternalLibrariesService exLib)
         {
             ThisVideoFileVM = this;
-            _exLib = exLibService;
-            FileOverview = new FileOverviewVM(source, _exLib);
-            AudioEdit = new AudioEditVM(this, _exLib);
-            VideoEdit = new VideoEditVM(this, _exLib);
+            Multiplexer = multiplexer;
+            ExLib = exLib;
+            FileOverview = new FileOverviewVM(source, ExLib);
+            AudioEdit = new AudioEditVM(this, ExLib);
+            VideoEdit = new VideoEditVM(this, ExLib);
 
             CallMKVMergeJ();
         }
 
         private async void CallMKVMergeJ()
         {
-            ProcessResult pr = await _exLib.Run(ProcessResultNames.MKVMergeJ, this);
+            ProcessResult pr = await ExLib.Run(ProcessResultNames.MKVMergeJ, this);
             ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
             MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
 
-            Tracks = new TracksVM(this, result, _exLib);
+            Tracks = new TracksVM(this, result, ExLib);
             Attachments = new AttachmentsVM(result.Attachments);
             Tags = new TagsVM(result.Global_tags, result.Track_tags);
 

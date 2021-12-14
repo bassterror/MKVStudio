@@ -1,18 +1,19 @@
 ﻿using MKVStudio.ViewModels;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
-    public class ClearVideosCommand : ICommand
+    public class RemoveFileCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly ObservableCollection<VideoFileVM> _videos;
+        private readonly MultiplexerVM _multiplexer;
+        private readonly MultiplexVM _multiplex;
 
-        public ClearVideosCommand(ObservableCollection<VideoFileVM> videos)
+        public RemoveFileCommand(MultiplexerVM multiplexer, MultiplexVM multiplex)
         {
-            _videos = videos;
+            _multiplexer = multiplexer;
+            _multiplex = multiplex;
         }
 
         public bool CanExecute(object parameter)
@@ -22,7 +23,7 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            _videos.Clear();
+            _multiplexer.Multiplexes.Remove(_multiplex);
         }
     }
 }

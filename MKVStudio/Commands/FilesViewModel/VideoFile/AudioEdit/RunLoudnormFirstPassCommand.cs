@@ -11,11 +11,11 @@ namespace MKVStudio.Commands
     public class RunLoudnormFirstPassCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly VideoFileVM _video;
+        private readonly MultiplexVM _video;
         private readonly AudioEditVM _audioEdit;
         private readonly IExternalLibrariesService _exLib;
 
-        public RunLoudnormFirstPassCommand(VideoFileVM video, AudioEditVM audioEditViewModel, IExternalLibrariesService externalLibrariesService)
+        public RunLoudnormFirstPassCommand(MultiplexVM video, AudioEditVM audioEditViewModel, IExternalLibrariesService externalLibrariesService)
         {
             _video = video;
             _audioEdit = audioEditViewModel;
@@ -29,9 +29,9 @@ namespace MKVStudio.Commands
 
         public async void Execute(object parameter)
         {
-            ProcessResult pr = await _exLib.Run(ProcessResultNames.LoudnormFirst, _video);
-            _video.ProcessResults[pr.Name] = pr;
-            SetLoudnormFirstPassMeasurements(_video.ProcessResults[ProcessResultNames.LoudnormFirst].StdErrOutput);
+            //ProcessResult pr = await _exLib.Run(ProcessResultNames.LoudnormFirst, _video);
+            //_video.ProcessResults[pr.Name] = pr;
+            //SetLoudnormFirstPassMeasurements(_video.ProcessResults[ProcessResultNames.LoudnormFirst].StdErrOutput);
         }
 
         private void SetLoudnormFirstPassMeasurements(string firstPassOutput)

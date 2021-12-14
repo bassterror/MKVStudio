@@ -23,7 +23,7 @@ namespace MKVStudio.Services
             GetLanguageList();
         }
 
-        public async Task<ProcessResult> Run(ProcessResultNames processName, VideoFileVM video = null)
+        public async Task<ProcessResult> Run(ProcessResultNames processName, MultiplexVM video = null)
         {
             ProcessResult pr = new();
 
@@ -142,7 +142,7 @@ namespace MKVStudio.Services
             return processResult;
         }
 
-        private static string BuildArguments(ProcessResultNames processName, VideoFileVM video = null)
+        private static string BuildArguments(ProcessResultNames processName, MultiplexVM video = null)
         {
             string arguments = string.Empty;
             switch (processName)

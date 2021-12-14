@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              xmlns:c="clr-namespace:MKVStudio.Converters"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=vm:ApplyToAllVM}"
+             d:DataContext="{d:DesignInstance Type=vm:BatchEditVM}"
              d:DesignHeight="50" d:DesignWidth="380">
     <UserControl.Resources>
         <c:EqualValueToParameterConverter x:Key="EVTPC"/>

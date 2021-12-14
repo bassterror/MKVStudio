@@ -4,9 +4,9 @@ namespace MKVStudio.ViewModels
 {
     public class VideoEditVM : BaseViewModel
     {
-        public VideoFileVM SelectedVideo { get; set; }
+        public MultiplexVM SelectedVideo { get; set; }
 
-        public VideoEditVM(VideoFileVM videoFileViewModel, IExternalLibrariesService externalLibrariesService)
+        public VideoEditVM(MultiplexVM videoFileViewModel, IExternalLibrariesService externalLibrariesService)
         {
             SelectedVideo = videoFileViewModel;
         }

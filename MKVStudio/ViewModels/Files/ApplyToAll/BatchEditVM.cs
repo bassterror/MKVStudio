@@ -1,20 +1,20 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Services;
-using System.Collections.ObjectModel;
+using MKVStudio.Views;
 using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
-    public class ApplyToAllVM : BaseViewModel
+    public class BatchEditVM : BaseViewModel
     {
         private readonly IExternalLibrariesService _exLib;
 
-        public ApplyToAllV ApplyToAllView { get; }
-        public ApplyToAllVM ThisApplyToAllVM { get; set; }
+        public BatchEditV ApplyToAllView { get; }
+        public BatchEditVM ThisApplyToAllVM { get; set; }
         public BaseViewModel CurrentApplyToAllTab { get; set; }
         public ICommand UpdateCurrentApplyToAllTab => new UpdateCurrentApplyToAllTabCommand(this);
-        public ICommand ApplyChanges => new ApplyChangesCommand(Videos, this, ApplyToAllView);
-        public ObservableCollection<VideoFileVM> Videos { get; set; }
+        public ICommand ApplyChanges => new ApplyChangesCommand(Multiplexer, this, ApplyToAllView);
+        public MultiplexerVM Multiplexer { get; set; }
 
         public TracksATAVM Tracks => new(_exLib);
         public static AttachmentsATAVM Attachments => new();
@@ -23,12 +23,12 @@ namespace MKVStudio.ViewModels
         public static VideoEditATAVM VideoEdit => new();
         public static TagsATAVM Tags => new();
 
-        public ApplyToAllVM(ObservableCollection<VideoFileVM> videos, IExternalLibrariesService exLib, ApplyToAllV applyToAllView)
+        public BatchEditVM(MultiplexerVM multiplexer, IExternalLibrariesService exLib, BatchEditV applyToAllView)
         {
             _exLib = exLib;
             ApplyToAllView = applyToAllView;
             ThisApplyToAllVM = this;
-            Videos = videos;
+            Multiplexer = multiplexer;
 
             UpdateCurrentApplyToAllTab.Execute(ViewModelTypes.Tracks);
         }

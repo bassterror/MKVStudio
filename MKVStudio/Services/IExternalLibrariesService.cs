@@ -10,6 +10,6 @@ namespace MKVStudio.Services
         IUtilitiesService Util { get; set; }
         ObservableCollection<Language> AllLanguages { get; set; }
         ObservableCollection<Language> Languages { get; set; }
-        Task<ProcessResult> Run(ProcessResultNames processName, VideoFileVM video = null);
+        Task<ProcessResult> Run(ProcessResultNames processName, MultiplexVM video = null);
     }
 }

@@ -5,9 +5,9 @@ namespace MKVStudio.Views
     /// <summary>
     /// Interaction logic for VideosView.xaml
     /// </summary>
-    public partial class FilesV : UserControl
+    public partial class MultiplexerV : UserControl
     {
-        public FilesV()
+        public MultiplexerV()
         {
             InitializeComponent();
         }

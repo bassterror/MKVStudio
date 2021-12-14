@@ -7,7 +7,7 @@ namespace MKVStudio.Commands
     public class UpdateCurrentVideoFileTabCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly VideoFileVM _video;
+        private readonly MultiplexVM _video;
         private readonly TracksVM _tracks;
         private readonly FileOverviewVM _fileOverview;
         private readonly AudioEditVM _audioEdit;
@@ -15,7 +15,7 @@ namespace MKVStudio.Commands
         private readonly TagsVM _tags;
         private readonly AttachmentsVM _attachments;
 
-        public UpdateCurrentVideoFileTabCommand(VideoFileVM videoFileVM,
+        public UpdateCurrentVideoFileTabCommand(MultiplexVM videoFileVM,
             FileOverviewVM fileOverviewVM,
             TracksVM tracksVM,
             AudioEditVM audioEditVM,

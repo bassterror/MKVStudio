@@ -6,7 +6,7 @@ namespace MKVStudio.ViewModels
 {
     public class AudioEditVM : BaseViewModel
     {
-        public VideoFileVM SelectedVideo { get; set; }
+        public MultiplexVM SelectedVideo { get; set; }
 
         #region LoudnormFirstPass
         public string InputI { get; set; }
@@ -22,7 +22,7 @@ namespace MKVStudio.ViewModels
 
         public ICommand RunLoudnormFirstPassCommand { get; set; }
 
-        public AudioEditVM(VideoFileVM selectedVideo, IExternalLibrariesService externalLibrariesService)
+        public AudioEditVM(MultiplexVM selectedVideo, IExternalLibrariesService externalLibrariesService)
         {
             SelectedVideo = selectedVideo;
             RunLoudnormFirstPassCommand = new RunLoudnormFirstPassCommand(SelectedVideo, this, externalLibrariesService);

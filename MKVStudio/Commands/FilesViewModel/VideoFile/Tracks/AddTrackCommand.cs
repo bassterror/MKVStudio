@@ -1,7 +1,6 @@
 ﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
