@@ -1,20 +1,18 @@
-name: .NET
+name: BuildAndRelease
 
 on:
-  pull_request:
-    branches: 
+  push:
+    branches:
       - main
-      - dev     
-      - hotfix/*
-      - feature/*
-      - release/*
+      - dev
 
 jobs:
   build:
     runs-on: windows-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+                            # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
+      Pre_Release: ${{ contains(github.ref, 'dev') }}
       Solution_Name: MKVStudio.sln
       Project_Name: MKVStudio/MKVStudio.csproj
       # Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
@@ -86,14 +84,24 @@ jobs:
         with:
           name: "MKVStudio-${{ steps.gitversion.outputs.fullSemVer }}"
           path: MKVStudio.7z
-          
+
+# Create changelog
+      - name: Changelog
+        uses: mikepenz/release-changelog-builder-action@main
+        id: Changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 # Upload to release
       - name: Upload binaries to release
-#        if: contains(github.ref, 'main')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: MKVStudio.7z
           asset_name: MKVStudio.7z
+          release_name: "${{ steps.gitversion.outputs.MajorMinorPatch }}"
           tag: "${{ steps.gitversion.outputs.MajorMinorPatch }}"
           overwrite: true
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+          prerelease: $env:Pre_Release
