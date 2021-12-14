@@ -1,13 +1,10 @@
-name: .NET
+name: Build and release
 
 on:
   pull_request:
     branches: 
       - main
-      - dev     
-      - hotfix/*
-      - feature/*
-      - release/*
+      - dev
 
 jobs:
   build:
@@ -86,14 +83,51 @@ jobs:
         with:
           name: "MKVStudio-${{ steps.gitversion.outputs.fullSemVer }}"
           path: MKVStudio.7z
+
+#Read Relese.md for using it as a body of new release
+      - name: Read release.md
+        id: read_release
+        shell: bash
+        run: |
+          r=$(cat .github/release.md)                       # <--- Read release.md (Provide correct path as per your repo)
+          r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
+          r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
+          r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
+          echo "::set-output name=RELEASE_BODY::$r"         # <--- Set environment variable
+
           
+#Read Relese.md for using it as a body of new release
+#      - name: Read release.md
+#        id: read_release
+#        shell: bash
+#        run: |
+#          r=$(cat .github/release.md)
+#          r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
+#          r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
+#          r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
+#          echo "::set-output name=RELEASE_BODY::$r"         # <--- Set environment variable
+
+
+# Create changelog
+      - name: Changelog
+        uses: Bullrich/generate-release-changelog@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
+
 # Upload to release
       - name: Upload binaries to release
-#        if: contains(github.ref, 'main')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: MKVStudio.7z
           asset_name: MKVStudio.7z
+          release_name: "${{ steps.gitversion.outputs.MajorMinorPatch }}"
           tag: "${{ steps.gitversion.outputs.MajorMinorPatch }}"
           overwrite: true
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+          if: contains(github.ref, 'main')
+          prerelease: false
+          if: contains(github.ref, 'dev')
+          prerelease: true
