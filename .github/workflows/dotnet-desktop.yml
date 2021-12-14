@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # For a list of available runner types, refer to
+    runs-on: windows-latest  # For a list of available runner types, refer to
                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
       Pre_Release: ${{ contains(github.ref, 'dev') }}
-      Solution_Name: MKVStudio/MKVStudio.sln
-      Project_Name: MKVStudio/MKVStudio/MKVStudio.csproj
+      Solution_Name: MKVStudio.sln
+      Project_Name: MKVStudio/MKVStudio.csproj
       # Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
 
     steps:
@@ -62,10 +62,6 @@ jobs:
           echo "UncommittedChanges: ${{ steps.gitversion.outputs.uncommittedChanges }}"
           echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
 
-# Create NuGet congif
-      - name: Create NuGet config
-        run: dotnet new nugetconfig
-
 # Restore NuGet
       - name: Restore NuGet with dotnet
         run: dotnet restore $env:Solution_Name
@@ -91,10 +87,10 @@ jobs:
 
 # Create changelog
       - name: Changelog
-        uses: Bullrich/generate-release-changelog@master
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
         id: Changelog
         env:
-          REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 # Upload to release
       - name: Upload binaries to release
