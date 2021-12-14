@@ -68,7 +68,7 @@ jobs:
 
 # Restore NuGet
       - name: Restore NuGet with dotnet
-        run: dotnet restore $env:Project_Name
+        run: dotnet restore
       
 # Execute all unit tests in the solution    
       - name: Tests
