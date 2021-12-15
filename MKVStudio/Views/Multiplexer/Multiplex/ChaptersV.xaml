@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="MKVStudio.Views.ChaptersV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             xmlns:v="clr-namespace:MKVStudio.Views"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:ChaptersVM}"
+             d:DesignHeight="450" d:DesignWidth="400">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Content="Remove all tags"
+                        Margin="2"
+                        Padding="5"
+                        Command="{Binding RemoveAllTags}"
+                        CommandParameter="{x:Static vm:ViewModelTypes.Chapters}"/>
+            </Grid>
+            <GroupBox Grid.Row="1">
+                <GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Global"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
+                                   VerticalAlignment="Center"/>
+                        <Button Grid.Column="1"
+                                Margin="0 0 4 0"
+                                Content="Add tag"
+                                Command="{Binding AddTag}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.GobalTag}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTags}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.GobalTag}"/>
+                    </Grid>
+                </GroupBox.Header>
+                <ItemsControl ItemsSource="{Binding GlobalTags}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <v:GlobalTagV/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </GroupBox>
+            <GroupBox Grid.Row="2">
+                <GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="Track"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"
+                                   VerticalAlignment="Center"/>
+                        <Button Grid.Column="1"
+                                Margin="0 0 4 0"
+                                Content="Add tag"
+                                Command="{Binding AddTag}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.TrackTag}"/>
+                        <Button Grid.Column="2"
+                                Margin="4 0 0 0"
+                                Content="Remove all"
+                                Command="{Binding RemoveAllTags}"
+                                CommandParameter="{x:Static vm:ViewModelTypes.TrackTag}"/>
+                    </Grid>
+                </GroupBox.Header>
+                <ItemsControl ItemsSource="{Binding TrackTags}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <v:TrackTagV/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </GroupBox>
+        </Grid>-->
+    </ScrollViewer>
+</UserControl>

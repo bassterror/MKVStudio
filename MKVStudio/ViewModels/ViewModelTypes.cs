@@ -6,13 +6,13 @@
         Multiplexer,
         JobQueue,
 
-        //Video file
-        Tracks,
+        //Multiplex
+        Input,
+        Output,
         Attachments,
-        FileOverview,
+        Chapters,
         AudioEdit,
         VideoEdit,
-        Tags,
 
         //Video file tracks
         VideoTrack,
