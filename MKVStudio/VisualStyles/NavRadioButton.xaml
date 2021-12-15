@@ -4,7 +4,7 @@
     <Style x:Key="NavRadioButton" TargetType="RadioButton">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="#FF242424"/>
-        <Setter Property="Padding" Value="5 10"/>
+        <Setter Property="Padding" Value="10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">

@@ -1,0 +1,354 @@
+﻿<UserControl x:Class="MKVStudio.Views.AttachmentsV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:AttachmentsVM}"
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--#region Existing attachments -->
+        <GroupBox Grid.Row="0">
+            <GroupBox.Header>
+                <TextBlock Text="Attachments from source files"
+                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--List-->
+                <ListView Grid.Column="0"
+                          MinHeight="200"
+                          ItemsSource="{Binding ExistingAttachments}"
+                          SelectedItem="{Binding SelectedExistingAttachment}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Center">
+                                    <CheckBox IsChecked="{Binding AreAllExistingChecked}"
+                                              Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsChecked}"
+                                                  Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Name"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="MIME type"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ContentType}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Description"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Source file"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Attachments.SourceFile.InputFullName}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Directory"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Attachments.SourceFile.InputPath}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Size"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Size}"
+                                                   Margin="3 3 0 3"/>
+                                            <TextBlock Text=" (" Margin="0 3 0 3"/>
+                                            <TextBlock Text="{Binding SizeConverted}"
+                                                       Margin="0 3 0 3"/>
+                                            <TextBlock Text=")" Margin="0 3 3 3"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                
+                <!--Image-->
+                <Grid Grid.Column="1">
+                    <Image></Image>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <!--#endregion-->
+        
+        <!--#region New attachments -->
+        <GroupBox Grid.Row="1">
+            <GroupBox.Header>
+                <TextBlock Text="Attachments to add"
+                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--List-->
+                    <ListView Grid.Column="0"
+                              MinHeight="200"
+                              ItemsSource="{Binding NewAttachments}"
+                              SelectedItem="{Binding SelectedNewAttachment}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader HorizontalContentAlignment="Center">
+                                        <CheckBox IsChecked="{Binding AreAllNewChecked}"
+                                                  Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsChecked}"
+                                                      Margin="3"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                        <TextBlock Text="Name"
+                                                   Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"
+                                                       Margin="3"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                        <TextBlock Text="MIME type"
+                                                   Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ContentType}"
+                                                       Margin="3"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader>
+                                        <TextBlock Text="Description"
+                                                   Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Description}"
+                                                       Margin="3"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader>
+                                        <TextBlock Text="Source file"
+                                                   Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Attachments.SourceFile.InputFullName}"
+                                                       Margin="3"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader>
+                                        <TextBlock Text="Directory"
+                                                   Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Attachments.SourceFile.InputPath}"
+                                                       Margin="3"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumnHeader>
+                                        <TextBlock Text="Size"
+                                                   Margin="3"/>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Size}"
+                                                           Margin="3 3 0 3"/>
+                                                <TextBlock Text=" (" Margin="0 3 0 3"/>
+                                                <TextBlock Text="{Binding SizeConverted}"
+                                                           Margin="0 3 0 3"/>
+                                                <TextBlock Text=")" Margin="0 3 3 3"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add attachment"
+                                          Padding="3"
+                                          Command="{Binding AddAttachment}"/>
+                                <MenuItem Header="Remove attachment"
+                                          Padding="3"
+                                          Command="{Binding RemoveAttachment}"/>
+                                <MenuItem Header="Remove all attachment"
+                                          Padding="3"
+                                          Command="{Binding RemoveAllAttachments}"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                    
+                    <!--Image-->
+                    <Grid Grid.Column="1">
+                        <Image></Image>
+                    </Grid>
+                </Grid>
+
+                <!--#region Settings -->
+                <GroupBox Grid.Row="1">
+                    <GroupBox.Header>
+                        <TextBlock Text="Settings"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                    </GroupBox.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--Name-->
+                        <Grid Grid.Row="0"
+                              Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="74"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Margin="3"
+                                   HorizontalContentAlignment="Right">
+                                <TextBlock Text="Name:"
+                                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                            </Label>
+                            <TextBox Grid.Column="1"
+                                     Margin="3"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding SelectedNewAttachment.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        
+                        <!--MIME type-->
+                        <Grid Grid.Row="1"
+                              Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="74"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Margin="3"
+                                   HorizontalContentAlignment="Right">
+                                <TextBlock Text="MIME type:"
+                                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                            </Label>
+                            <TextBox Grid.Column="1"
+                                     Margin="3"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        
+                        <!--Description-->
+                        <Grid Grid.Row="0"
+                              Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Margin="3"
+                                   HorizontalContentAlignment="Right">
+                                <TextBlock Text="Description:"
+                                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                            </Label>
+                            <TextBox Grid.Column="1"
+                                     Margin="3"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding SelectedNewAttachment.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <!--#endregion-->
+            </Grid>
+        </GroupBox>
+        <!--#endregion-->
+    </Grid>
+</UserControl>

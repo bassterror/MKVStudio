@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.ViewModels;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -23,29 +24,29 @@ namespace MKVStudio.Services
             GetLanguageList();
         }
 
-        public async Task<ProcessResult> Run(ProcessResultNames processName, VideoFileVM video = null)
+        public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null)
         {
             ProcessResult pr = new();
 
             switch (processName)
             {
                 case ProcessResultNames.LoudnormFirst:
-                    pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, video), processName);
+                    pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.LoudnormSecondStereo:
-                    pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, video), processName);
+                    pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.LoudnormSecond6Channels:
-                    pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, video), processName);
+                    pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.MKVInfo:
-                    pr = await RunProcess(Executables.MKVInfo, BuildArguments(processName, video), processName);
+                    pr = await RunProcess(Executables.MKVInfo, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.MKVExtract:
-                    pr = await RunProcess(Executables.MKVExtract, BuildArguments(processName, video), processName);
+                    pr = await RunProcess(Executables.MKVExtract, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.MKVMergeJ:
-                    pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, video), processName);
+                    pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.MKVMergeLangList:
                     pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
@@ -142,13 +143,13 @@ namespace MKVStudio.Services
             return processResult;
         }
 
-        private static string BuildArguments(ProcessResultNames processName, VideoFileVM video = null)
+        private static string BuildArguments(ProcessResultNames processName, SourceFileVM sourceFile = null)
         {
             string arguments = string.Empty;
             switch (processName)
             {
                 case ProcessResultNames.LoudnormFirst:
-                    arguments = $"-i \"{video.FileOverview.InputFullPath}\" -af loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json -f null -";
+                    arguments = $"-i \"{sourceFile.InputFullPath}\" -af loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json -f null -";
                     break;
                 case ProcessResultNames.LoudnormSecondStereo:
                     //arguments = $"-i \"{video.InputFullPath}\" -af loudnorm=I=-16:LRA=11:TP=-1.5 aresample={video.SampleRates} \"{video.OutputFullPath}\"";
@@ -157,13 +158,13 @@ namespace MKVStudio.Services
                     //arguments = $"-i \"{video.InputFullPath}\" -filter_complex \"[0:a:0]channelsplit=channel_layout=5.1[FL][FR][FC][LFE][BL][BR];[FC]loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={video.InputI}:measured_LRA={video.InputLRA}:measured_TP={video.InputTP}:measured_thresh={video.InputTresh}:offset={video.TargetOffset}:linear=true,aformat=sample_rates={video.SampleRates}:channel_layouts=mono[FC2];[FL]aformat=channel_layouts=mono[FL2];[FR]aformat=channel_layouts=mono[FR2];[LFE]aformat=channel_layouts=mono[LFE2];[BL]aformat=channel_layouts=mono[BL2];[BR]aformat=channel_layouts=mono[BR2];[FL2][FR2][FC2][LFE2][BL2][BR2]join=inputs=6:channel_layout=5.1:map=0.0-FL|1.0-FR|2.0-FC|3.0-LFE|4.0-BL|5.0-BR\" -c:v copy -c:a libfdk_aac -vbr 3 -c:s copy \"{video.OutputFullPath}\"";
                     break;
                 case ProcessResultNames.MKVInfo:
-                    arguments = $"\"{video.FileOverview.InputFullPath}\"";
+                    arguments = $"\"{sourceFile.InputFullPath}\"";
                     break;
                 case ProcessResultNames.MKVExtract:
-                    arguments = $"\"{video.FileOverview.InputFullPath}\" tracks";
+                    arguments = $"\"{sourceFile.InputFullPath}\" tracks";
                     break;
                 case ProcessResultNames.MKVMergeJ:
-                    arguments = $"-J \"{video.FileOverview.InputFullPath}\"";
+                    arguments = $"-J \"{sourceFile.InputFullPath}\"";
                     break;
                 case ProcessResultNames.MKVMergeLangList:
                     arguments = "--list-languages";
@@ -188,6 +189,21 @@ namespace MKVStudio.Services
                     Languages.Add(language);
                 }
             }
+        }
+
+        private void SetLoudnormFirstPassMeasurements(string firstPassOutput)
+        {
+            Match loudnormOutput = Regex.Match(firstPassOutput, @"(\{(\n*.*\n*)*?\})");
+            JObject keyValuePairs = JObject.Parse(loudnormOutput.Value);
+            //_audioEdit.InputI = (string)keyValuePairs["input_i"];
+            //_audioEdit.InputTP = (string)keyValuePairs["input_tp"];
+            //_audioEdit.InputLRA = (string)keyValuePairs["input_lra"];
+            //_audioEdit.InputTresh = (string)keyValuePairs["input_thresh"];
+            //_audioEdit.OutputTP = (string)keyValuePairs["output_tp"];
+            //_audioEdit.OutputLRA = (string)keyValuePairs["output_lra"];
+            //_audioEdit.OutputTresh = (string)keyValuePairs["output_thresh"];
+            //_audioEdit.NormalizationType = (string)keyValuePairs["normalization_type"];
+            //_audioEdit.TargetOffset = (string)keyValuePairs["target_offset"];
         }
     }
 }

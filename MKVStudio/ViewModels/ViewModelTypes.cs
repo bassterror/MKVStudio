@@ -3,24 +3,13 @@
     public enum ViewModelTypes
     {
         //Main
-        Files,
-        Queue,
+        Multiplexer,
+        JobQueue,
 
-        //Video file
-        Tracks,
+        //Multiplex
+        Input,
+        Output,
         Attachments,
-        FileOverview,
-        AudioEdit,
-        VideoEdit,
-        Tags,
-
-        //Video file tracks
-        VideoTrack,
-        AudioTrack,
-        SubtitlesTrack,
-
-        //Video file tags
-        GobalTag,
-        TrackTag
+        Chapters
     }
 }

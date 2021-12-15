@@ -6,20 +6,17 @@ namespace MKVStudio.ViewModels
 {
     public class MainVM : BaseViewModel
     {
-        public MainVM ThisMainViewModel { get; set; }
-        public BaseViewModel CurrentMainViewModel { get; set; }
-        private FilesVM FilesViewModel { get; set; }
-        private QueueVM QueueViewModel { get; set; }
+        public BaseViewModel SelectedMainTab { get; set; }
+        private MultiplexerVM Multiplexer => new(ExLib);
+        private JobQueueVM JobQueue => new();
 
-        public ICommand UpdateCurrentMainViewModelCommand { get; set; }
+        public ICommand UpdateSelectedMainTab => new UpdateSelectedMainTabCommand(this, Multiplexer, JobQueue);
+        public IExternalLibrariesService ExLib { get; }
 
-        public MainVM(IExternalLibrariesService externalLibrariesService)
+        public MainVM(IExternalLibrariesService exLib)
         {
-            ThisMainViewModel = this;
-            FilesViewModel = new FilesVM(externalLibrariesService);
-            QueueViewModel = new QueueVM();
-            UpdateCurrentMainViewModelCommand = new UpdateCurrentMainViewModelCommand(this, FilesViewModel, QueueViewModel);
-            UpdateCurrentMainViewModelCommand.Execute(ViewModelTypes.Files);
+            ExLib = exLib;
+            UpdateSelectedMainTab.Execute(ViewModelTypes.Multiplexer);
         }
     }
 }
