@@ -23,7 +23,6 @@ namespace MKVStudio.ViewModels
         public string LanguageIETF { get; set; }
         public int Number { get; set; }
         public string ContentEncodingAlgorithms { get; set; }
-        public ICommand RemoveTrack { get; set; }
 
         public SubtitlesPropertiesVM(IExternalLibrariesService exLib, MKVMergeJ.Track track)
         {

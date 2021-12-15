@@ -23,7 +23,6 @@ namespace MKVStudio.ViewModels
         public Language Language { get; set; }
         public string LanguageIETF { get; set; }
         public int Number { get; set; }
-        public ICommand RemoveTrack { get; set; }
 
         public AudioPropertiesVM(IExternalLibrariesService exLib, MKVMergeJ.Track track)
         {

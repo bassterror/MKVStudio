@@ -29,8 +29,6 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>            
             <RadioButton Grid.Column="0"
@@ -48,21 +46,11 @@
                          IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AttachmentsVM}}"
                          Command="{Binding UpdateMultiplexTab}"
                          CommandParameter="{x:Static vm:ViewModelTypes.Attachments}"/>
-            <RadioButton Grid.Column="5"
+            <RadioButton Grid.Column="3"
                          Content="Chapters"
                          IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:ChaptersVM}}"
                          Command="{Binding UpdateMultiplexTab}"
                          CommandParameter="{x:Static vm:ViewModelTypes.Chapters}"/>
-            <RadioButton Grid.Column="3"
-                         Content="Audio Edit"
-                         IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AudioEditVM}}"
-                         Command="{Binding UpdateMultiplexTab}"
-                         CommandParameter="{x:Static vm:ViewModelTypes.AudioEdit}"/>
-            <RadioButton Grid.Column="4"
-                         Content="Video Edit"
-                         IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:VideoEditVM}}"
-                         Command="{Binding UpdateMultiplexTab}"
-                         CommandParameter="{x:Static vm:ViewModelTypes.VideoEdit}"/>
         </Grid>
         <ContentControl Grid.Row="1"
                         Content="{Binding SelectedMultiplexTab}"/>

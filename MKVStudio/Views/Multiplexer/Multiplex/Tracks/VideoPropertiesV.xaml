@@ -18,14 +18,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
                    HorizontalContentAlignment="Right"
@@ -36,11 +34,6 @@
                      Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
                      Margin="2"/>
-            <Button Grid.Column="2"
-                    Content="Remove track"
-                    Margin="2"
-                    Command="{Binding RemoveTrack}"
-                    CommandParameter="{x:Static vm:ViewModelTypes.VideoTrack}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -190,10 +183,5 @@
                       VerticalContentAlignment="Center"
                       Margin="2"/>
         </Grid>
-        <Separator Grid.Row="9">
-            <Separator.RenderTransform>
-                <ScaleTransform ScaleY="3" />
-            </Separator.RenderTransform>
-        </Separator>
     </Grid>
 </UserControl>

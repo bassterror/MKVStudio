@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.ViewModels;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -188,6 +189,21 @@ namespace MKVStudio.Services
                     Languages.Add(language);
                 }
             }
+        }
+
+        private void SetLoudnormFirstPassMeasurements(string firstPassOutput)
+        {
+            Match loudnormOutput = Regex.Match(firstPassOutput, @"(\{(\n*.*\n*)*?\})");
+            JObject keyValuePairs = JObject.Parse(loudnormOutput.Value);
+            //_audioEdit.InputI = (string)keyValuePairs["input_i"];
+            //_audioEdit.InputTP = (string)keyValuePairs["input_tp"];
+            //_audioEdit.InputLRA = (string)keyValuePairs["input_lra"];
+            //_audioEdit.InputTresh = (string)keyValuePairs["input_thresh"];
+            //_audioEdit.OutputTP = (string)keyValuePairs["output_tp"];
+            //_audioEdit.OutputLRA = (string)keyValuePairs["output_lra"];
+            //_audioEdit.OutputTresh = (string)keyValuePairs["output_thresh"];
+            //_audioEdit.NormalizationType = (string)keyValuePairs["normalization_type"];
+            //_audioEdit.TargetOffset = (string)keyValuePairs["target_offset"];
         }
     }
 }

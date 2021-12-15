@@ -10,7 +10,7 @@ namespace MKVStudio.ViewModels
         public IExternalLibrariesService ExLib { get; }
         public ICommand RemoveFile => new RemoveFileCommand(Multiplexer, this);
         public BaseViewModel SelectedMultiplexTab { get; set; }
-        public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this, Input, Output, AudioEdit, VideoEdit, Chapters, Attachments);
+        public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this, Input, Output, Chapters, Attachments);
 
         public string PrimarySourcePath { get; set; }
         public bool IsChecked { get; set; }
@@ -20,8 +20,6 @@ namespace MKVStudio.ViewModels
         public OutputVM Output { get; set; }
         public AttachmentsVM Attachments { get; set; }
         public ChaptersVM Chapters { get; set; }
-        public AudioEditVM AudioEdit => new(this, ExLib);
-        public VideoEditVM VideoEdit => new(this, ExLib);
 
         public ICommand Browse => new BrowseCommand(this, ExLib);
 

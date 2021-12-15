@@ -25,9 +25,9 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is ViewModelTypes viewModelType)
+            if (parameter is ViewModelTypes viewModel)
             {
-                switch (viewModelType)
+                switch (viewModel)
                 {
                     case ViewModelTypes.Multiplexer:
                         _main.SelectedMainTab = _multiplexer;

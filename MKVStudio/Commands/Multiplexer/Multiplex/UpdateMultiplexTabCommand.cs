@@ -10,24 +10,18 @@ namespace MKVStudio.Commands
         private readonly MultiplexVM _multiplex;
         private readonly OutputVM _output;
         private readonly InputVM _input;
-        private readonly AudioEditVM _audioEdit;
-        private readonly VideoEditVM _videoEdit;
         private readonly ChaptersVM _chapters;
         private readonly AttachmentsVM _attachments;
 
         public UpdateMultiplexTabCommand(MultiplexVM multiplex,
             InputVM input,
             OutputVM output,
-            AudioEditVM audioEdit,
-            VideoEditVM videoEdit,
             ChaptersVM chapters,
             AttachmentsVM attachments)
         {
             _multiplex = multiplex;
             _input = input;
             _output = output;
-            _audioEdit = audioEdit;
-            _videoEdit = videoEdit;
             _chapters = chapters;
             _attachments = attachments;
         }
@@ -39,21 +33,15 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is ViewModelTypes videoFileTab)
+            if (parameter is ViewModelTypes viewModel)
             {
-                switch (videoFileTab)
+                switch (viewModel)
                 {
                     case ViewModelTypes.Input:
                         _multiplex.SelectedMultiplexTab = _input;
                         break;
                     case ViewModelTypes.Output:
                         _multiplex.SelectedMultiplexTab = _output;
-                        break;
-                    case ViewModelTypes.AudioEdit:
-                        _multiplex.SelectedMultiplexTab = _audioEdit;
-                        break;
-                    case ViewModelTypes.VideoEdit:
-                        _multiplex.SelectedMultiplexTab = _videoEdit;
                         break;
                     case ViewModelTypes.Chapters:
                         _multiplex.SelectedMultiplexTab = _chapters;

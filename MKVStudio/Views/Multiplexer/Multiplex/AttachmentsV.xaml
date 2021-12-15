@@ -9,7 +9,7 @@
              d:DataContext="{d:DesignInstance Type=vm:AttachmentsVM}"
              d:DesignHeight="150" d:DesignWidth="400">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
+        <!--<Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -51,6 +51,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </GroupBox>
-        </Grid>
+        </Grid>-->
     </ScrollViewer>
 </UserControl>

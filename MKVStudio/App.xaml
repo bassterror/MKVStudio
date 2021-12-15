@@ -37,17 +37,11 @@
             <DataTemplate DataType="{x:Type vm:AttachmentsVM}">
                 <v:AttachmentsV/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AudioEditVM}">
-                <v:AudioEditV/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:VideoEditVM}">
-                <v:VideoEditV/>
-            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ChaptersVM}">
                 <v:ChaptersV/>
             </DataTemplate>
             
-            <!--Tracks-->
+            <!--Input-->
             <DataTemplate DataType="{x:Type vm:VideoPropertiesVM}">
                 <v:VideoPropertiesV/>
             </DataTemplate>
@@ -56,11 +50,6 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SubtitlesPropertiesVM}">
                 <v:SubtitlesPropertiesV/>
-            </DataTemplate>
-            
-            <!--Video file attachments-->
-            <DataTemplate DataType="{x:Type vm:AttachmentVM}">
-                <v:AttachmentV/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
