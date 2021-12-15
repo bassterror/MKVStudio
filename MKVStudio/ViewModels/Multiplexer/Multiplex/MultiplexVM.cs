@@ -10,7 +10,7 @@ namespace MKVStudio.ViewModels
         public MultiplexerVM Multiplexer { get; }
         public IExternalLibrariesService ExLib { get; }
         public BaseViewModel SelectedMultiplexTab { get; set; }
-        public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this, Input, Output, Chapters, Attachments);
+        public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this);
 
         public string PrimarySourceFullPath { get; set; }
         public string PrimarySourcePath { get; set; }
@@ -18,7 +18,7 @@ namespace MKVStudio.ViewModels
         public bool IsChecked { get; set; }
 
 
-        public InputVM Input { get; set; }
+        public InputVM Input => new(this, ExLib);
         public OutputVM Output { get; set; }
         public AttachmentsVM Attachments { get; set; }
         public ChaptersVM Chapters { get; set; }
@@ -33,7 +33,6 @@ namespace MKVStudio.ViewModels
             PrimarySourcePath = Path.GetDirectoryName(source);
             PrimarySourceName = Path.GetFileName(source);
             IsChecked = true;
-            Input = new InputVM(this, exLib);
 
             UpdateMultiplexTab.Execute(ViewModelTypes.Input);
         }

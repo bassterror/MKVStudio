@@ -15,6 +15,7 @@ namespace MKVStudio.ViewModels
         public static string OutputExtension => ".mkv";
         public string OutputFullName => $"{OutputName}.{OutputExtension}";
         public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
+        public string Type { get; set; }
 
         public SourceFileVM(string source)
         {

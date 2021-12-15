@@ -6,13 +6,10 @@
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:OutputVM}"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:OutputVM}"
              d:DesignHeight="250" d:DesignWidth="250">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>

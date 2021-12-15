@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
 {
@@ -38,11 +39,14 @@ namespace MKVStudio.ViewModels
             }
         }
 
+        public ICommand AddSourceFiles { get; set; }
+
         public InputVM(MultiplexVM multiplex, IExternalLibrariesService exLib)
         {
             Multiplex = multiplex;
             ExLib = exLib;
             SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourceFullPath));
+
             CreateTracks(SourceFiles.First());
         }
 
@@ -51,6 +55,7 @@ namespace MKVStudio.ViewModels
             ProcessResult pr = await ExLib.Run(ProcessResultNames.MKVMergeJ, sourceFile);
             ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
             MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
+            sourceFile.Type = result.Container.Type;
             foreach (MKVMergeJ.Track track in result.Tracks.Where(t => t.Type == "video"))
             {
                 Tracks.Add(new TrackVM(this, track, TrackPropertiesTypes.Video, ExLib));
