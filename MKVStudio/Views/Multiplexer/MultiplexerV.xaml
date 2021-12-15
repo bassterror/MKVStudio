@@ -12,42 +12,59 @@
         <c:IntToBoolConverter x:Key="ITBC"/>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0"
-                     Width="400"
-                     ItemsSource="{Binding Multiplexes}"
-                     SelectedItem="{Binding SelectedMultiplex}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Column="0"
-                                      IsChecked="{Binding IsChecked}"
-                                      Margin="3"/>
-                            <TextBlock Grid.Column="1"
-                                       Margin="3"
-                                       Text="{Binding PrimarySourcePath}"/>
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Remove"
-                                              Command="{Binding RemoveFile}"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ContextMenu>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0"
+                      ItemsSource="{Binding Multiplexes}"
+                      SelectedItem="{Binding SelectedMultiplex}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumnHeader HorizontalContentAlignment="Center">
+                                <CheckBox IsChecked="{Binding AreAllChecked}"
+                                          Margin="3"/>
+                            </GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked}"
+                                              Margin="3"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                <TextBlock Text="Name"
+                                           Margin="3"/>
+                            </GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PrimarySourceName}"
+                                               Margin="3"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                <TextBlock Text="Path"
+                                           Margin="3"/>
+                            </GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PrimarySourcePath}"
+                                               Margin="3"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Add files"
                                   Command="{Binding AddFiles}"/>
@@ -55,25 +72,26 @@
                                   Command="{Binding AddFilesFromFolder}"/>
                         <MenuItem Header="Clear files"
                                   Command="{Binding ClearFiles}"/>
+                        <MenuItem Header="Remove"
+                                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
                     </ContextMenu>
-                </ListBox.ContextMenu>
-            </ListBox>
-            <ContentControl Grid.Column="1"
+                </ListView.ContextMenu>                
+            </ListView>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1"
+                        Content="Apply to all"
+                        Margin="2"
+                        Padding="5"
+                        IsEnabled="{Binding Multiplexes.Count, Mode=OneWay, Converter={StaticResource ITBC}}"
+                        Command="{Binding BatchEdit}"/>
+            </Grid>
+        </Grid>
+        <ContentControl Grid.Column="1"
                             Content="{Binding SelectedMultiplex}"/>
-            
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1"
-                    Content="Apply to all"
-                    Margin="2"
-                    Padding="5"
-                    IsEnabled="{Binding Multiplexes.Count, Mode=OneWay, Converter={StaticResource ITBC}}"
-                    Command="{Binding BatchEdit}"/>
-        </Grid>
     </Grid>
 </UserControl>

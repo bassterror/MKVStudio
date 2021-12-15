@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Commands;
 using MKVStudio.Services;
+using System.IO;
 using System.Windows.Input;
 
 namespace MKVStudio.ViewModels
@@ -12,7 +13,9 @@ namespace MKVStudio.ViewModels
         public BaseViewModel SelectedMultiplexTab { get; set; }
         public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this, Input, Output, Chapters, Attachments);
 
+        public string PrimarySourceFullPath { get; set; }
         public string PrimarySourcePath { get; set; }
+        public string PrimarySourceName { get; set; }
         public bool IsChecked { get; set; }
 
 
@@ -27,7 +30,9 @@ namespace MKVStudio.ViewModels
         {
             Multiplexer = multiplexer;
             ExLib = exLib;
-            PrimarySourcePath = source;
+            PrimarySourceFullPath = source;
+            PrimarySourcePath = Path.GetDirectoryName(source);
+            PrimarySourceName = Path.GetFileName(source);
             IsChecked = true;
             Input = new InputVM(this, exLib);
 

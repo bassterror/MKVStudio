@@ -4,6 +4,7 @@ namespace MKVStudio.ViewModels
 {
     public class SourceFileVM : BaseViewModel
     {
+        public bool IsChecked { get; set; }
         public string InputPath { get; set; }
         public string InputName { get; set; }
         public string InputExtension { get; set; }
@@ -17,6 +18,7 @@ namespace MKVStudio.ViewModels
 
         public SourceFileVM(string source)
         {
+            IsChecked = true;
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);
             InputExtension = Path.GetExtension(source);

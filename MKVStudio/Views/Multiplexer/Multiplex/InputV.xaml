@@ -8,72 +8,130 @@
              d:DataContext="{d:DesignInstance Type=vm:InputVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <GroupBox Grid.Column="0">
-                <ListBox ItemsSource="{Binding SourceFiles}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0"/>
-                                <TextBlock Grid.Column="1"
-                                           Margin="3"                                           
-                                           Text="{Binding InputFullName}"/>
-                                <TextBlock Grid.Column="2"
-                                           Margin="3"
-                                           Text="{Binding InputPath}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Source files">
+                <ListView ItemsSource="{Binding SourceFiles}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Center">
+                                    <CheckBox IsChecked="{Binding AreAllSFChecked}"
+                                              Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsChecked}"
+                                                  Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Name"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding InputFullName}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Path"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding InputPath}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </GroupBox>
-            <GroupBox Grid.Column="1">
-                <ListBox ItemsSource="{Binding Tracks}"
-                         SelectedItem="{Binding SelectedTrack}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0"
-                                          Margin="3"
-                                          IsChecked="{Binding IsChecked}"/>
-                                <TextBlock Grid.Column="1"
-                                           Margin="3"
-                                           Text="{Binding Codec}"/>
-                                <TextBlock Grid.Column="2"
-                                           Margin="3"
-                                           Text="{Binding Type}"/>
-                                <TextBlock Grid.Column="3"
-                                           Margin="3"
-                                           Text="{Binding Language}"/>
-                                <TextBlock Grid.Column="4"
-                                           Margin="3"
-                                           Text="{Binding Name}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+            <GroupBox Grid.Row="1" Header="Tracks">
+                <ListView ItemsSource="{Binding Tracks}"
+                          SelectedItem="{Binding SelectedTrack}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Center">
+                                    <CheckBox IsChecked="{Binding AreAllTChecked}"
+                                              Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsChecked}"
+                                                  Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Type"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Type}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Name"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Language"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Language}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Codec"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Codec}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </GroupBox>
         </Grid>
-        <GroupBox Grid.Row="1" Header="Properties">
+        <GroupBox Grid.Column="1" Header="Properties">
             <ContentControl Content="{Binding SelectedTrack.Properties}"/>
         </GroupBox>
     </Grid>

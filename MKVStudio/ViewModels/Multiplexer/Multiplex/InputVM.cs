@@ -15,12 +15,34 @@ namespace MKVStudio.ViewModels
         public ObservableCollection<SourceFileVM> SourceFiles { get; set; } = new();
         public ObservableCollection<TrackVM> Tracks { get; set; } = new();
         public TrackVM SelectedTrack { get; set; }
+        public bool AreAllSFChecked
+        {
+            get => SourceFiles.Count == SourceFiles.Count(m => m.IsChecked);
+            set
+            {
+                foreach (SourceFileVM sourceFile in SourceFiles)
+                {
+                    sourceFile.IsChecked = value;
+                }
+            }
+        }
+        public bool AreAllTChecked
+        {
+            get => Tracks.Count == Tracks.Count(m => m.IsChecked);
+            set
+            {
+                foreach (TrackVM track in Tracks)
+                {
+                    track.IsChecked = value;
+                }
+            }
+        }
 
         public InputVM(MultiplexVM multiplex, IExternalLibrariesService exLib)
         {
             Multiplex = multiplex;
             ExLib = exLib;
-            SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourcePath));
+            SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourceFullPath));
             CreateTracks(SourceFiles.First());
         }
 
