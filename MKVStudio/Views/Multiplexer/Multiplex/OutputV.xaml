@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-             d:DataContext="{d:DesignInstance Type=vm:InputVM}"
+             d:DataContext="{d:DesignInstance Type=vm:OutputVM}"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="250">
     <Grid>
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>

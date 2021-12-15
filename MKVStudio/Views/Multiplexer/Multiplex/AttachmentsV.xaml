@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:AttachmentsVM}"
-             d:DesignHeight="500" d:DesignWidth="400">
+             d:DesignHeight="600" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,13 +22,13 @@
             </GroupBox.Header>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 
                 <!--List-->
                 <ListView Grid.Column="0"
-                          MinHeight="150"
+                          MinHeight="200"
                           ItemsSource="{Binding ExistingAttachments}"
                           SelectedItem="{Binding SelectedExistingAttachment}">
                     <ListView.View>
@@ -70,7 +70,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn>
-                                <GridViewColumnHeader>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
                                     <TextBlock Text="Description"
                                                Margin="3"/>
                                 </GridViewColumnHeader>
@@ -82,7 +82,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn>
-                                <GridViewColumnHeader>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
                                     <TextBlock Text="Source file"
                                                Margin="3"/>
                                 </GridViewColumnHeader>
@@ -94,24 +94,32 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn>
-                                <GridViewColumnHeader>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
                                     <TextBlock Text="Directory"
                                                Margin="3"/>
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Attachments.SourceFile.InputPath}"/>
+                                        <TextBlock Text="{Binding Attachments.SourceFile.InputPath}"
+                                                   Margin="3"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn>
-                                <GridViewColumnHeader>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
                                     <TextBlock Text="Size"
                                                Margin="3"/>
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Size}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Size}"
+                                                   Margin="3 3 0 3"/>
+                                            <TextBlock Text=" (" Margin="0 3 0 3"/>
+                                            <TextBlock Text="{Binding SizeConverted}"
+                                                       Margin="0 3 0 3"/>
+                                            <TextBlock Text=")" Margin="0 3 3 3"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -140,13 +148,13 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
 
                     <!--List-->
                     <ListView Grid.Column="0"
-                              MinHeight="150"
+                              MinHeight="200"
                               ItemsSource="{Binding NewAttachments}"
                               SelectedItem="{Binding SelectedNewAttachment}">
                         <ListView.View>
@@ -230,8 +238,14 @@
                                     </GridViewColumnHeader>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Size}"
-                                                       Margin="3"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Size}"
+                                                           Margin="3 3 0 3"/>
+                                                <TextBlock Text=" (" Margin="0 3 0 3"/>
+                                                <TextBlock Text="{Binding SizeConverted}"
+                                                           Margin="0 3 0 3"/>
+                                                <TextBlock Text=")" Margin="0 3 3 3"/>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

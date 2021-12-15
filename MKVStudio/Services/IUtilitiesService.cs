@@ -9,5 +9,6 @@ namespace MKVStudio.Services
         OpenFileDialog GetFileDialog(string filter, bool multiselect);
         string[] GetFilesFromFolder(string complexFilter);
         string GetFolder();
+        string ConvertBytes(long value, int decimalPlaces = 1);
     }
 }
