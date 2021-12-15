@@ -67,12 +67,17 @@
                 <ListView.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Add files"
+                                  Padding="3"
                                   Command="{Binding AddFiles}"/>
-                        <MenuItem Header="Add files from folder"
+                        <MenuItem Header="Add folder"
+                                  Padding="3"
                                   Command="{Binding AddFilesFromFolder}"/>
-                        <MenuItem Header="Clear files"
+                        <MenuItem Header="Clear all files"
+                                  Padding="3"
                                   Command="{Binding ClearFiles}"/>
-                        <MenuItem Header="Remove"
+                        <MenuItem Header="Remove selected file"
+                                  Padding="3"
+                                  Command="{Binding RemoveFiles}"
                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
                     </ContextMenu>
                 </ListView.ContextMenu>                

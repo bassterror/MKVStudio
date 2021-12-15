@@ -9,7 +9,6 @@ namespace MKVStudio.ViewModels
     {
         public MultiplexerVM Multiplexer { get; }
         public IExternalLibrariesService ExLib { get; }
-        public ICommand RemoveFile => new RemoveFileCommand(Multiplexer, this);
         public BaseViewModel SelectedMultiplexTab { get; set; }
         public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this, Input, Output, Chapters, Attachments);
 

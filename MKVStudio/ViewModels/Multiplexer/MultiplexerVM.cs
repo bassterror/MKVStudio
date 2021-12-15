@@ -25,7 +25,7 @@ namespace MKVStudio.ViewModels
         public ICommand AddFiles => new AddFilesCommand(this, ExLib);
         public ICommand AddFilesFromFolder => new AddFilesFromFolderCommand(this, ExLib);
         public ICommand ClearFiles => new ClearFilesCommand(this);
-        public int MyProperty { get; set; }
+        public ICommand RemoveFiles => new RemoveFilesCommand(this);
         public ICommand BatchEdit => new BatchEditCommand(this, ExLib);
 
         public MultiplexerVM(IExternalLibrariesService exLib)

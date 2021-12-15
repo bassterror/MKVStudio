@@ -4,16 +4,15 @@ using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
-    public class RemoveFileCommand : ICommand
+    public class RemoveFilesCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly MultiplexerVM _multiplexer;
-        private readonly MultiplexVM _multiplex;
 
-        public RemoveFileCommand(MultiplexerVM multiplexer, MultiplexVM multiplex)
+        public event EventHandler CanExecuteChanged { add { } remove { } }
+
+        public RemoveFilesCommand(MultiplexerVM multiplexer)
         {
             _multiplexer = multiplexer;
-            _multiplex = multiplex;
         }
 
         public bool CanExecute(object parameter)
@@ -23,7 +22,10 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            _multiplexer.Multiplexes.Remove(_multiplex);
+            if (parameter is MultiplexVM multiplex)
+            {
+                _multiplexer.Multiplexes.Remove(multiplex);
+            }
         }
     }
 }
