@@ -4,97 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-             d:DataContext="{d:DesignInstance Type=vm:InputVM}"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:OutputVM}"
              d:DesignHeight="250" d:DesignWidth="250">
     <Grid>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="101"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   HorizontalContentAlignment="Right"
-                   Margin="2">
-                <TextBlock Text="Input name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
-            </Label>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding InputFullName}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="101"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   HorizontalContentAlignment="Right"
-                   Margin="2">
-                <TextBlock Text="Input location:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
-            </Label>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding InputPath}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="101"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   HorizontalContentAlignment="Right"
-                   Margin="2">
-                <TextBlock Text="Output name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
-            </Label>
-            <TextBox Grid.Column="1"
-                     Text="{Binding OutputName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     VerticalContentAlignment="Center"
-                     Margin="2"/>
-        </Grid>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="101"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   HorizontalContentAlignment="Right"
-                   Margin="2">
-                <TextBlock Text="Output location:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
-            </Label>
-            <TextBox Grid.Column="1"
-                     Text="{Binding OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     VerticalContentAlignment="Center"
-                     Margin="2"/>
-            <Button Grid.Column="2"
-                    Content="Browse"
-                    Margin="2"
-                    Command="{Binding Browse}"/>
-        </Grid>
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="101"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   HorizontalContentAlignment="Right"
-                   Margin="2">
-                <TextBlock Text="Output:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
-            </Label>
-            <TextBlock Grid.Column="1"
-                       Text="{Binding OutputFullPath}"
-                       VerticalAlignment="Center"
-                       Margin="2"/>
-        </Grid>-->
+        <GroupBox Grid.Column="0"
+                  Grid.Row="0">
+            <GroupBox.Header>
+                <TextBlock Text="General"
+                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       Margin="2"
+                       HorizontalContentAlignment="Right">
+                    <TextBlock Text="Title:"
+                               Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                </Label>
+                <TextBox Grid.Column="1"
+                         Margin="2"
+                         Text="{Binding Title}"
+                         VerticalContentAlignment="Center"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

@@ -1,5 +1,4 @@
-﻿using MKVStudio.Commands;
-using MKVStudio.Models;
+﻿using MKVStudio.Models;
 using MKVStudio.Services;
 using System.Windows.Input;
 
@@ -7,15 +6,16 @@ namespace MKVStudio.ViewModels
 {
     public class OutputVM : BaseViewModel
     {
-        public MultiplexVM SelectedVideo { get; set; }
+        public MultiplexVM Multiplex { get; set; }
+        public IExternalLibrariesService ExLib { get; }
         public string Title { get; set; }
         public ICommand RunMKVInfo { get; set; }
         public ICommand RunMKVExtract { get; set; }
 
-        public OutputVM(MultiplexVM selectedVideo, MKVMergeJ result, IExternalLibrariesService exLib)
+        public OutputVM(MultiplexVM multiplex, MKVMergeJ result, IExternalLibrariesService exLib)
         {
-            SelectedVideo = selectedVideo;
-
+            Multiplex = multiplex;
+            ExLib = exLib;
             Title = result.Container.Properties.Title;
         }
     }

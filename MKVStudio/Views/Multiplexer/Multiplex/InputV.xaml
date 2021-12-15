@@ -10,14 +10,18 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <GroupBox Grid.Row="0" Header="Source files">
+            <GroupBox Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Source files"
+                               Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                </GroupBox.Header>
                 <ListView ItemsSource="{Binding SourceFiles}">
                     <ListView.View>
                         <GridView>
@@ -47,6 +51,18 @@
                             </GridViewColumn>
                             <GridViewColumn>
                                 <GridViewColumnHeader HorizontalContentAlignment="Left">
+                                    <TextBlock Text="Container"
+                                               Margin="3"/>
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Type}"
+                                                   Margin="3"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumnHeader HorizontalContentAlignment="Left">
                                     <TextBlock Text="Path"
                                                Margin="3"/>
                                 </GridViewColumnHeader>
@@ -61,7 +77,11 @@
                     </ListView.View>
                 </ListView>
             </GroupBox>
-            <GroupBox Grid.Row="1" Header="Tracks">
+            <GroupBox Grid.Row="1">
+                <GroupBox.Header>
+                    <TextBlock Text="Tracks"
+                               Foreground="{StaticResource ControlDisabledGlythColour}"/>
+                </GroupBox.Header>
                 <ListView ItemsSource="{Binding Tracks}"
                           SelectedItem="{Binding SelectedTrack}">
                     <ListView.View>
@@ -131,7 +151,11 @@
                 </ListView>
             </GroupBox>
         </Grid>
-        <GroupBox Grid.Column="1" Header="Properties">
+        <GroupBox Grid.Column="1">
+            <GroupBox.Header>
+                <TextBlock Text="Properties"
+                           Foreground="{StaticResource ControlDisabledGlythColour}"/>
+            </GroupBox.Header>
             <ContentControl Content="{Binding SelectedTrack.Properties}"/>
         </GroupBox>
     </Grid>

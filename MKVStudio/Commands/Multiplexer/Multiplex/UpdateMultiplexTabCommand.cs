@@ -8,22 +8,10 @@ namespace MKVStudio.Commands
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
         private readonly MultiplexVM _multiplex;
-        private readonly OutputVM _output;
-        private readonly InputVM _input;
-        private readonly ChaptersVM _chapters;
-        private readonly AttachmentsVM _attachments;
 
-        public UpdateMultiplexTabCommand(MultiplexVM multiplex,
-            InputVM input,
-            OutputVM output,
-            ChaptersVM chapters,
-            AttachmentsVM attachments)
+        public UpdateMultiplexTabCommand(MultiplexVM multiplex)
         {
             _multiplex = multiplex;
-            _input = input;
-            _output = output;
-            _chapters = chapters;
-            _attachments = attachments;
         }
 
         public bool CanExecute(object parameter)
@@ -38,16 +26,16 @@ namespace MKVStudio.Commands
                 switch (viewModel)
                 {
                     case ViewModelTypes.Input:
-                        _multiplex.SelectedMultiplexTab = _input;
+                        _multiplex.SelectedMultiplexTab = _multiplex.Input;
                         break;
                     case ViewModelTypes.Output:
-                        _multiplex.SelectedMultiplexTab = _output;
-                        break;
-                    case ViewModelTypes.Chapters:
-                        _multiplex.SelectedMultiplexTab = _chapters;
+                        _multiplex.SelectedMultiplexTab = _multiplex.Output;
                         break;
                     case ViewModelTypes.Attachments:
-                        _multiplex.SelectedMultiplexTab = _attachments;
+                        _multiplex.SelectedMultiplexTab = _multiplex.Attachments;
+                        break;
+                    case ViewModelTypes.Chapters:
+                        _multiplex.SelectedMultiplexTab = _multiplex.Chapters;
                         break;
                 }
             }
