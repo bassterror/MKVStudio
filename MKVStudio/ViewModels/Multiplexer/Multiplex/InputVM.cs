@@ -64,8 +64,8 @@ namespace MKVStudio.ViewModels
                 Tracks.Add(new TrackVM(this, track, TrackPropertiesTypes.Subtitles, ExLib));
             }
             Multiplex.Output = new OutputVM(Multiplex, result, ExLib);
-            Multiplex.Attachments = new AttachmentsVM(result.Attachments);
-            Multiplex.Chapters = new ChaptersVM(result.Global_tags, result.Track_tags);
+            Multiplex.Attachments = new AttachmentsVM(sourceFile, result.Attachments);
+            Multiplex.Chapters = new ChaptersVM();
         }
     }
 }

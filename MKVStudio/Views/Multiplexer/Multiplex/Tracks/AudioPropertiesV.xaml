@@ -120,6 +120,7 @@
                 <TextBlock Text="Language:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <ComboBox Grid.Column="1"
+                      Margin="2"
                       ItemsSource="{Binding ExLib.Languages}"
                       SelectedItem="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
