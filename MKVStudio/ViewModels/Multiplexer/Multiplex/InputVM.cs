@@ -1,4 +1,5 @@
-﻿using MKVStudio.Models;
+﻿using MKVStudio.Commands;
+using MKVStudio.Models;
 using MKVStudio.Services;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -16,36 +17,19 @@ namespace MKVStudio.ViewModels
         public ObservableCollection<SourceFileVM> SourceFiles { get; set; } = new();
         public ObservableCollection<TrackVM> Tracks { get; set; } = new();
         public TrackVM SelectedTrack { get; set; }
-        public bool AreAllSFChecked
-        {
-            get => SourceFiles.Count == SourceFiles.Count(m => m.IsChecked);
-            set
-            {
-                foreach (SourceFileVM sourceFile in SourceFiles)
-                {
-                    sourceFile.IsChecked = value;
-                }
-            }
-        }
-        public bool AreAllTChecked
-        {
-            get => Tracks.Count == Tracks.Count(m => m.IsChecked);
-            set
-            {
-                foreach (TrackVM track in Tracks)
-                {
-                    track.IsChecked = value;
-                }
-            }
-        }
 
-        public ICommand AddSourceFiles { get; set; }
+        public ICommand CheckAllSourceFiles => new CheckBoxCommand(SourceFiles);
+        public ICommand CheckAllTracks => new CheckBoxCommand(Tracks);
+        public ICommand AddFiles => new AddFilesCommand(this, ExLib);
+        public ICommand AddFilesFromFolder => new AddFilesFromFolderCommand(this, ExLib);
+        public ICommand ClearFiles => new ClearFilesCommand(this);
+        public ICommand RemoveFiles => new RemoveFilesCommand(this);
 
         public InputVM(MultiplexVM multiplex, IExternalLibrariesService exLib)
         {
             Multiplex = multiplex;
             ExLib = exLib;
-            SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourceFullPath));
+            SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourceFullPath, true));
 
             CreateTracks(SourceFiles.First());
         }

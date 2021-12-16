@@ -6,13 +6,13 @@ namespace MKVStudio.Commands
 {
     public class RemoveFilesCommand : ICommand
     {
-        private readonly MultiplexerVM _multiplexer;
+        private readonly object _collectionParent;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public RemoveFilesCommand(MultiplexerVM multiplexer)
+        public RemoveFilesCommand(object collectionParent)
         {
-            _multiplexer = multiplexer;
+            _collectionParent = collectionParent;
         }
 
         public bool CanExecute(object parameter)
@@ -22,9 +22,19 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is MultiplexVM multiplex)
+            if (_collectionParent is MultiplexerVM multiplexer)
             {
-                _multiplexer.Multiplexes.Remove(multiplex);
+                if (parameter is MultiplexVM multiplex)
+                {
+                    multiplexer.Multiplexes.Remove(multiplex);
+                }
+            }
+            if (_collectionParent is InputVM input)
+            {
+                if (parameter is SourceFileVM sourceFile)
+                {
+                    input.SourceFiles.Remove(sourceFile);
+                }
             }
         }
     }

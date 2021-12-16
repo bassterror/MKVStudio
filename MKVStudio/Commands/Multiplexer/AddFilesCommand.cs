@@ -8,12 +8,12 @@ namespace MKVStudio.Commands
     public class AddFilesCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly MultiplexerVM _multiplexer;
+        private readonly object _collectionParent;
         private readonly IExternalLibrariesService _exLib;
 
-        public AddFilesCommand(MultiplexerVM multiplexer, IExternalLibrariesService exLib)
+        public AddFilesCommand(object collectionParent, IExternalLibrariesService exLib)
         {
-            _multiplexer = multiplexer;
+            _collectionParent = collectionParent;
             _exLib = exLib;
         }
 
@@ -24,10 +24,21 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            foreach (string filename in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+            if (_collectionParent is MultiplexerVM multiplexer)
             {
-                MultiplexVM multiplex = new(_multiplexer, filename, _exLib);
-                _multiplexer.Multiplexes.Add(multiplex);
+                foreach (string filename in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+                {
+                    MultiplexVM multiplex = new(multiplexer, filename, _exLib);
+                    multiplexer.Multiplexes.Add(multiplex);
+                } 
+            }
+            if (_collectionParent is InputVM input)
+            {
+                foreach (string fileName in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+                {
+                    SourceFileVM sourceFile = new(fileName, false);
+                    input.SourceFiles.Add(sourceFile);
+                }
             }
         }
     }
