@@ -17,11 +17,13 @@ namespace MKVStudio.Services
         public IUtilitiesService Util { get; set; }
         public ObservableCollection<Language> AllLanguages { get; set; } = new();
         public ObservableCollection<Language> Languages { get; set; } = new();
+        public SupportedFileTypesCollection SupportedFileTypesCollection { get; set; } = new();
 
         public ExternalLibrariesService(IUtilitiesService utilitiesService)
         {
             Util = utilitiesService;
             GetLanguageList();
+            GetSupportedFileTypes();
         }
 
         public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null)
@@ -49,6 +51,9 @@ namespace MKVStudio.Services
                     pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, sourceFile), processName);
                     break;
                 case ProcessResultNames.MKVMergeLangList:
+                    pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
+                    break;
+                case ProcessResultNames.MKVMergeSupportedFileTypes:
                     pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
                     break;
             }
@@ -171,6 +176,9 @@ namespace MKVStudio.Services
                 case ProcessResultNames.MKVMergeLangList:
                     arguments = "--list-languages";
                     break;
+                case ProcessResultNames.MKVMergeSupportedFileTypes:
+                    arguments = "-l";
+                    break;
             }
 
             return arguments;
@@ -190,6 +198,18 @@ namespace MKVStudio.Services
                 {
                     Languages.Add(language);
                 }
+            }
+        }
+
+        private async void GetSupportedFileTypes()
+        {
+            ProcessResult pr = await Run(ProcessResultNames.MKVMergeSupportedFileTypes);
+            string[] lines = pr.StdOutput.Split("\r\n");
+            for (int i = 2; i < lines.Length - 1; i++)
+            {
+                Match match = Regex.Match(lines[i], @"^\s\s(.+)\s\[(.+)\]$");
+                SupportedFileType fileType = new(match);
+                SupportedFileTypesCollection.SupportedFileTypes.Add(fileType);
             }
         }
 
