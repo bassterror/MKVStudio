@@ -46,6 +46,13 @@ namespace MKVStudio.Commands
                     }
                 }
             }
+            if (_collectionParent is AttachmentsVM attachments)
+            {
+                if (parameter is AttachmentVM attachment)
+                {
+                    _ = attachments.NewAttachments.Remove(attachment);
+                }
+            }
         }
     }
 }

@@ -40,6 +40,10 @@ namespace MKVStudio.Commands
                     }
                 }
             }
+            if (_collectionParent is AttachmentsVM attachments)
+            {
+                attachments.NewAttachments.Clear();
+            }
         }
     }
 }

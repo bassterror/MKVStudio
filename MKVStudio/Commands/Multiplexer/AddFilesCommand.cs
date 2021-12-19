@@ -36,9 +36,18 @@ namespace MKVStudio.Commands
             {
                 foreach (string fileName in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
                 {
-                    SourceFileVM sourceFile = new(input, fileName, false);
+                    SourceFileVM sourceFile = new(fileName, false, input);
                     input.SourceFiles.Add(sourceFile);
                     input.CreateTracks(sourceFile);
+                }
+            }
+            if (_collectionParent is AttachmentsVM attachments)
+            {
+                foreach (string fileName in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+                {
+                    SourceFileVM sourceFile = new(fileName, false);
+                    AttachmentVM attachment = new(attachments, sourceFile, _exLib);
+                    attachments.NewAttachments.Add(attachment);
                 }
             }
         }

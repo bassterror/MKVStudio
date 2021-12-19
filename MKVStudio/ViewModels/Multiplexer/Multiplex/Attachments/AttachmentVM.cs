@@ -29,18 +29,21 @@ namespace MKVStudio.ViewModels
         public int Size { get; set; }
         public string SizeConverted => ExLib.Util.ConvertBytes(Size, 2);
 
-        public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, MKVMergeJ.Attachment attachment, IExternalLibrariesService exLib)
+        public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, IExternalLibrariesService exLib, MKVMergeJ.Attachment attachment = null)
         {
             Attachments = attachments;
             SourceFile = sourceFile;
             ExLib = exLib;
 
-            ContentType = attachment.Content_type;
-            Description = attachment.Description;
-            Name = attachment.File_name;
-            ID = attachment.Id;
-            UID = attachment.Properties.UID;
-            Size = attachment.Size;
+            if (attachment != null)
+            {
+                ContentType = attachment.Content_type;
+                Description = attachment.Description;
+                Name = attachment.File_name;
+                ID = attachment.Id;
+                UID = attachment.Properties.UID;
+                Size = attachment.Size; 
+            }
         }
     }
 }

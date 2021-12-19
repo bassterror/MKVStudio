@@ -19,7 +19,7 @@ namespace MKVStudio.ViewModels
         public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
         public string Type { get; set; }
 
-        public SourceFileVM(InputVM input, string source, bool isPrimary)
+        public SourceFileVM(string source, bool isPrimary, InputVM input = null)
         {
             Input = input;
             IsPrimary = isPrimary;

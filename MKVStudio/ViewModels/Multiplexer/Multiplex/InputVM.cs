@@ -35,7 +35,7 @@ namespace MKVStudio.ViewModels
         {
             Multiplex = multiplex;
             ExLib = exLib;
-            SourceFiles.Add(new SourceFileVM(this, multiplex.PrimarySourceFullPath, true));
+            SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourceFullPath, true, this));
 
             CreateTracks(SourceFiles.First());
         }

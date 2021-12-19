@@ -36,7 +36,7 @@ namespace MKVStudio.Commands
             {
                 foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
                 {
-                    SourceFileVM sourceFile = new(input, filename, false);
+                    SourceFileVM sourceFile = new(filename, false, input);
                     input.SourceFiles.Add(sourceFile);
                     input.CreateTracks(sourceFile);
                 }
