@@ -1,13 +1,25 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using System.Linq;
 
 namespace MKVStudio.ViewModels
 {
     public class AttachmentVM : BaseViewModel
     {
         public AttachmentsVM Attachments { get; }
+        public SourceFileVM SourceFile { get; }
         public IExternalLibrariesService ExLib { get; }
-        public bool IsChecked { get; set; }
+        private bool _isChecked;
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set
+            {
+                _isChecked = value;
+                Attachments.IsCheckAll = Attachments.ExistingAttachments.Count(a => a.IsChecked) != Attachments.ExistingAttachments.Count;
+                Attachments.IsUncheckAll = Attachments.ExistingAttachments.Count(a => !a.IsChecked) != Attachments.ExistingAttachments.Count;
+            }
+        }
 
         public string ContentType { get; set; }
         public string Description { get; set; }
@@ -17,11 +29,11 @@ namespace MKVStudio.ViewModels
         public int Size { get; set; }
         public string SizeConverted => ExLib.Util.ConvertBytes(Size, 2);
 
-        public AttachmentVM(AttachmentsVM attachments, MKVMergeJ.Attachment attachment, IExternalLibrariesService exLib)
+        public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, MKVMergeJ.Attachment attachment, IExternalLibrariesService exLib)
         {
             Attachments = attachments;
+            SourceFile = sourceFile;
             ExLib = exLib;
-            IsChecked = true;
 
             ContentType = attachment.Content_type;
             Description = attachment.Description;

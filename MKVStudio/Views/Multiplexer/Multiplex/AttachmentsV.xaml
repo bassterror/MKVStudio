@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:AttachmentsVM}"
              d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <s:Boolean x:Key="True">True</s:Boolean>
+        <s:Boolean x:Key="False">False</s:Boolean>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -25,13 +30,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                
-                <!--List-->
+                                
                 <ListView Grid.Column="0"
                           MinHeight="200"
                           ItemsSource="{Binding ExistingAttachments}"
                           SelectedItem="{Binding SelectedExistingAttachment}">
                     <ListView.View>
+                        <!--#region list view -->
                         <GridView>
                             <GridViewColumn>
                                 <GridViewColumnHeader HorizontalContentAlignment="Center">
@@ -124,13 +129,51 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>
+                        <!--#endregion-->
                     </ListView.View>
+                    <ListView.ContextMenu>
+                        <!--#region context menu -->
+                        <ContextMenu>
+                            <MenuItem Command="{Binding CheckAll}"
+                                      CommandParameter="{StaticResource True}"
+                                      IsEnabled="{Binding IsCheckAll}">
+                                <MenuItem.Header>
+                                    <StackPanel Orientation="Horizontal"
+                                                Height="20"
+                                                Margin="4">
+                                        <Image Source="/VisualStyles/Images/Check.ico"/>
+                                        <TextBlock Text="Check all"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="4"/>
+                                    </StackPanel>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Command="{Binding CheckAll}"
+                                      CommandParameter="{StaticResource False}"
+                                      IsEnabled="{Binding IsUncheckAll}">
+                                <MenuItem.Header>
+                                    <StackPanel Orientation="Horizontal"
+                                                Height="20"
+                                                Margin="4">
+                                        <Image Source="/VisualStyles/Images/Uncheck.ico"/>
+                                        <TextBlock Text="Uncheck all"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="4"/>
+                                    </StackPanel>
+                                </MenuItem.Header>
+                            </MenuItem>
+                        </ContextMenu>
+                        <!--#endregion-->
+                    </ListView.ContextMenu>
                 </ListView>
                 
-                <!--Image-->
+                <!--#region Image -->
                 <Grid Grid.Column="1">
                     <Image></Image>
                 </Grid>
+                <!--#endregion-->
             </Grid>
         </GroupBox>
         <!--#endregion-->
@@ -152,25 +195,13 @@
                         <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
 
-                    <!--List-->
                     <ListView Grid.Column="0"
                               MinHeight="200"
                               ItemsSource="{Binding NewAttachments}"
                               SelectedItem="{Binding SelectedNewAttachment}">
                         <ListView.View>
+                            <!--#region list view -->
                             <GridView>
-                                <GridViewColumn>
-                                    <GridViewColumnHeader HorizontalContentAlignment="Center">
-                                        <CheckBox IsChecked="{Binding AreAllNewChecked}"
-                                                  Margin="3"/>
-                                    </GridViewColumnHeader>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsChecked}"
-                                                      Margin="3"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
                                 <GridViewColumn>
                                     <GridViewColumnHeader HorizontalContentAlignment="Left">
                                         <TextBlock Text="Name"
@@ -250,8 +281,10 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                             </GridView>
+                            <!--#endregion-->
                         </ListView.View>
                         <ListView.ContextMenu>
+                            <!--#region context menu -->
                             <ContextMenu>
                                 <MenuItem Header="Add attachment"
                                           Padding="3"
@@ -263,13 +296,15 @@
                                           Padding="3"
                                           Command="{Binding RemoveAllAttachments}"/>
                             </ContextMenu>
+                            <!--#endregion-->
                         </ListView.ContextMenu>
                     </ListView>
                     
-                    <!--Image-->
+                    <!--#region Image -->
                     <Grid Grid.Column="1">
                         <Image></Image>
                     </Grid>
+                    <!--#endregion-->
                 </Grid>
 
                 <!--#region Settings -->
@@ -288,7 +323,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
-                        <!--Name-->
+                        <!--#region Name -->
                         <Grid Grid.Row="0"
                               Grid.Column="0">
                             <Grid.ColumnDefinitions>
@@ -306,8 +341,9 @@
                                      VerticalContentAlignment="Center"
                                      Text="{Binding SelectedNewAttachment.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
-                        
-                        <!--MIME type-->
+                        <!--#endregion-->
+
+                        <!--#region MIME type -->
                         <Grid Grid.Row="1"
                               Grid.Column="0">
                             <Grid.ColumnDefinitions>
@@ -325,8 +361,9 @@
                                      VerticalContentAlignment="Center"
                                      Text="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
-                        
-                        <!--Description-->
+                        <!--#endregion-->
+
+                        <!--#region Description -->
                         <Grid Grid.Row="0"
                               Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -344,6 +381,7 @@
                                      VerticalContentAlignment="Center"
                                      Text="{Binding SelectedNewAttachment.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
+                        <!--#endregion-->
                     </Grid>
                 </GroupBox>
                 <!--#endregion-->

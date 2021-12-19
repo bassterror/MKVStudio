@@ -39,6 +39,13 @@ namespace MKVStudio.Commands
                         track.IsChecked = value;
                     }
                 }
+                if (_collection is ObservableCollection<AttachmentVM> attachments)
+                {
+                    foreach (AttachmentVM attachment in attachments)
+                    {
+                        attachment.IsChecked = value;
+                    }
+                }
             }
         }
     }
