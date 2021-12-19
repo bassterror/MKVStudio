@@ -1,5 +1,7 @@
 ﻿using MKVStudio.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
@@ -26,14 +28,22 @@ namespace MKVStudio.Commands
             {
                 if (parameter is MultiplexVM multiplex)
                 {
-                    multiplexer.Multiplexes.Remove(multiplex);
+                    _ = multiplexer.Multiplexes.Remove(multiplex);
                 }
             }
             if (_collectionParent is InputVM input)
             {
                 if (parameter is SourceFileVM sourceFile)
                 {
-                    input.SourceFiles.Remove(sourceFile);
+                    if (!sourceFile.IsPrimary)
+                    {
+                        _ = input.SourceFiles.Remove(sourceFile);
+                        List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
+                        foreach (TrackVM track in tracks)
+                        {
+                            _ = input.Tracks.Remove(track);
+                        }
+                    }
                 }
             }
         }

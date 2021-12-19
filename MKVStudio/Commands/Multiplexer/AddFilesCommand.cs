@@ -30,14 +30,15 @@ namespace MKVStudio.Commands
                 {
                     MultiplexVM multiplex = new(multiplexer, filename, _exLib);
                     multiplexer.Multiplexes.Add(multiplex);
-                } 
+                }
             }
             if (_collectionParent is InputVM input)
             {
                 foreach (string fileName in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
                 {
-                    SourceFileVM sourceFile = new(fileName, false);
+                    SourceFileVM sourceFile = new(input, fileName, false);
                     input.SourceFiles.Add(sourceFile);
+                    input.CreateTracks(sourceFile);
                 }
             }
         }

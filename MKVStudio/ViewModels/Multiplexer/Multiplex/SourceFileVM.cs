@@ -1,10 +1,11 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace MKVStudio.ViewModels
 {
     public class SourceFileVM : BaseViewModel
     {
-        public bool IsChecked { get; set; }
+        public InputVM Input { get; set; }
         public bool IsPrimary { get; set; }
         public string InputPath { get; set; }
         public string InputName { get; set; }
@@ -18,9 +19,9 @@ namespace MKVStudio.ViewModels
         public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
         public string Type { get; set; }
 
-        public SourceFileVM(string source, bool isPrimary)
+        public SourceFileVM(InputVM input, string source, bool isPrimary)
         {
-            IsChecked = true;
+            Input = input;
             IsPrimary = isPrimary;
             InputPath = Path.GetDirectoryName(source);
             InputName = Path.GetFileNameWithoutExtension(source);

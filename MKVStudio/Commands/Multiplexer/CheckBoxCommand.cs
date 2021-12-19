@@ -30,13 +30,6 @@ namespace MKVStudio.Commands
                     foreach (MultiplexVM multiplex in multiplexes)
                     {
                         multiplex.IsChecked = value;
-                    } 
-                }
-                if (_collection is ObservableCollection<SourceFileVM> sourceFiles)
-                {
-                    foreach (SourceFileVM sourceFile in sourceFiles)
-                    {
-                        sourceFile.IsChecked = value;
                     }
                 }
                 if (_collection is ObservableCollection<TrackVM> tracks)

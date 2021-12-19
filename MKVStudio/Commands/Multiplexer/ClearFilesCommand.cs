@@ -33,6 +33,11 @@ namespace MKVStudio.Commands
                 foreach (SourceFileVM sourceFile in notPrimary)
                 {
                     _ = input.SourceFiles.Remove(sourceFile);
+                    List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
+                    foreach (TrackVM track in tracks)
+                    {
+                        _ = input.Tracks.Remove(track);
+                    }
                 }
             }
         }

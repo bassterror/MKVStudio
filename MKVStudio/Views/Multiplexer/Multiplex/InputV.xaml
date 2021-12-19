@@ -33,18 +33,6 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>
-                                <GridViewColumnHeader HorizontalContentAlignment="Center">
-                                    <CheckBox IsChecked="True"
-                                              Margin="3"/>
-                                </GridViewColumnHeader>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsChecked}"
-                                                  Margin="3"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn>
                                 <GridViewColumnHeader HorizontalContentAlignment="Left">
                                     <TextBlock Text="Name"
                                                Margin="3"/>
@@ -86,36 +74,7 @@
 
                     <!--#region ListView context menu -->
                     <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Command="{Binding CheckAllSourceFiles}"
-                                      CommandParameter="{StaticResource True}">
-                                <MenuItem.Header>
-                                    <StackPanel Orientation="Horizontal"
-                                                Height="20"
-                                                Margin="4">
-                                        <Image Source="/VisualStyles/Images/Check.ico"/>
-                                        <TextBlock Text="Check all"
-                                                   FontSize="14"
-                                                   VerticalAlignment="Center"
-                                                   Margin="4"/>
-                                    </StackPanel>
-                                </MenuItem.Header>
-                            </MenuItem>
-                            <MenuItem Command="{Binding CheckAllSourceFiles}"
-                                      CommandParameter="{StaticResource False}">
-                                <MenuItem.Header>
-                                    <StackPanel Orientation="Horizontal"
-                                                Height="20"
-                                                Margin="4">
-                                        <Image Source="/VisualStyles/Images/Uncheck.ico"/>
-                                        <TextBlock Text="Uncheck all"
-                                                   FontSize="14"
-                                                   VerticalAlignment="Center"
-                                                   Margin="4"/>
-                                    </StackPanel>
-                                </MenuItem.Header>
-                            </MenuItem>
-                            <Separator Margin="4"/>
+                        <ContextMenu>                            
                             <MenuItem Command="{Binding AddFiles}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal"
@@ -255,7 +214,8 @@
                     <ListView.ContextMenu>
                         <ContextMenu>
                             <MenuItem Command="{Binding CheckAllTracks}"
-                                      CommandParameter="{StaticResource True}">
+                                      CommandParameter="{StaticResource True}"
+                                      IsEnabled="{Binding IsCheckAllT}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal"
                                                 Height="20"
@@ -269,7 +229,8 @@
                                 </MenuItem.Header>
                             </MenuItem>
                             <MenuItem Command="{Binding CheckAllTracks}"
-                                      CommandParameter="{StaticResource False}">
+                                      CommandParameter="{StaticResource False}"
+                                      IsEnabled="{Binding IsUncheckAllT}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal"
                                                 Height="20"
