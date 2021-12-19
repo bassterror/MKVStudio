@@ -26,7 +26,7 @@ namespace MKVStudio.Commands
         {
             if (_collectionParent is MultiplexerVM multiplexer)
             {
-                foreach (string filename in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+                foreach (string filename in _exLib.Util.GetFileDialog(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
                 {
                     MultiplexVM multiplex = new(multiplexer, filename, _exLib);
                     multiplexer.Multiplexes.Add(multiplex);
@@ -34,7 +34,7 @@ namespace MKVStudio.Commands
             }
             if (_collectionParent is InputVM input)
             {
-                foreach (string fileName in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+                foreach (string fileName in _exLib.Util.GetFileDialog(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
                 {
                     SourceFileVM sourceFile = new(fileName, false, input);
                     input.SourceFiles.Add(sourceFile);
@@ -43,7 +43,7 @@ namespace MKVStudio.Commands
             }
             if (_collectionParent is AttachmentsVM attachments)
             {
-                foreach (string fileName in _exLib.Util.GetFileDialog("Video files (*.mkv, *.mp4)|*.mkv;*.mp4|All files (*.*)|*.*", true).FileNames)
+                foreach (string fileName in _exLib.Util.GetFileDialog(_exLib.SupportedFileTypesCollection.CreateFiltersAllAttachments(), true).FileNames)
                 {
                     SourceFileVM sourceFile = new(fileName, false);
                     AttachmentVM attachment = new(attachments, sourceFile, _exLib);

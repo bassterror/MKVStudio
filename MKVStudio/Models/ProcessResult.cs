@@ -10,7 +10,8 @@ namespace MKVStudio.Models
         MKVInfo,
         MKVExtract,
         MKVMergeJ,
-        MKVMergeLangList
+        MKVMergeLangList,
+        MKVMergeSupportedFileTypes
     }
 
     public class ProcessResult

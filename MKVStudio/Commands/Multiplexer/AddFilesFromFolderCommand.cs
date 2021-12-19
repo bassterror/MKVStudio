@@ -26,7 +26,7 @@ namespace MKVStudio.Commands
         {
             if (_collectionParent is MultiplexerVM multiplexer)
             {
-                foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
+                foreach (string filename in _exLib.Util.GetFilesFromFolder(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
                 {
                     MultiplexVM multiplex = new(multiplexer, filename, _exLib);
                     multiplexer.Multiplexes.Add(multiplex);
@@ -34,7 +34,7 @@ namespace MKVStudio.Commands
             }
             if (_collectionParent is InputVM input)
             {
-                foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
+                foreach (string filename in _exLib.Util.GetFilesFromFolder(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
                 {
                     SourceFileVM sourceFile = new(filename, false, input);
                     input.SourceFiles.Add(sourceFile);

@@ -58,11 +58,11 @@ namespace MKVStudio.Services
         {
             UtilitiesService util = new();
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\MKVStudio", true);
-            key.SetValue(Executables.FFmpeg.ToString(), util.GetFileDialog("ffmpeg.exe|ffmpeg.exe").FileName);
-            key.SetValue(Executables.MKVInfo.ToString(), util.GetFileDialog("mkvinfo.exe|mkvinfo.exe").FileName);
-            key.SetValue(Executables.MKVMerge.ToString(), util.GetFileDialog("mkvmerge.exe|mkvmerge.exe").FileName);
-            key.SetValue(Executables.MKVPropEdit.ToString(), util.GetFileDialog("mkvpropedit.exe|mkvpropedit.exe").FileName);
-            key.SetValue(Executables.MKVExtract.ToString(), util.GetFileDialog("mkvextract.exe|mkvextract.exe").FileName);
+            key.SetValue(Executables.FFmpeg.ToString(), util.GetFileDialog("ffMPEG|ffmpeg.exe").FileName);
+            key.SetValue(Executables.MKVInfo.ToString(), util.GetFileDialog("MKV Info|mkvinfo.exe").FileName);
+            key.SetValue(Executables.MKVMerge.ToString(), util.GetFileDialog("MKV Merge|mkvmerge.exe").FileName);
+            key.SetValue(Executables.MKVPropEdit.ToString(), util.GetFileDialog("MKV Prop Edit|mkvpropedit.exe").FileName);
+            key.SetValue(Executables.MKVExtract.ToString(), util.GetFileDialog("MKV Extract|mkvextract.exe").FileName);
             key.Close();
         }
         #endregion
@@ -80,11 +80,6 @@ namespace MKVStudio.Services
             return openFileDialog;
         }
 
-        /// <summary>
-        /// Gets files from selected folder
-        /// </summary>
-        /// <param name="complexFilter">use "|" to separate</param>
-        /// <returns></returns>
         public string[] GetFilesFromFolder(string complexFilter)
         {
             using FolderBrowserDialog fbd = new();
@@ -97,6 +92,7 @@ namespace MKVStudio.Services
         {
             using FolderBrowserDialog fbd = new();
             DialogResult result = fbd.ShowDialog();
+
             return fbd.SelectedPath;
         }
 
