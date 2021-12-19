@@ -10,6 +10,8 @@ namespace MKVStudio.ViewModels
         public IExternalLibrariesService ExLib { get; }
         public ObservableCollection<MultiplexVM> Multiplexes { get; set; } = new();
         public MultiplexVM SelectedMultiplex { get; set; }
+        public bool IsCheckAll { get; set; }
+        public bool IsUncheckAll { get; set; }
 
         public ICommand AddFiles => new AddFilesCommand(this, ExLib);
         public ICommand AddFilesFromFolder => new AddFilesFromFolderCommand(this, ExLib);

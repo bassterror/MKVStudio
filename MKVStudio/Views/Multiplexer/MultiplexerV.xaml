@@ -6,7 +6,6 @@
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              xmlns:c="clr-namespace:MKVStudio.Converters"
              xmlns:s="clr-namespace:System;assembly=mscorlib"
-             xmlns:m="clr-namespace:MKVStudio.Models"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:MultiplexerVM}"
              d:DesignHeight="150" d:DesignWidth="400">
@@ -75,7 +74,8 @@
                 <ListView.ContextMenu>
                     <ContextMenu>
                         <MenuItem Command="{Binding CheckAll}"
-                                  CommandParameter="{StaticResource True}">
+                                  CommandParameter="{StaticResource True}"
+                                  IsEnabled="{Binding IsCheckAll}">
                             <MenuItem.Header>
                                 <StackPanel Orientation="Horizontal"
                                             Height="20"
@@ -89,7 +89,8 @@
                             </MenuItem.Header>
                         </MenuItem>
                         <MenuItem Command="{Binding CheckAll}"
-                                  CommandParameter="{StaticResource False}">
+                                  CommandParameter="{StaticResource False}"
+                                  IsEnabled="{Binding IsUncheckAll}">
                             <MenuItem.Header>
                                 <StackPanel Orientation="Horizontal"
                                             Height="20"
