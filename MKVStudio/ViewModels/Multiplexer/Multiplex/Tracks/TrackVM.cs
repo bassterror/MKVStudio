@@ -1,21 +1,35 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using System.Linq;
 
 namespace MKVStudio.ViewModels
 {
     public class TrackVM : BaseViewModel
     {
         public InputVM Input { get; }
-        public bool IsChecked { get; set; }
+        public SourceFileVM SourceFile { get; }
+
+        private bool _isChecked;
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set
+            {
+                _isChecked = value;
+                Input.IsCheckAllT = Input.Tracks.Where(t => t.IsChecked).Count() != Input.Tracks.Count;
+                Input.IsUncheckAllT = Input.Tracks.Where(t => !t.IsChecked).Count() != Input.Tracks.Count;
+            }
+        }
         public TrackPropertiesTypes Type { get; }
         public TrackProperties Properties { get; set; }
         public string Codec { get; set; }
         public string Language { get; set; }
         public string Name { get; set; }
 
-        public TrackVM(InputVM input, MKVMergeJ.Track mkvMergeTrack, TrackPropertiesTypes type, IExternalLibrariesService exLib)
+        public TrackVM(InputVM input, SourceFileVM sourceFile, MKVMergeJ.Track mkvMergeTrack, TrackPropertiesTypes type, IExternalLibrariesService exLib)
         {
             Input = input;
+            SourceFile = sourceFile;
             IsChecked = true;
             Type = type;
             switch (Type)

@@ -76,6 +76,8 @@ namespace MKVStudio.Services
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.StandardOutputEncoding = Encoding.UTF8;
+                process.StartInfo.StandardErrorEncoding = Encoding.UTF8;
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
                 StringBuilder output = new();

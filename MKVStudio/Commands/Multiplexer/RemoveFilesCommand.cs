@@ -1,18 +1,20 @@
 ﻿using MKVStudio.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MKVStudio.Commands
 {
     public class RemoveFilesCommand : ICommand
     {
-        private readonly MultiplexerVM _multiplexer;
+        private readonly object _collectionParent;
 
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
-        public RemoveFilesCommand(MultiplexerVM multiplexer)
+        public RemoveFilesCommand(object collectionParent)
         {
-            _multiplexer = multiplexer;
+            _collectionParent = collectionParent;
         }
 
         public bool CanExecute(object parameter)
@@ -22,9 +24,34 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is MultiplexVM multiplex)
+            if (_collectionParent is MultiplexerVM multiplexer)
             {
-                _multiplexer.Multiplexes.Remove(multiplex);
+                if (parameter is MultiplexVM multiplex)
+                {
+                    _ = multiplexer.Multiplexes.Remove(multiplex);
+                }
+            }
+            if (_collectionParent is InputVM input)
+            {
+                if (parameter is SourceFileVM sourceFile)
+                {
+                    if (!sourceFile.IsPrimary)
+                    {
+                        _ = input.SourceFiles.Remove(sourceFile);
+                        List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
+                        foreach (TrackVM track in tracks)
+                        {
+                            _ = input.Tracks.Remove(track);
+                        }
+                    }
+                }
+            }
+            if (_collectionParent is AttachmentsVM attachments)
+            {
+                if (parameter is AttachmentVM attachment)
+                {
+                    _ = attachments.NewAttachments.Remove(attachment);
+                }
             }
         }
     }

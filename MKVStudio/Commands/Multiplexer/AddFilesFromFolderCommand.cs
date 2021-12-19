@@ -8,12 +8,12 @@ namespace MKVStudio.Commands
     public class AddFilesFromFolderCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
-        private readonly MultiplexerVM _multiplexer;
+        private readonly object _collectionParent;
         private readonly IExternalLibrariesService _exLib;
 
-        public AddFilesFromFolderCommand(MultiplexerVM multiplexer, IExternalLibrariesService exLib)
+        public AddFilesFromFolderCommand(object collectionParent, IExternalLibrariesService exLib)
         {
-            _multiplexer = multiplexer;
+            _collectionParent = collectionParent;
             _exLib = exLib;
         }
 
@@ -24,10 +24,22 @@ namespace MKVStudio.Commands
 
         public void Execute(object parameter)
         {
-            foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
+            if (_collectionParent is MultiplexerVM multiplexer)
             {
-                MultiplexVM multiplex = new(_multiplexer, filename, _exLib);
-                _multiplexer.Multiplexes.Add(multiplex);
+                foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
+                {
+                    MultiplexVM multiplex = new(multiplexer, filename, _exLib);
+                    multiplexer.Multiplexes.Add(multiplex);
+                }
+            }
+            if (_collectionParent is InputVM input)
+            {
+                foreach (string filename in _exLib.Util.GetFilesFromFolder("*.mkv|*.mp4"))
+                {
+                    SourceFileVM sourceFile = new(filename, false, input);
+                    input.SourceFiles.Add(sourceFile);
+                    input.CreateTracks(sourceFile);
+                }
             }
         }
     }
