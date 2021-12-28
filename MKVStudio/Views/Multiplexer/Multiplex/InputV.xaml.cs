@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for InputV.xaml
+/// </summary>
+public partial class InputV : UserControl
 {
-    /// <summary>
-    /// Interaction logic for InputV.xaml
-    /// </summary>
-    public partial class InputV : UserControl
+    public InputV()
     {
-        public InputV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

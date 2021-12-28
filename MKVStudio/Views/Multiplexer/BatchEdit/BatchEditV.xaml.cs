@@ -1,15 +1,14 @@
 ﻿using System.Windows;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for ApplyToAllView.xaml
+/// </summary>
+public partial class BatchEditV : Window
 {
-    /// <summary>
-    /// Interaction logic for ApplyToAllView.xaml
-    /// </summary>
-    public partial class BatchEditV : Window
+    public BatchEditV()
     {
-        public BatchEditV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

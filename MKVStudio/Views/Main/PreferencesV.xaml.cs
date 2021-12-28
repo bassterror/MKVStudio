@@ -1,15 +1,14 @@
 ﻿using System.Windows;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for PreferencesV.xaml
+/// </summary>
+public partial class PreferencesV : Window
 {
-    /// <summary>
-    /// Interaction logic for PreferencesV.xaml
-    /// </summary>
-    public partial class PreferencesV : Window
+    public PreferencesV()
     {
-        public PreferencesV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

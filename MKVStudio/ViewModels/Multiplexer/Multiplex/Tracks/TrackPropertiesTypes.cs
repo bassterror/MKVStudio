@@ -1,9 +1,8 @@
-﻿namespace MKVStudio.ViewModels
+﻿namespace MKVStudio.ViewModels;
+
+public enum TrackPropertiesTypes
 {
-    public enum TrackPropertiesTypes
-    {
-        Video,
-        Audio,
-        Subtitles
-    }
+    Video,
+    Audio,
+    Subtitles
 }

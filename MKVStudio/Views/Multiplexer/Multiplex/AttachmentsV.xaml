@@ -34,7 +34,8 @@
                 <ListView Grid.Column="0"
                           MinHeight="200"
                           ItemsSource="{Binding ExistingAttachments}"
-                          SelectedItem="{Binding SelectedExistingAttachment}">
+                          SelectedItem="{Binding SelectedExistingAttachment}"
+                          d:ItemsSource="{d:SampleData ItemCount=3}">
                     <ListView.View>
                         <!--#region list view -->
                         <GridView>
@@ -198,7 +199,8 @@
                     <ListView Grid.Column="0"
                               MinHeight="200"
                               ItemsSource="{Binding NewAttachments}"
-                              SelectedItem="{Binding SelectedNewAttachment}">
+                              SelectedItem="{Binding SelectedNewAttachment}"
+                              d:ItemsSource="{d:SampleData ItemCount=3}">
                         <ListView.View>
                             <!--#region list view -->
                             <GridView>

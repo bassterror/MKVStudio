@@ -1,15 +1,14 @@
-﻿namespace MKVStudio.ViewModels
-{
-    public enum ViewModelTypes
-    {
-        //Main
-        Multiplexer,
-        JobQueue,
+﻿namespace MKVStudio.ViewModels;
 
-        //Multiplex
-        Input,
-        Output,
-        Attachments,
-        Chapters
-    }
+public enum ViewModelTypes
+{
+    //Main
+    Multiplexer,
+    JobQueue,
+
+    //Multiplex
+    Input,
+    Output,
+    Attachments,
+    Chapters
 }

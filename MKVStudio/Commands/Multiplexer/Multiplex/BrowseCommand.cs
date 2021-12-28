@@ -3,30 +3,29 @@ using MKVStudio.ViewModels;
 using System;
 using System.Windows.Input;
 
-namespace MKVStudio.Commands
+namespace MKVStudio.Commands;
+
+public class BrowseCommand : ICommand
 {
-    public class BrowseCommand : ICommand
+    private readonly MultiplexVM _multiplex;
+    private readonly IExternalLibrariesService _exLib;
+
+    public event EventHandler CanExecuteChanged { add { } remove { } }
+
+    public BrowseCommand(MultiplexVM multiplex, IExternalLibrariesService exLib)
     {
-        private readonly MultiplexVM _multiplex;
-        private readonly IExternalLibrariesService _exLib;
+        _multiplex = multiplex;
+        _exLib = exLib;
+    }
 
-        public event EventHandler CanExecuteChanged { add { } remove { } }
+    public bool CanExecute(object parameter)
+    {
+        return true;
+    }
 
-        public BrowseCommand(MultiplexVM multiplex, IExternalLibrariesService exLib)
-        {
-            _multiplex = multiplex;
-            _exLib = exLib;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            // Set new output dir
-            //_multiplex.OutputPath = _exLib.Util.GetFolder();
-        }
+    public void Execute(object parameter)
+    {
+        // Set new output dir
+        //_multiplex.OutputPath = _exLib.Util.GetFolder();
     }
 }
