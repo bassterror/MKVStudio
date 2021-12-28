@@ -9,12 +9,11 @@ namespace MKVStudio.Models
 
         public SupportedFileTypesCollection()
         {
-            AttachmentFileTypes.Add(new SupportedFileType("Images", "*.jpg;*.jpeg;*.png"));
-            AttachmentFileTypes.Add(new SupportedFileType("Fonts", "*.otf;*.ttf;*.fnt"));
+            AttachmentFileTypes.Add(new SupportedFileType("Images", "*.jpg;*.jpeg;*.png;*.bmp;*.gif"));
+            AttachmentFileTypes.Add(new SupportedFileType("Fonts", "*.otf;*.ttf;*.ttc"));
             AttachmentFileTypes.Add(new SupportedFileType("Text", "*.txt;*.doc;*.docx;*.pdf"));
             AttachmentFileTypes.Add(new SupportedFileType("JSON", "*.json"));
             AttachmentFileTypes.Add(new SupportedFileType("CSV", "*.csv"));
-            AttachmentFileTypes.Add(new SupportedFileType("Edit Decision List", "*.edl"));
         }
 
         public string CreateFiltersAllSuported()
