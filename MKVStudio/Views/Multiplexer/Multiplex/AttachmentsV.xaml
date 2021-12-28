@@ -40,7 +40,7 @@
                         <GridView>
                             <GridViewColumn>
                                 <GridViewColumnHeader HorizontalContentAlignment="Center">
-                                    <CheckBox IsChecked="{Binding AreAllExistingChecked}"
+                                    <CheckBox IsChecked="True"
                                               Margin="3"/>
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
@@ -388,10 +388,22 @@
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Center"
                                        Foreground="{StaticResource ControlDisabledGlythColour}"/>
-                            <TextBox Grid.Column="1"
-                                     Margin="3"
-                                     VerticalContentAlignment="Center"
-                                     Text="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Grid.Column="1"
+                                      Margin="3"
+                                      VerticalContentAlignment="Center"
+                                      ItemsSource="{Binding ExLib.MIMETypes}"
+                                      SelectedItem="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Type}"/>
+                                            <TextBlock Text=" ("/>
+                                            <TextBlock Text="{Binding Extensions}"/>
+                                            <TextBlock Text=")"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </Grid>
                         <!--#endregion-->
 
