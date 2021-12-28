@@ -18,6 +18,7 @@ namespace MKVStudio.Services
         public ObservableCollection<Language> AllLanguages { get; set; } = new();
         public ObservableCollection<Language> Languages { get; set; } = new();
         public SupportedFileTypesCollection SupportedFileTypesCollection { get; set; } = new();
+        public MIMETypeCollection MIMETypes { get; set; } = new();
 
         public ExternalLibrariesService(IUtilitiesService utilitiesService)
         {

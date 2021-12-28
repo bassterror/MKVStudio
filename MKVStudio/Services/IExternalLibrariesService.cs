@@ -11,6 +11,7 @@ namespace MKVStudio.Services
         ObservableCollection<Language> AllLanguages { get; set; }
         ObservableCollection<Language> Languages { get; set; }
         SupportedFileTypesCollection SupportedFileTypesCollection { get; set; }
+        MIMETypeCollection MIMETypes { get; set; }
         Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM video = null);
     }
 }
