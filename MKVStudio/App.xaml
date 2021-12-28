@@ -18,6 +18,9 @@
             <DataTemplate DataType="{x:Type vm:JobQueueVM}">
                 <v:QueueV/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:PreferencesVM}">
+                <v:PreferencesV/>
+            </DataTemplate>
             
             <!--Multiplexer-->
             <DataTemplate DataType="{x:Type vm:BatchEditVM}">
