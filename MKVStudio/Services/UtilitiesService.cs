@@ -65,6 +65,20 @@ namespace MKVStudio.Services
             key.SetValue(Executables.MKVExtract.ToString(), util.GetFileDialog("MKV Extract|mkvextract.exe").FileName);
             key.Close();
         }
+
+        public void SetPreferedLanguages(string languages)
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+            key.SetValue("PreferedLanguages", languages);
+            key.Close();
+        }
+
+        public string GetPreferedLanguages()
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+            string value = key.GetValue("PreferedLanguages") != null ? key.GetValue("PreferedLanguages").ToString() : string.Empty;
+            return value;
+        }
         #endregion
 
         #region Misc

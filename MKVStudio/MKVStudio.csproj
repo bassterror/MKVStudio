@@ -16,6 +16,7 @@
     <None Remove="VisualStyles\Images\RemoveAttachment.ico" />
     <None Remove="VisualStyles\Images\RemoveFile.ico" />
     <None Remove="VisualStyles\Images\RemoveFolder.ico" />
+    <None Remove="VisualStyles\Images\Search.ico" />
     <None Remove="VisualStyles\Images\Uncheck.ico" />
   </ItemGroup>
 
@@ -38,6 +39,7 @@
     <Resource Include="VisualStyles\Images\RemoveAttachment.ico" />
     <Resource Include="VisualStyles\Images\RemoveFile.ico" />
     <Resource Include="VisualStyles\Images\RemoveFolder.ico" />
+    <Resource Include="VisualStyles\Images\Search.ico" />
     <Resource Include="VisualStyles\Images\Uncheck.ico" />
   </ItemGroup>
 

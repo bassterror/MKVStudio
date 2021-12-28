@@ -12,6 +12,7 @@ namespace MKVStudio.ViewModels
 
         public ICommand UpdateSelectedMainTab => new UpdateSelectedMainTabCommand(this, Multiplexer, JobQueue);
         public IExternalLibrariesService ExLib { get; }
+        public ICommand Preferences => new PreferencesCommand(this, ExLib);
 
         public MainVM(IExternalLibrariesService exLib)
         {
