@@ -188,15 +188,18 @@ namespace MKVStudio.Services
         {
             ProcessResult pr = await Run(ProcessResultNames.MKVMergeLangList);
             string[] lines = pr.StdOutput.Split("\r\n");
-            for (int i = 2; i < lines.Length; i++)
+            string[] pref = Util.GetPreferedLanguages().Split("|");
+            for (int i = 2; i < lines.Length - 1; i++)
             {
                 Match match = Regex.Match(lines[i], @"^(.+)\|(.+)\|(.+)\|(.+)$");
                 Language language = new(match);
-                AllLanguages.Add(language);
-                string[] pref = new string[] { "eng", "und", "bul", "fre", "ger", "ita", "rus", "spa" };
                 if (pref.Contains(language.ID))
                 {
                     Languages.Add(language);
+                }
+                else
+                {
+                    AllLanguages.Add(language);
                 }
             }
         }
