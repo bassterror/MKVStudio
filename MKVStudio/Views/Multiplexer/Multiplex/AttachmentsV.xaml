@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MKVStudio.Views.AttachmentsV"
+<UserControl x:Class="MKVStudio.Views.AttachmentsV"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,8 +14,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
@@ -70,7 +69,7 @@
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding ContentType}"
+                                        <TextBlock Text="{Binding ContentType.Type}"
                                                    Margin="3"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -223,7 +222,7 @@
                                     </GridViewColumnHeader>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding ContentType}"
+                                            <TextBlock Text="{Binding ContentType.Type}"
                                                        Margin="3"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -393,7 +392,7 @@
                             <ComboBox Grid.Column="1"
                                       Margin="3"
                                       VerticalContentAlignment="Center"
-                                      ItemsSource="{Binding ExLib.MIMETypes}"
+                                      ItemsSource="{Binding ExLib.MIMETypes.AttachmentMIMETypes}"
                                       SelectedItem="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>

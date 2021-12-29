@@ -1,5 +1,6 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
+using System.IO;
 using System.Linq;
 
 namespace MKVStudio.ViewModels;
@@ -21,7 +22,7 @@ public class AttachmentVM : BaseViewModel
         }
     }
 
-    public string ContentType { get; set; }
+    public MIMEType ContentType { get; set; }
     public string Description { get; set; }
     public string Name { get; set; }
     public int ID { get; set; }
@@ -35,14 +36,20 @@ public class AttachmentVM : BaseViewModel
         SourceFile = sourceFile;
         ExLib = exLib;
 
-        if (attachment != null)
+        if (attachment == null)
         {
-            ContentType = attachment.Content_type;
-            Description = attachment.Description;
-            Name = attachment.File_name;
-            ID = attachment.Id;
-            UID = attachment.Properties.UID;
-            Size = attachment.Size;
+            IsChecked = true;
+            ContentType = ExLib.MIMETypes.AttachmentMIMETypes.First(m => m.Extensions.Contains(SourceFile.InputExtension));
+            Name = sourceFile.InputName;
+            Size = (int)new FileInfo(SourceFile.InputFullPath).Length;
+            return;
         }
+
+        ContentType = new MIMEType(attachment.Content_type);
+        Description = attachment.Description;
+        Name = attachment.File_name;
+        ID = attachment.Id;
+        UID = attachment.Properties.UID;
+        Size = attachment.Size;
     }
 }
