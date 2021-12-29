@@ -4,7 +4,9 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -27,7 +29,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
         GetSupportedFileTypes();
     }
 
-    public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null)
+    public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
     {
         ProcessResult pr = new();
 
@@ -45,8 +47,8 @@ public class ExternalLibrariesService : IExternalLibrariesService
             case ProcessResultNames.MKVInfo:
                 pr = await RunProcess(Executables.MKVInfo, BuildArguments(processName, sourceFile), processName);
                 break;
-            case ProcessResultNames.MKVExtract:
-                pr = await RunProcess(Executables.MKVExtract, BuildArguments(processName, sourceFile), processName);
+            case ProcessResultNames.MKVExtractAttachments:
+                pr = await RunProcess(Executables.MKVExtract, BuildArguments(processName, sourceFile, attachmentId, attachmentTempPath), processName);
                 break;
             case ProcessResultNames.MKVMergeJ:
                 pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, sourceFile), processName);
@@ -151,7 +153,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
         return processResult;
     }
 
-    private static string BuildArguments(ProcessResultNames processName, SourceFileVM sourceFile = null)
+    private static string BuildArguments(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
     {
         string arguments = string.Empty;
         switch (processName)
@@ -168,8 +170,8 @@ public class ExternalLibrariesService : IExternalLibrariesService
             case ProcessResultNames.MKVInfo:
                 arguments = $"\"{sourceFile.InputFullPath}\"";
                 break;
-            case ProcessResultNames.MKVExtract:
-                arguments = $"\"{sourceFile.InputFullPath}\" tracks";
+            case ProcessResultNames.MKVExtractAttachments:
+                arguments = $"\"{sourceFile.InputFullPath}\" attachments {attachmentId}:\"{attachmentTempPath}\"";
                 break;
             case ProcessResultNames.MKVMergeJ:
                 arguments = $"-J \"{sourceFile.InputFullPath}\"";

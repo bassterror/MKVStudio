@@ -170,8 +170,9 @@
                 </ListView>
                 
                 <!--#region Image -->
-                <Grid Grid.Column="1">
-                    <Image></Image>
+                <Grid Grid.Column="1"
+                      MaxHeight="200">
+                    <Image Source="{Binding SelectedExistingAttachment.TempPath}"/>
                 </Grid>
                 <!--#endregion-->
             </Grid>
@@ -400,7 +401,7 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Type}"/>
                                             <TextBlock Text=" ("/>
-                                            <TextBlock Text="{Binding Extensions}"/>
+                                            <TextBlock Text="{Binding Extension}"/>
                                             <TextBlock Text=")"/>
                                         </StackPanel>
                                     </DataTemplate>

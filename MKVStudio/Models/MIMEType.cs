@@ -3,7 +3,7 @@
 public class MIMEType
 {
     public string Type { get; set; }
-    public string Extensions { get; set; }
+    public string Extension { get; set; }
 
     public MIMEType(string type = null, string sourceExtension = null)
     {
@@ -71,43 +71,43 @@ public class MIMEType
         switch (Type)
         {
             case "image/jpeg":
-                Extensions = "*.jpg;*.jpeg";
+                Extension = ".jpg";
                 break;
             case "image/bmp":
-                Extensions = "*.bmp";
+                Extension = ".bmp";
                 break;
             case "image/png":
-                Extensions = "*.png";
+                Extension = ".png";
                 break;
             case "image/gif":
-                Extensions = "*.gif";
+                Extension = ".gif";
                 break;
             case "font/otf":
-                Extensions = "*.otf";
+                Extension = ".otf";
                 break;
             case "font/ttf":
-                Extensions = "*.ttf";
+                Extension = ".ttf";
                 break;
             case "font/collection":
-                Extensions = "*.ttc";
+                Extension = ".ttc";
                 break;
             case "text/plain":
-                Extensions = "*.txt";
+                Extension = ".txt";
                 break;
             case "application/msword":
-                Extensions = "*.doc";
+                Extension = ".doc";
                 break;
             case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                Extensions = "*.docx";
+                Extension = ".docx";
                 break;
             case "application/pdf":
-                Extensions = "*.pdf";
+                Extension = ".pdf";
                 break;
             case "application/json":
-                Extensions = "*.json";
+                Extension = ".json";
                 break;
             case "text/csv":
-                Extensions = "*.csv";
+                Extension = ".csv";
                 break;
             default:
                 break;

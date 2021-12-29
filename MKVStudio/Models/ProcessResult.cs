@@ -8,7 +8,7 @@ public enum ProcessResultNames
     LoudnormSecondStereo,
     LoudnormSecond6Channels,
     MKVInfo,
-    MKVExtract,
+    MKVExtractAttachments,
     MKVMergeJ,
     MKVMergeLangList,
     MKVMergeSupportedFileTypes

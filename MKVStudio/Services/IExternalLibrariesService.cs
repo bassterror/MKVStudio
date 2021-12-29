@@ -12,5 +12,5 @@ public interface IExternalLibrariesService
     ObservableCollection<Language> Languages { get; set; }
     SupportedFileTypesCollection SupportedFileTypesCollection { get; set; }
     MIMETypeCollection MIMETypes { get; set; }
-    Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM video = null);
+    Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null);
 }

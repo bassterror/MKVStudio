@@ -2,6 +2,7 @@
 using MKVStudio.Services;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace MKVStudio.ViewModels;
 
@@ -29,6 +30,7 @@ public class AttachmentVM : BaseViewModel
     public string UID { get; set; }
     public int Size { get; set; }
     public string SizeConverted => ExLib.Util.ConvertBytes(Size, 2);
+    public string TempPath { get; set; }
 
     public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, IExternalLibrariesService exLib, MKVMergeJ.Attachment attachment = null)
     {
@@ -39,7 +41,7 @@ public class AttachmentVM : BaseViewModel
         if (attachment == null)
         {
             IsChecked = true;
-            ContentType = ExLib.MIMETypes.AttachmentMIMETypes.First(m => m.Extensions.Contains(SourceFile.InputExtension));
+            ContentType = ExLib.MIMETypes.AttachmentMIMETypes.First(m => m.Extension.Contains(SourceFile.InputExtension));
             Name = sourceFile.InputName;
             Size = (int)new FileInfo(SourceFile.InputFullPath).Length;
             return;
@@ -51,5 +53,12 @@ public class AttachmentVM : BaseViewModel
         ID = attachment.Id;
         UID = attachment.Properties.UID;
         Size = attachment.Size;
+        TempPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $"\\temp\\{sourceFile.InputName}\\{Name}{ContentType.Extension}";
+        ExtractTemp();
+    }
+
+    private async void ExtractTemp()
+    {
+        ProcessResult pr = await ExLib.Run(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), TempPath);
     }
 }
