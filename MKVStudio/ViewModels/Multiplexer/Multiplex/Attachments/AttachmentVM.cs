@@ -3,6 +3,8 @@ using MKVStudio.Services;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MKVStudio.ViewModels;
 
@@ -31,6 +33,7 @@ public class AttachmentVM : BaseViewModel
     public int Size { get; set; }
     public string SizeConverted => ExLib.Util.ConvertBytes(Size, 2);
     public string TempPath { get; set; }
+    public ImageSource TempImage { get; set; }
 
     public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, IExternalLibrariesService exLib, MKVMergeJ.Attachment attachment = null)
     {
@@ -59,6 +62,20 @@ public class AttachmentVM : BaseViewModel
 
     private async void ExtractTemp()
     {
-        ProcessResult pr = await ExLib.Run(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), TempPath);
+        _ = await ExLib.Run(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), TempPath);
+        LoadTempImage();
+    }
+
+    private void LoadTempImage()
+    {
+        using var stream = new FileStream(TempPath, FileMode.Open, FileAccess.Read);
+        var bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.DecodePixelWidth = 200;
+        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+        bitmap.StreamSource = stream;
+        bitmap.EndInit();
+        bitmap.Freeze();
+        TempImage = bitmap;
     }
 }

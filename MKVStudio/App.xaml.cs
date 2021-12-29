@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+//using Forms = System.Windows.Forms;
 
 namespace MKVStudio;
 
@@ -43,18 +44,8 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
         DirectoryInfo di = new(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $"\\temp");
-
-        foreach (FileInfo file in di.GetFiles())
-        {
-            file.Delete();
-        }
-        foreach (DirectoryInfo dir in di.GetDirectories())
-        {
-            dir.Delete(true);
-        }
+        di.Delete(true);
         base.OnExit(e);
     }
 }

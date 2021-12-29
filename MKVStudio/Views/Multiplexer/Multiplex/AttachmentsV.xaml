@@ -172,7 +172,7 @@
                 <!--#region Image -->
                 <Grid Grid.Column="1"
                       MaxHeight="200">
-                    <Image Source="{Binding SelectedExistingAttachment.TempPath}"/>
+                    <Image Source="{Binding SelectedExistingAttachment.TempImage}"/>
                 </Grid>
                 <!--#endregion-->
             </Grid>
