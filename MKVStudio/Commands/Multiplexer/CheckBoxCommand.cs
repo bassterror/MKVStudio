@@ -3,48 +3,47 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace MKVStudio.Commands
+namespace MKVStudio.Commands;
+
+public class CheckBoxCommand : ICommand
 {
-    public class CheckBoxCommand : ICommand
+    private readonly object _collection;
+
+    public event EventHandler CanExecuteChanged { add { } remove { } }
+
+    public CheckBoxCommand(object collection)
     {
-        private readonly object _collection;
+        _collection = collection;
+    }
 
-        public event EventHandler CanExecuteChanged { add { } remove { } }
+    public bool CanExecute(object parameter)
+    {
+        return true;
+    }
 
-        public CheckBoxCommand(object collection)
+    public void Execute(object parameter)
+    {
+        if (parameter is bool value)
         {
-            _collection = collection;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            if (parameter is bool value)
+            if (_collection is ObservableCollection<MultiplexVM> multiplexes)
             {
-                if (_collection is ObservableCollection<MultiplexVM> multiplexes)
+                foreach (MultiplexVM multiplex in multiplexes)
                 {
-                    foreach (MultiplexVM multiplex in multiplexes)
-                    {
-                        multiplex.IsChecked = value;
-                    }
+                    multiplex.IsChecked = value;
                 }
-                if (_collection is ObservableCollection<TrackVM> tracks)
+            }
+            if (_collection is ObservableCollection<TrackVM> tracks)
+            {
+                foreach (TrackVM track in tracks)
                 {
-                    foreach (TrackVM track in tracks)
-                    {
-                        track.IsChecked = value;
-                    }
+                    track.IsChecked = value;
                 }
-                if (_collection is ObservableCollection<AttachmentVM> attachments)
+            }
+            if (_collection is ObservableCollection<AttachmentVM> attachments)
+            {
+                foreach (AttachmentVM attachment in attachments)
                 {
-                    foreach (AttachmentVM attachment in attachments)
-                    {
-                        attachment.IsChecked = value;
-                    }
+                    attachment.IsChecked = value;
                 }
             }
         }

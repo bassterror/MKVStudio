@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for SubtitleTrackViewModel.xaml
+/// </summary>
+public partial class SubtitlesPropertiesV : UserControl
 {
-    /// <summary>
-    /// Interaction logic for SubtitleTrackViewModel.xaml
-    /// </summary>
-    public partial class SubtitlesPropertiesV : UserControl
+    public SubtitlesPropertiesV()
     {
-        public SubtitlesPropertiesV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

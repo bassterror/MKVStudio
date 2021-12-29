@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for VideoTrackView.xaml
+/// </summary>
+public partial class VideoPropertiesV : UserControl
 {
-    /// <summary>
-    /// Interaction logic for VideoTrackView.xaml
-    /// </summary>
-    public partial class VideoPropertiesV : UserControl
+    public VideoPropertiesV()
     {
-        public VideoPropertiesV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

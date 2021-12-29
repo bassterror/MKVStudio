@@ -1,15 +1,19 @@
 ﻿using System.Windows.Controls;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for AttachmentsV.xaml
+/// </summary>
+public partial class AttachmentsV : UserControl
 {
-    /// <summary>
-    /// Interaction logic for AttachmentsV.xaml
-    /// </summary>
-    public partial class AttachmentsV : UserControl
+    public AttachmentsV()
     {
-        public AttachmentsV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
+
+    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace MKVStudio.ViewModels
+﻿namespace MKVStudio.ViewModels;
+
+public class JobQueueVM : BaseViewModel
 {
-    public class JobQueueVM : BaseViewModel
+    public JobQueueVM()
     {
-        public JobQueueVM()
-        {
-        }
     }
 }

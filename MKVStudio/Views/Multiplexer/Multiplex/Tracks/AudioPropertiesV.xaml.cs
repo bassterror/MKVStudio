@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for AudioTrackViewModel.xaml
+/// </summary>
+public partial class AudioPropertiesV : UserControl
 {
-    /// <summary>
-    /// Interaction logic for AudioTrackViewModel.xaml
-    /// </summary>
-    public partial class AudioPropertiesV : UserControl
+    public AudioPropertiesV()
     {
-        public AudioPropertiesV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

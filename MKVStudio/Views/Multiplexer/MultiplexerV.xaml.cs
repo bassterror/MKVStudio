@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace MKVStudio.Views
+namespace MKVStudio.Views;
+
+/// <summary>
+/// Interaction logic for VideosView.xaml
+/// </summary>
+public partial class MultiplexerV : UserControl
 {
-    /// <summary>
-    /// Interaction logic for VideosView.xaml
-    /// </summary>
-    public partial class MultiplexerV : UserControl
+    public MultiplexerV()
     {
-        public MultiplexerV()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

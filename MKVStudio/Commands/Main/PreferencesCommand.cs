@@ -5,32 +5,31 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 
-namespace MKVStudio.Commands
+namespace MKVStudio.Commands;
+
+public class PreferencesCommand : ICommand
 {
-    public class PreferencesCommand : ICommand
+    private readonly MainVM _main;
+    private readonly IExternalLibrariesService _exLib;
+
+    public event EventHandler CanExecuteChanged { add { } remove { } }
+
+    public PreferencesCommand(MainVM main, IExternalLibrariesService exLib)
     {
-        private readonly MainVM _main;
-        private readonly IExternalLibrariesService _exLib;
+        _main = main;
+        _exLib = exLib;
+    }
 
-        public event EventHandler CanExecuteChanged { add { } remove { } }
+    public bool CanExecute(object parameter)
+    {
+        return true;
+    }
 
-        public PreferencesCommand(MainVM main, IExternalLibrariesService exLib)
-        {
-            _main = main;
-            _exLib = exLib;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            PreferencesV preferences = new();
-            preferences.DataContext = new PreferencesVM(_main, _exLib, preferences);
-            preferences.Owner = Application.Current.MainWindow;
-            preferences.Show();
-        }
+    public void Execute(object parameter)
+    {
+        PreferencesV preferences = new();
+        preferences.DataContext = new PreferencesVM(_main, _exLib, preferences);
+        preferences.Owner = Application.Current.MainWindow;
+        preferences.Show();
     }
 }
