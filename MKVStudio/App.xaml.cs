@@ -2,6 +2,8 @@
 using MKVStudio.Services;
 using MKVStudio.ViewModels;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 
 namespace MKVStudio;
@@ -37,5 +39,22 @@ public partial class App : Application
         _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainVM>()));
 
         return services.BuildServiceProvider();
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        DirectoryInfo di = new(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $"\\temp");
+
+        foreach (FileInfo file in di.GetFiles())
+        {
+            file.Delete();
+        }
+        foreach (DirectoryInfo dir in di.GetDirectories())
+        {
+            dir.Delete(true);
+        }
+        base.OnExit(e);
     }
 }
