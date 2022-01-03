@@ -394,7 +394,7 @@
                             <ComboBox Grid.Column="1"
                                       Margin="3"
                                       VerticalContentAlignment="Center"
-                                      ItemsSource="{Binding ExLib.MIMETypes.AttachmentMIMETypes}"
+                                      ItemsSource="{Binding Util.MIMETypes.AttachmentMIMETypes}"
                                       SelectedItem="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>

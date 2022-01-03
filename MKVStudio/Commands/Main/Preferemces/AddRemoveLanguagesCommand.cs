@@ -31,23 +31,23 @@ public class AddRemoveLanguagesCommand : ICommand
             {
                 case "add":
                     _preferences.SearchAvailableLanguage = string.Empty;
-                    _preferences.ExLib.Languages.Add(_preferences.SelectedAvailableLanguage);
-                    _preferences.ExLib.Languages = new ObservableCollection<Language>(_preferences.ExLib.Languages.OrderBy(l => l.Name));
-                    _preferences.ExLib.AllLanguages.Remove(_preferences.SelectedAvailableLanguage);
-                    _preferences.ExLib.AllLanguages = new ObservableCollection<Language>(_preferences.ExLib.AllLanguages.OrderBy(l => l.Name));
-                    _preferences.UserLanguages = _preferences.ExLib.Languages;
-                    _preferences.AvailableLanguages = _preferences.ExLib.AllLanguages;
-                    _preferences.ExLib.Util.SetPreferedLanguages(GetPrefLangString());
+                    _preferences.Util.Languages.Add(_preferences.SelectedAvailableLanguage);
+                    _preferences.Util.Languages = new ObservableCollection<Language>(_preferences.Util.Languages.OrderBy(l => l.Name));
+                    _preferences.Util.AllLanguages.Remove(_preferences.SelectedAvailableLanguage);
+                    _preferences.Util.AllLanguages = new ObservableCollection<Language>(_preferences.Util.AllLanguages.OrderBy(l => l.Name));
+                    _preferences.UserLanguages = _preferences.Util.Languages;
+                    _preferences.AvailableLanguages = _preferences.Util.AllLanguages;
+                    _preferences.Util.SetPreferedLanguages(GetPrefLangString());
                     break;
                 case "remove":
                     _preferences.SearchUserLanguage = string.Empty;
-                    _preferences.ExLib.AllLanguages.Add(_preferences.SelectedUserLanguage);
-                    _preferences.ExLib.AllLanguages = new ObservableCollection<Language>(_preferences.ExLib.AllLanguages.OrderBy(l => l.Name));
-                    _preferences.ExLib.Languages.Remove(_preferences.SelectedUserLanguage);
-                    _preferences.ExLib.Languages = new ObservableCollection<Language>(_preferences.ExLib.Languages.OrderBy(l => l.Name));
-                    _preferences.AvailableLanguages = _preferences.ExLib.AllLanguages;
-                    _preferences.UserLanguages = _preferences.ExLib.Languages;
-                    _preferences.ExLib.Util.SetPreferedLanguages(GetPrefLangString());
+                    _preferences.Util.AllLanguages.Add(_preferences.SelectedUserLanguage);
+                    _preferences.Util.AllLanguages = new ObservableCollection<Language>(_preferences.Util.AllLanguages.OrderBy(l => l.Name));
+                    _preferences.Util.Languages.Remove(_preferences.SelectedUserLanguage);
+                    _preferences.Util.Languages = new ObservableCollection<Language>(_preferences.Util.Languages.OrderBy(l => l.Name));
+                    _preferences.AvailableLanguages = _preferences.Util.AllLanguages;
+                    _preferences.UserLanguages = _preferences.Util.Languages;
+                    _preferences.Util.SetPreferedLanguages(GetPrefLangString());
                     break;
             }
         }
@@ -56,7 +56,7 @@ public class AddRemoveLanguagesCommand : ICommand
     private string GetPrefLangString()
     {
         string value = string.Empty;
-        foreach (Language language in _preferences.ExLib.Languages)
+        foreach (Language language in _preferences.Util.Languages)
         {
             value += $"{language.ID}|";
         }

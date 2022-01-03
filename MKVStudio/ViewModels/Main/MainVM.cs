@@ -7,16 +7,16 @@ namespace MKVStudio.ViewModels;
 public class MainVM : BaseViewModel
 {
     public BaseViewModel SelectedMainTab { get; set; }
-    private MultiplexerVM Multiplexer => new(ExLib);
+    private MultiplexerVM Multiplexer => new(Util);
     private JobQueueVM JobQueue => new();
 
     public ICommand UpdateSelectedMainTab => new UpdateSelectedMainTabCommand(this, Multiplexer, JobQueue);
-    public IExternalLibrariesService ExLib { get; }
-    public ICommand Preferences => new PreferencesCommand(this, ExLib);
+    public IUtilitiesService Util { get; }
+    public ICommand Preferences => new PreferencesCommand(this, Util);
 
-    public MainVM(IExternalLibrariesService exLib)
+    public MainVM(IUtilitiesService util)
     {
-        ExLib = exLib;
+        Util = util;
         UpdateSelectedMainTab.Execute(ViewModelTypes.Multiplexer);
     }
 }

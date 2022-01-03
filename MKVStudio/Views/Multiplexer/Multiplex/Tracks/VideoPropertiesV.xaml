@@ -137,7 +137,7 @@
             </Label>
             <ComboBox Grid.Column="1"
                       Margin="2"
-                      ItemsSource="{Binding ExLib.Languages}"
+                      ItemsSource="{Binding Util.Languages}"
                       SelectedItem="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

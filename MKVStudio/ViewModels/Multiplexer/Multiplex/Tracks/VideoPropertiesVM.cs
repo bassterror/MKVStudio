@@ -6,7 +6,7 @@ namespace MKVStudio.ViewModels;
 
 public class VideoPropertiesVM : TrackProperties
 {
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     public string Name { get; set; }
     public string ID { get; set; }
     public string UID { get; set; }
@@ -24,9 +24,9 @@ public class VideoPropertiesVM : TrackProperties
     public string DisplayDimensions { get; set; }
     public string PixelDimensions { get; set; }
 
-    public VideoPropertiesVM(IExternalLibrariesService exLib, MKVMergeJ.Track track)
+    public VideoPropertiesVM(IUtilitiesService util, MKVMergeJ.Track track)
     {
-        ExLib = exLib;
+        Util = util;
         Name = track.Properties.Track_name;
         ID = track.ID.ToString();
         UID = track.Properties.UID;
@@ -37,7 +37,7 @@ public class VideoPropertiesVM : TrackProperties
         ForcedTrack = track.Properties.Forced_track;
         FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
         FlagCommentary = track.Properties.Flag_commentary;
-        Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
+        Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? Util.Languages.First(a => a.ID == "und") : Util.Languages.First(a => a.ID == track.Properties.Language);
         LanguageIETF = track.Properties.Language_ietf;
         Number = track.Properties.Number;
         Packetizer = track.Properties.Packetizer;

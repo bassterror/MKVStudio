@@ -1,16 +1,12 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.ViewModels;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using static MKVStudio.Services.ExternalLibrariesService;
 
 namespace MKVStudio.Services;
 
 public interface IExternalLibrariesService
 {
-    IUtilitiesService Util { get; set; }
-    ObservableCollection<Language> AllLanguages { get; set; }
-    ObservableCollection<Language> Languages { get; set; }
-    SupportedFileTypesCollection SupportedFileTypesCollection { get; set; }
-    MIMETypeCollection MIMETypes { get; set; }
+    string GetExecutable(Executables executable);
     Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null);
 }

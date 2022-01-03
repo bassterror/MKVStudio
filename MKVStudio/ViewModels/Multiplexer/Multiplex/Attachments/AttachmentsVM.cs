@@ -9,7 +9,7 @@ namespace MKVStudio.ViewModels;
 public class AttachmentsVM : BaseViewModel
 {
     public SourceFileVM SourceFile { get; }
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
 
     #region existing
     public ObservableCollection<AttachmentVM> ExistingAttachments { get; set; } = new();
@@ -23,20 +23,20 @@ public class AttachmentsVM : BaseViewModel
     public ObservableCollection<AttachmentVM> NewAttachments { get; set; } = new();
     public AttachmentVM SelectedNewAttachment { get; set; }
     public bool IsSettings => SelectedNewAttachment != null;
-    public ICommand AddAttachment => new AddFilesCommand(this, ExLib);
+    public ICommand AddAttachment => new AddFilesCommand(this, Util);
     public ICommand RemoveAttachment => new RemoveFilesCommand(this);
     public ICommand ClearAttachments => new ClearFilesCommand(this);
     #endregion
 
-    public AttachmentsVM(SourceFileVM sourceFile, MKVMergeJ.Attachment[] attachments, IExternalLibrariesService exLib)
+    public AttachmentsVM(SourceFileVM sourceFile, MKVMergeJ.Attachment[] attachments, IUtilitiesService util)
     {
         SourceFile = sourceFile;
-        ExLib = exLib;
+        Util = util;
         if (attachments != null)
         {
             foreach (MKVMergeJ.Attachment attachment in attachments)
             {
-                AttachmentVM att = new(this, SourceFile, ExLib, attachment);
+                AttachmentVM att = new(this, SourceFile, Util, attachment);
                 ExistingAttachments.Add(att);
                 att.IsChecked = true;
             }

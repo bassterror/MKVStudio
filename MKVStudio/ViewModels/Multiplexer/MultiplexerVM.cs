@@ -7,21 +7,21 @@ namespace MKVStudio.ViewModels;
 
 public class MultiplexerVM : BaseViewModel
 {
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     public ObservableCollection<MultiplexVM> Multiplexes { get; set; } = new();
     public MultiplexVM SelectedMultiplex { get; set; }
     public bool IsCheckAll { get; set; }
     public bool IsUncheckAll { get; set; }
 
-    public ICommand AddFiles => new AddFilesCommand(this, ExLib);
-    public ICommand AddFilesFromFolder => new AddFilesFromFolderCommand(this, ExLib);
+    public ICommand AddFiles => new AddFilesCommand(this, Util);
+    public ICommand AddFilesFromFolder => new AddFilesFromFolderCommand(this, Util);
     public ICommand ClearFiles => new ClearFilesCommand(this);
     public ICommand RemoveFiles => new RemoveFilesCommand(this);
     public ICommand CheckAll => new CheckBoxCommand(Multiplexes);
-    public ICommand BatchEdit => new BatchEditCommand(this, ExLib);
+    public ICommand BatchEdit => new BatchEditCommand(this, Util);
 
-    public MultiplexerVM(IExternalLibrariesService exLib)
+    public MultiplexerVM(IUtilitiesService util)
     {
-        ExLib = exLib;
+        Util = util;
     }
 }

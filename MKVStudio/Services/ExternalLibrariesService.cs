@@ -1,34 +1,17 @@
-﻿using MKVStudio.Models;
+﻿using Microsoft.Win32;
+using MKVStudio.Models;
 using MKVStudio.ViewModels;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static MKVStudio.Services.UtilitiesService;
 
 namespace MKVStudio.Services;
 
 public class ExternalLibrariesService : IExternalLibrariesService
 {
-    public IUtilitiesService Util { get; set; }
-    public ObservableCollection<Language> AllLanguages { get; set; } = new();
-    public ObservableCollection<Language> Languages { get; set; } = new();
-    public SupportedFileTypesCollection SupportedFileTypesCollection { get; set; } = new();
-    public MIMETypeCollection MIMETypes { get; set; } = new();
-
-    public ExternalLibrariesService(IUtilitiesService utilitiesService)
-    {
-        Util = utilitiesService;
-        GetLanguageList();
-        GetSupportedFileTypes();
-    }
-
     public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
     {
         ProcessResult pr = new();
@@ -78,7 +61,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
             };
             processTasks.Add(processExitEvent.Task);
             process.EnableRaisingEvents = true;
-            process.StartInfo.FileName = Util.GetExecutable(executable);
+            process.StartInfo.FileName = GetExecutable(executable);
             process.StartInfo.Arguments = arguments;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardError = true;
@@ -187,36 +170,38 @@ public class ExternalLibrariesService : IExternalLibrariesService
         return arguments;
     }
 
-    private async void GetLanguageList()
+    public enum Executables
     {
-        ProcessResult pr = await Run(ProcessResultNames.MKVMergeLangList);
-        string[] lines = pr.StdOutput.Split("\r\n");
-        string[] pref = Util.GetPreferedLanguages().Split("|");
-        for (int i = 2; i < lines.Length - 1; i++)
-        {
-            Match match = Regex.Match(lines[i], @"^(.+)\|(.+)\|(.+)\|(.+)$");
-            Language language = new(match);
-            if (pref.Contains(language.ID))
-            {
-                Languages.Add(language);
-            }
-            else
-            {
-                AllLanguages.Add(language);
-            }
-        }
+        FFmpeg,
+        MKVInfo,
+        MKVMerge,
+        MKVPropEdit,
+        MKVExtract
     }
 
-    private async void GetSupportedFileTypes()
+    public string GetExecutable(Executables executable)
     {
-        ProcessResult pr = await Run(ProcessResultNames.MKVMergeSupportedFileTypes);
-        string[] lines = pr.StdOutput.Split("\r\n");
-        for (int i = 2; i < lines.Length - 1; i++)
+        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
+        string path = string.Empty;
+        switch (executable)
         {
-            Match match = Regex.Match(lines[i], @"^\s\s(.+)\s\[(.+)\]$");
-            SupportedFileType fileType = new(match);
-            SupportedFileTypesCollection.SupportedFileTypes.Add(fileType);
+            case Executables.FFmpeg:
+                path = key.GetValue(Executables.FFmpeg.ToString()).ToString();
+                break;
+            case Executables.MKVInfo:
+                path = key.GetValue(Executables.MKVInfo.ToString()).ToString();
+                break;
+            case Executables.MKVMerge:
+                path = key.GetValue(Executables.MKVMerge.ToString()).ToString();
+                break;
+            case Executables.MKVPropEdit:
+                path = key.GetValue(Executables.MKVPropEdit.ToString()).ToString();
+                break;
+            case Executables.MKVExtract:
+                path = key.GetValue(Executables.MKVExtract.ToString()).ToString();
+                break;
         }
+        return path;
     }
 
     private void SetLoudnormFirstPassMeasurements(string firstPassOutput)

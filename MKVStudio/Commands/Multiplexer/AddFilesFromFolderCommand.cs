@@ -9,12 +9,12 @@ public class AddFilesFromFolderCommand : ICommand
 {
     public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly object _collectionParent;
-    private readonly IExternalLibrariesService _exLib;
+    private readonly IUtilitiesService _util;
 
-    public AddFilesFromFolderCommand(object collectionParent, IExternalLibrariesService exLib)
+    public AddFilesFromFolderCommand(object collectionParent, IUtilitiesService util)
     {
         _collectionParent = collectionParent;
-        _exLib = exLib;
+        _util = util;
     }
 
     public bool CanExecute(object parameter)
@@ -26,15 +26,15 @@ public class AddFilesFromFolderCommand : ICommand
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _exLib.Util.GetFilesFromFolder(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
+            foreach (string filename in _util.GetFilesFromFolder(_util.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
             {
-                MultiplexVM multiplex = new(multiplexer, filename, _exLib);
+                MultiplexVM multiplex = new(multiplexer, filename, _util);
                 multiplexer.Multiplexes.Add(multiplex);
             }
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string filename in _exLib.Util.GetFilesFromFolder(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
+            foreach (string filename in _util.GetFilesFromFolder(_util.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
             {
                 SourceFileVM sourceFile = new(filename, false, input);
                 input.SourceFiles.Add(sourceFile);

@@ -26,7 +26,7 @@ public class TrackVM : BaseViewModel
     public string Language { get; set; }
     public string Name { get; set; }
 
-    public TrackVM(InputVM input, SourceFileVM sourceFile, MKVMergeJ.Track mkvMergeTrack, TrackPropertiesTypes type, IExternalLibrariesService exLib)
+    public TrackVM(InputVM input, SourceFileVM sourceFile, MKVMergeJ.Track mkvMergeTrack, TrackPropertiesTypes type, IUtilitiesService util)
     {
         Input = input;
         SourceFile = sourceFile;
@@ -35,21 +35,21 @@ public class TrackVM : BaseViewModel
         switch (Type)
         {
             case TrackPropertiesTypes.Video:
-                VideoPropertiesVM vProp = new(exLib, mkvMergeTrack);
+                VideoPropertiesVM vProp = new(util, mkvMergeTrack);
                 Properties = vProp;
                 Codec = vProp.Codec;
                 Language = vProp.Language.Name;
                 Name = vProp.Name;
                 break;
             case TrackPropertiesTypes.Audio:
-                AudioPropertiesVM aProp = new(exLib, mkvMergeTrack);
+                AudioPropertiesVM aProp = new(util, mkvMergeTrack);
                 Properties = aProp;
                 Codec = aProp.Codec;
                 Language = aProp.Language.Name;
                 Name = aProp.Name;
                 break;
             case TrackPropertiesTypes.Subtitles:
-                SubtitlesPropertiesVM sProp = new(exLib, mkvMergeTrack);
+                SubtitlesPropertiesVM sProp = new(util, mkvMergeTrack);
                 Properties = sProp;
                 Codec = sProp.Codec;
                 Language = sProp.Language.Name;

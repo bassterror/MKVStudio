@@ -10,7 +10,7 @@ public class MultiplexVM : BaseViewModel
 {
 
     public MultiplexerVM Multiplexer { get; }
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     public BaseViewModel SelectedMultiplexTab { get; set; }
     public ICommand UpdateMultiplexTab => new UpdateMultiplexTabCommand(this);
 
@@ -30,17 +30,17 @@ public class MultiplexVM : BaseViewModel
     }
 
 
-    public InputVM Input => new(this, ExLib);
+    public InputVM Input => new(this, Util);
     public OutputVM Output { get; set; }
     public AttachmentsVM Attachments { get; set; }
     public ChaptersVM Chapters { get; set; }
 
-    public ICommand Browse => new BrowseCommand(this, ExLib);
+    public ICommand Browse => new BrowseCommand(this, Util);
 
-    public MultiplexVM(MultiplexerVM multiplexer, string source, IExternalLibrariesService exLib)
+    public MultiplexVM(MultiplexerVM multiplexer, string source, IUtilitiesService util)
     {
         Multiplexer = multiplexer;
-        ExLib = exLib;
+        Util = util;
         PrimarySourceFullPath = source;
         PrimarySourcePath = Path.GetDirectoryName(source);
         PrimarySourceName = Path.GetFileName(source);

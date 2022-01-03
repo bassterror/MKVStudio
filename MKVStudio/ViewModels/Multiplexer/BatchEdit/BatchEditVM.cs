@@ -5,16 +5,16 @@ namespace MKVStudio.ViewModels;
 
 public class BatchEditVM : BaseViewModel
 {
-    private readonly IExternalLibrariesService _exLib;
+    private readonly IUtilitiesService _util;
 
     public BatchEditV ApplyToAllView { get; }
     public BatchEditVM ThisApplyToAllVM { get; set; }
     public BaseViewModel CurrentApplyToAllTab { get; set; }
     public MultiplexerVM Multiplexer { get; set; }
 
-    public BatchEditVM(MultiplexerVM multiplexer, IExternalLibrariesService exLib, BatchEditV applyToAllView)
+    public BatchEditVM(MultiplexerVM multiplexer, IUtilitiesService util, BatchEditV applyToAllView)
     {
-        _exLib = exLib;
+        _util = util;
         ApplyToAllView = applyToAllView;
         Multiplexer = multiplexer;
     }

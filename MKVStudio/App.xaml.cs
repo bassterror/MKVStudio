@@ -16,12 +16,7 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        IServiceProvider serviceProvider = CreateServiceProvider();
-
-        if (UtilitiesService.CheckMKVStudioRegistryKey())
-        {
-            UtilitiesService.CreateMKVStudioRegistryKeys();
-        }
+        IServiceProvider serviceProvider = CreateServiceProvider();        
 
         MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
         mainWindow.Show();
@@ -33,8 +28,8 @@ public partial class App : Application
     {
         IServiceCollection services = new ServiceCollection();
 
-        _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
         _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
+        _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
 
         _ = services.AddScoped<MainVM>();
         _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainVM>()));

@@ -8,14 +8,14 @@ namespace MKVStudio.Commands;
 public class BrowseCommand : ICommand
 {
     private readonly MultiplexVM _multiplex;
-    private readonly IExternalLibrariesService _exLib;
+    private readonly IUtilitiesService _util;
 
     public event EventHandler CanExecuteChanged { add { } remove { } }
 
-    public BrowseCommand(MultiplexVM multiplex, IExternalLibrariesService exLib)
+    public BrowseCommand(MultiplexVM multiplex, IUtilitiesService util)
     {
         _multiplex = multiplex;
-        _exLib = exLib;
+        _util = util;
     }
 
     public bool CanExecute(object parameter)

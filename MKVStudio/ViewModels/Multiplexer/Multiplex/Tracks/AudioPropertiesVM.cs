@@ -7,7 +7,7 @@ namespace MKVStudio.ViewModels;
 
 public class AudioPropertiesVM : TrackProperties
 {
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     public string Name { get; set; }
     public string ID { get; set; }
     public string UID { get; set; }
@@ -24,9 +24,9 @@ public class AudioPropertiesVM : TrackProperties
     public string LanguageIETF { get; set; }
     public int Number { get; set; }
 
-    public AudioPropertiesVM(IExternalLibrariesService exLib, MKVMergeJ.Track track)
+    public AudioPropertiesVM(IUtilitiesService util, MKVMergeJ.Track track)
     {
-        ExLib = exLib;
+        Util = util;
         Name = track.Properties.Track_name;
         ID = track.ID.ToString();
         UID = track.Properties.UID;
@@ -39,7 +39,7 @@ public class AudioPropertiesVM : TrackProperties
         FlagCommentary = track.Properties.Flag_commentary;
         Channels = track.Properties.Audio_channels;
         SampleRate = track.Properties.Audio_sampling_frequency;
-        Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
+        Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? Util.Languages.First(a => a.ID == "und") : Util.Languages.First(a => a.ID == track.Properties.Language);
         LanguageIETF = track.Properties.Language_ietf;
         Number = track.Properties.Number;
     }

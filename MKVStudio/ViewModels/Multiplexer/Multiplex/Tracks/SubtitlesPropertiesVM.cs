@@ -1,13 +1,12 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
 using System.Linq;
-using System.Windows.Input;
 
 namespace MKVStudio.ViewModels;
 
 public class SubtitlesPropertiesVM : TrackProperties
 {
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     public string Name { get; set; }
     public string ID { get; set; }
     public string UID { get; set; }
@@ -24,9 +23,9 @@ public class SubtitlesPropertiesVM : TrackProperties
     public int Number { get; set; }
     public string ContentEncodingAlgorithms { get; set; }
 
-    public SubtitlesPropertiesVM(IExternalLibrariesService exLib, MKVMergeJ.Track track)
+    public SubtitlesPropertiesVM(IUtilitiesService util, MKVMergeJ.Track track)
     {
-        ExLib = exLib;
+        Util = util;
         Name = track.Properties.Track_name;
         ID = track.ID.ToString();
         UID = track.Properties.UID;
@@ -37,7 +36,7 @@ public class SubtitlesPropertiesVM : TrackProperties
         ForcedTrack = track.Properties.Forced_track;
         FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
         FlagCommentary = track.Properties.Flag_commentary;
-        Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? ExLib.Languages.First(a => a.ID == "und") : ExLib.Languages.First(a => a.ID == track.Properties.Language);
+        Language = string.IsNullOrWhiteSpace(track.Properties.Language) ? Util.Languages.First(a => a.ID == "und") : Util.Languages.First(a => a.ID == track.Properties.Language);
         LanguageIETF = track.Properties.Language_ietf;
         Number = track.Properties.Number;
         ContentEncodingAlgorithms = track.Properties.Content_encoding_algorithms;

@@ -10,14 +10,14 @@ namespace MKVStudio.Commands;
 public class BatchEditCommand : ICommand
 {
     private readonly MultiplexerVM _multiplexer;
-    private readonly IExternalLibrariesService _exLIb;
+    private readonly IUtilitiesService _util;
 
     public event EventHandler CanExecuteChanged { add { } remove { } }
 
-    public BatchEditCommand(MultiplexerVM multiplexer, IExternalLibrariesService exLib)
+    public BatchEditCommand(MultiplexerVM multiplexer, IUtilitiesService util)
     {
         _multiplexer = multiplexer;
-        _exLIb = exLib;
+        _util = util;
     }
 
     public bool CanExecute(object parameter)
@@ -28,7 +28,7 @@ public class BatchEditCommand : ICommand
     public void Execute(object parameter)
     {
         BatchEditV applyToAllView = new();
-        applyToAllView.DataContext = new BatchEditVM(_multiplexer, _exLIb, applyToAllView);
+        applyToAllView.DataContext = new BatchEditVM(_multiplexer, _util, applyToAllView);
         applyToAllView.Owner = Application.Current.MainWindow;
         applyToAllView.ShowInTaskbar = false;
         applyToAllView.ShowDialog();

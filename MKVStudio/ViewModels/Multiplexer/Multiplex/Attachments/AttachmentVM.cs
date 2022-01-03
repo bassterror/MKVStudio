@@ -12,7 +12,7 @@ public class AttachmentVM : BaseViewModel
 {
     public AttachmentsVM Attachments { get; }
     public SourceFileVM SourceFile { get; }
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     private bool _isChecked;
     public bool IsChecked
     {
@@ -31,20 +31,20 @@ public class AttachmentVM : BaseViewModel
     public int ID { get; set; }
     public string UID { get; set; }
     public int Size { get; set; }
-    public string SizeConverted => ExLib.Util.ConvertBytes(Size, 2);
+    public string SizeConverted => Util.ConvertBytes(Size, 2);
     public string TempPath { get; set; }
     public ImageSource TempImage { get; set; }
 
-    public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, IExternalLibrariesService exLib, MKVMergeJ.Attachment attachment = null)
+    public AttachmentVM(AttachmentsVM attachments, SourceFileVM sourceFile, IUtilitiesService util, MKVMergeJ.Attachment attachment = null)
     {
         Attachments = attachments;
         SourceFile = sourceFile;
-        ExLib = exLib;
+        Util = util;
 
         if (attachment == null)
         {
             IsChecked = true;
-            ContentType = ExLib.MIMETypes.AttachmentMIMETypes.First(m => m.Extension.Contains(SourceFile.InputExtension));
+            ContentType = Util.MIMETypes.AttachmentMIMETypes.First(m => m.Extension.Contains(SourceFile.InputExtension));
             Name = sourceFile.InputName;
             Size = (int)new FileInfo(SourceFile.InputFullPath).Length;
             return;
@@ -62,7 +62,7 @@ public class AttachmentVM : BaseViewModel
 
     private async void ExtractTemp()
     {
-        _ = await ExLib.Run(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), TempPath);
+        _ = await Util.ExLib.Run(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), TempPath);
         LoadTempImage();
     }
 

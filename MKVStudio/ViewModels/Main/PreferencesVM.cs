@@ -12,7 +12,7 @@ public class PreferencesVM : BaseViewModel
 {
 
     public MainVM Main { get; }
-    public IExternalLibrariesService ExLib { get; }
+    public IUtilitiesService Util { get; }
     public PreferencesV PreferencesV { get; }
 
     public ObservableCollection<Language> AvailableLanguages { get; set; }
@@ -24,7 +24,7 @@ public class PreferencesVM : BaseViewModel
         set
         {
             _searchAvailableLanguage = value;
-            AvailableLanguages = new ObservableCollection<Language>(ExLib.AllLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
+            AvailableLanguages = new ObservableCollection<Language>(Util.AllLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
         }
     }
 
@@ -37,18 +37,18 @@ public class PreferencesVM : BaseViewModel
         set
         {
             _searchUserLanguage = value;
-            UserLanguages = new ObservableCollection<Language>(ExLib.Languages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
+            UserLanguages = new ObservableCollection<Language>(Util.Languages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
         }
     }
 
     public ICommand AddRemoveLanguage => new AddRemoveLanguagesCommand(this);
 
-    public PreferencesVM(MainVM main, IExternalLibrariesService exLib, PreferencesV preferencesV)
+    public PreferencesVM(MainVM main, IUtilitiesService util, PreferencesV preferencesV)
     {
         Main = main;
-        ExLib = exLib;
+        Util = util;
         PreferencesV = preferencesV;
-        AvailableLanguages = ExLib.AllLanguages;
-        UserLanguages = ExLib.Languages;
+        AvailableLanguages = Util.AllLanguages;
+        UserLanguages = Util.Languages;
     }
 }
