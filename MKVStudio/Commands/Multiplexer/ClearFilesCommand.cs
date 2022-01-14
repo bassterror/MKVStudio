@@ -1,14 +1,11 @@
 ﻿using MKVStudio.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class ClearFilesCommand : ICommand
+public class ClearFilesCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly object _collectionParent;
 
     public ClearFilesCommand(object collectionParrent)
@@ -16,12 +13,7 @@ public class ClearFilesCommand : ICommand
         _collectionParent = collectionParrent;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {

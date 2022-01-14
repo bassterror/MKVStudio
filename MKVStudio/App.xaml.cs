@@ -16,7 +16,7 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        IServiceProvider serviceProvider = CreateServiceProvider();        
+        IServiceProvider serviceProvider = CreateServiceProvider();
 
         MainWindow mainWindow = serviceProvider.GetRequiredService<MainWindow>();
         mainWindow.Show();
@@ -31,8 +31,9 @@ public partial class App : Application
         _ = services.AddSingleton<IExternalLibrariesService, ExternalLibrariesService>();
         _ = services.AddSingleton<IUtilitiesService, UtilitiesService>();
 
-        _ = services.AddScoped<MainVM>();
-        _ = services.AddScoped(f => new MainWindow(f.GetRequiredService<MainVM>()));
+        _ = services.AddSingleton<MainVM>();
+
+        _ = services.AddSingleton(f => new MainWindow(f.GetRequiredService<MainVM>()));
 
         return services.BuildServiceProvider();
     }
@@ -40,7 +41,10 @@ public partial class App : Application
     protected override void OnExit(ExitEventArgs e)
     {
         DirectoryInfo di = new(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + $"\\temp");
-        di.Delete(true);
+        if (di.Exists)
+        {
+            di.Delete(true);
+        }
         base.OnExit(e);
     }
 }

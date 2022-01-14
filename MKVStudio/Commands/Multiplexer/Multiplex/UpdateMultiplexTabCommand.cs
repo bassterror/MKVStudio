@@ -1,12 +1,9 @@
 ﻿using MKVStudio.ViewModels;
-using System;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class UpdateMultiplexTabCommand : ICommand
+public class UpdateMultiplexTabCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly MultiplexVM _multiplex;
 
     public UpdateMultiplexTabCommand(MultiplexVM multiplex)
@@ -14,12 +11,7 @@ public class UpdateMultiplexTabCommand : ICommand
         _multiplex = multiplex;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (parameter is ViewModelTypes viewModel)
         {

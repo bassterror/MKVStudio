@@ -1,13 +1,10 @@
 ﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
-using System;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class AddFilesFromFolderCommand : ICommand
+public class AddFilesFromFolderCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly object _collectionParent;
     private readonly IUtilitiesService _util;
 
@@ -17,12 +14,7 @@ public class AddFilesFromFolderCommand : ICommand
         _util = util;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {

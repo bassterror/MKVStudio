@@ -1,29 +1,20 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.ViewModels;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class AddRemoveLanguagesCommand : ICommand
+public class AddRemoveLanguagesCommand : BaseCommand
 {
     private readonly PreferencesVM _preferences;
-
-    public event EventHandler CanExecuteChanged { add { } remove { } }
 
     public AddRemoveLanguagesCommand(PreferencesVM preferences)
     {
         _preferences = preferences;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (parameter is string value)
         {
