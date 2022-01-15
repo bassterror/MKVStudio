@@ -31,11 +31,11 @@ public class InputVM : BaseViewModel
     public ICommand CheckAllTracks => new CheckBoxCommand(Tracks);
     #endregion
 
-    public InputVM(MultiplexVM multiplex, IUtilitiesService util)
+    public InputVM(IUtilitiesService util, MultiplexVM multiplex)
     {
-        Multiplex = multiplex;
         Util = util;
-        SourceFiles.Add(new SourceFileInfo(Util, multiplex.PrimarySourceFullPath, true));
+        Multiplex = multiplex;
+        SourceFiles.Add(multiplex.SourceFile);
 
         CreateTracks(SourceFiles.First(s => s.IsPrimary));
     }
@@ -63,7 +63,7 @@ public class InputVM : BaseViewModel
             Attachment att = new(Util, sourceFile, Multiplex.Attachments, attachment);
             Multiplex.Attachments.ExistingAttachments.Add(att);
         }
-        Multiplex.Output = new OutputVM(Multiplex, result, Util);
-        Multiplex.Chapters = new ChaptersVM();
+        Multiplex.Output.Title = result.Container.Properties.Title;
+        //TODO Chapters
     }
 }

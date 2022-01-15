@@ -21,7 +21,8 @@ public class AddFilesCommand : BaseCommand
         {
             foreach (string filename in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
             {
-                MultiplexVM multiplex = new(multiplexer, filename, _util);
+                SourceFileInfo sourceFile = new(_util, filename, true);
+                MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
                 multiplexer.Multiplexes.Add(multiplex);
             }
         }
