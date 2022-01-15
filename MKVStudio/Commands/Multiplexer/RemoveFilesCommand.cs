@@ -25,7 +25,7 @@ public class RemoveFilesCommand : BaseCommand
         }
         if (_collectionParent is InputVM input)
         {
-            if (parameter is SourceFileVM sourceFile)
+            if (parameter is SourceFileInfo sourceFile)
             {
                 if (!sourceFile.IsPrimary)
                 {
@@ -34,6 +34,11 @@ public class RemoveFilesCommand : BaseCommand
                     foreach (TrackVM track in tracks)
                     {
                         _ = input.Tracks.Remove(track);
+                    }
+                    List<Attachment> atts = input.Multiplex.Attachments.ExistingAttachments.Where(a => a.SourceFile == sourceFile).ToList();
+                    foreach (Attachment attachment in atts)
+                    {
+                        _ = input.Multiplex.Attachments.ExistingAttachments.Remove(attachment);
                     }
                 }
             }

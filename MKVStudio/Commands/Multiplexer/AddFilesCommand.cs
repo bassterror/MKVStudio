@@ -29,7 +29,7 @@ public class AddFilesCommand : BaseCommand
         {
             foreach (string fileName in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
             {
-                SourceFileVM sourceFile = new(fileName, false, input);
+                SourceFileInfo sourceFile = new(_util, fileName, false);
                 input.SourceFiles.Add(sourceFile);
                 input.CreateTracks(sourceFile);
             }
@@ -38,8 +38,8 @@ public class AddFilesCommand : BaseCommand
         {
             foreach (string fileName in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllAttachments(), true).FileNames)
             {
-                SourceFileVM sourceFile = new(fileName, false);
-                Attachment attachment = new(_util, sourceFile,attachments);
+                SourceFileInfo sourceFile = new(_util, fileName, false);
+                Attachment attachment = new(_util, sourceFile, attachments);
                 attachments.NewAttachments.Add(attachment);
             }
         }

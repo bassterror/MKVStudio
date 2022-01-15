@@ -8,5 +8,5 @@ namespace MKVStudio.Services;
 public interface IExternalLibrariesService
 {
     string GetExecutable(Executables executable);
-    Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null);
+    Task<ProcessResult> Run(ProcessResultNames processName, SourceFileInfo sourceFile = null, string attachmentId = null, string attachmentTempPath = null);
 }

@@ -16,7 +16,7 @@ public class InputVM : BaseViewModel
     public IUtilitiesService Util { get; }
 
     #region SourceFiles
-    public ObservableCollection<SourceFileVM> SourceFiles { get; set; } = new();
+    public ObservableCollection<SourceFileInfo> SourceFiles { get; set; } = new();
     public ICommand AddFiles => new AddFilesCommand(this, Util);
     public ICommand AddFilesFromFolder => new AddFilesFromFolderCommand(this, Util);
     public ICommand ClearFiles => new ClearFilesCommand(this);
@@ -35,12 +35,12 @@ public class InputVM : BaseViewModel
     {
         Multiplex = multiplex;
         Util = util;
-        SourceFiles.Add(new SourceFileVM(multiplex.PrimarySourceFullPath, true, this));
+        SourceFiles.Add(new SourceFileInfo(Util, multiplex.PrimarySourceFullPath, true));
 
-        CreateTracks(SourceFiles.First());
+        CreateTracks(SourceFiles.First(s => s.IsPrimary));
     }
 
-    public async void CreateTracks(SourceFileVM sourceFile)
+    public async void CreateTracks(SourceFileInfo sourceFile)
     {
         ProcessResult pr = await Util.ExLib.Run(ProcessResultNames.MKVMergeJ, sourceFile);
         ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
@@ -58,8 +58,12 @@ public class InputVM : BaseViewModel
         {
             Tracks.Add(new TrackVM(this, sourceFile, track, TrackPropertiesTypes.Subtitles, Util));
         }
+        foreach (MKVMergeJ.Attachment attachment in result.Attachments)
+        {
+            Attachment att = new(Util, sourceFile, Multiplex.Attachments, attachment);
+            Multiplex.Attachments.ExistingAttachments.Add(att);
+        }
         Multiplex.Output = new OutputVM(Multiplex, result, Util);
-        Multiplex.Attachments = new AttachmentsVM(Util, sourceFile, result.Attachments);
         Multiplex.Chapters = new ChaptersVM();
     }
 }

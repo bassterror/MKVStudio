@@ -28,18 +28,8 @@ public class AttachmentsVM : BaseViewModel
     public ICommand ClearAttachments => new ClearFilesCommand(this);
     #endregion
 
-    public AttachmentsVM(IUtilitiesService util, SourceFileVM sourceFile, MKVMergeJ.Attachment[] attachments)
+    public AttachmentsVM(IUtilitiesService util)
     {
         Util = util;
-        if (attachments != null)
-        {
-            foreach (MKVMergeJ.Attachment attachment in attachments)
-            {
-                Attachment att = new(Util, sourceFile, this, attachment);
-                ExistingAttachments.Add(att);
-            }
-            IsCheckAllEnabled = ExistingAttachments.Count(a => a.ToBeAdded) != ExistingAttachments.Count;
-            IsUncheckAllEnabled = ExistingAttachments.Count(a => !a.ToBeAdded) != ExistingAttachments.Count;
-        }
     }
 }

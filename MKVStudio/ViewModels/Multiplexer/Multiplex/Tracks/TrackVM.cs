@@ -7,7 +7,7 @@ namespace MKVStudio.ViewModels;
 public class TrackVM : BaseViewModel
 {
     public InputVM Input { get; }
-    public SourceFileVM SourceFile { get; }
+    public SourceFileInfo SourceFile { get; }
 
     private bool _isChecked;
     public bool IsChecked
@@ -26,7 +26,7 @@ public class TrackVM : BaseViewModel
     public string Language { get; set; }
     public string Name { get; set; }
 
-    public TrackVM(InputVM input, SourceFileVM sourceFile, MKVMergeJ.Track mkvMergeTrack, TrackPropertiesTypes type, IUtilitiesService util)
+    public TrackVM(InputVM input, SourceFileInfo sourceFile, MKVMergeJ.Track mkvMergeTrack, TrackPropertiesTypes type, IUtilitiesService util)
     {
         Input = input;
         SourceFile = sourceFile;

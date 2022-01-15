@@ -12,7 +12,7 @@ namespace MKVStudio.Services;
 
 public class ExternalLibrariesService : IExternalLibrariesService
 {
-    public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
+    public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileInfo sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
     {
         ProcessResult pr = new();
 
@@ -136,7 +136,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
         return processResult;
     }
 
-    private static string BuildArguments(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
+    private static string BuildArguments(ProcessResultNames processName, SourceFileInfo sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
     {
         string arguments = string.Empty;
         switch (processName)

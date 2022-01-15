@@ -1,4 +1,5 @@
-﻿using MKVStudio.Services;
+﻿using MKVStudio.Models;
+using MKVStudio.Services;
 using MKVStudio.ViewModels;
 
 namespace MKVStudio.Commands;
@@ -28,7 +29,7 @@ public class AddFilesFromFolderCommand : BaseCommand
         {
             foreach (string filename in _util.GetFilesFromFolder(_util.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
             {
-                SourceFileVM sourceFile = new(filename, false, input);
+                SourceFileInfo sourceFile = new(_util, filename, false);
                 input.SourceFiles.Add(sourceFile);
                 input.CreateTracks(sourceFile);
             }

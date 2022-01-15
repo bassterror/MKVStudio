@@ -15,7 +15,7 @@ public class Attachment : BaseModel
     private bool _toBeAdded;
 
     public IUtilitiesService Util { get; }
-    public SourceFileVM SourceFile { get; }
+    public SourceFileInfo SourceFile { get; }
     public bool ToBeAdded
     {
         get => _toBeAdded;
@@ -35,7 +35,7 @@ public class Attachment : BaseModel
     public string SizeConverted => Util.ConvertBytes(Size, 2);
     public ImageSource TempImage { get; set; }
 
-    public Attachment(IUtilitiesService util, SourceFileVM sourceFile, AttachmentsVM attachments, MKVMergeJ.Attachment attachment = null)
+    public Attachment(IUtilitiesService util, SourceFileInfo sourceFile, AttachmentsVM attachments, MKVMergeJ.Attachment attachment = null)
     {
         Util = util;
         SourceFile = sourceFile;
