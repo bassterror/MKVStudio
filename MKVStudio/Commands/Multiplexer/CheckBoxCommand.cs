@@ -1,4 +1,5 @@
-﻿using MKVStudio.ViewModels;
+﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace MKVStudio.Commands;
@@ -30,11 +31,11 @@ public class CheckBoxCommand : BaseCommand
                     track.IsChecked = value;
                 }
             }
-            if (_collection is ObservableCollection<AttachmentVM> attachments)
+            if (_collection is ObservableCollection<Attachment> attachments)
             {
-                foreach (AttachmentVM attachment in attachments)
+                foreach (Attachment attachment in attachments)
                 {
-                    attachment.IsChecked = value;
+                    attachment.ToBeAdded = value;
                 }
             }
         }

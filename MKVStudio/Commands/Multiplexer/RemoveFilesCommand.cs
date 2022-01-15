@@ -1,4 +1,5 @@
-﻿using MKVStudio.ViewModels;
+﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,7 +40,7 @@ public class RemoveFilesCommand : BaseCommand
         }
         if (_collectionParent is AttachmentsVM attachments)
         {
-            if (parameter is AttachmentVM attachment)
+            if (parameter is Attachment attachment)
             {
                 _ = attachments.NewAttachments.Remove(attachment);
             }

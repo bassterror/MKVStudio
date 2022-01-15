@@ -1,4 +1,5 @@
-﻿using MKVStudio.Services;
+﻿using MKVStudio.Models;
+using MKVStudio.Services;
 using MKVStudio.ViewModels;
 
 namespace MKVStudio.Commands;
@@ -38,7 +39,7 @@ public class AddFilesCommand : BaseCommand
             foreach (string fileName in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllAttachments(), true).FileNames)
             {
                 SourceFileVM sourceFile = new(fileName, false);
-                AttachmentVM attachment = new(attachments, sourceFile, _util);
+                Attachment attachment = new(_util, sourceFile,attachments);
                 attachments.NewAttachments.Add(attachment);
             }
         }

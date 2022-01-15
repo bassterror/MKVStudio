@@ -44,7 +44,7 @@ public class InputVM : BaseViewModel
     {
         ProcessResult pr = await Util.ExLib.Run(ProcessResultNames.MKVMergeJ, sourceFile);
         ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
-        MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(ProcessResults[ProcessResultNames.MKVMergeJ].StdOutput);
+        MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(pr.StdOutput);
         sourceFile.Type = result.Container.Type;
         foreach (MKVMergeJ.Track track in result.Tracks.Where(t => t.Type == "video"))
         {
@@ -59,7 +59,7 @@ public class InputVM : BaseViewModel
             Tracks.Add(new TrackVM(this, sourceFile, track, TrackPropertiesTypes.Subtitles, Util));
         }
         Multiplex.Output = new OutputVM(Multiplex, result, Util);
-        Multiplex.Attachments = new AttachmentsVM(sourceFile, result.Attachments, Util);
+        Multiplex.Attachments = new AttachmentsVM(Util, sourceFile, result.Attachments);
         Multiplex.Chapters = new ChaptersVM();
     }
 }
