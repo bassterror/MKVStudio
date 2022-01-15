@@ -44,4 +44,9 @@
     <Resource Include="VisualStyles\Images\Uncheck.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Main\" />
+    <Folder Include="Models\JobQueue\" />
+  </ItemGroup>
+
 </Project>

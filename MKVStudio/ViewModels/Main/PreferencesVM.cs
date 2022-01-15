@@ -10,8 +10,8 @@ namespace MKVStudio.ViewModels;
 
 public class PreferencesVM : BaseViewModel
 {
-    public MainVM Main { get; }
     public IUtilitiesService Util { get; }
+    public MainVM Main { get; }
     public PreferencesV PreferencesV { get; }
 
     public ObservableCollection<Language> AvailableLanguages { get; set; }
