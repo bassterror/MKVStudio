@@ -63,7 +63,7 @@ public class InputVM : BaseViewModel
             Attachment att = new(Util, sourceFile, Multiplex.Attachments, attachment);
             Multiplex.Attachments.ExistingAttachments.Add(att);
         }
-        Multiplex.Output.Title = result.Container.Properties.Title;
+        Multiplex.Output.Output.Title = result.Container.Properties.Title;
         //TODO Chapters
     }
 }

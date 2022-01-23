@@ -31,7 +31,7 @@
                 </Label>
                 <TextBox Grid.Column="1"
                          Margin="2"
-                         Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding Output.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center"/>
             </Grid>
         </GroupBox>

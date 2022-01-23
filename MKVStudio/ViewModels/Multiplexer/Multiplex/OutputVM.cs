@@ -1,20 +1,18 @@
 ﻿using MKVStudio.Models;
 using MKVStudio.Services;
-using System.Windows.Input;
 
 namespace MKVStudio.ViewModels;
 
 public class OutputVM : BaseViewModel
 {
-    public IUtilitiesService Util { get; }
-    public MultiplexVM Multiplex { get; set; }
-    public string Title { get; set; }
-    public ICommand RunMKVInfo { get; set; }
-    public ICommand RunMKVExtract { get; set; }
+    private readonly IUtilitiesService _util;
+    private readonly MultiplexVM _multiplex;
+    public Output Output { get; set; }
 
     public OutputVM(IUtilitiesService util, MultiplexVM multiplex)
     {
-        Util = util;
-        Multiplex = multiplex;
+        _util = util;
+        _multiplex = multiplex;
+        Output = new(_util);
     }
 }
