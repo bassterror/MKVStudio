@@ -51,9 +51,9 @@ public class TrackVM : BaseViewModel
             case TrackPropertiesTypes.Subtitles:
                 SubtitlesPropertiesVM sProp = new(util, mkvMergeTrack);
                 Properties = sProp;
-                Codec = sProp.Codec;
-                Language = sProp.Language.Name;
-                Name = sProp.Name;
+                Codec = sProp.SubtitlesProperties.Codec;
+                Language = sProp.SubtitlesProperties.Language.Name;
+                Name = sProp.SubtitlesProperties.Name;
                 break;
         }
     }
