@@ -31,7 +31,7 @@
                 <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBox Grid.Column="1"
-                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding VideoProperties.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
                      Margin="2"/>
         </Grid>
@@ -46,7 +46,7 @@
                 <TextBlock Text="ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding ID}"
+                       Text="{Binding VideoProperties.ID}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -61,7 +61,7 @@
                 <TextBlock Text="Codec:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Codec}"
+                       Text="{Binding VideoProperties.Codec}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -76,7 +76,7 @@
                 <TextBlock Text="Codec ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding CodecId}"
+                       Text="{Binding VideoProperties.CodecId}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -91,7 +91,7 @@
                 <TextBlock Text="Display dimensions:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding DisplayDimensions}"
+                       Text="{Binding VideoProperties.DisplayDimensions}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -106,7 +106,7 @@
                 <TextBlock Text="Pixel dimensions:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding PixelDimensions}"
+                       Text="{Binding VideoProperties.PixelDimensions}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -121,7 +121,7 @@
                 <TextBlock Text="Packetizer:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Packetizer}"
+                       Text="{Binding VideoProperties.Packetizer}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -138,7 +138,7 @@
             <ComboBox Grid.Column="1"
                       Margin="2"
                       ItemsSource="{Binding Util.Languages}"
-                      SelectedItem="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                      SelectedItem="{Binding VideoProperties.Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -160,27 +160,27 @@
             </Grid.ColumnDefinitions>
             <CheckBox Grid.Column="0"
                       Content="Default track"
-                      IsChecked="{Binding DefaultTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding VideoProperties.DefaultTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="1"
                       Content="Enabled track"
-                      IsChecked="{Binding EnabledTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding VideoProperties.EnabledTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="2"
                       Content="Forced track"
-                      IsChecked="{Binding ForcedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding VideoProperties.ForcedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="3"
                       Content="Commentary track"
-                      IsChecked="{Binding FlagCommentary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding VideoProperties.FlagCommentary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="4"
                       Content="Hearing impared track"
-                      IsChecked="{Binding FlagHearingImpaired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding VideoProperties.FlagHearingImpaired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
         </Grid>

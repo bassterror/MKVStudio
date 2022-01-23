@@ -37,9 +37,9 @@ public class TrackVM : BaseViewModel
             case TrackPropertiesTypes.Video:
                 VideoPropertiesVM vProp = new(util, mkvMergeTrack);
                 Properties = vProp;
-                Codec = vProp.Codec;
-                Language = vProp.Language.Name;
-                Name = vProp.Name;
+                Codec = vProp.VideoProperties.Codec;
+                Language = vProp.VideoProperties.Language.Name;
+                Name = vProp.VideoProperties.Name;
                 break;
             case TrackPropertiesTypes.Audio:
                 AudioPropertiesVM aProp = new(util, mkvMergeTrack);
