@@ -1,0 +1,47 @@
+﻿<Window x:Class="MKVStudio.Views.PreferencesV"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:c="clr-namespace:MKVStudio.Converters"
+        xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="SingleBorderWindow"
+        ShowInTaskbar="False"
+        Width="800"
+        Height="600"
+        Style="{DynamicResource CustomWindowStyle}"
+        d:DataContext="{d:DesignInstance Type=vm:PreferencesVM}"
+        d:DesignHeight="200"
+        d:DesignWidth="400">
+    <Window.Resources>
+        <c:EqualValueToParameterConverter x:Key="EVTPC" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              RenderOptions.EdgeMode="Aliased"
+              Background="{StaticResource WindowTitleColour}">
+            <Grid.Resources>
+                <Style TargetType="RadioButton"
+                       BasedOn="{StaticResource NavRadioButton}" />
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <RadioButton Grid.Row="0"
+                         Content="Often used"
+                         IsChecked="{Binding SelectedPreferencesTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:OftenUsedVM}}"
+                         Command="{Binding UpdateSelectedPreferencesTab}"
+                         CommandParameter="{x:Static vm:ViewModelTypes.OftenUsed}" />
+        </Grid>
+        <ContentControl Grid.Column="1"
+                        Content="{Binding SelectedPreferencesTab}" />
+    </Grid>
+</Window>
