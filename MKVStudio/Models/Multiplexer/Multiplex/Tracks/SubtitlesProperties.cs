@@ -14,6 +14,7 @@ public class SubtitlesProperties : BaseModel
     public bool EnabledTrack { get; set; }
     public bool ForcedTrack { get; set; }
     public bool FlagHearingImpaired { get; set; }
+    public bool FlagOriginal { get; set; }
     public bool FlagCommentary { get; set; }
     public string Encoding { get; set; }
     public Language Language { get; set; }
@@ -32,6 +33,7 @@ public class SubtitlesProperties : BaseModel
         EnabledTrack = track.Properties.Enabled_track;
         ForcedTrack = track.Properties.Forced_track;
         FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
+        FlagOriginal = track.Properties.Flag_original;
         FlagCommentary = track.Properties.Flag_commentary;
         Language = string.IsNullOrWhiteSpace(track.Properties.Language) ?
             util.Settings.PreferedLanguages.First(a => a.ID == "und") :

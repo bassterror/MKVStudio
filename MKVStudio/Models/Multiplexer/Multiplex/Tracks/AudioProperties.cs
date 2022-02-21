@@ -14,6 +14,7 @@ public class AudioProperties : BaseModel
     public bool EnabledTrack { get; set; }
     public bool ForcedTrack { get; set; }
     public bool FlagVisualImpaired { get; set; }
+    public bool FlagOriginal { get; set; }
     public bool FlagCommentary { get; set; }
     public int Channels { get; set; }
     public int SampleRate { get; set; }
@@ -32,6 +33,7 @@ public class AudioProperties : BaseModel
         EnabledTrack = track.Properties.Enabled_track;
         ForcedTrack = track.Properties.Forced_track;
         FlagVisualImpaired = track.Properties.Flag_visual_impaired;
+        FlagOriginal = track.Properties.Flag_original;
         FlagCommentary = track.Properties.Flag_commentary;
         Channels = track.Properties.Audio_channels;
         SampleRate = track.Properties.Audio_sampling_frequency;

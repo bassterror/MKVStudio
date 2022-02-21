@@ -72,6 +72,7 @@ public class MKVMergeJ
         public bool Enabled_track { get; set; }
         public bool Forced_track { get; set; }
         public bool Flag_hearing_impaired { get; set; }
+        public bool Flag_original { get; set; }
         public bool Flag_visual_impaired { get; set; }
         public bool Flag_commentary { get; set; }
         public string Language { get; set; }
