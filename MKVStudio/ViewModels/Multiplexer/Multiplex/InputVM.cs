@@ -42,7 +42,7 @@ public class InputVM : BaseViewModel
 
     public async void CreateTracks(SourceFileInfo sourceFile)
     {
-        ProcessResult pr = await Util.ExLib.Run(ProcessResultNames.MKVMergeJ, sourceFile);
+        ProcessResult pr = await Util.ExLib.RunProcess(ProcessResultNames.MKVMergeJ, sourceFile);
         ProcessResults[ProcessResultNames.MKVMergeJ] = pr;
         MKVMergeJ result = JsonConvert.DeserializeObject<MKVMergeJ>(pr.StdOutput);
         sourceFile.Type = result.Container.Type;

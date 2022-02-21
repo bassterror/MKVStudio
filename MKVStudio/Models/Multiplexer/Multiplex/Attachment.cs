@@ -62,7 +62,7 @@ public class Attachment : BaseModel
 
     private async void ExtractTemp()
     {
-        _ = await Util.ExLib.Run(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), _tempPath);
+        _ = await Util.ExLib.RunProcess(ProcessResultNames.MKVExtractAttachments, SourceFile, ID.ToString(), _tempPath);
         LoadTempImage();
     }
 

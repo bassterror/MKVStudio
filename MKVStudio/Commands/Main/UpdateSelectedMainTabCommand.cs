@@ -19,15 +19,20 @@ public class UpdateSelectedMainTabCommand : BaseCommand
     {
         if (parameter is ViewModelTypes viewModel)
         {
-            switch (viewModel)
-            {
-                case ViewModelTypes.Multiplexer:
-                    _main.SelectedMainTab = _multiplexer;
-                    break;
-                case ViewModelTypes.JobQueue:
-                    _main.SelectedMainTab = _jobQueue;
-                    break;
-            }
+            SelectMainTab(viewModel);
+        }
+    }
+
+    private void SelectMainTab(ViewModelTypes viewModel)
+    {
+        switch (viewModel)
+        {
+            case ViewModelTypes.Multiplexer:
+                _main.SelectedMainTab = _multiplexer;
+                break;
+            case ViewModelTypes.JobQueue:
+                _main.SelectedMainTab = _jobQueue;
+                break;
         }
     }
 }

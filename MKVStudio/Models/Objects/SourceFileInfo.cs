@@ -28,7 +28,7 @@ public class SourceFileInfo : BaseModel
         InputName = Path.GetFileNameWithoutExtension(source);
         InputExtension = Path.GetExtension(source);
         InputFullPath = source;
-        OutputPath = InputPath;
+        OutputPath = InputPath; //TODO Default output path
         OutputName = InputName + " - edit"; //TODO Default ouputname suffix
     }
 }

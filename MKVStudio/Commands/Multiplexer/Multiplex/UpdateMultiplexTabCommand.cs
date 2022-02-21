@@ -15,21 +15,26 @@ public class UpdateMultiplexTabCommand : BaseCommand
     {
         if (parameter is ViewModelTypes viewModel)
         {
-            switch (viewModel)
-            {
-                case ViewModelTypes.Input:
-                    _multiplex.SelectedMultiplexTab = _multiplex.Input;
-                    break;
-                case ViewModelTypes.Output:
-                    _multiplex.SelectedMultiplexTab = _multiplex.Output;
-                    break;
-                case ViewModelTypes.Attachments:
-                    _multiplex.SelectedMultiplexTab = _multiplex.Attachments;
-                    break;
-                case ViewModelTypes.Chapters:
-                    _multiplex.SelectedMultiplexTab = _multiplex.Chapters;
-                    break;
-            }
+            SelectMultiplexTab(viewModel);
+        }
+    }
+
+    private void SelectMultiplexTab(ViewModelTypes viewModel)
+    {
+        switch (viewModel)
+        {
+            case ViewModelTypes.Input:
+                _multiplex.SelectedMultiplexTab = _multiplex.Input;
+                break;
+            case ViewModelTypes.Output:
+                _multiplex.SelectedMultiplexTab = _multiplex.Output;
+                break;
+            case ViewModelTypes.Attachments:
+                _multiplex.SelectedMultiplexTab = _multiplex.Attachments;
+                break;
+            case ViewModelTypes.Chapters:
+                _multiplex.SelectedMultiplexTab = _multiplex.Chapters;
+                break;
         }
     }
 }

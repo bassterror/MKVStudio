@@ -22,25 +22,40 @@ public class ClearFilesCommand : BaseCommand
         }
         if (_collectionParent is InputVM input)
         {
-            List<SourceFileInfo> notPrimary = input.SourceFiles.Where(s => !s.IsPrimary).ToList();
-            foreach (SourceFileInfo sourceFile in notPrimary)
-            {
-                _ = input.SourceFiles.Remove(sourceFile);
-                List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
-                foreach (TrackVM track in tracks)
-                {
-                    _ = input.Tracks.Remove(track);
-                }
-                List<Attachment> att = input.Multiplex.Attachments.ExistingAttachments.Where(a => a.SourceFile == sourceFile).ToList();
-                foreach (Attachment attachment in att)
-                {
-                    _ = input.Multiplex.Attachments.ExistingAttachments.Remove(attachment);
-                }
-            }
+            ClearInput(input);
         }
         if (_collectionParent is AttachmentsVM attachments)
         {
             attachments.NewAttachments.Clear();
+        }
+    }
+
+    private static void ClearInput(InputVM input)
+    {
+        List<SourceFileInfo> notPrimary = input.SourceFiles.Where(s => !s.IsPrimary).ToList();
+        foreach (SourceFileInfo sourceFile in notPrimary)
+        {
+            _ = input.SourceFiles.Remove(sourceFile);
+            ClearTracks(input, sourceFile);
+            ClearAttachments(input, sourceFile);
+        }
+    }
+
+    private static void ClearTracks(InputVM input, SourceFileInfo sourceFile)
+    {
+        List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
+        foreach (TrackVM track in tracks)
+        {
+            _ = input.Tracks.Remove(track);
+        }
+    }
+
+    private static void ClearAttachments(InputVM input, SourceFileInfo sourceFile)
+    {
+        List<Attachment> attachments = input.Multiplex.Attachments.ExistingAttachments.Where(a => a.SourceFile == sourceFile).ToList();
+        foreach (Attachment attachment in attachments)
+        {
+            _ = input.Multiplex.Attachments.ExistingAttachments.Remove(attachment);
         }
     }
 }

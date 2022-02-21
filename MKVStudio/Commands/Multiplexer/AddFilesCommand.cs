@@ -19,30 +19,51 @@ public class AddFilesCommand : BaseCommand
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _util.GetFileDialog(_util.Settings.SupportedFileTypes.CreateFiltersAllSuported(), true).FileNames)
-            {
-                SourceFileInfo sourceFile = new(_util, filename, true);
-                MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
-                multiplexer.Multiplexes.Add(multiplex);
-            }
+            AddFilesToMultiplexer(multiplexer);
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string fileName in _util.GetFileDialog(_util.Settings.SupportedFileTypes.CreateFiltersAllSuported(), true).FileNames)
-            {
-                SourceFileInfo sourceFile = new(_util, fileName, false);
-                input.SourceFiles.Add(sourceFile);
-                input.CreateTracks(sourceFile);
-            }
+            AddFilesToInput(input);
         }
         if (_collectionParent is AttachmentsVM attachments)
         {
-            foreach (string fileName in _util.GetFileDialog(_util.Settings.SupportedFileTypes.CreateFiltersAllAttachments(), true).FileNames)
-            {
-                SourceFileInfo sourceFile = new(_util, fileName, false);
-                Attachment attachment = new(_util, sourceFile, attachments);
-                attachments.NewAttachments.Add(attachment);
-            }
+            AddFilesToAttachments(attachments);
+        }
+    }
+
+    private void AddFilesToMultiplexer(MultiplexerVM multiplexer)
+    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuported();
+        string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
+        foreach (string filename in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, filename, true);
+            MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
+            multiplexer.Multiplexes.Add(multiplex);
+        }
+    }
+
+    private void AddFilesToInput(InputVM input)
+    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuported();
+        string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
+        foreach (string fileName in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, fileName, false);
+            input.SourceFiles.Add(sourceFile);
+            input.CreateTracks(sourceFile);
+        }
+    }
+
+    private void AddFilesToAttachments(AttachmentsVM attachments)
+    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllAttachments();
+        string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
+        foreach (string fileName in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, fileName, false);
+            Attachment attachment = new(_util, sourceFile, attachments);
+            attachments.NewAttachments.Add(attachment);
         }
     }
 }

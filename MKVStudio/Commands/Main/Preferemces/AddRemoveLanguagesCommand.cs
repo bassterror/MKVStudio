@@ -18,29 +18,34 @@ public class AddRemoveLanguagesCommand : BaseCommand
     {
         if (parameter is string value)
         {
-            switch (value)
-            {
-                case "add":
-                    _preferences.SearchAvailableLanguage = string.Empty;
-                    _preferences.Util.Settings.PreferedLanguages.Add(_preferences.SelectedAvailableLanguage);
-                    _preferences.Util.Settings.PreferedLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.PreferedLanguages.OrderBy(l => l.Name));
-                    _preferences.Util.Settings.AllLanguages.Remove(_preferences.SelectedAvailableLanguage);
-                    _preferences.Util.Settings.AllLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.AllLanguages.OrderBy(l => l.Name));
-                    _preferences.UserLanguages = _preferences.Util.Settings.PreferedLanguages;
-                    _preferences.AvailableLanguages = _preferences.Util.Settings.AllLanguages;
-                    _preferences.Util.Settings.SetPreferedLanguages(GetPrefLangString());
-                    break;
-                case "remove":
-                    _preferences.SearchUserLanguage = string.Empty;
-                    _preferences.Util.Settings.AllLanguages.Add(_preferences.SelectedUserLanguage);
-                    _preferences.Util.Settings.AllLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.AllLanguages.OrderBy(l => l.Name));
-                    _preferences.Util.Settings.PreferedLanguages.Remove(_preferences.SelectedUserLanguage);
-                    _preferences.Util.Settings.PreferedLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.PreferedLanguages.OrderBy(l => l.Name));
-                    _preferences.AvailableLanguages = _preferences.Util.Settings.AllLanguages;
-                    _preferences.UserLanguages = _preferences.Util.Settings.PreferedLanguages;
-                    _preferences.Util.Settings.SetPreferedLanguages(GetPrefLangString());
-                    break;
-            }
+            AddRemove(value);
+        }
+    }
+
+    private void AddRemove(string value)
+    {
+        switch (value)
+        {
+            case "add":
+                _preferences.SearchAvailableLanguage = string.Empty;
+                _preferences.Util.Settings.PreferedLanguages.Add(_preferences.SelectedAvailableLanguage);
+                _preferences.Util.Settings.PreferedLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.PreferedLanguages.OrderBy(l => l.Name));
+                _preferences.Util.Settings.AllLanguages.Remove(_preferences.SelectedAvailableLanguage);
+                _preferences.Util.Settings.AllLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.AllLanguages.OrderBy(l => l.Name));
+                _preferences.UserLanguages = _preferences.Util.Settings.PreferedLanguages;
+                _preferences.AvailableLanguages = _preferences.Util.Settings.AllLanguages;
+                _preferences.Util.Settings.SetPreferedLanguages(GetPrefLangString());
+                break;
+            case "remove":
+                _preferences.SearchUserLanguage = string.Empty;
+                _preferences.Util.Settings.AllLanguages.Add(_preferences.SelectedUserLanguage);
+                _preferences.Util.Settings.AllLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.AllLanguages.OrderBy(l => l.Name));
+                _preferences.Util.Settings.PreferedLanguages.Remove(_preferences.SelectedUserLanguage);
+                _preferences.Util.Settings.PreferedLanguages = new ObservableCollection<Language>(_preferences.Util.Settings.PreferedLanguages.OrderBy(l => l.Name));
+                _preferences.AvailableLanguages = _preferences.Util.Settings.AllLanguages;
+                _preferences.UserLanguages = _preferences.Util.Settings.PreferedLanguages;
+                _preferences.Util.Settings.SetPreferedLanguages(GetPrefLangString());
+                break;
         }
     }
 

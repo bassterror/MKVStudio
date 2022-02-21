@@ -17,23 +17,35 @@ public class AddFilesFromFolderCommand : BaseCommand
 
     public override void Execute(object parameter)
     {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt();
+        string[] fileNames = _util.GetFilesFromFolder(filter);
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _util.GetFilesFromFolder(_util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt()))
-            {
-                SourceFileInfo sourceFile = new(_util, filename, true);
-                MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
-                multiplexer.Multiplexes.Add(multiplex);
-            }
+            AddFilesToMultiplexer(multiplexer, fileNames);
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string filename in _util.GetFilesFromFolder(_util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt()))
-            {
-                SourceFileInfo sourceFile = new(_util, filename, false);
-                input.SourceFiles.Add(sourceFile);
-                input.CreateTracks(sourceFile);
-            }
+            AddFilesToInput(input, fileNames);
+        }
+    }
+
+    private void AddFilesToMultiplexer(MultiplexerVM multiplexer, string[] fileNames)
+    {
+        foreach (string filename in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, filename, true);
+            MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
+            multiplexer.Multiplexes.Add(multiplex);
+        }
+    }
+
+    private void AddFilesToInput(InputVM input, string[] fileNames)
+    {
+        foreach (string filename in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, filename, false);
+            input.SourceFiles.Add(sourceFile);
+            input.CreateTracks(sourceFile);
         }
     }
 }

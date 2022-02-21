@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using MKVStudio.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -97,7 +98,7 @@ public class Settings
     #region Languages
     private async void GetLanguageList()
     {
-        ProcessResult pr = await _util.ExLib.Run(ProcessResultNames.MKVMergeLangList);
+        ProcessResult pr = await _util.ExLib.RunProcess(ProcessResultNames.MKVMergeLangList);
         string[] lines = pr.StdOutput.Split("\r\n");
         string[] pref = GetPreferedLanguages().Split("|");
         for (int i = 2; i < lines.Length - 1; i++)
@@ -141,14 +142,26 @@ public class Settings
     #region FileTypes
     private async void GetSupportedFileTypes()
     {
-        ProcessResult pr = await _util.ExLib.Run(ProcessResultNames.MKVMergeSupportedFileTypes);
+        Dictionary<string, string> uniqueExts = new();
+        string exts = string.Empty;
+        ProcessResult pr = await _util.ExLib.RunProcess(ProcessResultNames.MKVMergeSupportedFileTypes);
         string[] lines = pr.StdOutput.Split("\r\n");
         for (int i = 2; i < lines.Length - 1; i++)
         {
             Match match = Regex.Match(lines[i], @"^\s\s(.+)\s\[(.+)\]$");
             SupportedFileType fileType = new(match);
             SupportedFileTypes.SupportedFileTypes.Add(fileType);
+            foreach (string ext in fileType.Extensions.Split(";"))
+            {
+                _ = uniqueExts.TryAdd(ext, ext);
+            }
         }
+        foreach (string extension in uniqueExts.Keys)
+        {
+            exts += $"{extension};";
+        }
+        SupportedFileType allSupportedFileTypes = new("All supported media files", exts.Remove(exts.Length - 1, 1));
+        SupportedFileTypes.SupportedFileTypes.Insert(0, allSupportedFileTypes);
     }
     #endregion
 
