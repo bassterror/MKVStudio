@@ -1,51 +1,58 @@
-﻿using MKVStudio.ViewModels;
-using System;
+﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class CheckBoxCommand : ICommand
+public class CheckBoxCommand : BaseCommand
 {
     private readonly object _collection;
-
-    public event EventHandler CanExecuteChanged { add { } remove { } }
 
     public CheckBoxCommand(object collection)
     {
         _collection = collection;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (parameter is bool value)
         {
             if (_collection is ObservableCollection<MultiplexVM> multiplexes)
             {
-                foreach (MultiplexVM multiplex in multiplexes)
-                {
-                    multiplex.IsChecked = value;
-                }
+                CheckUncheckMultiplexes(value, multiplexes);
             }
             if (_collection is ObservableCollection<TrackVM> tracks)
             {
-                foreach (TrackVM track in tracks)
-                {
-                    track.IsChecked = value;
-                }
+                CheckUncheckTracks(value, tracks);
             }
-            if (_collection is ObservableCollection<AttachmentVM> attachments)
+            if (_collection is ObservableCollection<Attachment> attachments)
             {
-                foreach (AttachmentVM attachment in attachments)
-                {
-                    attachment.IsChecked = value;
-                }
+                CheckUncheckAttachments(value, attachments);
             }
+        }
+    }
+
+    private static void CheckUncheckMultiplexes(bool value, ObservableCollection<MultiplexVM> multiplexes)
+    {
+        foreach (MultiplexVM multiplex in multiplexes)
+        {
+            multiplex.IsChecked = value;
+        }
+    }
+
+    private static void CheckUncheckTracks(bool value, ObservableCollection<TrackVM> tracks)
+    {
+        foreach (TrackVM track in tracks)
+        {
+            track.IsChecked = value;
+        }
+    }
+
+    private static void CheckUncheckAttachments(bool value, ObservableCollection<Attachment> attachments)
+    {
+        foreach (Attachment attachment in attachments)
+        {
+            attachment.ToBeAdded = value;
         }
     }
 }

@@ -1,70 +1,65 @@
 ﻿using MKVStudio.Models;
-using MKVStudio.ViewModels;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static MKVStudio.Services.UtilitiesService;
 
 namespace MKVStudio.Services;
 
 public class ExternalLibrariesService : IExternalLibrariesService
 {
-    public IUtilitiesService Util { get; set; }
-    public ObservableCollection<Language> AllLanguages { get; set; } = new();
-    public ObservableCollection<Language> Languages { get; set; } = new();
-    public SupportedFileTypesCollection SupportedFileTypesCollection { get; set; } = new();
-    public MIMETypeCollection MIMETypes { get; set; } = new();
+    public Dictionary<ExecutableNames, Executable> Executables { get; set; } = new();
 
-    public ExternalLibrariesService(IUtilitiesService utilitiesService)
-    {
-        Util = utilitiesService;
-        GetLanguageList();
-        GetSupportedFileTypes();
-    }
-
-    public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
+    public async Task<ProcessResult> RunProcess(ProcessResultNames processName,
+        SourceFileInfo sourceFile = null,
+        string attachmentId = null,
+        string attachmentTempPath = null)
     {
         ProcessResult pr = new();
+        string arguments = string.Empty;
 
         switch (processName)
         {
             case ProcessResultNames.LoudnormFirst:
-                pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
+                arguments = BuildArguments(processName, sourceFile);
+                pr = await Run(ExecutableNames.FFmpeg, arguments, processName);
                 break;
             case ProcessResultNames.LoudnormSecondStereo:
-                pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
+                arguments = BuildArguments(processName, sourceFile);
+                pr = await Run(ExecutableNames.FFmpeg, arguments, processName);
                 break;
             case ProcessResultNames.LoudnormSecond6Channels:
-                pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
+                arguments = BuildArguments(processName, sourceFile);
+                pr = await Run(ExecutableNames.FFmpeg, arguments, processName);
                 break;
             case ProcessResultNames.MKVInfo:
-                pr = await RunProcess(Executables.MKVInfo, BuildArguments(processName, sourceFile), processName);
+                arguments = BuildArguments(processName, sourceFile);
+                pr = await Run(ExecutableNames.MKVInfo, arguments, processName);
                 break;
             case ProcessResultNames.MKVExtractAttachments:
-                pr = await RunProcess(Executables.MKVExtract, BuildArguments(processName, sourceFile, attachmentId, attachmentTempPath), processName);
+                arguments = BuildArguments(processName, sourceFile, attachmentId, attachmentTempPath);
+                pr = await Run(ExecutableNames.MKVExtract, arguments, processName);
                 break;
             case ProcessResultNames.MKVMergeJ:
-                pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, sourceFile), processName);
+                arguments = BuildArguments(processName, sourceFile);
+                pr = await Run(ExecutableNames.MKVMerge, arguments, processName);
                 break;
             case ProcessResultNames.MKVMergeLangList:
-                pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
+                arguments = BuildArguments(processName);
+                pr = await Run(ExecutableNames.MKVMerge, arguments, processName);
                 break;
             case ProcessResultNames.MKVMergeSupportedFileTypes:
-                pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
+                arguments = BuildArguments(processName);
+                pr = await Run(ExecutableNames.MKVMerge, arguments, processName);
                 break;
         }
 
         return pr;
     }
 
-    private async Task<ProcessResult> RunProcess(Executables executable, string arguments, ProcessResultNames processName)
+    private async Task<ProcessResult> Run(ExecutableNames executable, string arguments, ProcessResultNames processName)
     {
         ProcessResult processResult = new();
 
@@ -78,7 +73,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
             };
             processTasks.Add(processExitEvent.Task);
             process.EnableRaisingEvents = true;
-            process.StartInfo.FileName = Util.GetExecutable(executable);
+            process.StartInfo.FileName = Executables[executable].Path;
             process.StartInfo.Arguments = arguments;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardError = true;
@@ -153,7 +148,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
         return processResult;
     }
 
-    private static string BuildArguments(ProcessResultNames processName, SourceFileVM sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
+    private static string BuildArguments(ProcessResultNames processName, SourceFileInfo sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
     {
         string arguments = string.Empty;
         switch (processName)
@@ -185,38 +180,6 @@ public class ExternalLibrariesService : IExternalLibrariesService
         }
 
         return arguments;
-    }
-
-    private async void GetLanguageList()
-    {
-        ProcessResult pr = await Run(ProcessResultNames.MKVMergeLangList);
-        string[] lines = pr.StdOutput.Split("\r\n");
-        string[] pref = Util.GetPreferedLanguages().Split("|");
-        for (int i = 2; i < lines.Length - 1; i++)
-        {
-            Match match = Regex.Match(lines[i], @"^(.+)\|(.+)\|(.+)\|(.+)$");
-            Language language = new(match);
-            if (pref.Contains(language.ID))
-            {
-                Languages.Add(language);
-            }
-            else
-            {
-                AllLanguages.Add(language);
-            }
-        }
-    }
-
-    private async void GetSupportedFileTypes()
-    {
-        ProcessResult pr = await Run(ProcessResultNames.MKVMergeSupportedFileTypes);
-        string[] lines = pr.StdOutput.Split("\r\n");
-        for (int i = 2; i < lines.Length - 1; i++)
-        {
-            Match match = Regex.Match(lines[i], @"^\s\s(.+)\s\[(.+)\]$");
-            SupportedFileType fileType = new(match);
-            SupportedFileTypesCollection.SupportedFileTypes.Add(fileType);
-        }
     }
 
     private void SetLoudnormFirstPassMeasurements(string firstPassOutput)

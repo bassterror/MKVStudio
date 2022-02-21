@@ -10,9 +10,8 @@ namespace MKVStudio.ViewModels;
 
 public class PreferencesVM : BaseViewModel
 {
-
+    public IUtilitiesService Util { get; }
     public MainVM Main { get; }
-    public IExternalLibrariesService ExLib { get; }
     public PreferencesV PreferencesV { get; }
 
     public ObservableCollection<Language> AvailableLanguages { get; set; }
@@ -24,7 +23,8 @@ public class PreferencesVM : BaseViewModel
         set
         {
             _searchAvailableLanguage = value;
-            AvailableLanguages = new ObservableCollection<Language>(ExLib.AllLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
+            AvailableLanguages = new ObservableCollection<Language>(
+                Util.Settings.AllLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
         }
     }
 
@@ -37,18 +37,19 @@ public class PreferencesVM : BaseViewModel
         set
         {
             _searchUserLanguage = value;
-            UserLanguages = new ObservableCollection<Language>(ExLib.Languages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
+            UserLanguages = new ObservableCollection<Language>(
+                Util.Settings.PreferedLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
         }
     }
 
     public ICommand AddRemoveLanguage => new AddRemoveLanguagesCommand(this);
 
-    public PreferencesVM(MainVM main, IExternalLibrariesService exLib, PreferencesV preferencesV)
+    public PreferencesVM(MainVM main, IUtilitiesService util, PreferencesV preferencesV)
     {
         Main = main;
-        ExLib = exLib;
+        Util = util;
         PreferencesV = preferencesV;
-        AvailableLanguages = ExLib.AllLanguages;
-        UserLanguages = ExLib.Languages;
+        AvailableLanguages = Util.Settings.AllLanguages;
+        UserLanguages = Util.Settings.PreferedLanguages;
     }
 }

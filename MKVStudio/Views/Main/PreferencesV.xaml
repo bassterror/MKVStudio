@@ -4,8 +4,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-        xmlns:c="clr-namespace:MKVStudio.Converters"
-        xmlns:v="clr-namespace:MKVStudio.Views"
         mc:Ignorable="d" 
         WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow"

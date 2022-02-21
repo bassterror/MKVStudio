@@ -1,45 +1,51 @@
-﻿using MKVStudio.Services;
+﻿using MKVStudio.Models;
+using MKVStudio.Services;
 using MKVStudio.ViewModels;
-using System;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class AddFilesFromFolderCommand : ICommand
+public class AddFilesFromFolderCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly object _collectionParent;
-    private readonly IExternalLibrariesService _exLib;
+    private readonly IUtilitiesService _util;
 
-    public AddFilesFromFolderCommand(object collectionParent, IExternalLibrariesService exLib)
+    public AddFilesFromFolderCommand(object collectionParent, IUtilitiesService util)
     {
         _collectionParent = collectionParent;
-        _exLib = exLib;
+        _util = util;
     }
 
-    public bool CanExecute(object parameter)
+    public override void Execute(object parameter)
     {
-        return true;
-    }
-
-    public void Execute(object parameter)
-    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt();
+        string[] fileNames = _util.GetFilesFromFolder(filter);
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _exLib.Util.GetFilesFromFolder(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
-            {
-                MultiplexVM multiplex = new(multiplexer, filename, _exLib);
-                multiplexer.Multiplexes.Add(multiplex);
-            }
+            AddFilesToMultiplexer(multiplexer, fileNames);
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string filename in _exLib.Util.GetFilesFromFolder(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
-            {
-                SourceFileVM sourceFile = new(filename, false, input);
-                input.SourceFiles.Add(sourceFile);
-                input.CreateTracks(sourceFile);
-            }
+            AddFilesToInput(input, fileNames);
+        }
+    }
+
+    private void AddFilesToMultiplexer(MultiplexerVM multiplexer, string[] fileNames)
+    {
+        foreach (string filename in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, filename, true);
+            MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
+            multiplexer.Multiplexes.Add(multiplex);
+        }
+    }
+
+    private void AddFilesToInput(InputVM input, string[] fileNames)
+    {
+        foreach (string filename in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, filename, false);
+            input.SourceFiles.Add(sourceFile);
+            input.CreateTracks(sourceFile);
         }
     }
 }

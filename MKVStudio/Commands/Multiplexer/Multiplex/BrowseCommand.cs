@@ -1,29 +1,20 @@
 ﻿using MKVStudio.Services;
 using MKVStudio.ViewModels;
-using System;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class BrowseCommand : ICommand
+public class BrowseCommand : BaseCommand
 {
     private readonly MultiplexVM _multiplex;
-    private readonly IExternalLibrariesService _exLib;
+    private readonly IUtilitiesService _util;
 
-    public event EventHandler CanExecuteChanged { add { } remove { } }
-
-    public BrowseCommand(MultiplexVM multiplex, IExternalLibrariesService exLib)
+    public BrowseCommand(MultiplexVM multiplex, IUtilitiesService util)
     {
         _multiplex = multiplex;
-        _exLib = exLib;
+        _util = util;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         // Set new output dir
         //_multiplex.OutputPath = _exLib.Util.GetFolder();

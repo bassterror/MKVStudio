@@ -45,7 +45,7 @@
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsChecked}"
+                                        <CheckBox IsChecked="{Binding ToBeAdded}"
                                                   Margin="3"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -93,7 +93,7 @@
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Attachments.SourceFile.InputFullName}"
+                                        <TextBlock Text="{Binding SourceFile.InputFullName}"
                                                    Margin="3"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -105,7 +105,7 @@
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Attachments.SourceFile.InputPath}"
+                                        <TextBlock Text="{Binding SourceFile.InputPath}"
                                                    Margin="3"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -136,7 +136,7 @@
                         <ContextMenu>
                             <MenuItem Command="{Binding CheckAll}"
                                       CommandParameter="{StaticResource True}"
-                                      IsEnabled="{Binding IsCheckAll}">
+                                      IsEnabled="{Binding IsCheckAllEnabled}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal"
                                                 Height="20"
@@ -151,7 +151,7 @@
                             </MenuItem>
                             <MenuItem Command="{Binding CheckAll}"
                                       CommandParameter="{StaticResource False}"
-                                      IsEnabled="{Binding IsUncheckAll}">
+                                      IsEnabled="{Binding IsUncheckAllEnabled}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal"
                                                 Height="20"
@@ -247,7 +247,7 @@
                                     </GridViewColumnHeader>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Attachments.SourceFile.InputFullName}"
+                                            <TextBlock Text="{Binding SourceFile.InputFullName}"
                                                        Margin="3"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -259,7 +259,7 @@
                                     </GridViewColumnHeader>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Attachments.SourceFile.InputPath}"
+                                            <TextBlock Text="{Binding SourceFile.InputPath}"
                                                        Margin="3"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -343,7 +343,7 @@
 
                 <!--#region Settings -->
                 <GroupBox Grid.Row="1"
-                          IsEnabled="{Binding IsSettings}">
+                          IsEnabled="{Binding IsSettingsEnabled}">
                     <GroupBox.Header>
                         <TextBlock Text="Settings"
                                    Foreground="{StaticResource ControlDisabledGlythColour}"/>
@@ -394,7 +394,7 @@
                             <ComboBox Grid.Column="1"
                                       Margin="3"
                                       VerticalContentAlignment="Center"
-                                      ItemsSource="{Binding ExLib.MIMETypes.AttachmentMIMETypes}"
+                                      ItemsSource="{Binding Util.Settings.MIMETypes.AttachmentMIMETypes}"
                                       SelectedItem="{Binding SelectedNewAttachment.ContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>

@@ -1,54 +1,69 @@
-﻿using MKVStudio.Services;
+﻿using MKVStudio.Models;
+using MKVStudio.Services;
 using MKVStudio.ViewModels;
-using System;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class AddFilesCommand : ICommand
+public class AddFilesCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly object _collectionParent;
-    private readonly IExternalLibrariesService _exLib;
+    private readonly IUtilitiesService _util;
 
-    public AddFilesCommand(object collectionParent, IExternalLibrariesService exLib)
+    public AddFilesCommand(object collectionParent, IUtilitiesService util)
     {
         _collectionParent = collectionParent;
-        _exLib = exLib;
+        _util = util;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _exLib.Util.GetFileDialog(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
-            {
-                MultiplexVM multiplex = new(multiplexer, filename, _exLib);
-                multiplexer.Multiplexes.Add(multiplex);
-            }
+            AddFilesToMultiplexer(multiplexer);
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string fileName in _exLib.Util.GetFileDialog(_exLib.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
-            {
-                SourceFileVM sourceFile = new(fileName, false, input);
-                input.SourceFiles.Add(sourceFile);
-                input.CreateTracks(sourceFile);
-            }
+            AddFilesToInput(input);
         }
         if (_collectionParent is AttachmentsVM attachments)
         {
-            foreach (string fileName in _exLib.Util.GetFileDialog(_exLib.SupportedFileTypesCollection.CreateFiltersAllAttachments(), true).FileNames)
-            {
-                SourceFileVM sourceFile = new(fileName, false);
-                AttachmentVM attachment = new(attachments, sourceFile, _exLib);
-                attachments.NewAttachments.Add(attachment);
-            }
+            AddFilesToAttachments(attachments);
+        }
+    }
+
+    private void AddFilesToMultiplexer(MultiplexerVM multiplexer)
+    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuported();
+        string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
+        foreach (string filename in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, filename, true);
+            MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
+            multiplexer.Multiplexes.Add(multiplex);
+        }
+    }
+
+    private void AddFilesToInput(InputVM input)
+    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuported();
+        string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
+        foreach (string fileName in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, fileName, false);
+            input.SourceFiles.Add(sourceFile);
+            input.CreateTracks(sourceFile);
+        }
+    }
+
+    private void AddFilesToAttachments(AttachmentsVM attachments)
+    {
+        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllAttachments();
+        string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
+        foreach (string fileName in fileNames)
+        {
+            SourceFileInfo sourceFile = new(_util, fileName, false);
+            Attachment attachment = new(_util, sourceFile, attachments);
+            attachments.NewAttachments.Add(attachment);
         }
     }
 }

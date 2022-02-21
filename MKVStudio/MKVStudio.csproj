@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-	<LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="All" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +42,11 @@
     <Resource Include="VisualStyles\Images\RemoveFolder.ico" />
     <Resource Include="VisualStyles\Images\Search.ico" />
     <Resource Include="VisualStyles\Images\Uncheck.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Main\" />
+    <Folder Include="Models\JobQueue\" />
   </ItemGroup>
 
 </Project>

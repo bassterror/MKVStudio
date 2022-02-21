@@ -1,12 +1,9 @@
 ﻿using MKVStudio.ViewModels;
-using System;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class UpdateSelectedMainTabCommand : ICommand
+public class UpdateSelectedMainTabCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly MainVM _main;
     private readonly MultiplexerVM _multiplexer;
     private readonly JobQueueVM _jobQueue;
@@ -18,24 +15,24 @@ public class UpdateSelectedMainTabCommand : ICommand
         _jobQueue = jobQueue;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (parameter is ViewModelTypes viewModel)
         {
-            switch (viewModel)
-            {
-                case ViewModelTypes.Multiplexer:
-                    _main.SelectedMainTab = _multiplexer;
-                    break;
-                case ViewModelTypes.JobQueue:
-                    _main.SelectedMainTab = _jobQueue;
-                    break;
-            }
+            SelectMainTab(viewModel);
+        }
+    }
+
+    private void SelectMainTab(ViewModelTypes viewModel)
+    {
+        switch (viewModel)
+        {
+            case ViewModelTypes.Multiplexer:
+                _main.SelectedMainTab = _multiplexer;
+                break;
+            case ViewModelTypes.JobQueue:
+                _main.SelectedMainTab = _jobQueue;
+                break;
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using MKVStudio.ViewModels;
-using System;
+﻿using MKVStudio.Models;
+using MKVStudio.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 
 namespace MKVStudio.Commands;
 
-public class ClearFilesCommand : ICommand
+public class ClearFilesCommand : BaseCommand
 {
-    public event EventHandler CanExecuteChanged { add { } remove { } }
     private readonly object _collectionParent;
 
     public ClearFilesCommand(object collectionParrent)
@@ -16,12 +14,7 @@ public class ClearFilesCommand : ICommand
         _collectionParent = collectionParrent;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
+    public override void Execute(object parameter)
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {
@@ -29,20 +22,40 @@ public class ClearFilesCommand : ICommand
         }
         if (_collectionParent is InputVM input)
         {
-            List<SourceFileVM> notPrimary = input.SourceFiles.Where(s => !s.IsPrimary).ToList();
-            foreach (SourceFileVM sourceFile in notPrimary)
-            {
-                _ = input.SourceFiles.Remove(sourceFile);
-                List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
-                foreach (TrackVM track in tracks)
-                {
-                    _ = input.Tracks.Remove(track);
-                }
-            }
+            ClearInput(input);
         }
         if (_collectionParent is AttachmentsVM attachments)
         {
             attachments.NewAttachments.Clear();
+        }
+    }
+
+    private static void ClearInput(InputVM input)
+    {
+        List<SourceFileInfo> notPrimary = input.SourceFiles.Where(s => !s.IsPrimary).ToList();
+        foreach (SourceFileInfo sourceFile in notPrimary)
+        {
+            _ = input.SourceFiles.Remove(sourceFile);
+            ClearTracks(input, sourceFile);
+            ClearAttachments(input, sourceFile);
+        }
+    }
+
+    private static void ClearTracks(InputVM input, SourceFileInfo sourceFile)
+    {
+        List<TrackVM> tracks = input.Tracks.Where(t => t.SourceFile == sourceFile).ToList();
+        foreach (TrackVM track in tracks)
+        {
+            _ = input.Tracks.Remove(track);
+        }
+    }
+
+    private static void ClearAttachments(InputVM input, SourceFileInfo sourceFile)
+    {
+        List<Attachment> attachments = input.Multiplex.Attachments.ExistingAttachments.Where(a => a.SourceFile == sourceFile).ToList();
+        foreach (Attachment attachment in attachments)
+        {
+            _ = input.Multiplex.Attachments.ExistingAttachments.Remove(attachment);
         }
     }
 }

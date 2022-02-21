@@ -30,7 +30,7 @@
                 <TextBlock Text="Track name:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBox Grid.Column="1"
-                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding AudioProperties.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
                      Margin="2"/>
         </Grid>
@@ -45,7 +45,7 @@
                 <TextBlock Text="ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding ID}"
+                       Text="{Binding AudioProperties.ID}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -60,7 +60,7 @@
                 <TextBlock Text="Codec:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Codec}"
+                       Text="{Binding AudioProperties.Codec}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -75,7 +75,7 @@
                 <TextBlock Text="Codec ID:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding CodecId}"
+                       Text="{Binding AudioProperties.CodecId}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -90,7 +90,7 @@
                 <TextBlock Text="Channels:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding Channels}"
+                       Text="{Binding AudioProperties.Channels}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -105,7 +105,7 @@
                 <TextBlock Text="Sample rate:" Foreground="{StaticResource ControlDisabledGlythColour}"/>
             </Label>
             <TextBlock Grid.Column="1"
-                       Text="{Binding SampleRate}"
+                       Text="{Binding AudioProperties.SampleRate}"
                        VerticalAlignment="Center"
                        Margin="2"/>
         </Grid>
@@ -121,8 +121,8 @@
             </Label>
             <ComboBox Grid.Column="1"
                       Margin="2"
-                      ItemsSource="{Binding ExLib.Languages}"
-                      SelectedItem="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding Util.Settings.PreferedLanguages}"
+                      SelectedItem="{Binding AudioProperties.Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -145,27 +145,27 @@
             </Grid.ColumnDefinitions>
             <CheckBox Grid.Column="0"
                       Content="Default track"
-                      IsChecked="{Binding DefaultTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding AudioProperties.DefaultTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="1"
                       Content="Enabled track"
-                      IsChecked="{Binding EnabledTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding AudioProperties.EnabledTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="2"
                       Content="Forced track"
-                      IsChecked="{Binding ForcedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding AudioProperties.ForcedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="3"
                       Content="Commentary track"
-                      IsChecked="{Binding FlagCommentary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding AudioProperties.FlagCommentary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
             <CheckBox Grid.Column="4"
                       Content="Visual impaired track"
-                      IsChecked="{Binding FlagVisualImpaired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding AudioProperties.FlagVisualImpaired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       VerticalContentAlignment="Center"
                       Margin="2"/>
         </Grid>

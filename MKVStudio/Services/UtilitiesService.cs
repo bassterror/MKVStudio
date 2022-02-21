@@ -1,90 +1,27 @@
 ﻿using Microsoft.Win32;
+using MKVStudio.Models;
 using System;
 using System.Collections;
 using System.IO;
-using System.Windows.Forms;
+using F = System.Windows.Forms;
 
 namespace MKVStudio.Services;
 
 public class UtilitiesService : IUtilitiesService
 {
-    #region Registry
-    public enum Executables
-    {
-        FFmpeg,
-        MKVInfo,
-        MKVMerge,
-        MKVPropEdit,
-        MKVExtract
-    }
+    public IExternalLibrariesService ExLib { get; }
+    public Settings Settings { get; set; }
 
-    public string GetExecutable(Executables executable)
+    public UtilitiesService(IExternalLibrariesService exLib)
     {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        string path = string.Empty;
-        switch (executable)
-        {
-            case Executables.FFmpeg:
-                path = key.GetValue(Executables.FFmpeg.ToString()).ToString();
-                break;
-            case Executables.MKVInfo:
-                path = key.GetValue(Executables.MKVInfo.ToString()).ToString();
-                break;
-            case Executables.MKVMerge:
-                path = key.GetValue(Executables.MKVMerge.ToString()).ToString();
-                break;
-            case Executables.MKVPropEdit:
-                path = key.GetValue(Executables.MKVPropEdit.ToString()).ToString();
-                break;
-            case Executables.MKVExtract:
-                path = key.GetValue(Executables.MKVExtract.ToString()).ToString();
-                break;
-        }
-        return path;
+        ExLib = exLib;
+        Settings = new(this);
     }
-
-    public static bool CheckMKVStudioRegistryKey()
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        object ffmpeg = key.GetValue(Executables.FFmpeg.ToString());
-        object mkvInfo = key.GetValue(Executables.MKVInfo.ToString());
-        object mkvMerge = key.GetValue(Executables.MKVMerge.ToString());
-        object mkvPropEdit = key.GetValue(Executables.MKVPropEdit.ToString());
-        object mkvExtract = key.GetValue(Executables.MKVExtract.ToString());
-        return key == null || ffmpeg == null || mkvInfo == null || mkvMerge == null || mkvPropEdit == null || mkvExtract == null;
-    }
-
-    public static void CreateMKVStudioRegistryKeys()
-    {
-        UtilitiesService util = new();
-        RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\MKVStudio", true);
-        key.SetValue(Executables.FFmpeg.ToString(), util.GetFileDialog("ffMPEG|ffmpeg.exe").FileName);
-        key.SetValue(Executables.MKVInfo.ToString(), util.GetFileDialog("MKV Info|mkvinfo.exe").FileName);
-        key.SetValue(Executables.MKVMerge.ToString(), util.GetFileDialog("MKV Merge|mkvmerge.exe").FileName);
-        key.SetValue(Executables.MKVPropEdit.ToString(), util.GetFileDialog("MKV Prop Edit|mkvpropedit.exe").FileName);
-        key.SetValue(Executables.MKVExtract.ToString(), util.GetFileDialog("MKV Extract|mkvextract.exe").FileName);
-        key.Close();
-    }
-
-    public void SetPreferedLanguages(string languages)
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        key.SetValue("PreferedLanguages", languages);
-        key.Close();
-    }
-
-    public string GetPreferedLanguages()
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        string value = key.GetValue("PreferedLanguages") != null ? key.GetValue("PreferedLanguages").ToString() : string.Empty;
-        return value;
-    }
-    #endregion
 
     #region Misc
-    public Microsoft.Win32.OpenFileDialog GetFileDialog(string filter, bool multiselect = false)
+    public OpenFileDialog GetFileDialog(string filter, bool multiselect = false)
     {
-        Microsoft.Win32.OpenFileDialog openFileDialog = new();
+        OpenFileDialog openFileDialog = new();
         openFileDialog.Multiselect = multiselect;
         openFileDialog.Filter = filter;
         openFileDialog.ValidateNames = true;
@@ -96,16 +33,16 @@ public class UtilitiesService : IUtilitiesService
 
     public string[] GetFilesFromFolder(string complexFilter)
     {
-        using FolderBrowserDialog fbd = new();
-        DialogResult result = fbd.ShowDialog();
+        using F.FolderBrowserDialog fbd = new();
+        F.DialogResult result = fbd.ShowDialog();
 
         return !string.IsNullOrWhiteSpace(fbd.SelectedPath) ? GetFiles(fbd.SelectedPath, complexFilter) : Array.Empty<string>();
     }
 
     public string GetFolder()
     {
-        using FolderBrowserDialog fbd = new();
-        DialogResult result = fbd.ShowDialog();
+        using F.FolderBrowserDialog fbd = new();
+        F.DialogResult result = fbd.ShowDialog();
 
         return fbd.SelectedPath;
     }
@@ -122,8 +59,8 @@ public class UtilitiesService : IUtilitiesService
         return (string[])newList.ToArray(typeof(string));
     }
 
-
     private readonly string[] _sizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+
     public string ConvertBytes(long value, int decimalPlaces = 1)
     {
         if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException(nameof(decimalPlaces)); }

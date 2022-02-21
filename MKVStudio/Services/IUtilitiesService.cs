@@ -1,14 +1,14 @@
 ﻿using Microsoft.Win32;
-using static MKVStudio.Services.UtilitiesService;
+using MKVStudio.Models;
+using System.Collections.ObjectModel;
 
 namespace MKVStudio.Services;
 
 public interface IUtilitiesService
 {
-    string GetExecutable(Executables executable);
-    void SetPreferedLanguages(string languages);
-    string GetPreferedLanguages();
-    OpenFileDialog GetFileDialog(string filter, bool multiselect);
+    IExternalLibrariesService ExLib { get; }
+    Settings Settings { get; set; }
+    OpenFileDialog GetFileDialog(string filter, bool multiselect = false);
     string[] GetFilesFromFolder(string complexFilter);
     string GetFolder();
     string ConvertBytes(long value, int decimalPlaces = 1);
