@@ -7,13 +7,8 @@ namespace MKVStudio.Services;
 public interface IUtilitiesService
 {
     IExternalLibrariesService ExLib { get; }
-    ObservableCollection<Language> AllLanguages { get; set; }
-    ObservableCollection<Language> Languages { get; set; }
-    SupportedFileTypesCollection SupportedFileTypesCollection { get; set; }
-    MIMETypeCollection MIMETypes { get; set; }
-    void SetPreferedLanguages(string languages);
-    string GetPreferedLanguages();
-    OpenFileDialog GetFileDialog(string filter, bool multiselect);
+    Settings Settings { get; set; }
+    OpenFileDialog GetFileDialog(string filter, bool multiselect = false);
     string[] GetFilesFromFolder(string complexFilter);
     string GetFolder();
     string ConvertBytes(long value, int decimalPlaces = 1);

@@ -2,11 +2,7 @@
 using MKVStudio.Models;
 using System;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using static MKVStudio.Services.ExternalLibrariesService;
 using F = System.Windows.Forms;
 
 namespace MKVStudio.Services;
@@ -14,93 +10,13 @@ namespace MKVStudio.Services;
 public class UtilitiesService : IUtilitiesService
 {
     public IExternalLibrariesService ExLib { get; }
-    public ObservableCollection<Language> AllLanguages { get; set; } = new();
-    public ObservableCollection<Language> Languages { get; set; } = new();
-    public SupportedFileTypesCollection SupportedFileTypesCollection { get; set; } = new();
-    public MIMETypeCollection MIMETypes { get; set; } = new();
+    public Settings Settings { get; set; }
 
     public UtilitiesService(IExternalLibrariesService exLib)
     {
         ExLib = exLib;
-        if (CheckMKVStudioRegistryKey())
-        {
-            CreateMKVStudioRegistryKeys();
-        }
-        GetLanguageList();
-        GetSupportedFileTypes();
+        Settings = new(this);
     }
-
-    private async void GetLanguageList()
-    {
-        ProcessResult pr = await ExLib.Run(ProcessResultNames.MKVMergeLangList);
-        string[] lines = pr.StdOutput.Split("\r\n");
-        string[] pref = GetPreferedLanguages().Split("|");
-        for (int i = 2; i < lines.Length - 1; i++)
-        {
-            Match match = Regex.Match(lines[i], @"^(.+)\|(.+)\|(.+)\|(.+)$");
-            Language language = new(match);
-            if (pref.Contains(language.ID))
-            {
-                Languages.Add(language);
-            }
-            else
-            {
-                AllLanguages.Add(language);
-            }
-        }
-    }
-
-    private async void GetSupportedFileTypes()
-    {
-        ProcessResult pr = await ExLib.Run(ProcessResultNames.MKVMergeSupportedFileTypes);
-        string[] lines = pr.StdOutput.Split("\r\n");
-        for (int i = 2; i < lines.Length - 1; i++)
-        {
-            Match match = Regex.Match(lines[i], @"^\s\s(.+)\s\[(.+)\]$");
-            SupportedFileType fileType = new(match);
-            SupportedFileTypesCollection.SupportedFileTypes.Add(fileType);
-        }
-    }
-
-
-    #region Registry
-    
-    public bool CheckMKVStudioRegistryKey()
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        object ffmpeg = key.GetValue(Executables.FFmpeg.ToString());
-        object mkvInfo = key.GetValue(Executables.MKVInfo.ToString());
-        object mkvMerge = key.GetValue(Executables.MKVMerge.ToString());
-        object mkvPropEdit = key.GetValue(Executables.MKVPropEdit.ToString());
-        object mkvExtract = key.GetValue(Executables.MKVExtract.ToString());
-        return key == null || ffmpeg == null || mkvInfo == null || mkvMerge == null || mkvPropEdit == null || mkvExtract == null;
-    }
-
-    public void CreateMKVStudioRegistryKeys()
-    {
-        RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\MKVStudio", true);
-        key.SetValue(Executables.FFmpeg.ToString(), GetFileDialog("ffMPEG|ffmpeg.exe").FileName);
-        key.SetValue(Executables.MKVInfo.ToString(), GetFileDialog("MKV Info|mkvinfo.exe").FileName);
-        key.SetValue(Executables.MKVMerge.ToString(), GetFileDialog("MKV Merge|mkvmerge.exe").FileName);
-        key.SetValue(Executables.MKVPropEdit.ToString(), GetFileDialog("MKV Prop Edit|mkvpropedit.exe").FileName);
-        key.SetValue(Executables.MKVExtract.ToString(), GetFileDialog("MKV Extract|mkvextract.exe").FileName);
-        key.Close();
-    }
-
-    public void SetPreferedLanguages(string languages)
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        key.SetValue("PreferedLanguages", languages);
-        key.Close();
-    }
-
-    public string GetPreferedLanguages()
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        string value = key.GetValue("PreferedLanguages") != null ? key.GetValue("PreferedLanguages").ToString() : string.Empty;
-        return value;
-    }
-    #endregion
 
     #region Misc
     public OpenFileDialog GetFileDialog(string filter, bool multiselect = false)
@@ -144,7 +60,7 @@ public class UtilitiesService : IUtilitiesService
     }
 
     private readonly string[] _sizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-        
+
     public string ConvertBytes(long value, int decimalPlaces = 1)
     {
         if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException(nameof(decimalPlaces)); }

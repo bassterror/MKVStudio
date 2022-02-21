@@ -19,7 +19,7 @@ public class AddFilesCommand : BaseCommand
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
+            foreach (string filename in _util.GetFileDialog(_util.Settings.SupportedFileTypes.CreateFiltersAllSuported(), true).FileNames)
             {
                 SourceFileInfo sourceFile = new(_util, filename, true);
                 MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
@@ -28,7 +28,7 @@ public class AddFilesCommand : BaseCommand
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string fileName in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllSuported(), true).FileNames)
+            foreach (string fileName in _util.GetFileDialog(_util.Settings.SupportedFileTypes.CreateFiltersAllSuported(), true).FileNames)
             {
                 SourceFileInfo sourceFile = new(_util, fileName, false);
                 input.SourceFiles.Add(sourceFile);
@@ -37,7 +37,7 @@ public class AddFilesCommand : BaseCommand
         }
         if (_collectionParent is AttachmentsVM attachments)
         {
-            foreach (string fileName in _util.GetFileDialog(_util.SupportedFileTypesCollection.CreateFiltersAllAttachments(), true).FileNames)
+            foreach (string fileName in _util.GetFileDialog(_util.Settings.SupportedFileTypes.CreateFiltersAllAttachments(), true).FileNames)
             {
                 SourceFileInfo sourceFile = new(_util, fileName, false);
                 Attachment attachment = new(_util, sourceFile, attachments);

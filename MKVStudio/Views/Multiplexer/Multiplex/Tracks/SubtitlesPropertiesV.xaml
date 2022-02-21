@@ -105,7 +105,7 @@
             </Label>
             <ComboBox Grid.Column="1"
                       Margin="2"
-                      ItemsSource="{Binding Util.Languages}"
+                      ItemsSource="{Binding Util.Settings.PreferedLanguages}"
                       SelectedItem="{Binding SubtitlesProperties.Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

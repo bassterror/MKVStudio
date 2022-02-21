@@ -19,7 +19,7 @@ public class AddFilesFromFolderCommand : BaseCommand
     {
         if (_collectionParent is MultiplexerVM multiplexer)
         {
-            foreach (string filename in _util.GetFilesFromFolder(_util.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
+            foreach (string filename in _util.GetFilesFromFolder(_util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt()))
             {
                 SourceFileInfo sourceFile = new(_util, filename, true);
                 MultiplexVM multiplex = new(_util, multiplexer, sourceFile);
@@ -28,7 +28,7 @@ public class AddFilesFromFolderCommand : BaseCommand
         }
         if (_collectionParent is InputVM input)
         {
-            foreach (string filename in _util.GetFilesFromFolder(_util.SupportedFileTypesCollection.CreateFiltersAllSuportedOnlyExt()))
+            foreach (string filename in _util.GetFilesFromFolder(_util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt()))
             {
                 SourceFileInfo sourceFile = new(_util, filename, false);
                 input.SourceFiles.Add(sourceFile);

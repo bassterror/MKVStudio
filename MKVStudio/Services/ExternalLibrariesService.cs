@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-using MKVStudio.Models;
-using MKVStudio.ViewModels;
+﻿using MKVStudio.Models;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,42 +10,47 @@ namespace MKVStudio.Services;
 
 public class ExternalLibrariesService : IExternalLibrariesService
 {
-    public async Task<ProcessResult> Run(ProcessResultNames processName, SourceFileInfo sourceFile = null, string attachmentId = null, string attachmentTempPath = null)
+    public Dictionary<ExecutableNames, Executable> Executables { get; set; } = new();
+
+    public async Task<ProcessResult> Run(ProcessResultNames processName, 
+        SourceFileInfo sourceFile = null, 
+        string attachmentId = null, 
+        string attachmentTempPath = null)
     {
         ProcessResult pr = new();
 
         switch (processName)
         {
             case ProcessResultNames.LoudnormFirst:
-                pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
+                pr = await RunProcess(ExecutableNames.FFmpeg, BuildArguments(processName, sourceFile), processName);
                 break;
             case ProcessResultNames.LoudnormSecondStereo:
-                pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
+                pr = await RunProcess(ExecutableNames.FFmpeg, BuildArguments(processName, sourceFile), processName);
                 break;
             case ProcessResultNames.LoudnormSecond6Channels:
-                pr = await RunProcess(Executables.FFmpeg, BuildArguments(processName, sourceFile), processName);
+                pr = await RunProcess(ExecutableNames.FFmpeg, BuildArguments(processName, sourceFile), processName);
                 break;
             case ProcessResultNames.MKVInfo:
-                pr = await RunProcess(Executables.MKVInfo, BuildArguments(processName, sourceFile), processName);
+                pr = await RunProcess(ExecutableNames.MKVInfo, BuildArguments(processName, sourceFile), processName);
                 break;
             case ProcessResultNames.MKVExtractAttachments:
-                pr = await RunProcess(Executables.MKVExtract, BuildArguments(processName, sourceFile, attachmentId, attachmentTempPath), processName);
+                pr = await RunProcess(ExecutableNames.MKVExtract, BuildArguments(processName, sourceFile, attachmentId, attachmentTempPath), processName);
                 break;
             case ProcessResultNames.MKVMergeJ:
-                pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName, sourceFile), processName);
+                pr = await RunProcess(ExecutableNames.MKVMerge, BuildArguments(processName, sourceFile), processName);
                 break;
             case ProcessResultNames.MKVMergeLangList:
-                pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
+                pr = await RunProcess(ExecutableNames.MKVMerge, BuildArguments(processName), processName);
                 break;
             case ProcessResultNames.MKVMergeSupportedFileTypes:
-                pr = await RunProcess(Executables.MKVMerge, BuildArguments(processName), processName);
+                pr = await RunProcess(ExecutableNames.MKVMerge, BuildArguments(processName), processName);
                 break;
         }
 
         return pr;
     }
 
-    private async Task<ProcessResult> RunProcess(Executables executable, string arguments, ProcessResultNames processName)
+    private async Task<ProcessResult> RunProcess(ExecutableNames executable, string arguments, ProcessResultNames processName)
     {
         ProcessResult processResult = new();
 
@@ -61,7 +64,7 @@ public class ExternalLibrariesService : IExternalLibrariesService
             };
             processTasks.Add(processExitEvent.Task);
             process.EnableRaisingEvents = true;
-            process.StartInfo.FileName = GetExecutable(executable);
+            process.StartInfo.FileName = Executables[executable].Path;
             process.StartInfo.Arguments = arguments;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardError = true;
@@ -168,40 +171,6 @@ public class ExternalLibrariesService : IExternalLibrariesService
         }
 
         return arguments;
-    }
-
-    public enum Executables
-    {
-        FFmpeg,
-        MKVInfo,
-        MKVMerge,
-        MKVPropEdit,
-        MKVExtract
-    }
-
-    public string GetExecutable(Executables executable)
-    {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\MKVStudio", true);
-        string path = string.Empty;
-        switch (executable)
-        {
-            case Executables.FFmpeg:
-                path = key.GetValue(Executables.FFmpeg.ToString()).ToString();
-                break;
-            case Executables.MKVInfo:
-                path = key.GetValue(Executables.MKVInfo.ToString()).ToString();
-                break;
-            case Executables.MKVMerge:
-                path = key.GetValue(Executables.MKVMerge.ToString()).ToString();
-                break;
-            case Executables.MKVPropEdit:
-                path = key.GetValue(Executables.MKVPropEdit.ToString()).ToString();
-                break;
-            case Executables.MKVExtract:
-                path = key.GetValue(Executables.MKVExtract.ToString()).ToString();
-                break;
-        }
-        return path;
     }
 
     private void SetLoudnormFirstPassMeasurements(string firstPassOutput)

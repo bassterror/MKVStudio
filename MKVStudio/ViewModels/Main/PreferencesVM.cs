@@ -23,7 +23,8 @@ public class PreferencesVM : BaseViewModel
         set
         {
             _searchAvailableLanguage = value;
-            AvailableLanguages = new ObservableCollection<Language>(Util.AllLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
+            AvailableLanguages = new ObservableCollection<Language>(
+                Util.Settings.AllLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
         }
     }
 
@@ -36,7 +37,8 @@ public class PreferencesVM : BaseViewModel
         set
         {
             _searchUserLanguage = value;
-            UserLanguages = new ObservableCollection<Language>(Util.Languages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
+            UserLanguages = new ObservableCollection<Language>(
+                Util.Settings.PreferedLanguages.Where(l => l.Name.Contains(value, System.StringComparison.OrdinalIgnoreCase)).ToList());
         }
     }
 
@@ -47,7 +49,7 @@ public class PreferencesVM : BaseViewModel
         Main = main;
         Util = util;
         PreferencesV = preferencesV;
-        AvailableLanguages = Util.AllLanguages;
-        UserLanguages = Util.Languages;
+        AvailableLanguages = Util.Settings.AllLanguages;
+        UserLanguages = Util.Settings.PreferedLanguages;
     }
 }

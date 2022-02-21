@@ -2,12 +2,12 @@
 
 namespace MKVStudio.Models;
 
-public class SupportedFileTypesCollection
+public class SupportedFileTypesCollections
 {
     public List<SupportedFileType> SupportedFileTypes { get; set; } = new();
     public List<SupportedFileType> AttachmentFileTypes { get; set; } = new();
 
-    public SupportedFileTypesCollection()
+    public SupportedFileTypesCollections()
     {
         AttachmentFileTypes.Add(new SupportedFileType("Images", "*.jpg;*.jpeg;*.png;*.bmp;*.gif"));
         AttachmentFileTypes.Add(new SupportedFileType("Fonts", "*.otf;*.ttf;*.ttc"));
