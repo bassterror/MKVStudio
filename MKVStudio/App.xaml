@@ -2,57 +2,61 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
-             xmlns:v="clr-namespace:MKVStudio.Views"
-             xmlns:l="clr-namespace:MKVStudio">
+             xmlns:v="clr-namespace:MKVStudio.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/VisualStyles/NavRadioButton.xaml"/>
-                <ResourceDictionary Source="/VisualStyles/Colors.xaml"/>
-                <ResourceDictionary Source="/VisualStyles/ColourfulDarkTheme.xaml"/>
+                <ResourceDictionary Source="/VisualStyles/NavRadioButton.xaml" />
+                <ResourceDictionary Source="/VisualStyles/Colors.xaml" />
+                <ResourceDictionary Source="/VisualStyles/ColourfulDarkTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!--Main-->
             <DataTemplate DataType="{x:Type vm:MultiplexerVM}">
-                <v:MultiplexerV/>
+                <v:MultiplexerV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:JobQueueVM}">
-                <v:QueueV/>
+                <v:QueueV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:PreferencesVM}">
-                <v:PreferencesV/>
+                <v:PreferencesV />
             </DataTemplate>
-            
+
+            <!--Preferences-->
+            <DataTemplate DataType="{x:Type vm:OftenUsedVM}">
+                <v:OftenUsedV />
+            </DataTemplate>
+
             <!--Multiplexer-->
             <DataTemplate DataType="{x:Type vm:BatchEditVM}">
-                <v:BatchEditV/>
+                <v:BatchEditV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:MultiplexVM}">
-                <v:MultiplexV/>
+                <v:MultiplexV />
             </DataTemplate>
-            
+
             <!--Multiplex-->
             <DataTemplate DataType="{x:Type vm:InputVM}">
-                <v:InputV/>
+                <v:InputV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:OutputVM}">
-                <v:OutputV/>
+                <v:OutputV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AttachmentsVM}">
-                <v:AttachmentsV/>
+                <v:AttachmentsV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ChaptersVM}">
-                <v:ChaptersV/>
+                <v:ChaptersV />
             </DataTemplate>
-            
+
             <!--Input-->
             <DataTemplate DataType="{x:Type vm:VideoPropertiesVM}">
-                <v:VideoPropertiesV/>
+                <v:VideoPropertiesV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AudioPropertiesVM}">
-                <v:AudioPropertiesV/>
+                <v:AudioPropertiesV />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SubtitlesPropertiesVM}">
-                <v:SubtitlesPropertiesV/>
+                <v:SubtitlesPropertiesV />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

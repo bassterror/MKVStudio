@@ -6,6 +6,9 @@ public enum ViewModelTypes
     Multiplexer,
     JobQueue,
 
+    //Preferences
+    OftenUsed,
+
     //Multiplex
     Input,
     Output,
