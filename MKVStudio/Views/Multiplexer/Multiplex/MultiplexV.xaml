@@ -1,61 +1,62 @@
 ﻿<UserControl x:Class="MKVStudio.Views.MultiplexV"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              xmlns:c="clr-namespace:MKVStudio.Converters"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:MultiplexVM}"
-             d:DesignHeight="750" d:DesignWidth="1000">
+             d:DesignHeight="750"
+             d:DesignWidth="1000">
     <UserControl.Resources>
-        <c:EqualValueToParameterConverter x:Key="EVTPC"/>
+        <c:EqualValueToParameterConverter x:Key="EVTPC" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
               RenderOptions.EdgeMode="Aliased"
               Background="{StaticResource WindowTitleColour}">
             <Grid.Resources>
                 <Style TargetType="RadioButton"
-                       BasedOn="{StaticResource NavRadioButton}"/>
+                       BasedOn="{StaticResource NavRadioButton}" />
             </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>            
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <RadioButton Grid.Column="0"
                          Content="Input"
                          IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:InputVM}}"
                          Command="{Binding UpdateMultiplexTab}"
-                         CommandParameter="{x:Static vm:ViewModelTypes.Input}"/>
+                         CommandParameter="{x:Static vm:ViewModelTypes.Input}" />
             <RadioButton Grid.Column="1"
                          Content="Output"
                          IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:OutputVM}}"
                          Command="{Binding UpdateMultiplexTab}"
-                         CommandParameter="{x:Static vm:ViewModelTypes.Output}"/>
+                         CommandParameter="{x:Static vm:ViewModelTypes.Output}" />
             <RadioButton Grid.Column="2"
                          Content="Attachments"
                          IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:AttachmentsVM}}"
                          Command="{Binding UpdateMultiplexTab}"
-                         CommandParameter="{x:Static vm:ViewModelTypes.Attachments}"/>
+                         CommandParameter="{x:Static vm:ViewModelTypes.Attachments}" />
             <RadioButton Grid.Column="3"
                          Content="Chapters"
                          IsChecked="{Binding SelectedMultiplexTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:ChaptersVM}}"
                          Command="{Binding UpdateMultiplexTab}"
-                         CommandParameter="{x:Static vm:ViewModelTypes.Chapters}"/>
+                         CommandParameter="{x:Static vm:ViewModelTypes.Chapters}" />
         </Grid>
         <ContentControl Grid.Row="1"
-                        Content="{Binding SelectedMultiplexTab}"/>
+                        Content="{Binding SelectedMultiplexTab}" />
         <Grid Grid.Row="2">
-            <TextBlock Text="Buttons"/>
+            <TextBlock Text="Buttons" />
         </Grid>
     </Grid>
 </UserControl>
