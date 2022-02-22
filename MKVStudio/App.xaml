@@ -25,6 +25,9 @@
             <DataTemplate DataType="{x:Type vm:OftenUsedVM}">
                 <v:OftenUsedV />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:PreferedLanguagesVM}">
+                <v:PreferedLanguagesV />
+            </DataTemplate>
 
             <!--Multiplexer-->
             <DataTemplate DataType="{x:Type vm:BatchEditVM}">

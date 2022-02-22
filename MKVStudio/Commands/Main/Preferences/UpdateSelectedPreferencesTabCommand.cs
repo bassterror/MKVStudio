@@ -20,6 +20,7 @@ public class UpdateSelectedPreferencesTabCommand : BaseCommand
             SelectPreferencesTab(viewModel);
         }
     }
+
     private void SelectPreferencesTab(ViewModelTypes viewModel)
     {
         switch (viewModel)

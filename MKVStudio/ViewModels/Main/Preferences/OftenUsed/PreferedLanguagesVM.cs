@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace MKVStudio.ViewModels;
 
-public class OftenUsedVM : BaseViewModel
+public class PreferedLanguagesVM : BaseViewModel
 {
     public IUtilitiesService Util { get; }
 
@@ -41,7 +41,7 @@ public class OftenUsedVM : BaseViewModel
 
     public ICommand AddRemoveLanguage => new AddRemoveLanguagesCommand(this);
 
-    public OftenUsedVM(IUtilitiesService util)
+    public PreferedLanguagesVM(IUtilitiesService util)
     {
         Util = util;
         AvailableLanguages = Util.Settings.AllLanguages;

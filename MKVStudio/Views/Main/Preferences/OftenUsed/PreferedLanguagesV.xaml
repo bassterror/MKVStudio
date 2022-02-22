@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="MKVStudio.Views.OftenUsedV"
+﻿<UserControl x:Class="MKVStudio.Views.PreferedLanguagesV"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:MKVStudio.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=vm:OftenUsedVM}"
+             d:DataContext="{d:DesignInstance Type=vm:PreferedLanguagesVM}"
              d:DesignHeight="200"
              d:DesignWidth="400">
     <Grid>
