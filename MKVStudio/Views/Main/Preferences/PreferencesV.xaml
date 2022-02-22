@@ -14,7 +14,7 @@
         Style="{DynamicResource CustomWindowStyle}"
         d:DataContext="{d:DesignInstance Type=vm:PreferencesVM}"
         d:DesignHeight="200"
-        d:DesignWidth="400">
+        d:DesignWidth="200">
     <Window.Resources>
         <c:EqualValueToParameterConverter x:Key="EVTPC" />
     </Window.Resources>
@@ -40,6 +40,11 @@
                          IsChecked="{Binding SelectedPreferencesTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:OftenUsedVM}}"
                          Command="{Binding UpdateSelectedPreferencesTab}"
                          CommandParameter="{x:Static vm:ViewModelTypes.OftenUsed}" />
+            <RadioButton Grid.Row="1"
+                         Content="Output"
+                         IsChecked="{Binding SelectedPreferencesTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:OutputNameVM}}"
+                         Command="{Binding UpdateSelectedPreferencesTab}"
+                         CommandParameter="{x:Static vm:ViewModelTypes.OutputName}" />
         </Grid>
         <ContentControl Grid.Column="1"
                         Content="{Binding SelectedPreferencesTab}" />

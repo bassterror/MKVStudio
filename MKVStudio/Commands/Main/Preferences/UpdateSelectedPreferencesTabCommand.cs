@@ -6,11 +6,13 @@ public class UpdateSelectedPreferencesTabCommand : BaseCommand
 {
     private readonly PreferencesVM _preferences;
     private readonly OftenUsedVM _oftenUsed;
+    private readonly OutputNameVM _outputName;
 
-    public UpdateSelectedPreferencesTabCommand(PreferencesVM preferences, OftenUsedVM oftenUsed)
+    public UpdateSelectedPreferencesTabCommand(PreferencesVM preferences, OftenUsedVM oftenUsed, OutputNameVM outputName)
     {
         _preferences = preferences;
         _oftenUsed = oftenUsed;
+        _outputName = outputName;
     }
 
     public override void Execute(object parameter)
@@ -27,6 +29,9 @@ public class UpdateSelectedPreferencesTabCommand : BaseCommand
         {
             case ViewModelTypes.OftenUsed:
                 _preferences.SelectedPreferencesTab = _oftenUsed;
+                break;
+            case ViewModelTypes.OutputName:
+                _preferences.SelectedPreferencesTab = _outputName;
                 break;
         }
     }

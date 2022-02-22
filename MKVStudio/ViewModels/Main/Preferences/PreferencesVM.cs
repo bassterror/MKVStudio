@@ -17,7 +17,8 @@ public class PreferencesVM : BaseViewModel
     #region Navigation
     public BaseViewModel SelectedPreferencesTab { get; set; }
     private OftenUsedVM OftenUsed => new(Util);
-    public ICommand UpdateSelectedPreferencesTab => new UpdateSelectedPreferencesTabCommand(this, OftenUsed);
+    private OutputNameVM OutputName => new(Util);
+    public ICommand UpdateSelectedPreferencesTab => new UpdateSelectedPreferencesTabCommand(this, OftenUsed, OutputName);
     #endregion
 
     public PreferencesVM(MainVM main, IUtilitiesService util, PreferencesV preferencesV)

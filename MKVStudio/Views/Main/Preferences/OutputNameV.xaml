@@ -1,0 +1,267 @@
+﻿<UserControl x:Class="MKVStudio.Views.OutputNameV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:MKVStudio.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:PreferencesVM}"
+             d:DesignHeight="550"
+             d:DesignWidth="450">
+    <UserControl.Resources>
+        <Style x:Key="SettingsRadio"
+               TargetType="RadioButton" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0"
+                  Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Destination file name"
+                           Foreground="{StaticResource ControlDisabledGlythColour}" />
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <CheckBox Grid.Row="0"
+                          Margin="5"
+                          IsChecked="{Binding Util.Settings.AutomaticallySetTheDestinationFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalContentAlignment="Center">
+                    <TextBlock>
+                        <TextBlock.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ControlDisabledGlythColour}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Resources>
+                    Automatically set the destination file name
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Grid.Row="1"
+                          Margin="5"
+                          IsChecked="{Binding Util.Settings.OnlyUseTheFirstSourceFileWithAVideoTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalContentAlignment="Center">
+                    <TextBlock>
+                        <TextBlock.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ControlDisabledGlythColour}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Resources>
+                    Only use the first source file with a video track
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Grid.Row="2"
+                          Margin="5"
+                          IsChecked="{Binding Util.Settings.UseTheTitleAsTheBaseFileNameIfATitleIsSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalContentAlignment="Center">
+                    <TextBlock>
+                        <TextBlock.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ControlDisabledGlythColour}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Resources>
+                    Use the title as the base file name if a title is set
+                    </TextBlock>
+                </CheckBox>
+                <GroupBox Grid.Row="3"
+                          Margin="5">
+                    <GroupBox.Header>
+                        <TextBlock Text="Destination directory"
+                                   Foreground="{StaticResource ControlDisabledGlythColour}" />
+                    </GroupBox.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <RadioButton Grid.Row="0"
+                                     Margin="5"
+                                     IsChecked="{Binding Util.Settings.SameDirectoryAsTheFirstSourceFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBlock>
+                                <TextBlock.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=IsChecked}"
+                                                         Value="False">
+                                                <Setter Property="Foreground"
+                                                        Value="{StaticResource ControlDisabledGlythColour}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Resources>
+                                Same directory as the first source file
+                            </TextBlock>
+                        </RadioButton>
+                        <RadioButton Grid.Row="1"
+                                     Margin="5"
+                                     IsChecked="{Binding Util.Settings.PreviouslyUsedDestinationDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBlock>
+                                <TextBlock.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=IsChecked}"
+                                                         Value="False">
+                                                <Setter Property="Foreground"
+                                                        Value="{StaticResource ControlDisabledGlythColour}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Resources>
+                                Previously used destination directory
+                            </TextBlock>
+                        </RadioButton>
+                        <RadioButton Grid.Row="2"
+                                     Margin="5"
+                                     x:Name="DR"
+                                     IsChecked="{Binding Util.Settings.DirectoryRelativeToFirstSourceFileDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBlock>
+                                <TextBlock.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=IsChecked}"
+                                                         Value="False">
+                                                <Setter Property="Foreground"
+                                                        Value="{StaticResource ControlDisabledGlythColour}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Resources>
+                                Directory relative to first source file's directory:
+                            </TextBlock>
+                        </RadioButton>
+                        <TextBox Grid.Row="3"
+                                 Margin="25 5 5 5"
+                                 IsEnabled="{Binding IsChecked, ElementName=DR}"/>
+                        <RadioButton Grid.Row="4"
+                                     Margin="5"
+                                     x:Name="UF"
+                                     IsChecked="{Binding Util.Settings.UseFixedDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBlock>
+                                <TextBlock.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=IsChecked}"
+                                                         Value="False">
+                                                <Setter Property="Foreground"
+                                                        Value="{StaticResource ControlDisabledGlythColour}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Resources>
+                                Use fixed directory:
+                            </TextBlock>
+                        </RadioButton>
+                        <Grid Grid.Row="5"
+                              IsEnabled="{Binding IsChecked, ElementName=UF}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0"
+                                     Margin="25 5 5 5" />
+                            <Button Grid.Column="1"
+                                    Margin="0 5 5 5"
+                                    Content="Browse" />
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <CheckBox Grid.Row="4"
+                          IsChecked="{Binding Util.Settings.EnsureTheFileNameIsUnique, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalContentAlignment="Center"
+                          Margin="5">
+                    <TextBlock>
+                        <TextBlock.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ControlDisabledGlythColour}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Resources>
+                    Ensure the file name is unique
+                    </TextBlock>
+                </CheckBox>
+                <CheckBox Grid.Row="5"
+                          IsChecked="{Binding Util.Settings.AutomaticallyClearTheDestinationFileNameWhenTheLastFileIsRemoved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalContentAlignment="Center"
+                          Margin="5">
+                    <TextBlock>
+                        <TextBlock.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ControlDisabledGlythColour}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Resources>
+                    Automatically clear the destination file name when the last file is removed
+                    </TextBlock>
+                </CheckBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1"
+                  Margin="5 0 5 5">
+            <GroupBox.Header>
+                <TextBlock Text="Recent destination directories"
+                           Foreground="{StaticResource ControlDisabledGlythColour}" />
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ListView Grid.Column="0"
+                          Margin="5"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0"
+                            Margin="5"
+                            Content="+" />
+                    <Button Grid.Row="1"
+                            Margin="5"
+                            Content="-" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

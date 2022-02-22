@@ -1,8 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.Win32;
 using MKVStudio.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -16,6 +18,18 @@ public class Settings
     public ObservableCollection<Language> PreferedLanguages { get; set; } = new();
     public SupportedFileTypesCollections SupportedFileTypes { get; set; } = new();
     public MIMETypeCollection MIMETypes { get; set; } = new();
+
+    #region OutputName
+    public bool AutomaticallySetTheDestinationFileName { get; set; } //TODO
+    public bool OnlyUseTheFirstSourceFileWithAVideoTrack { get; set; } //TODO
+    public bool UseTheTitleAsTheBaseFileNameIfATitleIsSet { get; set; } //TODO
+    public bool SameDirectoryAsTheFirstSourceFile { get; set; } //TODO
+    public bool PreviouslyUsedDestinationDirectory { get; set; } //TODO
+    public bool DirectoryRelativeToFirstSourceFileDirectory { get; set; } //TODO
+    public bool UseFixedDirectory { get; set; } //TODO
+    public bool EnsureTheFileNameIsUnique { get; set; } //TODO
+    public bool AutomaticallyClearTheDestinationFileNameWhenTheLastFileIsRemoved { get; set; } //TODO 
+    #endregion
 
     public Settings(IUtilitiesService util)
     {

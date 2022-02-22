@@ -9,6 +9,7 @@ public enum ViewModelTypes
     //Preferences
     OftenUsed,
     PreferedLanguages,
+    OutputName,
 
     //Multiplex
     Input,
