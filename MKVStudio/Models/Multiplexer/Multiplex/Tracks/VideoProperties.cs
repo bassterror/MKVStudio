@@ -35,8 +35,8 @@ public class VideoProperties : BaseModel
         FlagHearingImpaired = track.Properties.Flag_hearing_impaired;
         FlagCommentary = track.Properties.Flag_commentary;
         Language = string.IsNullOrWhiteSpace(track.Properties.Language) ?
-            util.Settings.PreferedLanguages.First(a => a.ID == "und") :
-            util.Settings.PreferedLanguages.First(a => a.ID == track.Properties.Language);
+            util.Preferences.Languages.AllLanguages.First(a => a.ID == "und") :
+            util.Preferences.Languages.AllLanguages.First(a => a.ID == track.Properties.Language);
         LanguageIETF = track.Properties.Language_ietf;
         Number = track.Properties.Number;
         Packetizer = track.Properties.Packetizer;

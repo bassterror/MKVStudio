@@ -9,16 +9,28 @@ namespace MKVStudio.Services;
 
 public class UtilitiesService : IUtilitiesService
 {
+    private readonly string[] _sizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+    private readonly string _settingsPath = AppDomain.CurrentDomain.BaseDirectory + "preferences.json";
+
     public IExternalLibrariesService ExLib { get; }
-    public Settings Settings { get; set; }
+    public Preferences Preferences { get; private set; }
 
     public UtilitiesService(IExternalLibrariesService exLib)
     {
         ExLib = exLib;
-        Settings = new(this);
+        if (!File.Exists(_settingsPath))
+        {
+            File.WriteAllText(_settingsPath, string.Empty);
+        }
+        Preferences = Preferences.GetPreferences(this, _settingsPath);
     }
 
     #region Misc
+    public void SavePreferences()
+    {
+        Preferences.Save(_settingsPath);
+    }
+
     public OpenFileDialog GetFileDialog(string filter, bool multiselect = false)
     {
         OpenFileDialog openFileDialog = new();
@@ -58,8 +70,6 @@ public class UtilitiesService : IUtilitiesService
 
         return (string[])newList.ToArray(typeof(string));
     }
-
-    private readonly string[] _sizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
 
     public string ConvertBytes(long value, int decimalPlaces = 1)
     {

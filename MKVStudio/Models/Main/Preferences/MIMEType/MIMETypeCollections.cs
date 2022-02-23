@@ -2,11 +2,11 @@
 
 namespace MKVStudio.Models;
 
-public class MIMETypeCollection
+public class MIMETypeCollections
 {
     public List<MIMEType> AttachmentMIMETypes { get; set; } = new();
 
-    public MIMETypeCollection()
+    public MIMETypeCollections()
     {
         AttachmentMIMETypes.Add(new MIMEType("image/jpeg"));
         AttachmentMIMETypes.Add(new MIMEType("image/bmp"));

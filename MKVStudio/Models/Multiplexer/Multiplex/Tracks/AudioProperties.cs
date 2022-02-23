@@ -38,8 +38,8 @@ public class AudioProperties : BaseModel
         Channels = track.Properties.Audio_channels;
         SampleRate = track.Properties.Audio_sampling_frequency;
         Language = string.IsNullOrWhiteSpace(track.Properties.Language) ?
-            util.Settings.PreferedLanguages.First(a => a.ID == "und") :
-            util.Settings.PreferedLanguages.First(a => a.ID == track.Properties.Language);
+            util.Preferences.Languages.AllLanguages.First(a => a.ID == "und") :
+            util.Preferences.Languages.AllLanguages.First(a => a.ID == track.Properties.Language);
         LanguageIETF = track.Properties.Language_ietf;
         Number = track.Properties.Number;
     }

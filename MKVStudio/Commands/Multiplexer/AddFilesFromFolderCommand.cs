@@ -17,7 +17,7 @@ public class AddFilesFromFolderCommand : BaseCommand
 
     public override void Execute(object parameter)
     {
-        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt();
+        string filter = _util.Preferences.SupportedFileTypes.CreateFiltersAllSuportedOnlyExt();
         string[] fileNames = _util.GetFilesFromFolder(filter);
         if (_collectionParent is MultiplexerVM multiplexer)
         {

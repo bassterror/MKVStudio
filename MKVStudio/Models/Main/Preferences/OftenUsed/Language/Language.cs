@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace MKVStudio.Models;
 
@@ -15,5 +16,10 @@ public class Language
         Name = match.Groups[1].ToString().Trim();
         ISO6392 = match.Groups[3].ToString().Trim();
         ISO6391 = match.Groups[4].ToString().Trim();
+    }
+
+    public Language()
+    {
+
     }
 }

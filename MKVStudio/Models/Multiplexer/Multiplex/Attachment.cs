@@ -44,7 +44,7 @@ public class Attachment : BaseModel
 
         if (attachment == null)
         {
-            ContentType = Util.Settings.MIMETypes.AttachmentMIMETypes.First(m => m.Extension.Contains(SourceFile.InputExtension));
+            ContentType = Util.Preferences.MIMETypes.AttachmentMIMETypes.First(m => m.Extension.Contains(SourceFile.InputExtension));
             Name = sourceFile.InputName;
             Size = (int)new FileInfo(SourceFile.InputFullPath).Length;
             return;

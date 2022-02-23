@@ -7,9 +7,10 @@ namespace MKVStudio.Services;
 public interface IUtilitiesService
 {
     IExternalLibrariesService ExLib { get; }
-    Settings Settings { get; set; }
+    Preferences Preferences { get; }
     OpenFileDialog GetFileDialog(string filter, bool multiselect = false);
     string[] GetFilesFromFolder(string complexFilter);
     string GetFolder();
     string ConvertBytes(long value, int decimalPlaces = 1);
+    void SavePreferences();
 }

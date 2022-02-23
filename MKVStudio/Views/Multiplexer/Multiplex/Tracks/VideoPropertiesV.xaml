@@ -146,7 +146,7 @@
             </Label>
             <ComboBox Grid.Column="1"
                       Margin="2"
-                      ItemsSource="{Binding Util.Settings.PreferedLanguages}"
+                      ItemsSource="{Binding Util.Preferences.Languages.PreferedLanguages}"
                       SelectedItem="{Binding VideoProperties.Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

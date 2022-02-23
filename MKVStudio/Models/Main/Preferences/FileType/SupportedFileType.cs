@@ -4,8 +4,8 @@ namespace MKVStudio.Models;
 
 public class SupportedFileType
 {
-    public string Name { get; private set; }
-    public string Extensions { get; private set; }
+    public string Name { get; set; }
+    public string Extensions { get; set; }
 
     public SupportedFileType(Match match)
     {

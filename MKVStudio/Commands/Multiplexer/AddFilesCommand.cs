@@ -33,7 +33,7 @@ public class AddFilesCommand : BaseCommand
 
     private void AddFilesToMultiplexer(MultiplexerVM multiplexer)
     {
-        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuported();
+        string filter = _util.Preferences.SupportedFileTypes.CreateFiltersAllSuported();
         string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
         foreach (string filename in fileNames)
         {
@@ -45,7 +45,7 @@ public class AddFilesCommand : BaseCommand
 
     private void AddFilesToInput(InputVM input)
     {
-        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllSuported();
+        string filter = _util.Preferences.SupportedFileTypes.CreateFiltersAllSuported();
         string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
         foreach (string fileName in fileNames)
         {
@@ -57,7 +57,7 @@ public class AddFilesCommand : BaseCommand
 
     private void AddFilesToAttachments(AttachmentsVM attachments)
     {
-        string filter = _util.Settings.SupportedFileTypes.CreateFiltersAllAttachments();
+        string filter = _util.Preferences.SupportedFileTypes.CreateFiltersAllAttachments();
         string[] fileNames = _util.GetFileDialog(filter, true).FileNames;
         foreach (string fileName in fileNames)
         {

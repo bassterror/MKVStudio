@@ -34,7 +34,7 @@
                 </Grid.RowDefinitions>
                 <CheckBox Grid.Row="0"
                           Margin="5"
-                          IsChecked="{Binding Util.Settings.AutomaticallySetTheDestinationFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          IsChecked="{Binding Util.Preferences.OutputName.AutomaticallySetTheDestinationFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           VerticalContentAlignment="Center">
                     <TextBlock>
                         <TextBlock.Resources>
@@ -53,7 +53,7 @@
                 </CheckBox>
                 <CheckBox Grid.Row="1"
                           Margin="5"
-                          IsChecked="{Binding Util.Settings.OnlyUseTheFirstSourceFileWithAVideoTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          IsChecked="{Binding Util.Preferences.OutputName.OnlyUseTheFirstSourceFileWithAVideoTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           VerticalContentAlignment="Center">
                     <TextBlock>
                         <TextBlock.Resources>
@@ -72,7 +72,7 @@
                 </CheckBox>
                 <CheckBox Grid.Row="2"
                           Margin="5"
-                          IsChecked="{Binding Util.Settings.UseTheTitleAsTheBaseFileNameIfATitleIsSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          IsChecked="{Binding Util.Preferences.OutputName.UseTheTitleAsTheBaseFileNameIfATitleIsSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           VerticalContentAlignment="Center">
                     <TextBlock>
                         <TextBlock.Resources>
@@ -106,7 +106,7 @@
                         </Grid.RowDefinitions>
                         <RadioButton Grid.Row="0"
                                      Margin="5"
-                                     IsChecked="{Binding Util.Settings.SameDirectoryAsTheFirstSourceFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                     IsChecked="{Binding Util.Preferences.OutputName.SameDirectoryAsTheFirstSourceFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <TextBlock>
                                 <TextBlock.Resources>
                                     <Style TargetType="TextBlock">
@@ -124,7 +124,7 @@
                         </RadioButton>
                         <RadioButton Grid.Row="1"
                                      Margin="5"
-                                     IsChecked="{Binding Util.Settings.PreviouslyUsedDestinationDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                     IsChecked="{Binding Util.Preferences.OutputName.PreviouslyUsedDestinationDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <TextBlock>
                                 <TextBlock.Resources>
                                     <Style TargetType="TextBlock">
@@ -143,7 +143,7 @@
                         <RadioButton Grid.Row="2"
                                      Margin="5"
                                      x:Name="DR"
-                                     IsChecked="{Binding Util.Settings.DirectoryRelativeToFirstSourceFileDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                     IsChecked="{Binding Util.Preferences.OutputName.DirectoryRelativeToFirstSourceFileDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <TextBlock>
                                 <TextBlock.Resources>
                                     <Style TargetType="TextBlock">
@@ -165,7 +165,7 @@
                         <RadioButton Grid.Row="4"
                                      Margin="5"
                                      x:Name="UF"
-                                     IsChecked="{Binding Util.Settings.UseFixedDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                     IsChecked="{Binding Util.Preferences.OutputName.UseFixedDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <TextBlock>
                                 <TextBlock.Resources>
                                     <Style TargetType="TextBlock">
@@ -196,7 +196,7 @@
                     </Grid>
                 </GroupBox>
                 <CheckBox Grid.Row="4"
-                          IsChecked="{Binding Util.Settings.EnsureTheFileNameIsUnique, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          IsChecked="{Binding Util.Preferences.OutputName.EnsureTheFileNameIsUnique, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           VerticalContentAlignment="Center"
                           Margin="5">
                     <TextBlock>
@@ -215,7 +215,7 @@
                     </TextBlock>
                 </CheckBox>
                 <CheckBox Grid.Row="5"
-                          IsChecked="{Binding Util.Settings.AutomaticallyClearTheDestinationFileNameWhenTheLastFileIsRemoved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          IsChecked="{Binding Util.Preferences.OutputName.AutomaticallyClearTheDestinationFileNameWhenTheLastFileIsRemoved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           VerticalContentAlignment="Center"
                           Margin="5">
                     <TextBlock>

@@ -28,34 +28,21 @@ public class AddRemoveLanguagesCommand : BaseCommand
         {
             case "add":
                 _prefLang.SearchAvailableLanguage = string.Empty;
-                _prefLang.Util.Settings.PreferedLanguages.Add(_prefLang.SelectedAvailableLanguage);
-                _prefLang.Util.Settings.PreferedLanguages = new ObservableCollection<Language>(_prefLang.Util.Settings.PreferedLanguages.OrderBy(l => l.Name));
-                _prefLang.Util.Settings.AllLanguages.Remove(_prefLang.SelectedAvailableLanguage);
-                _prefLang.Util.Settings.AllLanguages = new ObservableCollection<Language>(_prefLang.Util.Settings.AllLanguages.OrderBy(l => l.Name));
-                _prefLang.PreferedLanguages = _prefLang.Util.Settings.PreferedLanguages;
-                _prefLang.AvailableLanguages = _prefLang.Util.Settings.AllLanguages;
-                _prefLang.Util.Settings.SetPreferedLanguages(GetPrefLangString());
+                _prefLang.Util.Preferences.Languages.PreferedLanguages.Add(_prefLang.SelectedAvailableLanguage);
+                _prefLang.Util.Preferences.Languages.PreferedLanguages = new ObservableCollection<Language>(_prefLang.Util.Preferences.Languages.PreferedLanguages.OrderBy(l => l.Name));
+                _prefLang.Util.Preferences.Languages.AllLanguages.Remove(_prefLang.SelectedAvailableLanguage);
+                _prefLang.Util.Preferences.Languages.AllLanguages = new ObservableCollection<Language>(_prefLang.Util.Preferences.Languages.AllLanguages.OrderBy(l => l.Name));
                 break;
             case "remove":
                 _prefLang.SearchUserLanguage = string.Empty;
-                _prefLang.Util.Settings.AllLanguages.Add(_prefLang.SelectedUserLanguage);
-                _prefLang.Util.Settings.AllLanguages = new ObservableCollection<Language>(_prefLang.Util.Settings.AllLanguages.OrderBy(l => l.Name));
-                _prefLang.Util.Settings.PreferedLanguages.Remove(_prefLang.SelectedUserLanguage);
-                _prefLang.Util.Settings.PreferedLanguages = new ObservableCollection<Language>(_prefLang.Util.Settings.PreferedLanguages.OrderBy(l => l.Name));
-                _prefLang.AvailableLanguages = _prefLang.Util.Settings.AllLanguages;
-                _prefLang.PreferedLanguages = _prefLang.Util.Settings.PreferedLanguages;
-                _prefLang.Util.Settings.SetPreferedLanguages(GetPrefLangString());
+                _prefLang.Util.Preferences.Languages.AllLanguages.Add(_prefLang.SelectedUserLanguage);
+                _prefLang.Util.Preferences.Languages.AllLanguages = new ObservableCollection<Language>(_prefLang.Util.Preferences.Languages.AllLanguages.OrderBy(l => l.Name));
+                _prefLang.Util.Preferences.Languages.PreferedLanguages.Remove(_prefLang.SelectedUserLanguage);
+                _prefLang.Util.Preferences.Languages.PreferedLanguages = new ObservableCollection<Language>(_prefLang.Util.Preferences.Languages.PreferedLanguages.OrderBy(l => l.Name));
                 break;
         }
-    }
-
-    private string GetPrefLangString()
-    {
-        string value = string.Empty;
-        foreach (Language language in _prefLang.Util.Settings.PreferedLanguages)
-        {
-            value += $"{language.ID}|";
-        }
-        return value.Remove(value.Length - 1, 1);
+        _prefLang.AvailableLanguages = _prefLang.Util.Preferences.Languages.AllLanguages;
+        _prefLang.PreferedLanguages = _prefLang.Util.Preferences.Languages.PreferedLanguages;
+        _prefLang.Util.SavePreferences();
     }
 }
