@@ -16,7 +16,6 @@ public class BrowseCommand : BaseCommand
 
     public override void Execute(object parameter)
     {
-        // Set new output dir
-        //_multiplex.OutputPath = _exLib.Util.GetFolder();
+        _multiplex.SourceFile.OutputPath = _util.GetFolder();
     }
 }

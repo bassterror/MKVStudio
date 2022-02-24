@@ -77,11 +77,11 @@
                              Margin="3"
                              Padding="3"
                              VerticalContentAlignment="Center"
-                             Text="{Binding SourceFile.OutputFullPath}">                        
-                    </TextBox>
+                             Text="{Binding SourceFile.OutputFullPath}" />
                     <Button Grid.Column="2"
                             Margin="3"
-                            Content="Browse" />
+                            Content="Browse"
+                            Command="{Binding Browse}"/>
                 </Grid>
             </GroupBox>
         </Grid>
