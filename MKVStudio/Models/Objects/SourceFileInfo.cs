@@ -6,6 +6,9 @@ namespace MKVStudio.Models;
 public class SourceFileInfo : BaseModel
 {
     private readonly IUtilitiesService _util;
+    private string _outputPath;
+    private string _outputName;
+    private string _outputNameSuffix;
 
     public bool IsPrimary { get; set; }
     public string InputPath { get; set; }
@@ -13,12 +16,38 @@ public class SourceFileInfo : BaseModel
     public string InputExtension { get; set; }
     public string InputFullName => InputName + InputExtension;
     public string InputFullPath { get; set; }
-    public string OutputPath { get; set; }
-    public string OutputName { get; set; }
-    public string OutputNameSuffix { get; set; }
+    public string OutputPath
+    {
+        get => _outputPath;
+        set
+        {
+            _outputPath = value;
+            OutputFullPath = Path.Combine(OutputPath, string.IsNullOrWhiteSpace(OutputFullName) ? string.Empty : OutputFullName);
+        }
+    }
+    public string OutputName
+    {
+        get => _outputName;
+        set
+        {
+            _outputName = value;
+            OutputFullName = $"{OutputName}{OutputNameSuffix}{OutputExtension}";
+            OutputFullPath = Path.Combine(OutputPath, string.IsNullOrWhiteSpace(OutputFullName) ? string.Empty : OutputFullName);
+        }
+    }
+    public string OutputNameSuffix
+    {
+        get => _outputNameSuffix;
+        set
+        {
+            _outputNameSuffix = value;
+            OutputFullName = $"{OutputName}{OutputNameSuffix}{OutputExtension}";
+            OutputFullPath = Path.Combine(OutputPath, string.IsNullOrWhiteSpace(OutputFullName) ? string.Empty : OutputFullName);
+        }
+    }
     public static string OutputExtension => ".mkv";
-    public string OutputFullName => $"{OutputName}{OutputNameSuffix}{OutputExtension}";
-    public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
+    public string OutputFullName { get; set; }
+    public string OutputFullPath { get; set; }
     public string Type { get; set; }
 
     public SourceFileInfo(IUtilitiesService util, string source, bool isPrimary)

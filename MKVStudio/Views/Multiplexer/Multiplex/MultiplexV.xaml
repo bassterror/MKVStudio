@@ -56,7 +56,34 @@
         <ContentControl Grid.Row="1"
                         Content="{Binding SelectedMultiplexTab}" />
         <Grid Grid.Row="2">
-            <TextBlock Text="Buttons" />
+            <GroupBox>
+                <GroupBox.Header>
+                    <TextBlock Text="Destination file"
+                               Foreground="{StaticResource ControlDisabledGlythColour}" />
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Margin="3"
+                               Text="Location:"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource ControlDisabledGlythColour}" />
+                    <TextBox Grid.Column="1"
+                             Margin="3"
+                             Padding="3"
+                             VerticalContentAlignment="Center"
+                             Text="{Binding SourceFile.OutputFullPath}">                        
+                    </TextBox>
+                    <Button Grid.Column="2"
+                            Margin="3"
+                            Content="Browse" />
+                </Grid>
+            </GroupBox>
         </Grid>
     </Grid>
 </UserControl>
