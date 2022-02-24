@@ -60,19 +60,19 @@ public class SourceFileInfo : BaseModel
         InputFullPath = source;
         if (isPrimary)
         {
-            if (util.Preferences.OutputName.SameDirectoryAsTheFirstSourceFile)
+            if (util.Preferences.Destination.SameDirectoryAsTheFirstSourceFile)
             {
                 OutputPath = InputPath;
             }
-            if (util.Preferences.OutputName.PreviouslyUsedDestinationDirectory)
+            if (util.Preferences.Destination.PreviouslyUsedDestinationDirectory)
             {
                 //TODO
             }
-            if (util.Preferences.OutputName.DirectoryRelativeToFirstSourceFileDirectory)
+            if (util.Preferences.Destination.DirectoryRelativeToFirstSourceFileDirectory)
             {
                 //TODO
             }
-            if (util.Preferences.OutputName.UseFixedDirectory)
+            if (util.Preferences.Destination.UseFixedDirectory)
             {
                 //TODO
             }

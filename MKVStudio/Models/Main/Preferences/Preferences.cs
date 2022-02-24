@@ -23,7 +23,7 @@ public class Preferences
     public SupportedFileTypesCollections SupportedFileTypes { get; set; }
     public MIMETypeCollections MIMETypes { get; set; }
     [JsonProperty]
-    public OutputName OutputName { get; set; }
+    public Destination Destination { get; set; }
 
     public static Preferences GetPreferences(IUtilitiesService util, string fileName)
     {
@@ -87,11 +87,11 @@ public class Preferences
         preferences.Languages.GetLanguageList();
         preferences.SupportedFileTypes = new(util);
         preferences.MIMETypes = new();
-        if (preferences.OutputName == null)
+        if (preferences.Destination == null)
         {
-            preferences.OutputName = new();
+            preferences.Destination = new();
         }
-        preferences.OutputName.Util = util;
+        preferences.Destination.Util = util;
 
         return preferences;
     }

@@ -28,8 +28,8 @@
             <DataTemplate DataType="{x:Type vm:PreferedLanguagesVM}">
                 <v:PreferedLanguagesV />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:OutputNameVM}">
-                <v:OutputNameV />
+            <DataTemplate DataType="{x:Type vm:DestinationVM}">
+                <v:DestinationV />
             </DataTemplate>
 
             <!--Multiplexer-->

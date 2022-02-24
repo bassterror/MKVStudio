@@ -6,9 +6,9 @@ public class UpdateSelectedPreferencesTabCommand : BaseCommand
 {
     private readonly PreferencesVM _preferences;
     private readonly OftenUsedVM _oftenUsed;
-    private readonly OutputNameVM _outputName;
+    private readonly DestinationVM _outputName;
 
-    public UpdateSelectedPreferencesTabCommand(PreferencesVM preferences, OftenUsedVM oftenUsed, OutputNameVM outputName)
+    public UpdateSelectedPreferencesTabCommand(PreferencesVM preferences, OftenUsedVM oftenUsed, DestinationVM outputName)
     {
         _preferences = preferences;
         _oftenUsed = oftenUsed;

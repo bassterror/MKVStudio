@@ -5,9 +5,9 @@ namespace MKVStudio.Views;
 /// <summary>
 /// Interaction logic for OutputNameV.xaml
 /// </summary>
-public partial class OutputNameV : UserControl
+public partial class DestinationV : UserControl
 {
-    public OutputNameV()
+    public DestinationV()
     {
         InitializeComponent();
     }

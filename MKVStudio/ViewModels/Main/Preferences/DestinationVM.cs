@@ -2,11 +2,11 @@
 
 namespace MKVStudio.ViewModels;
 
-public class OutputNameVM : BaseViewModel
+public class DestinationVM : BaseViewModel
 {
     public IUtilitiesService Util { get; }
 
-    public OutputNameVM(IUtilitiesService util)
+    public DestinationVM(IUtilitiesService util)
     {
         Util = util;
     }

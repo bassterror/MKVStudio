@@ -41,8 +41,8 @@
                          Command="{Binding UpdateSelectedPreferencesTab}"
                          CommandParameter="{x:Static vm:ViewModelTypes.OftenUsed}" />
             <RadioButton Grid.Row="1"
-                         Content="Output"
-                         IsChecked="{Binding SelectedPreferencesTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:OutputNameVM}}"
+                         Content="Destination file"
+                         IsChecked="{Binding SelectedPreferencesTab, Mode=OneWay, Converter={StaticResource EVTPC}, ConverterParameter={x:Type vm:DestinationVM}}"
                          Command="{Binding UpdateSelectedPreferencesTab}"
                          CommandParameter="{x:Static vm:ViewModelTypes.OutputName}" />
         </Grid>

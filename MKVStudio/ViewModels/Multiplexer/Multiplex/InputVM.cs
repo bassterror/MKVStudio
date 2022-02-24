@@ -67,16 +67,16 @@ public class InputVM : BaseViewModel
             Multiplex.Attachments.ExistingAttachments.Add(att);
         }
         Multiplex.Output.Output.Title = result.Container.Properties.Title;
-        if (Util.Preferences.OutputName.AutomaticallySetTheDestinationFileName && sourceFile.IsPrimary)
+        if (Util.Preferences.Destination.AutomaticallySetTheDestinationFileName && sourceFile.IsPrimary)
         {
             sourceFile.OutputName = sourceFile.InputName + sourceFile.OutputNameSuffix;
         }
-        if (Util.Preferences.OutputName.UseTheTitleAsTheBaseFileNameIfATitleIsSet && sourceFile.IsPrimary)
+        if (Util.Preferences.Destination.UseTheTitleAsTheBaseFileNameIfATitleIsSet && sourceFile.IsPrimary)
         {
-            string ifTitleIsNull = Util.Preferences.OutputName.AutomaticallySetTheDestinationFileName ? sourceFile.InputName + sourceFile.OutputNameSuffix : null;
+            string ifTitleIsNull = Util.Preferences.Destination.AutomaticallySetTheDestinationFileName ? sourceFile.InputName + sourceFile.OutputNameSuffix : null;
             sourceFile.OutputName = string.IsNullOrWhiteSpace(Multiplex.Output.Output.Title) ? ifTitleIsNull : Multiplex.Output.Output.Title + sourceFile.OutputNameSuffix;
         }
-        if (Util.Preferences.OutputName.EnsureTheFileNameIsUnique && sourceFile.IsPrimary)
+        if (Util.Preferences.Destination.EnsureTheFileNameIsUnique && sourceFile.IsPrimary)
         {
             CheckIfNameExists(sourceFile);
         }

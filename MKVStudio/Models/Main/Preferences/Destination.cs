@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace MKVStudio.Models;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class OutputName
+public class Destination : BaseModel
 {
     private bool _sameDirectoryAsTheFirstSourceFile;
     private bool _previouslyUsedDestinationDirectory;
