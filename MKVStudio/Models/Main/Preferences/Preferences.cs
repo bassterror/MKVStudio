@@ -87,6 +87,11 @@ public class Preferences
         preferences.Languages.GetLanguageList();
         preferences.SupportedFileTypes = new(util);
         preferences.MIMETypes = new();
+        if (preferences.OutputName == null)
+        {
+            preferences.OutputName = new();
+        }
+        preferences.OutputName.Util = util;
 
         return preferences;
     }
@@ -105,6 +110,7 @@ public class Preferences
     private static Preferences Read(string filename)
     {
         string json = File.ReadAllText(filename);
-        return JsonConvert.DeserializeObject<Preferences>(json);
+        Preferences preferences = JsonConvert.DeserializeObject<Preferences>(json);
+        return preferences ?? new Preferences();
     }
 }

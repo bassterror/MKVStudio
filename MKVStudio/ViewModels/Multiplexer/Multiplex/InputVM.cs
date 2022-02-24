@@ -4,6 +4,7 @@ using MKVStudio.Services;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 
@@ -11,6 +12,8 @@ namespace MKVStudio.ViewModels;
 
 public class InputVM : BaseViewModel
 {
+    private int _counter = 1;
+
     public Dictionary<ProcessResultNames, ProcessResult> ProcessResults { get; private set; } = new();
     public MultiplexVM Multiplex { get; }
     public IUtilitiesService Util { get; }
@@ -64,6 +67,30 @@ public class InputVM : BaseViewModel
             Multiplex.Attachments.ExistingAttachments.Add(att);
         }
         Multiplex.Output.Output.Title = result.Container.Properties.Title;
+        if (Util.Preferences.OutputName.AutomaticallySetTheDestinationFileName && sourceFile.IsPrimary)
+        {
+            sourceFile.OutputName = sourceFile.InputName + sourceFile.OutputNameSuffix;
+        }
+        if (Util.Preferences.OutputName.UseTheTitleAsTheBaseFileNameIfATitleIsSet && sourceFile.IsPrimary)
+        {
+            string ifTitleIsNull = Util.Preferences.OutputName.AutomaticallySetTheDestinationFileName ? sourceFile.InputName + sourceFile.OutputNameSuffix : null;
+            sourceFile.OutputName = string.IsNullOrWhiteSpace(Multiplex.Output.Output.Title) ? ifTitleIsNull : Multiplex.Output.Output.Title + sourceFile.OutputNameSuffix;
+        }
+        if (Util.Preferences.OutputName.EnsureTheFileNameIsUnique && sourceFile.IsPrimary)
+        {
+            CheckIfNameExists(sourceFile);
+        }
+
         //TODO Chapters
+    }
+
+    private void CheckIfNameExists(SourceFileInfo sourceFile)
+    {
+        if (Directory.GetFiles(sourceFile.InputPath).Contains(sourceFile.OutputFullPath))
+        {
+            sourceFile.OutputName += $"({_counter})";
+            _counter++;
+            CheckIfNameExists(sourceFile);
+        }
     }
 }

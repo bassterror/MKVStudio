@@ -15,8 +15,9 @@ public class SourceFileInfo : BaseModel
     public string InputFullPath { get; set; }
     public string OutputPath { get; set; }
     public string OutputName { get; set; }
+    public string OutputNameSuffix { get; set; }
     public static string OutputExtension => ".mkv";
-    public string OutputFullName => $"{OutputName}.{OutputExtension}";
+    public string OutputFullName => $"{OutputName}{OutputNameSuffix}{OutputExtension}";
     public string OutputFullPath => Path.Combine(OutputPath, OutputFullName);
     public string Type { get; set; }
 
@@ -28,7 +29,24 @@ public class SourceFileInfo : BaseModel
         InputName = Path.GetFileNameWithoutExtension(source);
         InputExtension = Path.GetExtension(source);
         InputFullPath = source;
-        OutputPath = InputPath; //TODO Default output path
-        OutputName = InputName + " - edit"; //TODO Default ouputname suffix
+        if (isPrimary)
+        {
+            if (util.Preferences.OutputName.SameDirectoryAsTheFirstSourceFile)
+            {
+                OutputPath = InputPath;
+            }
+            if (util.Preferences.OutputName.PreviouslyUsedDestinationDirectory)
+            {
+                //TODO
+            }
+            if (util.Preferences.OutputName.DirectoryRelativeToFirstSourceFileDirectory)
+            {
+                //TODO
+            }
+            if (util.Preferences.OutputName.UseFixedDirectory)
+            {
+                //TODO
+            }
+        }
     }
 }
